@@ -22,7 +22,11 @@
     "not_found_handling": "404-page",
     "run_worker_first": [
       "/api/*",
-      "/contribute/review/*"
+      "/contribute/review/*",
+      "/50",
+      "/50/",
+      "/en/50",
+      "/en/50/"
     ]
   },
   "vars": {

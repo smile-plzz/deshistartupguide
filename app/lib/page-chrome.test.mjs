@@ -12,19 +12,21 @@ test('utility and policy pages do not present Guide and Discussion as content ta
     '/privacy',
     '/terms',
     '/sitemap',
+    '/startup-50',
     '/en/about',
     '/en/contact',
     '/en/contribute',
     '/en/privacy',
     '/en/terms',
-    '/en/sitemap'
+    '/en/sitemap',
+    '/en/startup-50'
   ]) {
     assert.equal(pageChromePolicy(route).showContentTabs, false, route)
   }
 })
 
-test('home and contact omit the whole page-chrome strip', () => {
-  for (const route of ['/', '/en', '/en/', '/contact', '/en/contact']) {
+test('home, contact, and Startup 50 omit the whole page-chrome strip', () => {
+  for (const route of ['/', '/en', '/en/', '/contact', '/en/contact', '/startup-50', '/en/startup-50']) {
     assert.deepEqual(
       pageChromePolicy(route),
       { showContentTabs: false, showPageActions: false, showEditAction: false },
@@ -121,6 +123,13 @@ test('source policy blocks stubs and thin generated shells', () => {
     sourceSupportsInlineEdit({
       slug: 'directory/investors',
       source: '# Investors\n\n<DirectoryList category="investors" locale="en" />'
+    }),
+    false
+  )
+  assert.equal(
+    sourceSupportsInlineEdit({
+      slug: 'startup-50',
+      source: '<Startup50 locale="en" />'
     }),
     false
   )

@@ -45,6 +45,7 @@ const contentRoot = path.join(root, 'app', '(contents)')
 const publicMedia = path.join(root, 'public', 'media')
 const contributorLedgerFile = path.join(root, 'data', 'contributor-ledger.json')
 const contributorPolicyFile = path.join(root, 'data', 'contributors-policy.json')
+const startup50LogoFile = path.join(root, 'data', 'startup-50-logos.json')
 
 const ALLOWED = new Set(Object.keys(CONTENT_TYPES))
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/
@@ -169,6 +170,32 @@ function checkContributorAvatarReferences() {
 }
 
 checkContributorAvatarReferences()
+
+function checkStartup50LogoReferences() {
+  const fileName = path.relative(root, startup50LogoFile)
+  let logoData
+  try {
+    logoData = JSON.parse(fs.readFileSync(startup50LogoFile, 'utf8'))
+  } catch (error) {
+    errors.push(`${fileName}: could not read Startup 50 logo references (${error.message}).`)
+    return
+  }
+
+  if (!Array.isArray(logoData.entries)) {
+    errors.push(`${fileName}: entries must be an array.`)
+    return
+  }
+
+  for (const logo of logoData.entries) {
+    if (typeof logo.src !== 'string' || !logo.src.trim()) {
+      errors.push(`${fileName}: ${logo.name || logo.slug || 'a company'} has no logo path.`)
+      continue
+    }
+    checkSource(logo.src, `${logo.name || logo.slug || 'company'} logo`, fileName)
+  }
+}
+
+checkStartup50LogoReferences()
 
 function validFacebookVideoUrl(value) {
   let url

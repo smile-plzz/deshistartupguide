@@ -1,0 +1,358 @@
+{
+  "reviewedAt": "2026-08-23",
+  "note": "Company marks used for editorial identification. Sources were reviewed before upload; the image bytes live in R2, not Git.",
+  "entries": [
+    {
+      "slug": "10-minute-school",
+      "name": "10 Minute School",
+      "src": "/media/startup-50/10-minute-school.webp",
+      "source": "https://cdn.10minuteschool.com/images/svg/10mslogo-svg.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "agricore",
+      "name": "AgriCore (formerly InsureCow)",
+      "src": "/media/startup-50/agricore.webp",
+      "source": "https://insurecow.com/favicon.ico?favicon.b5c73edd.ico",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "agroshift",
+      "name": "Agroshift",
+      "src": "/media/startup-50/agroshift.webp",
+      "source": "https://cdn.prod.website-files.com/682b2e509c06fb31d9d240ce/682f6cead76dd449a7745a25_68106fb648460e8b171e0059_AS-Logo%20(1)%201.svg",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "apon-wellbeing",
+      "name": "Apon Wellbeing",
+      "src": "/media/startup-50/apon-wellbeing.webp",
+      "source": "https://apon.ibos.io/media/logos/apon.png",
+      "sourceKind": "official company web-app logo"
+    },
+    {
+      "slug": "apploye",
+      "name": "Apploye",
+      "src": "/media/startup-50/apploye.webp",
+      "source": "https://cdn.prod.website-files.com/64bf6aa2443faa46c887a8c0/64c8ad1e4d77e15467726c08_logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "arogga",
+      "name": "Arogga",
+      "src": "/media/startup-50/arogga.webp",
+      "source": "https://www.arogga.com/assets/arogga-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "aunkur",
+      "name": "Aunkur",
+      "src": "/media/startup-50/aunkur.webp",
+      "source": "https://aunkur.ai/assets/images/favicons/apple-touch-icon.png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "barikoi",
+      "name": "Barikoi",
+      "src": "/media/startup-50/barikoi.webp",
+      "source": "https://barikoi.com/lovable-uploads/03d24b15-45b3-4023-8b96-84c6a7a64267.png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "biniyog-io",
+      "name": "biniyog.io",
+      "src": "/media/startup-50/biniyog-io.webp",
+      "source": "https://byiocdn.sgp1.cdn.digitaloceanspaces.com/public_web/biniyog_io_logo.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "bkash",
+      "name": "bKash",
+      "src": "/media/startup-50/bkash.webp",
+      "source": "https://payment.bkash.com/bKash-logo.png",
+      "sourceKind": "official payment portal logo"
+    },
+    {
+      "slug": "bondstein",
+      "name": "Bondstein",
+      "src": "/media/startup-50/bondstein.webp",
+      "source": "https://bondstein.com/_next/image?url=%2FlogoImage.png&w=3840&q=100",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "chaldal",
+      "name": "Chaldal",
+      "src": "/media/startup-50/chaldal.webp",
+      "source": "https://i.chaldn.com/asset/egg-chaldal-web-release-id-29483/https/Default/components/header/Header/images/logo-small-v2.svg?q=best",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "chamak",
+      "name": "Chamak",
+      "src": "/media/startup-50/chamak.webp",
+      "source": "https://chamak-assets.s3.ap-southeast-1.amazonaws.com/chamak_logo_04.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "digibox",
+      "name": "DIGIBOX",
+      "src": "/media/startup-50/digibox.webp",
+      "source": "https://digibox.com.bd/wp-content/uploads/2025/09/digi-logo-scaled.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "dorik",
+      "name": "Dorik",
+      "src": "/media/startup-50/dorik.webp",
+      "source": "https://cdn.dorik.com/5e373b6c43a72a001f56dbf6/61a1f4035bfd7b0011fb92f9/images/logo-dark_jta933n2.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "dreamers-academy",
+      "name": "Dreamers Academy",
+      "src": "/media/startup-50/dreamers-academy.webp",
+      "source": "https://dreamersacademy.com.bd/assets_2/img/logo/logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "dubotech",
+      "name": "Dubotech",
+      "src": "/media/startup-50/dubotech.webp",
+      "source": "https://dubotech.com/favicon/apple-touch-icon.png",
+      "sourceKind": "official-site icon"
+    },
+    {
+      "slug": "ecovia",
+      "name": "Ecovia",
+      "src": "/media/startup-50/ecovia.webp",
+      "source": "https://cdn.prod.website-files.com/6709161cf99db2549fda7a27/69c7b178459471bea91d24a9_Ecovia%20Fav%20(7).png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "ezycourse",
+      "name": "EzyCourse",
+      "src": "/media/startup-50/ezycourse.webp",
+      "source": "https://f.ezycourse.net/2456/cm8qwjlaa008e1f8z99u5a7ue.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "gozayaan",
+      "name": "GoZayaan",
+      "src": "/media/startup-50/gozayaan.webp",
+      "source": "https://gozayaan.com/gz-favicon.svg",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "ifarmer",
+      "name": "iFarmer",
+      "src": "/media/startup-50/ifarmer.webp",
+      "source": "https://framerusercontent.com/images/xLYkgyfP9RcxFdqFQBFVZxS0MBc.png",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "inkam",
+      "name": "Inkam",
+      "src": "/media/startup-50/inkam.webp",
+      "source": "https://inkam.app/_next/static/media/logo-flow.a6c28c97.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "intelligent-machines",
+      "name": "Intelligent Machines",
+      "src": "/media/startup-50/intelligent-machines.webp",
+      "source": "https://intelmachines.ai/images/misc/logo.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "jatri",
+      "name": "Jatri",
+      "src": "/media/startup-50/jatri.webp",
+      "source": "https://jatri.co/_nuxt/jatri-logo.sAXW7P9b.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "khaas-food",
+      "name": "Khaas Food",
+      "src": "/media/startup-50/khaas-food.webp",
+      "source": "https://www.khaasfood.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fkhaasfood_white.0d0g39f2~ef.a.webp&w=3840&q=95",
+      "sourceKind": "official-site Khaas Food logo"
+    },
+    {
+      "slug": "loop-freight",
+      "name": "Loop Freight",
+      "src": "/media/startup-50/loop-freight.webp",
+      "source": "https://loopfreight.io/static/media/logo-white.e51aa633.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "markopolo-ai",
+      "name": "Markopolo.ai",
+      "src": "/media/startup-50/markopolo-ai.webp",
+      "source": "https://framerusercontent.com/images/ha4kYkWvG1CQYDQWIG6MqCXASL0.png",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "medeasy",
+      "name": "MedEasy",
+      "src": "/media/startup-50/medeasy.webp",
+      "source": "https://medeasy.health/assets/images/medEasyIcon.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "moner-bondhu",
+      "name": "Moner Bondhu",
+      "src": "/media/startup-50/moner-bondhu.webp",
+      "source": "https://monerbondhu.com/img/mb-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "monsha",
+      "name": "Monsha",
+      "src": "/media/startup-50/monsha.webp",
+      "source": "https://cdn.prod.website-files.com/67f7f7f50ddeef0ebca4c8de/67ff9e5adcd6627c196a77ea_monsha.avif",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "nodes-digital",
+      "name": "Nodes Digital",
+      "src": "/media/startup-50/nodes-digital.webp",
+      "source": "https://nodesdigitalbd.com/wp-content/uploads/2023/11/nodes-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "ostad",
+      "name": "Ostad",
+      "src": "/media/startup-50/ostad.webp",
+      "source": "https://cdn.ostad.app/public/upload/2024-03-20T04-26-32.799Z-ostad_logo_light@512x%20(2).png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "palki-motors",
+      "name": "Palki Motors",
+      "src": "/media/startup-50/palki-motors.webp",
+      "source": "https://palkimotors.com/logo.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "pathao",
+      "name": "Pathao",
+      "src": "/media/startup-50/pathao.webp",
+      "source": "https://pathao.com/wp-content/uploads/2023/10/Pathao-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "pickaboo",
+      "name": "Pickaboo",
+      "src": "/media/startup-50/pickaboo.webp",
+      "source": "https://www.pickaboo.com/assets/images/logo.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "praava-health",
+      "name": "Praava Health",
+      "src": "/media/startup-50/praava-health.webp",
+      "source": "https://www.praavahealth.com/favicon/apple-icon-180x180.png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "priyoshop",
+      "name": "PriyoShop",
+      "src": "/media/startup-50/priyoshop.webp",
+      "source": "https://priyoshopretail.com/wp-content/uploads/2025/09/Frame-1-3.png",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "pulsetech",
+      "name": "PulseTech",
+      "src": "/media/startup-50/pulsetech.webp",
+      "source": "https://pulsetechltd.com/logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "revora",
+      "name": "Revora",
+      "src": "/media/startup-50/revora.webp",
+      "source": "https://userevora.com/favicon.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "shajgoj",
+      "name": "Shajgoj",
+      "src": "/media/startup-50/shajgoj.webp",
+      "source": "https://shajgoj.com/images/small-logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "sharetrip",
+      "name": "ShareTrip",
+      "src": "/media/startup-50/sharetrip.webp",
+      "source": "https://assets.sharetrip.net/b2c-web-public/public/images/safari-pinned-tab.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "sheba-xyz",
+      "name": "Sheba.xyz",
+      "src": "/media/startup-50/sheba-xyz.webp",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Sheba.xyz_Logo.png",
+      "sourceKind": "CC BY-SA 4.0 logo copy",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "credit": "Mehedi91, Wikimedia Commons"
+    },
+    {
+      "slug": "shikho",
+      "name": "Shikho",
+      "src": "/media/startup-50/shikho.webp",
+      "source": "https://shikho.com/shikho-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "shopup-silq",
+      "name": "ShopUp (SILQ)",
+      "src": "/media/startup-50/shopup-silq.webp",
+      "source": "https://cdn.prod.website-files.com/6538a2c4ccf1fed5a7d6e311/6538ad340785ff4bb377fd77_ShopUp-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "sokrio",
+      "name": "Sokrio",
+      "src": "/media/startup-50/sokrio.webp",
+      "source": "https://sokrio.com/wp-content/themes/sokrio/assets/images/logo.png",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "solshare",
+      "name": "SOLshare",
+      "src": "/media/startup-50/solshare.webp",
+      "source": "http://solshare.com/wp-content/uploads/2022/08/SOLShare-Logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "tallykhata",
+      "name": "TallyKhata",
+      "src": "/media/startup-50/tallykhata.webp",
+      "source": "https://www.tallykhata.com/wp-content/uploads/2022/11/TallyKhata-Registered-BN-Logo-Horizontal-with-background.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "tiger-new-energy",
+      "name": "Tiger New Energy",
+      "src": "/media/startup-50/tiger-new-energy.webp",
+      "source": "https://www.tigernewenergy.com/imgs/footer-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "truck-lagbe",
+      "name": "Truck Lagbe",
+      "src": "/media/startup-50/truck-lagbe.webp",
+      "source": "http://trucklagbe.com/wp-content/uploads/2025/10/truck-lagbe-dark.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "wegro",
+      "name": "WeGro",
+      "src": "/media/startup-50/wegro.webp",
+      "source": "https://www.wegro.global/newWegroLogo.png",
+      "sourceKind": "official-site logo image"
+    }
+  ]
+}

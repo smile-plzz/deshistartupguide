@@ -406,6 +406,7 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
   const isCollection =
     page.slug === 'sitemap' ||
     page.slug === 'contributors' ||
+    page.slug === 'startup-50' ||
     page.slug === 'directory' ||
     page.slug.startsWith('directory/') ||
     children.length > 0
@@ -622,6 +623,7 @@ for (const page of pages) {
   const isCollectionPage =
     page.slug === 'sitemap' ||
     page.slug === 'contributors' ||
+    page.slug === 'startup-50' ||
     page.slug === 'directory' ||
     page.slug.startsWith('directory/') ||
     pageChildren.length > 0

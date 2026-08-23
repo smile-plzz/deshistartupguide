@@ -57,7 +57,10 @@ export const bnNav: NavSection[] = [
   },
   {
     label: 'ডিরেক্টরি',
-    items: [['/directory', 'ইকোসিস্টেম ডিরেক্টরি']]
+    items: [
+      ['/directory', 'ইকোসিস্টেম ডিরেক্টরি'],
+      ['/startup-50', 'দেশি স্টার্টআপ ৫০']
+    ]
   },
   {
     label: 'অংশ নিন',
@@ -112,7 +115,10 @@ export const enNav: NavSection[] = [
   },
   {
     label: 'Directory',
-    items: [['/en/directory', 'Ecosystem directory']]
+    items: [
+      ['/en/directory', 'Ecosystem directory'],
+      ['/en/startup-50', 'Deshi Startup 50']
+    ]
   },
   {
     label: 'Take Part',

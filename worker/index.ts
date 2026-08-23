@@ -92,6 +92,13 @@ export default {
         return await apiResponse(request, env, url.pathname.replace(/\/+$/, ''))
       }
 
+      const startup50Alias = url.pathname.match(/^\/(en\/)?50\/?$/)
+      if (startup50Alias) {
+        const destination = new URL(startup50Alias[1] ? '/en/startup-50' : '/startup-50', url)
+        destination.search = url.search
+        return Response.redirect(destination.toString(), 308)
+      }
+
       const legacyReview = url.pathname.match(/^\/contribute\/review\/([^/]+)\/?$/)
       if (legacyReview && OPAQUE_ID.test(legacyReview[1])) {
         const destination = new URL('/contribute/review', url)

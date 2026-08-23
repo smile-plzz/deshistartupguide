@@ -522,6 +522,22 @@ values are sentences (coverage areas, rate bands, application steps), a column g
 track too narrow to hold a word, and a new field should cost one more labelled line rather than one
 more squeezed column. There is no horizontal scroll at any width.
 
+### Startup 50 watchlist
+
+The Startup 50 opens with one large folio number and continues into a flat, ruled company list.
+Each row shows the reviewed company mark, name, sector, a short description and one useful lesson.
+A small Details control reveals the company background, latest update, public funding information
+and official website without sending readers to a second record page.
+
+The complete list is server-rendered. A small client component only filters the existing records by
+name and sector, so every company and link remains available without JavaScript. At narrow widths,
+the folio becomes a compact masthead and each row stacks in reading order without horizontal scroll.
+
+Green is used for structure, rules, hover and focus; blue remains for links. Company marks are
+reviewed before use, stored in R2 through the site's media pipeline and linked to their source in the
+authored logo manifest. The page is reviewed monthly when practical and at least quarterly. It has no
+rank numbers, public scores, trophy language or sponsor-controlled placement.
+
 ### Contributor record
 
 The two recognition surfaces, `/contributors` and `/contributors/{slug}`, are set as a ruled

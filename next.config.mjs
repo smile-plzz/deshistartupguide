@@ -60,6 +60,20 @@ const nextConfig = {
   basePath,
   ...(isDevelopment
     ? {
+        async redirects() {
+          return [
+            {
+              source: '/50',
+              destination: '/startup-50',
+              permanent: true
+            },
+            {
+              source: '/en/50',
+              destination: '/en/startup-50',
+              permanent: true
+            }
+          ]
+        },
         async rewrites() {
           return [
             {

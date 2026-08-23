@@ -314,6 +314,8 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
     pathname.startsWith('/contributors/') ||
     pathname === '/en/contributors' ||
     pathname.startsWith('/en/contributors/')
+  const isStandaloneFeature =
+    isCredits || pathname === '/startup-50' || pathname === '/en/startup-50'
   const isContact = pathname === '/contact' || pathname === '/en/contact'
   // One 404 document serves every unmatched URL, so the router reports the
   // synthetic `/_not-found` route. There is no source file behind it: an
@@ -331,7 +333,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   const showEditAction = routeShowsEditAction && sourceSupportsEdit
   const showPageChrome =
     !isPrivateReview &&
-    !isCredits &&
+    !isStandaloneFeature &&
     !isNotFound &&
     (showContentTabs || showPageActions)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -386,7 +388,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
       pathname === '/' ||
       pathname === '/en' ||
       isPrivateReview ||
-      isCredits ||
+      isStandaloneFeature ||
       isNotFound
     ) return
     if (stored) setIsEditing(true)
@@ -892,7 +894,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             />
           )}
 
-          {!isLanding && !isEditing && !isPrivateReview && !isCredits && !isNotFound && (
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && (
             <div className="article-lede">
               <Breadcrumbs isEn={isEn} pathname={pathname} pageTitle={pageTitle} />
               {!isContact && (
@@ -952,7 +954,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             {children}
           </article>
 
-          {!isLanding && !isEditing && !isPrivateReview && !isCredits && !isNotFound && !isContact && (
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && !isContact && (
             <section
               id="credits"
               className="page-contribution-credits"
@@ -967,7 +969,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             />
           )}
 
-          {!isLanding && !isEditing && !isPrivateReview && !isCredits && !isNotFound && !isContact && (
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && !isContact && (
             <footer className="article-footer">
               <h2>{isEn ? 'Help improve this page' : 'এই পেজ আরও ভালো করুন'}</h2>
               <div className="contrib-row">

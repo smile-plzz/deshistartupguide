@@ -5,14 +5,19 @@ Deshi Startup uses one Cloudflare Worker deployment with two deliberately separa
 - `out/` contains the static Next.js/Nextra site, Pagefind index, fonts, and generated discovery
   files. Cloudflare Static Assets serve matching requests without running Worker code.
 - `worker/` contains the small request-time application. It handles `/api/contact`, the
-  contribution APIs, and redirects old `/contribute/review/:id` links to the static
-  `/contribute/review?id=...` page.
+  contribution APIs, old contribution-review redirects, and the permanent `/50` and `/en/50`
+  shortcuts for Startup 50.
 - R2 continues to hold public media and private contributor quarantine objects. Article HTML and
   MDX do not belong in R2 because Static Assets already provide clean URLs, caching, compression,
   and atomic versioned deployment.
 
 This boundary makes content growth independent of the Worker script-size limit. Adding Bangla or
 English guides adds static assets; it does not compile the guide bodies into the Worker.
+
+Static Assets answer navigation requests before Worker code unless the route is listed under
+`assets.run_worker_first` in `wrangler.jsonc`. Every redirect owned by `worker/index.ts` must also
+have its exact route spellings there, including any supported trailing slash. Otherwise the static
+404 page wins and the redirect code never runs.
 
 ## Free-plan guardrails
 
