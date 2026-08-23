@@ -17,6 +17,9 @@ HTML is validated before Wrangler packages the deployment.
 - Every indexable locale pair self-canonicalizes and publishes reciprocal `bn-BD`, `en-BD`, and
   `x-default` alternates. The Bengali root route owns `x-default`.
 - XML `<lastmod>` is the page's actual latest git commit date. Do not substitute the build date.
+  `npm run build:worker` repairs a shallow checkout with `npm run history:ensure` before the
+  manifest runs; manifest generation fails instead of publishing false dates if history remains
+  incomplete. Article schema separately uses the full timezone-aware Git commit timestamps.
 
 ## Generated and postprocessed artifacts
 
@@ -106,7 +109,8 @@ and eligible for a normal Search snippet. For all answer engines, the durable wo
 
 ## Release checklist
 
-1. Run `npm run manifest`.
+1. Ensure the checkout has full Git history. `npm run build:worker` does this automatically;
+   before running `npm run manifest` directly in CI, run `npm run history:ensure`.
 2. Run `npm run lint:bangla`.
 3. Run `npm run build:worker`; the build includes the static export and final SEO audit.
 4. Run `npm run check:worker`; this enforces the Worker and Static Assets growth budgets.

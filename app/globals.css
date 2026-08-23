@@ -2335,7 +2335,7 @@ a.is-stub-link:hover {
   padding: 16px 18px;
 }
 
-.directory-card h3 {
+.directory-card h2 {
   margin: 0;
   font-family: var(--sans);
   font-size: 1.05rem;

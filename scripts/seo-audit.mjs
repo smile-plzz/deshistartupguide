@@ -30,6 +30,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const { htmlDir: outDir, staticDir } = resolveBuildOutput(root)
 const pages = JSON.parse(fs.readFileSync(path.join(root, 'app', 'generated', 'seo-pages.json'), 'utf8'))
 const contributorView = prepareContributorSnapshot(snapshotData)
+const ISO_DATETIME_WITH_TIMEZONE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/
 const contributorProfileById = new Map(
   contributorView.rankedProfiles.map((profile) => [profile.id, profile])
 )
@@ -146,11 +147,28 @@ for (const page of pages) {
     record(errors, `${page.route}: expected exactly one non-empty meta description, found ${descriptions.length}`)
   }
   if ($('h1').length !== 1) record(errors, `${page.route}: expected one H1, found ${$('h1').length}`)
+  let previousHeadingLevel = 0
+  $('.article').first().find('h1, h2, h3, h4, h5, h6').each((_, heading) => {
+    const level = Number(heading.tagName.slice(1))
+    if (previousHeadingLevel && level > previousHeadingLevel + 1) {
+      record(
+        errors,
+        `${page.route}: heading hierarchy skips from H${previousHeadingLevel} to H${level}`
+      )
+    }
+    previousHeadingLevel = level
+  })
+
+  $('.glossary-term-btn .sr-only, .glossary-popover').each((_, element) => {
+    if (!$(element).is('[data-nosnippet]')) {
+      record(errors, `${page.route}: glossary helper content is eligible for search snippets`)
+    }
+  })
 
   // The postbuild pass writes the two shell TOCs into static HTML, then the
   // client shell reproduces the same nodes on its first render. If either copy
   // is missing or differs, React discards the server tree during hydration.
-  const shellHeadings = $('.article').first().find('h2').slice(0, 16)
+  const shellHeadings = $('.article').first().find('h2:not([data-toc-ignore])').slice(0, 16)
     .map((_, heading) => ({
       href: `#${$(heading).attr('id') || ''}`,
       text: $(heading).text().trim()
@@ -334,6 +352,21 @@ for (const page of pages) {
         }
         if (!article.headline || !article.datePublished || !article.dateModified) {
           record(errors, `${page.route}: Article headline or publication dates are missing`)
+        }
+        if (!ISO_DATETIME_WITH_TIMEZONE.test(article.datePublished || '')) {
+          record(errors, `${page.route}: Article datePublished is not a timezone-aware ISO DateTime`)
+        }
+        if (!ISO_DATETIME_WITH_TIMEZONE.test(article.dateModified || '')) {
+          record(errors, `${page.route}: Article dateModified is not a timezone-aware ISO DateTime`)
+        }
+        if (article.datePublished !== page.publishedAt || article.dateModified !== page.modifiedAt) {
+          record(errors, `${page.route}: Article dates do not match full Git commit timestamps`)
+        }
+        if (
+          $('meta[property="article:published_time"]').attr('content') !== page.publishedAt ||
+          $('meta[property="article:modified_time"]').attr('content') !== page.modifiedAt
+        ) {
+          record(errors, `${page.route}: Open Graph article dates do not match full Git commit timestamps`)
         }
         if (contributorIds.some((id) => !nodeIds.has(id))) {
           record(errors, `${page.route}: Article contributor does not resolve to a public graph entity`)

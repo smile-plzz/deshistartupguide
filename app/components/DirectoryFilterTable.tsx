@@ -346,7 +346,7 @@ export default function DirectoryFilterTable({ category, locale, rows }: Directo
               // Two entries can share a name, and directory data is edited by
               // hand: index keeps a collision from silently dropping a row.
               <article className="directory-card" key={`${row.name}-${index}`}>
-                <h3>{row.name}</h3>
+                <h2 data-toc-ignore="">{row.name}</h2>
                 {row.notes && <p className="directory-card__note">{row.notes}</p>}
                 <dl>
                   {config.columns.map((column) => (

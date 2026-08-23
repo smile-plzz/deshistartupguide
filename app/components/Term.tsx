@@ -43,7 +43,7 @@ export default function Term({ name, def, children }: TermProps) {
       >
         {children}
         <span className="glossary-term-dot" aria-hidden="true" />
-        <span className="sr-only" data-pagefind-ignore>
+        <span className="sr-only" data-pagefind-ignore data-nosnippet="">
           <span className="glossary-copy glossary-copy--bn">: সংজ্ঞা দেখুন</span>
           <span className="glossary-copy glossary-copy--en">: show definition</span>
         </span>
@@ -55,6 +55,7 @@ export default function Term({ name, def, children }: TermProps) {
         popover="auto"
         role="note"
         data-pagefind-ignore
+        data-nosnippet=""
         style={{ positionAnchor: anchorName }}
       >
         <span className="glossary-popover__title">

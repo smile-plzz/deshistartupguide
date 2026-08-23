@@ -11,7 +11,6 @@
  *   public/page-dates.json          – route -> last git update, or verified-date fallback
  *   public/page-published.json      – route -> oldest git commit date
  */
-import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +24,7 @@ import {
 import { prepareContributorSnapshot } from "../app/lib/contributor-leaderboard.mjs";
 import { sourceSupportsInlineEdit } from "../app/lib/inline-edit-policy.mjs";
 import { isWrittenGuide } from "./content-guide.mjs";
+import { collectGitDates } from "./git-content-dates.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentRoot = path.join(root, "app", "(contents)");
@@ -65,57 +65,6 @@ function firstHeading(source) {
   return match ? match[1].trim() : null;
 }
 
-// One git pass: newest and oldest commit date per content file. Rename detection
-// (--name-status -M) walks history through moves such as the July 2026 URL
-// migration, so a moved guide keeps its original published/updated dates.
-function collectGitDates() {
-  const modified = new Map();
-  const published = new Map();
-  const alias = new Map(); // historical path -> current path
-  const resolve = (file) => {
-    let current = file;
-    while (alias.has(current)) current = alias.get(current);
-    return current;
-  };
-  try {
-    const log = execSync(
-      "git log --format='C%cs' --name-status -M -- 'app/(contents)'",
-      {
-        cwd: root,
-        encoding: "utf8",
-        maxBuffer: 64 * 1024 * 1024,
-      },
-    );
-    let current = null;
-    for (const line of log.split("\n")) {
-      if (line.startsWith("C")) {
-        current = line.slice(1).trim();
-        continue;
-      }
-      if (!line.trim() || !current) continue;
-      const parts = line.split("\t");
-      const status = parts[0];
-      let file = null;
-      if (status.startsWith("R") && parts.length >= 3) {
-        // Log runs newest → oldest: map the pre-rename path onto the file's
-        // current (already-resolved) path for all older commits.
-        const canonical = resolve(parts[2].trim());
-        alias.set(parts[1].trim(), canonical);
-        file = canonical;
-      } else if (parts.length >= 2) {
-        file = resolve(parts[1].trim());
-      }
-      if (!file) continue;
-      if (!modified.has(file)) modified.set(file, current);
-      published.set(file, current);
-    }
-  } catch {
-    // No git available (fresh tarball): publication dates stay empty. A page's
-    // verified frontmatter may still supply its last-updated fallback below.
-  }
-  return { modified, published };
-}
-
 // A directory page is a shell around data/directory/*.json. With no rows it is
 // as unwritten as a StubNotice page, so it must not be counted as written,
 // indexed, or listed in the sitemap and llms.txt. Flips back on its own as soon
@@ -146,7 +95,7 @@ function walkPages(dir, baseDir) {
   return pages;
 }
 
-const gitDates = collectGitDates();
+const gitDates = collectGitDates(root);
 const generatedDir = path.join(root, "app", "generated");
 fs.mkdirSync(generatedDir, { recursive: true });
 
@@ -179,6 +128,8 @@ for (const locale of LOCALES) {
     const verified = fm.verified ? String(fm.verified) : null;
     const date = gitDates.modified.get(repoPath) || verified;
     const published = gitDates.published.get(repoPath) || null;
+    const modifiedAt = gitDates.modifiedAt.get(repoPath) || null;
+    const publishedAt = gitDates.publishedAt.get(repoPath) || null;
     if (date) allDates[route] = date;
     if (published) allPublished[route] = published;
     if (verified) allVerified[route] = verified;
@@ -193,6 +144,8 @@ for (const locale of LOCALES) {
       guide: isWrittenGuide({ slug: rel, source, stub: isStub }),
       date,
       published,
+      modifiedAt,
+      publishedAt,
       verified,
       repoPath,
     };

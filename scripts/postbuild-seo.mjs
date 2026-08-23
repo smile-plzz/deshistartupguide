@@ -245,7 +245,7 @@ function collectShellHeadings($) {
   const article = $('.article').first()
   if (article.length === 0) return []
   return article
-    .find('h2')
+    .find('h2:not([data-toc-ignore])')
     .slice(0, HEADING_LIMIT)
     .map((_, el) => ({ id: $(el).attr('id') || '', text: $(el).text().trim() }))
     .get()
@@ -375,7 +375,7 @@ function visibleCollectionItemsFor($, page) {
     return $('.directory-card')
       .map((index, element) => {
         const card = $(element)
-        const name = card.find('h3').first().text().trim()
+        const name = card.find('h2').first().text().trim()
         if (!name) return null
         const sourceUrl = card.find('.directory-card__source a[href]').first().attr('href')
         const description = card.find('.directory-card__note').first().text().trim()
@@ -473,8 +473,8 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
     copyrightHolder: { '@id': organizationNode['@id'] }
   }
 
-  if (!isUtility && page.published) pageNode.datePublished = page.published
-  if (!isUtility && page.date) pageNode.dateModified = page.date
+  if (!isUtility && page.published) pageNode.datePublished = page.publishedAt || page.published
+  if (!isUtility && page.date) pageNode.dateModified = page.modifiedAt || page.date
   const collectionItems = visibleCollectionItems.length > 0
     ? visibleCollectionItems
     : children.map((child, index) => ({
@@ -547,8 +547,8 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
         ? contributorReferences[0]
         : contributorReferences
     }
-    if (page.published) articleNode.datePublished = page.published
-    if (page.date) articleNode.dateModified = page.date
+    if (page.published) articleNode.datePublished = page.publishedAt || page.published
+    if (page.date) articleNode.dateModified = page.modifiedAt || page.date
     if (wordCount > 0) articleNode.wordCount = wordCount
     pageNode.mainEntity = { '@id': articleNode['@id'] }
     graph.push(articleNode)
@@ -721,8 +721,8 @@ for (const page of pages) {
   )
 
   if (ogType === 'article') {
-    if (page.published) tags.push(`<meta property="article:published_time" content="${page.published}"/>`)
-    if (page.date) tags.push(`<meta property="article:modified_time" content="${page.date}"/>`)
+    if (page.published) tags.push(`<meta property="article:published_time" content="${page.publishedAt || page.published}"/>`)
+    if (page.date) tags.push(`<meta property="article:modified_time" content="${page.modifiedAt || page.date}"/>`)
     if (pageNamedAuthors.length > 0) {
       for (const profile of pageNamedAuthors) {
         tags.push(

@@ -145,7 +145,7 @@ function collectHeadings(assignIds: boolean): HeadingItem[] {
   const article = document.querySelector('.article')
   if (!article) return []
 
-  const nodes = [...article.querySelectorAll('h2')].slice(0, HEADING_LIMIT)
+  const nodes = [...article.querySelectorAll('h2:not([data-toc-ignore])')].slice(0, HEADING_LIMIT)
 
   if (assignIds) {
     const seen = new Set<string>()
