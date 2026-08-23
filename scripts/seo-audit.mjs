@@ -51,7 +51,17 @@ const errors = []
 const warnings = []
 const titleOwners = new Map()
 const descriptionOwners = new Map()
-const RETIRED_EXTERNAL_HOSTS = new Set(['ossbida.gov.bd'])
+const RETIRED_EXTERNAL_HOSTS = new Set([
+  'ossbida.gov.bd',
+  'bida.gov.bd',
+  'www.bida.gov.bd',
+  'beza.gov.bd',
+  'www.beza.gov.bd',
+  'boi.gov.bd',
+  'www.boi.gov.bd',
+  'banglabiz.com.bd',
+  'www.banglabiz.com.bd',
+])
 
 const htmlFileFor = (route) => path.join(outDir, route === '/' ? 'index.html' : `${route.slice(1)}.html`)
 const record = (collection, message) => collection.push(message)

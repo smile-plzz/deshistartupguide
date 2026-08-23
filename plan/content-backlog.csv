@@ -86,13 +86,13 @@ Phase 1: Starting,Market Research,গ্রামীণ বনাম শহু�
 Phase 1: Starting,Market Research,বাংলাদেশি গ্রাহক পারসোনা কীভাবে বানাবেন,How to build Bangladeshi consumer personas,/validation/consumer-personas,Template,Medium,Bangla-first customer segmentation.
 Phase 1: Starting,Business Structure,একক মালিকানা দিয়ে শুরু করবেন কি না,Should you start as a sole proprietorship?,/registration/sole-proprietorship,Guide,High,Trade license and tax path.
 Phase 1: Starting,Business Structure,পার্টনারশিপ ডিডে কী কী থাকবে,Partnership deed essentials,/registration/partnership-deed,Checklist,Medium,For non-company teams.
-Phase 1: Starting,Business Structure,"প্রাইভেট লিমিটেড, OPC নাকি একক মালিকানা: সিদ্ধান্ত নেওয়ার গাইড","Private limited, OPC or sole proprietorship decision tree",/registration/structure-decision-tree,Guide / Comparison,High,"Source lead: RJSC, BIDA."
-Phase 1: Starting,Business Structure,বিদেশি মালিকানাধীন কোম্পানি শুরু করার বেসিক,Basics of starting a foreign-owned company in Bangladesh,/registration/foreign-owned-company,Guide,High,Source lead: BIDA foreign investment resources.
+Phase 1: Starting,Business Structure,"প্রাইভেট লিমিটেড, OPC নাকি একক মালিকানা: সিদ্ধান্ত নেওয়ার গাইড","Private limited, OPC or sole proprietorship decision tree",/registration/structure-decision-tree,Guide / Comparison,High,"Source lead: RJSC, Invest Bangladesh."
+Phase 1: Starting,Business Structure,বিদেশি মালিকানাধীন কোম্পানি শুরু করার বেসিক,Basics of starting a foreign-owned company in Bangladesh,/registration/foreign-owned-company,Guide,High,Source lead: Invest Bangladesh foreign investment resources.
 Phase 1: Starting,Business Structure,"ব্রাঞ্চ, লিয়াজোঁ ও রিপ্রেজেন্টেটিভ অফিসের পার্থক্য","Branch, liaison and representative office differences",/registration/branch-liaison-office,Guide,Medium,For foreign/diaspora founders.
 Phase 1: Starting,Business Structure,"শেয়ার ক্যাপিটাল, পরিচালক ও শেয়ারহোল্ডার বেসিক","Share capital, directors and shareholders basics",/registration/shares-and-directors,Guide,High,RJSC-facing explainer.
 Phase 1: Starting,Company Registration,কোম্পানি নিবন্ধনের পর প্রথম ১০টি কাজ,First 10 things after company registration,/registration/after-registration,Checklist,High,"Bank, TIN, VAT, accounting, compliance."
 Phase 1: Starting,Company Registration,RJSC বার্ষিক রিটার্ন ও ফাইলিং ক্যালেন্ডার,RJSC annual returns and filing calendar,/registration/annual-returns,Tracker,High,Source lead: RJSC.
-Phase 1: Starting,Company Registration,BIDA OSS ও BanglaBiz starter resources কীভাবে ব্যবহার করবেন,How to use BIDA OSS and BanglaBiz starter resources,/registration/bida-banglabiz,Guide,High,Source lead: BIDA OSS.
+Phase 1: Starting,Company Registration,ইনভেস্ট বাংলাদেশ OSS ও BanglaBiz starter resources কীভাবে ব্যবহার করবেন,How to use Invest Bangladesh OSS and BanglaBiz starter resources,/registration/bida-banglabiz,Guide,High,Source lead: Invest Bangladesh OSS.
 Phase 1: Starting,Company Registration,"CA, আইনজীবী ও কোম্পানি সেক্রেটারি বাছাইয়ের গাইড","How to choose a CA, lawyer and company secretary",/registration/ca-lawyer-secretary,Guide,Medium,Credibility and cost control.
 Phase 1: Starting,Company Registration,কোম্পানি বন্ধ করার আগে কী কী ভাববেন,What to consider before closing a company,/registration/before-closing,Guide / Checklist,Medium,Rare but important lifecycle topic.
 Phase 1: Starting,Local Licenses & Tax,সিটি কর্পোরেশনভেদে ট্রেড লাইসেন্স ক্যাটেগরি বাছাই,Choosing the right trade license category by city corporation,/licenses/trade-license-category,Guide,High,Source lead: city corporation pages.
@@ -138,7 +138,7 @@ Phase 1: Starting,Import / Export / IP,উৎপত্তি সনদ কখন
 Phase 1: Starting,Import / Export / IP,রপ্তানি আয় দেশে আনার বেসিক,Export proceeds repatriation basics,/trade/export-proceeds,Guide,High,Source lead: Bangladesh Bank foreign exchange rules.
 Phase 1: Starting,Import / Export / IP,EPB নিবন্ধন ও রপ্তানি প্রণোদনার পথ,EPB registration and export incentive path,/trade/epb-registration,Guide,Medium,Source lead: EPB.
 Phase 1: Starting,Import / Export / IP,বন্ডেড ওয়্যারহাউস কী এবং কাদের জন্য,What bonded warehouses are and who should use them,/trade/bonded-warehouses,Guide,Medium,For export manufacturing.
-Phase 1: Starting,Import / Export / IP,BEPZA ও BEZA: রপ্তানিমুখী উৎপাদনের জন্য কখন ভাববেন,When to consider BEPZA and BEZA for export manufacturing,/trade/bepza-beza,Guide,Medium,Source lead: BEPZA / BEZA.
+Phase 1: Starting,Import / Export / IP,BEPZA ও ইনভেস্ট বাংলাদেশের ইকোনমিক জোন: রপ্তানিমুখী উৎপাদনের জন্য কখন ভাববেন,When to consider BEPZA and Invest Bangladesh economic zones for export manufacturing,/trade/bepza-beza,Guide,Medium,Source lead: BEPZA / Invest Bangladesh.
 Phase 1: Starting,Import / Export / IP,পণ্যের লেবেলিং ও প্যাকেজিং কমপ্লায়েন্স,Product labeling and packaging compliance,/licenses/product-labeling,Checklist,High,For consumer goods.
 Phase 1: Starting,Import / Export / IP,স্যাম্পল আমদানি ও প্রোটোটাইপ শিপমেন্ট,Sample imports and prototype shipments,/trade/sample-imports,Guide,Medium,Early physical product testing.
 Phase 1: Starting,Import / Export / IP,বিদেশি সাপ্লায়ার যাচাইয়ের চেকলিস্ট,Foreign supplier verification checklist,/trade/supplier-verification,Checklist,High,Alibaba and sourcing risk.
@@ -303,7 +303,7 @@ Phase 3: Launching & Growing,Funding,"SAFE, convertible note ও priced round �
 Phase 3: Launching & Growing,Funding,পরিবারের টাকা ক্যাপ টেবিলে কীভাবে দেখাবেন,How to reflect family money in the cap table,/funding/family-money-cap-table,Guide,High,Bangladesh-specific funding reality.
 Phase 3: Launching & Growing,Funding,"ব্যাংক ঋণ, SME ঋণ নাকি ইকুইটি?","Bank loan, SME loan or equity?",/funding/loan-or-equity,Comparison,Medium,For non-VC businesses too.
 Phase 3: Launching & Growing,Funding,ইমপ্যাক্ট ইনভেস্টরদের জন্য প্রস্তুতি: থিওরি অব চেঞ্জ ও ফলাফলের প্রমাণ,Impact investment readiness: theory of change and evidence of outcomes,/funding/impact-investment-readiness,Guide / Checklist,Medium,"Theory of change, financial sustainability, outcome indicators, evidence collection, the impact section of a data room, and how to avoid SDG-washing. Verify frameworks against GIIN IRIS+, the UN SDGs and the IFC impact principles. Source lead: Accelerating Bangladesh, Impact Investments and the SDGs."
-Phase 3: Launching & Growing,Funding,NRB বা প্রবাসী বিনিয়োগ নেওয়ার পথ,NRB or diaspora funding path,/funding/diaspora-funding,Guide,High,"Source lead: Startup Bangladesh NRB Connect, BIDA."
+Phase 3: Launching & Growing,Funding,NRB বা প্রবাসী বিনিয়োগ নেওয়ার পথ,NRB or diaspora funding path,/funding/diaspora-funding,Guide,High,"Source lead: Startup Bangladesh NRB Connect, Invest Bangladesh."
 Phase 3: Launching & Growing,Funding,ইনভেস্টর বোর্ড রিপোর্ট টেমপ্লেট,Investor board report template,/funding/board-report,Template,Medium,Post-funding governance.
 Phase 3: Launching & Growing,Scaling,নতুন শহরে লঞ্চ প্লেবুক,City launch playbook,/growth/city-launch-playbook,Playbook,High,For expansion outside Dhaka.
 Phase 3: Launching & Growing,Scaling,টিয়ার-২ শহরে লোকাল পার্টনার চেকলিস্ট,Tier-2 city local partner checklist,/growth/tier-2-partners,Checklist,Medium,Distribution and trust.
@@ -311,7 +311,7 @@ Phase 3: Launching & Growing,Scaling,বাংলাদেশের জন্য
 Phase 3: Launching & Growing,Scaling,"আঞ্চলিক রপ্তানি: নেপাল, ভারত, মধ্যপ্রাচ্য","Regional export: Nepal, India and the Middle East",/growth/regional-export,Guide,Medium,Export-oriented founders.
 Phase 3: Launching & Growing,Scaling,দ্বিতীয় অফিস বা কারখানা খুললে কমপ্লায়েন্স চেকলিস্ট,Compliance checklist for a second office or factory,/growth/second-office-compliance,Checklist,Medium,Scale-stage operations.
 Phase 4: Ecosystem & Support,Government Programs & Policies,হাই-টেক পার্ক কর্তৃপক্ষের প্রোগ্রামগুলি,Hi-Tech Park Authority programs,/ecosystem/hi-tech-parks,Guide / Directory,Medium,
-Phase 4: Ecosystem & Support,Government Programs & Policies,বিডা ওয়ান-স্টপ পরিষেবা এবং বিনিয়োগ নীতি,BIDA one-stop services and investment policy,/ecosystem/bida-oss,Guide / Directory,Medium,
+Phase 4: Ecosystem & Support,Government Programs & Policies,ইনভেস্ট বাংলাদেশ ওয়ান-স্টপ সেবা ও বিনিয়োগ নীতি,Invest Bangladesh one-stop services and investment policy,/ecosystem/bida-oss,Guide / Directory,Medium,
 Phase 4: Ecosystem & Support,Government Programs & Policies,আইটি/আইটিইএস-এর জন্য রপ্তানি প্রণোদনা,Export incentives for IT/ITES,/ecosystem/it-export-incentives,Guide / Directory,Medium,
 Phase 4: Ecosystem & Support,Government Programs & Policies,প্রযুক্তি সংস্থাগুলির জন্য কর অবকাশ,Tax holidays for tech companies,/ecosystem/tax-holidays,Guide / Directory,Medium,
 Phase 4: Ecosystem & Support,Government Programs & Policies,বিশেষ অর্থনৈতিক অঞ্চল,Special Economic Zones,/ecosystem/economic-zones,Guide / Directory,Medium,
@@ -324,7 +324,7 @@ Phase 4: Ecosystem & Support,Community & Networking,পরামর্শদা�
 Phase 4: Ecosystem & Support,Community & Networking,বিশ্ববিদ্যালয় উদ্যোক্তা ইকোসিস্টেম,University entrepreneurship ecosystems,/ecosystem/university-ecosystems,Directory / Calendar,Medium,
 Phase 4: Ecosystem & Support,Community & Networking,"ব্র্যাক, এনএসইউ, ডিইউ, আইবিএ উদ্যোক্তা ক্লাব","BRAC, NSU, DU, IBA entrepreneurship clubs",/ecosystem/university-clubs,Directory / Calendar,Medium,
 Phase 4: Ecosystem & Support,Community & Networking,অনুষ্ঠান/সুযোগ ক্যালেন্ডার,Event/opportunity calendar,/ecosystem/event-calendar,Directory / Calendar,Medium,
-Phase 4: Ecosystem & Support,Government Programs & Policies,BIDA OSS অ্যাকাউন্ট খুলে সেবা অনুরোধ ট্র্যাক করা,Opening a BIDA OSS account and tracking service requests,/ecosystem/bida-oss-account,Guide,High,Source lead: BIDA OSS.
+Phase 4: Ecosystem & Support,Government Programs & Policies,ইনভেস্ট বাংলাদেশ OSS অ্যাকাউন্ট খুলে সেবার আবেদন ট্র্যাক করা,Opening an Invest Bangladesh OSS account and tracking service requests,/ecosystem/bida-oss-account,Guide,High,Source lead: Invest Bangladesh OSS.
 Phase 4: Ecosystem & Support,Government Programs & Policies,Hi-Tech Park আবেদন পথচিত্র,Hi-Tech Park application path,/ecosystem/hi-tech-park-application,Guide,Medium,Source lead: BHTPA.
 Phase 4: Ecosystem & Support,Government Programs & Policies,BASIS সদস্যপদ: কখন দরকার,BASIS membership: when it matters,/ecosystem/basis-membership,Guide,Medium,IT/ITES founder support.
 Phase 4: Ecosystem & Support,Government Programs & Policies,e-CAB সদস্যপদ: অনলাইন বিক্রেতাদের জন্য মূল্য,Value of e-CAB membership for online sellers,/ecosystem/e-cab-membership,Guide,Medium,E-commerce support.
@@ -340,7 +340,7 @@ Phase 4: Ecosystem & Support,Sector Playbooks,বাংলাদেশ থেক
 Phase 4: Ecosystem & Support,Sector Playbooks,RMG ও গার্মেন্টস অ্যাকসেসরিজ ব্যবসার গাইড,RMG and garment accessories startup guide,/industries/rmg-garments,Guide,Medium,Export/manufacturing path.
 Phase 4: Ecosystem & Support,Sector Playbooks,খাদ্য ও কৃষিপণ্য প্রক্রিয়াজাতকরণ ব্যবসার গাইড,Food and agro-processing business guide,/industries/agro-processing,Guide,High,"Food safety, packaging, cold chain."
 Phase 4: Ecosystem & Support,Sector Playbooks,বিউটি ও পার্সোনাল কেয়ার পণ্য ব্যবসার গাইড,Beauty and personal care product business guide,/industries/beauty-care,Guide,Medium,"Labeling, influencers, retail."
-Phase 4: Ecosystem & Support,Sector Playbooks,লাইট ইঞ্জিনিয়ারিং ও হার্ডওয়্যার উৎপাদন গাইড,Light engineering and hardware manufacturing guide,/industries/light-engineering,Guide,Medium,BIDA sector lead.
+Phase 4: Ecosystem & Support,Sector Playbooks,লাইট ইঞ্জিনিয়ারিং ও হার্ডওয়্যার উৎপাদন গাইড,Light engineering and hardware manufacturing guide,/industries/light-engineering,Guide,Medium,Invest Bangladesh sector lead.
 Phase 4: Ecosystem & Support,Sector Playbooks,পর্যটন ও ট্রাভেল স্টার্টআপ গাইড,Tourism and travel startup guide,/industries/travel,Guide,Medium,Travel agency and payment constraints.
 Founder Life,Soft Topics,ছাত্র প্রতিষ্ঠাতা সীমাবদ্ধতা,Student founder constraints,/founder-life/student-founders,Guide / Script,Medium,
 Founder Life,Soft Topics,পারিবারিক চাপ এবং কর্মজীবনের ঝুঁকি,Family pressure and career risk,/founder-life/family-pressure,Guide / Script,Medium,

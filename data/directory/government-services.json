@@ -12,16 +12,16 @@
     "notes": "RJSC creates and maintains the legal record for registered entities; it does not issue a trade licence or protect a trademark. Name clearance is required before registering most new entities, while RJSC's process guide exempts foreign companies and partnership firms from that step."
   },
   {
-    "name": "BIDA One Stop Service",
+    "name": "Invest Bangladesh One Stop Service (formerly BIDA OSS)",
     "type": "Investment facilitation",
     "service": "Registration and approval of domestic, foreign and joint-venture industrial projects, branch or liaison offices, foreign-worker services and other investor-facing permits.",
-    "process": "Submit documents, pay applicable charges, track applications and download approvals through the BIDA OSS portal; requests are routed to BIDA or an integrated agency.",
-    "ministry": "Chief Adviser's Office",
-    "applicationPath": "Create an organisation account on bidaquickserv.org and choose the specific BIDA or partner-agency service you need.",
-    "website": "https://bida.gov.bd/",
+    "process": "Submit documents, pay applicable charges, track applications and download approvals through the Invest Bangladesh OSS portal; requests are routed to Invest Bangladesh or an integrated agency.",
+    "ministry": "Prime Minister's Office",
+    "applicationPath": "Create an organisation account on bidaquickserv.org — the official OSS address retained after the agency transition — and choose the Invest Bangladesh or partner-agency service you need.",
+    "website": "https://investbangladesh.gov.bd/",
     "sourceUrl": "https://bidaquickserv.org/",
-    "lastVerified": "2026-08-19",
-    "notes": "BIDA is the principal agency for private investment promotion and facilitation, and OSS brings many investor approvals into one account. It is particularly relevant to industrial projects, foreign investment, foreign staff and branch or liaison offices, but it does not replace RJSC registration or every sector licence."
+    "lastVerified": "2026-08-23",
+    "notes": "Invest Bangladesh became the apex investment agency on 23 August 2026 after BIDA, BEZA and PPPA were merged. Existing investor services continue through the new authority. OSS is particularly relevant to eligible industrial and service projects, foreign staff and branch or liaison offices; Invest Bangladesh's FAQ says registration is not required for commercial and trading activities, and OSS does not replace RJSC registration or every sector licence."
   },
   {
     "name": "National Board of Revenue – e-TIN and income tax",
@@ -173,7 +173,7 @@
     "service": "Foreign-investment share issue and transfer reporting, temporary investment accounts, dividend and share-sale repatriation, portfolio-investment routes and other foreign-exchange transactions.",
     "process": "Most filings and remittances are handled through an authorised dealer bank under Bangladesh Bank rules; only specified cases require prior central-bank approval.",
     "ministry": "Central bank (autonomous)",
-    "applicationPath": "Engage an authorised dealer bank before money moves, use the FEID portal for current requirements and use BIDA OSS for a temporary non-resident account where applicable.",
+    "applicationPath": "Engage an authorised dealer bank before money moves, use the FEID portal for current requirements and use Invest Bangladesh OSS for a temporary non-resident account where applicable.",
     "website": "https://www.bb.org.bd/",
     "sourceUrl": "https://www.bb.org.bd/feidportal/repatriation_share_sale_proceeds.php",
     "lastVerified": "2026-08-19",

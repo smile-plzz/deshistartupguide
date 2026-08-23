@@ -22,7 +22,7 @@ const termVariants = {
   "cod": ["cash on delivery", "Cash on delivery", "COD", "ক্যাশ অন ডেলিভারি"],
   "vesting": ["vesting", "Vesting", "ভেস্টিং"],
   "cap-table": ["cap table", "Cap table", "Cap Table", "ক্যাপ টেবিল"],
-  "bida-oss": ["BIDA OSS", "BIDA One Stop Service"],
+  "bida-oss": ["Invest Bangladesh OSS", "Invest Bangladesh One Stop Service", "BIDA OSS", "BIDA One Stop Service"],
   "board-resolution": ["board resolution", "Board resolution", "Board Resolution", "বোর্ড রেজল্যুশন", "বোর্ড রেজুলেশন"],
   "withholding-tax": ["withholding tax", "Withholding tax", "Withholding Tax", "উৎস কর"],
   "corporate-tax": ["corporate tax", "Corporate tax", "Corporate Tax", "করপোরেট কর", "কর্পোরেট কর", "করপোরেট ট্যাক্স"],

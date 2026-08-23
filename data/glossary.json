@@ -168,23 +168,23 @@
     }
   },
   "bida-oss": {
-    "head": "BIDA OSS",
-    "bn": "বিডা ওএসএস",
-    "expansion": "BIDA One Stop Service",
+    "head": "Invest Bangladesh OSS",
+    "bn": "ইনভেস্ট বাংলাদেশ ওএসএস",
+    "expansion": "Invest Bangladesh One Stop Service (formerly BIDA OSS)",
     "group": "paperwork",
     "def": {
-      "bn": "বাংলাদেশ বিনিয়োগ উন্নয়ন কর্তৃপক্ষের (BIDA) একটি অনলাইন পোর্টাল, যেখানে এক জায়গা থেকেই ব্যবসার বিভিন্ন সরকারি লাইসেন্স আর সেবার আবেদন করা যায়।",
-      "en": "An online portal by the Bangladesh government where businesses can easily apply for important permits and approvals in one place."
+      "bn": "ইনভেস্ট বাংলাদেশের অনলাইন ওয়ান স্টপ সার্ভিস পোর্টাল। পুরোনো bidaquickserv.org ঠিকানাতেই এটি চলছে। প্রযোজ্য বিনিয়োগ রেজিস্ট্রেশন, অনুমোদন ও যুক্ত সরকারি সেবার আবেদন এখান থেকে করা যায়।",
+      "en": "Invest Bangladesh's online One Stop Service portal, still hosted at the legacy bidaquickserv.org address, for eligible investment registration, approvals and integrated government services."
     },
-    "sourceUrl": "https://bidaquickserv.org/",
-    "verified": "2026-07-28",
+    "sourceUrl": "https://investbangladesh.gov.bd/faq",
+    "verified": "2026-08-23",
     "example": {
-      "en": "If you're setting up a new manufacturing plant, you don't need to run between ten different government ministries anymore. BIDA OSS lets you apply for your trade license, environmental clearance, and utility connections all from one website.",
-      "bn": "নতুন কোনো ম্যানুফ্যাকচারিং প্ল্যান্ট বসাতে গেলে এখন আর দশটা সরকারি মন্ত্রণালয়ে ছুটতে হয় না। বিডা ওএসএস ব্যবহার করে আপনি এক ওয়েবসাইট থেকেই ট্রেড লাইসেন্স, পরিবেশ ছাড়পত্র বা গ্যাস-বিদ্যুতের কানেকশনের জন্য আবেদন করতে পারবেন।"
+      "en": "For a new industrial project, check the current service list first. Eligible services such as Invest Bangladesh registration and linked clearances can be started from one account.",
+      "bn": "নতুন শিল্প প্রকল্পের কাজ শুরু করলে আগে বর্তমান সেবার তালিকা দেখে নিন। প্রযোজ্য হলে একই অ্যাকাউন্ট থেকে ইনভেস্ট বাংলাদেশ রেজিস্ট্রেশন ও যুক্ত ছাড়পত্রের আবেদন শুরু করা যায়।"
     },
     "watchOut": {
-      "en": "While the system is mostly online, you still need to make sure your uploaded documents are perfectly clear and match your official records. A single typo in your NID or company name can cause annoying delays in getting your approvals.",
-      "bn": "যদিও পুরো সিস্টেমটা অনলাইনে, তারপরও আপলোড করা ডকুমেন্টগুলো একদম স্পষ্ট হতে হবে আর আসল কাগজের সাথে মিল থাকতে হবে। এনআইডি বা কোম্পানির নামে ছোট একটা বানানের ভুলের জন্যও আপনার লাইসেন্স পেতে বেশ দেরি হয়ে যেতে পারে।"
+      "en": "A service appearing in OSS does not make it universally required or fully online. Check whether it applies, the current document list and whether a physical submission is still requested.",
+      "bn": "ওএসএসে কোনো সেবা থাকলেই সেটি সবার জন্য বাধ্যতামূলক বা পুরোপুরি অনলাইন হয়ে যায় না। কাজটি আপনার ক্ষেত্রে প্রযোজ্য কি না, বর্তমান কাগজের তালিকা এবং সরাসরি কাগজ জমা দিতে হবে কি না, আগে দেখে নিন।"
     }
   },
   "board-resolution": {
