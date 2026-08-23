@@ -151,6 +151,35 @@
     "notes": "A six-month accelerator and investment programme combining early-stage capital with founder leadership, company-building and Bangladesh-specific legal and financial support. It is sector-agnostic, prefers teams with some market traction and looks for businesses addressing socioeconomic challenges."
   },
   {
+    "name": "OnnoRokom Uddokta",
+    "type": "Non-profit business accelerator",
+    "stage": [
+      "Operating business",
+      "Early stage",
+      "Growth"
+    ],
+    "sectors": [
+      "Sector-agnostic",
+      "Impact",
+      "Sustainable businesses"
+    ],
+    "benefits": [
+      "Six-month, 17-module growth programme",
+      "In-person and online learning sessions",
+      "Mentoring, selected one-to-one coaching and practical guidance",
+      "Growth-partner reviews, follow-ups and accountability",
+      "Founder and business network access"
+    ],
+    "cohortTiming": "Cohort 3 applications are open until 31 August 2026. The programme is scheduled to run from 15 September 2026 to 15 March 2027; these dates are tentative and may change.",
+    "costOrEquity": "No application, admission, participation, coaching or training fee; the programme takes no equity.",
+    "notableAlumni": [],
+    "applicationPath": "Apply through the official Active Applications page by 31 August 2026. Applicants must already operate a business, venture or non-profit; idea-only applicants are not eligible.",
+    "website": "https://onnorokomuddokta.org/en/",
+    "sourceUrl": "https://onnorokomuddokta.org/applications",
+    "lastVerified": "2026-08-23",
+    "notes": "OnnoRokom Group's six-month accelerator supports Bangladeshi founders who already run a business and want structured help to grow sustainably. The programme combines learning sessions, coaching, mentoring, practical work, accountability and network access, with one-to-one coaching for selected participants. Its separate idea-stage incubation programme is still being developed and has not announced a first cohort."
+  },
+  {
     "name": "NSU Startups Next",
     "type": "University startup incubator and accelerator",
     "stage": [
