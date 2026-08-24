@@ -11,7 +11,7 @@
     "dev": "node scripts/dev.mjs",
     "dev:turbo": "node scripts/dev.mjs --turbopack",
     "build": "NODE_ENV=production next build",
-    "build:worker": "npm run history:ensure && DESHI_DEPLOY_TARGET=cloudflare-worker npm run build",
+    "build:worker": "npm run history:ensure && NODE_OPTIONS=--max-old-space-size=4096 DESHI_DEPLOY_TARGET=cloudflare-worker npm run build",
     "preview:worker": "npm run build:worker && wrangler dev --env-file .env.local",
     "deploy:worker": "npm run build:worker && wrangler deploy --keep-vars",
     "upload:worker": "npm run build:worker && wrangler versions upload --keep-vars",
