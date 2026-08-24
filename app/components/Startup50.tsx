@@ -285,17 +285,19 @@ export default function Startup50({ locale = 'bn' }: Startup50Props) {
         <h2 id="startup50-method-title">{isEn ? 'How startups make the list' : 'কোন স্টার্টআপ তালিকায় আসে'}</h2>
         <p className="startup50-methodology__lede">
           {isEn
-            ? 'We look for active companies with a clear product, recent progress and something useful other founders can learn. Funding can add context, but it does not decide who gets in.'
-            : 'যাদের পরিষ্কার একটি প্রডাক্ট আছে, কাজের অগ্রগতি দেখা যাচ্ছে আর অন্য ফাউন্ডারদেরও যাদের কাছ থেকে কিছু শেখার আছে, আমরা এমন স্টার্টআপই খুঁজি। ফান্ডিংয়ের তথ্য হয়তো বাড়তি ধারণা দেয়, তবে শুধু ফান্ডিং পেলেই এই তালিকায় জায়গা হয় না।'}
+            ? 'Every startup on the list must meet the same basic requirements. We then compare customer adoption, recent growth, reach and funding. Funding is an important factor, but it is not the only one and does not guarantee a place on the list.'
+            : 'এই তালিকার প্রতিটি স্টার্টআপকেই একই প্রাথমিক শর্ত পূরণ করতে হয়। এরপর আমরা দেখি প্রডাক্টটি মানুষ কতটা ব্যবহার করছে, সম্প্রতি ব্যবসা কতটা এগিয়েছে, কাজের পরিসর কত বড় আর ফান্ডিং হয়েছে কি না। ফান্ডিং একটি গুরুত্বপূর্ণ বিষয়, তবে এটিই একমাত্র মাপকাঠি নয়। ফান্ডিং পেলেই তালিকায় জায়গা নিশ্চিত হয় না।'}
         </p>
 
         <div className="startup50-methodology__body">
           <section>
             <h3>{isEn ? 'What we look for' : 'আমরা যা দেখি'}</h3>
             <ul>
-              <li>{isEn ? 'A product people can use today' : 'মানুষ এখনই ব্যবহার করতে পারেন এমন পণ্য'}</li>
-              <li>{isEn ? 'Recent work that shows the team is moving forward' : 'এমন সাম্প্রতিক কাজ, যা দেখে বোঝা যায় টিম সামনের দিকে এগোচ্ছে'}</li>
-              <li>{isEn ? 'Something other founders can learn from' : 'অন্য ফাউন্ডারদের শেখার মতো কিছু'}</li>
+              <li>{isEn ? 'Founded in Bangladesh or primarily operating from Bangladesh' : 'বাংলাদেশে প্রতিষ্ঠিত, অথবা মূল কার্যক্রম বাংলাদেশ থেকে পরিচালিত'}</li>
+              <li>{isEn ? 'A live product or platform that can scale' : 'চালু আছে আর বড় পরিসরে চালানো যায়, এমন নিজস্ব প্রডাক্ট বা প্ল্যাটফর্ম'}</li>
+              <li>{isEn ? 'Verifiable activity within the past 12 months' : 'গত ১২ মাসের মধ্যে কাজের যাচাইযোগ্য অগ্রগতি'}</li>
+              <li>{isEn ? 'Evidence of customers, users, revenue, transactions, contracts or meaningful partnerships' : 'কাস্টমার, ইউজার, রেভিনিউ, ট্রানজ্যাকশন, চুক্তি বা গুরুত্বপূর্ণ পার্টনারশিপের প্রমাণ'}</li>
+              <li>{isEn ? 'At least two reliable public sources, including one independent of the company' : 'অন্তত দুটি নির্ভরযোগ্য পাবলিক সোর্স, যার একটি কোম্পানির বাইরের'}</li>
             </ul>
           </section>
           <section>

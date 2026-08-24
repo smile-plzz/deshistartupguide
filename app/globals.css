@@ -3021,12 +3021,7 @@ html[lang='bn'] .startup50-hero__folio strong {
 
 .startup50-methodology__body ul {
   margin: 0;
-  padding-left: 20px;
-}
-
-html[lang='bn'] .startup50-methodology__body ul {
-  padding-left: 0;
-  padding-right: 20px;
+  padding-inline-start: 24px;
 }
 
 .startup50-methodology__body li,

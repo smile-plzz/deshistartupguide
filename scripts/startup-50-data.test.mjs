@@ -132,6 +132,37 @@ test('the company data cannot silently become a ranking', () => {
   }
 })
 
+test('the public selection criteria are specific about evidence and funding', () => {
+  assert.match(componentSource, /Founded in Bangladesh or primarily operating from Bangladesh/)
+  assert.match(componentSource, /Verifiable activity within the past 12 months/)
+  assert.match(componentSource, /At least two reliable public sources, including one independent of the company/)
+  assert.match(componentSource, /Funding is an important factor, but it is not the only one/)
+  assert.doesNotMatch(componentSource, /—/)
+})
+
+test('every selected company has multiple sources including an independent publisher', () => {
+  const hostname = (value) => new URL(value).hostname.replace(/^www\./, '')
+
+  for (const entry of data.entries) {
+    const officialHostname = hostname(entry.website)
+    const sources = [
+      entry.website,
+      ...entry.background.sources,
+      entry.activity.url,
+      entry.financing.url
+    ].filter(Boolean)
+
+    assert.ok(new Set(sources).size >= 2, entry.name + ' needs at least two public sources')
+    assert.ok(
+      sources.some((source) => {
+        const sourceHostname = hostname(source)
+        return sourceHostname !== officialHostname && sourceHostname !== 'linkedin.com'
+      }),
+      entry.name + ' needs a source independent of the company'
+    )
+  }
+})
+
 test('every company has one reviewed logo in the R2 media registry', () => {
   assert.match(logos.reviewedAt, /^\d{4}-\d{2}-\d{2}$/)
   assert.equal(logos.entries.length, 50)
