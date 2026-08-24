@@ -46,6 +46,7 @@ const publicMedia = path.join(root, 'public', 'media')
 const contributorLedgerFile = path.join(root, 'data', 'contributor-ledger.json')
 const contributorPolicyFile = path.join(root, 'data', 'contributors-policy.json')
 const startup50LogoFile = path.join(root, 'data', 'startup-50-logos.json')
+const socialImagesFile = path.join(root, 'data', 'social-images.json')
 
 const ALLOWED = new Set(Object.keys(CONTENT_TYPES))
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/
@@ -169,7 +170,24 @@ function checkContributorAvatarReferences() {
   }
 }
 
+function checkSocialImageReferences() {
+  const name = path.relative(root, socialImagesFile)
+  let definitions
+  try {
+    definitions = JSON.parse(fs.readFileSync(socialImagesFile, 'utf8'))
+  } catch (error) {
+    errors.push(`${name}: could not read social-image references (${error.message}).`)
+    return
+  }
+  for (const [slug, definition] of Object.entries(definitions)) {
+    for (const [locale, localized] of Object.entries(definition?.locales || {})) {
+      checkSource(localized?.src || '', `${slug}:${locale} social image`, name)
+    }
+  }
+}
+
 checkContributorAvatarReferences()
+checkSocialImageReferences()
 
 function checkStartup50LogoReferences() {
   const fileName = path.relative(root, startup50LogoFile)

@@ -19,6 +19,10 @@ import {
 import { pageBylineHtml } from '../app/lib/page-byline.mjs'
 import { pageCreditsHtml } from '../app/lib/page-credits.mjs'
 import {
+  defaultSocialImageAlt,
+  pageSocialImage
+} from '../app/lib/page-social-image.mjs'
+import {
   CONTENT_LICENSE_URL,
   DEFAULT_DESCRIPTIONS,
   DEFAULT_OG_IMAGE,
@@ -643,16 +647,15 @@ for (const page of pages) {
   const robots = page.stub
     ? 'noindex, follow, noarchive'
     : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+  const customSocialImage = pageSocialImage(page)
   const socialImage = contributorProfile
     ? `${SITE_URL}/contributor-cards/${contributorProfile.slug}.png`
-    : DEFAULT_OG_IMAGE
+    : customSocialImage?.url || DEFAULT_OG_IMAGE
   const socialImageAlt = contributorProfile
     ? (isEn
         ? `${contributorProfile.displayName}'s Deshi Startup contributor card`
         : `${contributorProfile.displayName}-এর দেশি স্টার্টআপ কন্ট্রিবিউটর কার্ড`)
-    : (isEn
-        ? 'Deshi Startup, the free, open-source manual for building startups in Bangladesh'
-        : 'দেশি স্টার্টআপ, বাংলাদেশে স্টার্টআপ গড়ার ফ্রি, ওপেন-সোর্স ম্যানুয়াল')
+    : customSocialImage?.alt || defaultSocialImageAlt(page.locale)
   const metaAuthor = contributorProfile?.displayName ||
     (pageNamedAuthors.length > 0
       ? pageNamedAuthors.map((profile) => profile.displayName).join(', ')

@@ -8,6 +8,24 @@
     "remote": true,
     "uploadedAt": "2026-08-18T21:34:09.801Z"
   },
+  "/media/og/bn/startup-50.png": {
+    "key": "og/bn/startup-50.b36805afc551.png",
+    "w": 1200,
+    "h": 630,
+    "bytes": 57357,
+    "sha": "b36805afc551",
+    "remote": true,
+    "uploadedAt": "2026-08-24T12:15:08.523Z"
+  },
+  "/media/og/en/startup-50.png": {
+    "key": "og/en/startup-50.94e9c57fe2b5.png",
+    "w": 1200,
+    "h": 630,
+    "bytes": 54742,
+    "sha": "94e9c57fe2b5",
+    "remote": true,
+    "uploadedAt": "2026-08-24T11:58:07.858Z"
+  },
   "/media/startup-50/10-minute-school.webp": {
     "key": "startup-50/10-minute-school.0f0f373d12e6.webp",
     "w": 320,

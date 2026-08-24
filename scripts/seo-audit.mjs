@@ -24,6 +24,10 @@ import {
 } from '../app/seo.config.mjs'
 import { resolveBuildOutput } from './build-output.mjs'
 import { scopeRepeatsRoles } from '../app/lib/page-credits.mjs'
+import {
+  defaultSocialImageAlt,
+  pageSocialImage
+} from '../app/lib/page-social-image.mjs'
 import { eventsForLocale } from './postbuild-contributors.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -296,9 +300,23 @@ for (const page of pages) {
   }
   const expectedOgImage = contributorProfile
     ? `${SITE_URL}/contributor-cards/${contributorProfile.slug}.png`
-    : DEFAULT_OG_IMAGE
+    : pageSocialImage(page)?.url || DEFAULT_OG_IMAGE
   if ($('meta[property="og:image"]').attr('content') !== expectedOgImage) {
     record(errors, `${page.route}: wrong Open Graph image`)
+  }
+  const expectedOgImageAlt = contributorProfile
+    ? (page.locale === 'en'
+        ? `${contributorProfile.displayName}'s Deshi Startup contributor card`
+        : `${contributorProfile.displayName}-এর দেশি স্টার্টআপ কন্ট্রিবিউটর কার্ড`)
+    : pageSocialImage(page)?.alt || defaultSocialImageAlt(page.locale)
+  if ($('meta[property="og:image:alt"]').attr('content') !== expectedOgImageAlt) {
+    record(errors, `${page.route}: wrong Open Graph image alt text`)
+  }
+  if ($('meta[name="twitter:image"]').attr('content') !== expectedOgImage) {
+    record(errors, `${page.route}: Twitter image does not match Open Graph image`)
+  }
+  if ($('meta[name="twitter:image:alt"]').attr('content') !== expectedOgImageAlt) {
+    record(errors, `${page.route}: wrong Twitter image alt text`)
   }
 
   if (!page.stub && schemaScripts.length === 1) {

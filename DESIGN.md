@@ -19,6 +19,7 @@ colors:
   social-card-field: "#064e3b"
   social-card-identity: "#fbfaf7"
   social-card-monogram: "#f7f3e8"
+  social-card-copy: "#315548"
   blue: "#3366cc"
   blue-hover: "#1f4fb2"
   blue-soft: "#eef5fc"
@@ -529,14 +530,66 @@ Each row shows the reviewed company mark, name, sector, a short description and 
 A small Details control reveals the company background, latest update, public funding information
 and official website without sending readers to a second record page.
 
+The folio and the edition line under it are one masthead, not two blocks. A single 2px green spine
+runs the full height of both rows, a hairline divides them, and the heavy green rule closes the
+block at the bottom rather than bisecting it. Everything in the seam column is left-aligned on the
+same edge: the folio numeral, the edition heading and the last-updated line. The numeral is pulled
+left by its own side bearing so it starts on that edge rather than a dozen pixels inside it, and
+its line box is trimmed to cap and baseline so a mark whose box is a third taller than its ink
+still centres on what a reader sees. Bengali figures stop short of the cap line that Latin figures
+overshoot, so the Bangla edition takes a small documented correction to sit on the same axis. The
+two columns of the edition row start on the same cap, which equal top padding gives them for
+free: the smaller line carries proportionally more of its own leading than the heading does, and at
+these two sizes that offsets the heading's taller ascent almost exactly. Two blocks either side of
+a heavy rule want their tops to agree rather than their baselines, and no figure here has to be
+kept in step with a font size by hand.
+
+Wherever the folio sits in the seam column, it is sized from that track and not from the viewport:
+at 0.8 of the track the wider of the two numerals still clears the spine, whichever face the
+platform serves the Latin digits from. This is a rule, not a preference. A viewport-derived numeral
+beside a fixed seam printed the 50 straight over the body copy between 681px and 860px, and any
+future per-breakpoint override of either value can reintroduce that. The two-column masthead has one
+seam ramp and one size formula for exactly this reason.
+
+Below 680px the rule does not apply, and the exception is deliberate. The masthead stacks, the folio
+loses its right-hand border and takes a band of its own across the full canvas, and the seam
+variable is not read by that layout at all. There is no column to overflow and no spine to reach,
+so the numeral is free to stay viewport-fluid there and does: it runs at 22vw between a 5.2rem floor
+and a 7.6rem ceiling. The ceiling is what keeps it honest. At its largest the mark is about 141px of
+ink inside a canvas of at least 517px, so the band cannot be filled by the numeral at any width this
+layout serves. The rule above is about collision with the spine; where there is no spine there is
+nothing for it to govern.
+
+The block is sized by its content and its stated padding. There is no min-height on it; the last one
+invented eighty pixels above the headline that no rule in this system had authored.
+
 The complete list is server-rendered. A small client component only filters the existing records by
 name and sector, so every company and link remains available without JavaScript. At narrow widths,
 the folio becomes a compact masthead and each row stacks in reading order without horizontal scroll.
+
+The company row is the one place on this site sized by its container rather than by the window, and
+the reason is specific: the navigation rail keeps its full width until 860px, so a 900px window
+leaves this list a narrower canvas than an 860px window does. A window-keyed row therefore asked for
+its widest layout exactly where the least room existed and pushed the page sideways by up to 128px
+between 861px and 1019px. The row is stacked by default and layers its columns back on with
+container min-width queries whose thresholds are each that layout's own column minimums plus a
+margin, so a tier is never drawn into less room than it needs and an engine without container
+queries still gets the readable stacked row. Any future change to the rail width or the canvas
+gutters is absorbed by this automatically; reintroducing a window-keyed breakpoint here would not
+be.
 
 Green is used for structure, rules, hover and focus; blue remains for links. Company marks are
 reviewed before use, stored in R2 through the site's media pipeline and linked to their source in the
 authored logo manifest. The page is reviewed monthly when practical and at least quarterly. It has no
 rank numbers, public scores, trophy language or sponsor-controlled placement.
+
+Each language has its own 1200×630 sharing image. It carries the same folio idea as the page: one
+large 50 on a deep-green field, then the title, watch line, project mark and short URL on warm paper.
+It is deliberately not a screenshot, logo wall or miniature list. The copy and logical R2 paths live
+in `data/social-images.json`; `npm run social:images` renders the bytes into the gitignored
+`media/og/{locale}/` staging directory, and the normal media upload gives each revision a new
+content-addressed R2 URL. The SEO pass uses a configured image only after its registry entry confirms
+that the object is remote, otherwise it safely falls back to the site-wide card.
 
 ### Contributor record
 

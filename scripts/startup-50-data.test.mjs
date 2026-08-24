@@ -108,8 +108,8 @@ test('official websites are labelled with their root domains', () => {
 test('the English metadata positions the edition as top startups in Bangladesh', () => {
   assert.match(englishPageSource, /title: "The Deshi Startup 50: Top startups in Bangladesh"/)
   assert.match(englishPageSource, /description: ".*top startups in Bangladesh/i)
-  assert.match(componentSource, /'50 Bangladeshi startups to watch in 2026\.'/)
-  assert.doesNotMatch(componentSource, /'Top 50 Bangladeshi startups to watch in 2026\.'/)
+  assert.match(componentSource, /'Top 50 Bangladeshi startups to watch in 2026\.'/)
+  assert.doesNotMatch(componentSource, /'50 Bangladeshi startups to watch in 2026\.'/)
 })
 
 test('search, empty results and accessible row controls match the interface copy', () => {

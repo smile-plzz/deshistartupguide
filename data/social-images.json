@@ -1,0 +1,30 @@
+{
+  "startup-50": {
+    "template": "folio",
+    "provenance": "Deterministic programmatic social card for The Deshi Startup 50. 1200x630 editorial folio: a deep-green left field with an oversized warm-white 50 or ৫০, and a warm-paper identity field with the localized title and approved watch line, thin warm rules, the Deshi Startup mark at top right, and a short green URL. Flat, clean, high-contrast, no gradients, shadows, logo wall, screenshot, ranking badges, or decorative clutter. English and Bangla versions use identical geometry; Bangla uses the bundled Deshi Sans Bengali font with full-script shaping.",
+    "locales": {
+      "en": {
+        "src": "/media/og/en/startup-50.png",
+        "folio": "50",
+        "title": "The Deshi Startup 50",
+        "tagline": [
+          "Top 50 Bangladeshi startups",
+          "to watch in 2026."
+        ],
+        "displayUrl": "deshistartup.com/en/50",
+        "alt": "The Deshi Startup 50: Top 50 Bangladeshi startups to watch in 2026"
+      },
+      "bn": {
+        "src": "/media/og/bn/startup-50.png",
+        "folio": "৫০",
+        "title": "দেশি স্টার্টআপ ৫০",
+        "tagline": [
+          "২০২৬ সালে নজরে রাখার মতো",
+          "৫০টি বাংলাদেশি স্টার্টআপ।"
+        ],
+        "displayUrl": "deshistartup.com/50",
+        "alt": "দেশি স্টার্টআপ ৫০: ২০২৬ সালে নজরে রাখার মতো ৫০টি বাংলাদেশি স্টার্টআপ"
+      }
+    }
+  }
+}

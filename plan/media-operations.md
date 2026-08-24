@@ -87,6 +87,15 @@ Every image still needs editorial review: educational relevance, source and righ
 legible redaction of personal data, useful alt text, and credit where required. Uploading an image
 does not approve it.
 
+### Page-specific social images
+
+Social-card copy, alt text and logical paths live in `data/social-images.json`. Run
+`npm run social:images` to render the configured 1200×630 cards into the gitignored
+`media/og/{locale}/` staging directory, review the PNGs, then upload them with the normal
+`npm run media:upload` command. The image bytes stay out of Git. The SEO pass uses the immutable
+R2 object key recorded in `app/generated/media.json`; a configured card that is missing from the
+remote registry falls back to the site-wide image rather than producing a broken share preview.
+
 ## Retention and deletion
 
 Do not use an age-based lifecycle rule on the active object namespace. A correct screenshot may

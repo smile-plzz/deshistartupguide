@@ -380,7 +380,13 @@ export function putObject(file, key) {
       CACHE_CONTROL,
       '--remote'
     ],
-    { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] }
+    {
+      cwd: root,
+      // Wrangler's saved OAuth login is deliberately interactive. Preserve a
+      // maintainer terminal when one exists; CI still keeps stdin closed and
+      // uses CLOUDFLARE_API_TOKEN as before.
+      stdio: process.stdin.isTTY ? 'inherit' : ['ignore', 'pipe', 'pipe']
+    }
   )
 }
 
