@@ -199,6 +199,7 @@ npm run lint:glossary       # glossary schema, locale parity, guide links and te
 npm run lint:routes         # URL and locale-tree checks
 npm run lint:terms          # tag first mention of each glossary term with <Term>; rewrites content files
 npm run lint:media          # media references and limits
+npm test                    # run every repository test file once
 npm run test:contribute     # editor/contribution helpers
 npm run test:contributors   # contributor snapshot and leaderboard helpers
 npm run test:media          # media pipeline helpers

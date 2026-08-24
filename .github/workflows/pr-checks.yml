@@ -34,17 +34,8 @@ jobs:
       - name: Bangla style lint (hard findings fail)
         run: npm run lint:bangla -- --strict
 
-      - name: Media guardrail tests
-        run: npm run test:media
-
-      - name: Citation guardrail tests
-        run: npm run test:citations
-
-      - name: Contributor recognition tests
-        run: npm run test:contributors
-
-      - name: Contribution flow tests
-        run: npm run test:contribute
+      - name: Run all tests
+        run: npm test
 
       - name: Build Cloudflare deployment
         run: npm run build:worker

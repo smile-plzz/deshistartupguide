@@ -336,8 +336,3 @@ export function normalizeContributionMarkdown(markdown: string): string {
     mapOutsideInlineCodeSpans(normalizeTableSegment(segment), normalizeSerializerEscapes)
   )
 }
-
-/** Kept as a compatibility alias for existing table-normalization callers. */
-export function normalizeTables(markdown: string): string {
-  return normalizeContributionMarkdown(markdown)
-}
