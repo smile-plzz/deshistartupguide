@@ -30,6 +30,8 @@ import {
 const contentRoot = path.join(root, 'app', '(contents)')
 const contributorLedgerFile = path.join(root, 'data', 'contributor-ledger.json')
 const contributorPolicyFile = path.join(root, 'data', 'contributors-policy.json')
+const startup50LogoFile = path.join(root, 'data', 'startup-50-logos.json')
+const socialImagesFile = path.join(root, 'data', 'social-images.json')
 const apply = process.argv.includes('--apply')
 const retireUnreferenced = process.argv.includes('--retire-unreferenced')
 const unknown = process.argv
@@ -91,6 +93,22 @@ function references() {
       )
     }
     used.add(logicalPath)
+  }
+
+  if (fs.existsSync(socialImagesFile)) {
+    const definitions = JSON.parse(fs.readFileSync(socialImagesFile, 'utf8'))
+    for (const definition of Object.values(definitions)) {
+      for (const localized of Object.values(definition?.locales || {})) {
+        if (validLogicalPath(localized?.src || '')) used.add(localized.src)
+      }
+    }
+  }
+
+  if (fs.existsSync(startup50LogoFile)) {
+    const logoData = JSON.parse(fs.readFileSync(startup50LogoFile, 'utf8'))
+    for (const logo of logoData.entries || []) {
+      if (validLogicalPath(logo?.src || '')) used.add(logo.src)
+    }
   }
 
   return used

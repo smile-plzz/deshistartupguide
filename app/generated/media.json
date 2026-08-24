@@ -53,14 +53,23 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:12:56.947Z"
   },
-  "/media/startup-50/apon-wellbeing.webp": {
-    "key": "startup-50/apon-wellbeing.2f59ac2a7ad4.webp",
+  "/media/startup-50/airwork.webp": {
+    "key": "startup-50/airwork.275fd931d2a1.webp",
     "w": 320,
-    "h": 160,
-    "bytes": 5714,
-    "sha": "2f59ac2a7ad4",
+    "h": 55,
+    "bytes": 3700,
+    "sha": "275fd931d2a1",
     "remote": true,
-    "uploadedAt": "2026-08-23T18:12:59.044Z"
+    "uploadedAt": "2026-08-24T19:40:36.920Z"
+  },
+  "/media/startup-50/amarlab.webp": {
+    "key": "startup-50/amarlab.2c8a55dbec42.webp",
+    "w": 149,
+    "h": 160,
+    "bytes": 5710,
+    "sha": "2c8a55dbec42",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:19.440Z"
   },
   "/media/startup-50/apploye.webp": {
     "key": "startup-50/apploye.eeb85b9c3f75.webp",
@@ -98,14 +107,14 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:08.152Z"
   },
-  "/media/startup-50/biniyog-io.webp": {
-    "key": "startup-50/biniyog-io.22de0a776a83.webp",
+  "/media/startup-50/bimafy.webp": {
+    "key": "startup-50/bimafy.bc5405cbeb3e.webp",
     "w": 320,
-    "h": 102,
-    "bytes": 12604,
-    "sha": "22de0a776a83",
+    "h": 101,
+    "bytes": 8332,
+    "sha": "bc5405cbeb3e",
     "remote": true,
-    "uploadedAt": "2026-08-23T18:13:10.681Z"
+    "uploadedAt": "2026-08-24T19:40:39.567Z"
   },
   "/media/startup-50/bkash.webp": {
     "key": "startup-50/bkash.4200621a6935.webp",
@@ -116,23 +125,14 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:12.930Z"
   },
-  "/media/startup-50/bondstein.webp": {
-    "key": "startup-50/bondstein.1a5ddd9e6114.webp",
+  "/media/startup-50/cassetex.webp": {
+    "key": "startup-50/cassetex.eb65e0c35ee7.webp",
     "w": 320,
-    "h": 67,
-    "bytes": 5992,
-    "sha": "1a5ddd9e6114",
+    "h": 160,
+    "bytes": 4156,
+    "sha": "eb65e0c35ee7",
     "remote": true,
-    "uploadedAt": "2026-08-23T18:13:15.369Z"
-  },
-  "/media/startup-50/chaldal.webp": {
-    "key": "startup-50/chaldal.290ae1be0a7b.webp",
-    "w": 320,
-    "h": 89,
-    "bytes": 10712,
-    "sha": "290ae1be0a7b",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:13:17.421Z"
+    "uploadedAt": "2026-08-24T19:40:41.777Z"
   },
   "/media/startup-50/chamak.webp": {
     "key": "startup-50/chamak.c43370096b1c.webp",
@@ -152,6 +152,15 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:21.486Z"
   },
+  "/media/startup-50/doctorkoi.webp": {
+    "key": "startup-50/doctorkoi.ae8ed2b76509.webp",
+    "w": 320,
+    "h": 150,
+    "bytes": 10708,
+    "sha": "ae8ed2b76509",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:43.919Z"
+  },
   "/media/startup-50/dorik.webp": {
     "key": "startup-50/dorik.f11ce693f53c.webp",
     "w": 320,
@@ -160,15 +169,6 @@
     "sha": "f11ce693f53c",
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:23.682Z"
-  },
-  "/media/startup-50/dreamers-academy.webp": {
-    "key": "startup-50/dreamers-academy.0fc1f44bfba0.webp",
-    "w": 320,
-    "h": 55,
-    "bytes": 11212,
-    "sha": "0fc1f44bfba0",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:13:25.850Z"
   },
   "/media/startup-50/dubotech.webp": {
     "key": "startup-50/dubotech.7ee234090123.webp",
@@ -197,6 +197,15 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:32.196Z"
   },
+  "/media/startup-50/fashol.webp": {
+    "key": "startup-50/fashol.77a700f12196.webp",
+    "w": 320,
+    "h": 71,
+    "bytes": 10208,
+    "sha": "77a700f12196",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:21.736Z"
+  },
   "/media/startup-50/gozayaan.webp": {
     "key": "startup-50/gozayaan.334146aa6c6d.webp",
     "w": 160,
@@ -205,6 +214,15 @@
     "sha": "334146aa6c6d",
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:34.207Z"
+  },
+  "/media/startup-50/hishabee.webp": {
+    "key": "startup-50/hishabee.ea5dc28bbb11.webp",
+    "w": 320,
+    "h": 75,
+    "bytes": 6200,
+    "sha": "ea5dc28bbb11",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:05.776Z"
   },
   "/media/startup-50/ifarmer.webp": {
     "key": "startup-50/ifarmer.1d490d42dea4.webp",
@@ -215,24 +233,6 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:36.300Z"
   },
-  "/media/startup-50/inkam.webp": {
-    "key": "startup-50/inkam.224876179b8d.webp",
-    "w": 160,
-    "h": 160,
-    "bytes": 4398,
-    "sha": "224876179b8d",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:13:38.562Z"
-  },
-  "/media/startup-50/intelligent-machines.webp": {
-    "key": "startup-50/intelligent-machines.b95ad78779ce.webp",
-    "w": 160,
-    "h": 160,
-    "bytes": 1328,
-    "sha": "b95ad78779ce",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:13:40.711Z"
-  },
   "/media/startup-50/jatri.webp": {
     "key": "startup-50/jatri.8768d080af18.webp",
     "w": 320,
@@ -241,15 +241,6 @@
     "sha": "8768d080af18",
     "remote": true,
     "uploadedAt": "2026-08-23T18:13:42.795Z"
-  },
-  "/media/startup-50/khaas-food.webp": {
-    "key": "startup-50/khaas-food.a2ea484eb353.webp",
-    "w": 320,
-    "h": 106,
-    "bytes": 4508,
-    "sha": "a2ea484eb353",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:13:44.887Z"
   },
   "/media/startup-50/loop-freight.webp": {
     "key": "startup-50/loop-freight.e1c8d4ecae80.webp",
@@ -278,15 +269,6 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:01.776Z"
   },
-  "/media/startup-50/moner-bondhu.webp": {
-    "key": "startup-50/moner-bondhu.3c4c25a54969.webp",
-    "w": 288,
-    "h": 160,
-    "bytes": 22486,
-    "sha": "3c4c25a54969",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:14:03.819Z"
-  },
   "/media/startup-50/monsha.webp": {
     "key": "startup-50/monsha.53250aac253a.webp",
     "w": 320,
@@ -304,6 +286,15 @@
     "sha": "14667961710d",
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:08.111Z"
+  },
+  "/media/startup-50/nuport.webp": {
+    "key": "startup-50/nuport.85a738cd8742.webp",
+    "w": 320,
+    "h": 36,
+    "bytes": 4712,
+    "sha": "85a738cd8742",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:07.883Z"
   },
   "/media/startup-50/ostad.webp": {
     "key": "startup-50/ostad.6faa4de6965a.webp",
@@ -332,24 +323,6 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:14.555Z"
   },
-  "/media/startup-50/pickaboo.webp": {
-    "key": "startup-50/pickaboo.92f46ff1925c.webp",
-    "w": 320,
-    "h": 160,
-    "bytes": 4204,
-    "sha": "92f46ff1925c",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:14:16.836Z"
-  },
-  "/media/startup-50/praava-health.webp": {
-    "key": "startup-50/praava-health.2e7c3b1fa12b.webp",
-    "w": 85,
-    "h": 160,
-    "bytes": 5132,
-    "sha": "2e7c3b1fa12b",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:14:19.013Z"
-  },
   "/media/startup-50/priyoshop.webp": {
     "key": "startup-50/priyoshop.f0de4a0461f3.webp",
     "w": 320,
@@ -368,6 +341,15 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:23.329Z"
   },
+  "/media/startup-50/relaxy.webp": {
+    "key": "startup-50/relaxy.3e1adec94a09.webp",
+    "w": 320,
+    "h": 82,
+    "bytes": 11030,
+    "sha": "3e1adec94a09",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:10.353Z"
+  },
   "/media/startup-50/revora.webp": {
     "key": "startup-50/revora.591d67fc9ce1.webp",
     "w": 160,
@@ -376,15 +358,6 @@
     "sha": "591d67fc9ce1",
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:25.442Z"
-  },
-  "/media/startup-50/shajgoj.webp": {
-    "key": "startup-50/shajgoj.c5829b741a68.webp",
-    "w": 120,
-    "h": 160,
-    "bytes": 4318,
-    "sha": "c5829b741a68",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:14:27.697Z"
   },
   "/media/startup-50/sharetrip.webp": {
     "key": "startup-50/sharetrip.0a9d4f601730.webp",
@@ -395,15 +368,6 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:29.751Z"
   },
-  "/media/startup-50/sheba-xyz.webp": {
-    "key": "startup-50/sheba-xyz.a5f411c53d51.webp",
-    "w": 320,
-    "h": 92,
-    "bytes": 8952,
-    "sha": "a5f411c53d51",
-    "remote": true,
-    "uploadedAt": "2026-08-23T18:14:31.865Z"
-  },
   "/media/startup-50/shikho.webp": {
     "key": "startup-50/shikho.9acfd504b3a5.webp",
     "w": 320,
@@ -413,6 +377,15 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:33.879Z"
   },
+  "/media/startup-50/shomvob.webp": {
+    "key": "startup-50/shomvob.30e8bedd776a.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 4488,
+    "sha": "30e8bedd776a",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:12.683Z"
+  },
   "/media/startup-50/shopup-silq.webp": {
     "key": "startup-50/shopup-silq.cf4fe41add09.webp",
     "w": 320,
@@ -421,6 +394,15 @@
     "sha": "cf4fe41add09",
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:36.106Z"
+  },
+  "/media/startup-50/shuttle.webp": {
+    "key": "startup-50/shuttle.bae18419eb07.webp",
+    "w": 173,
+    "h": 160,
+    "bytes": 9964,
+    "sha": "bae18419eb07",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:23.940Z"
   },
   "/media/startup-50/sokrio.webp": {
     "key": "startup-50/sokrio.607b90495f33.webp",
@@ -458,6 +440,15 @@
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:44.640Z"
   },
+  "/media/startup-50/togumogu.webp": {
+    "key": "startup-50/togumogu.7498805b5b9e.webp",
+    "w": 320,
+    "h": 73,
+    "bytes": 9040,
+    "sha": "7498805b5b9e",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:46.092Z"
+  },
   "/media/startup-50/truck-lagbe.webp": {
     "key": "startup-50/truck-lagbe.8c29b5165f68.webp",
     "w": 320,
@@ -475,5 +466,14 @@
     "sha": "712df6b136b2",
     "remote": true,
     "uploadedAt": "2026-08-23T18:14:49.593Z"
+  },
+  "/media/startup-50/zatiq.webp": {
+    "key": "startup-50/zatiq.95122537ec42.webp",
+    "w": 320,
+    "h": 119,
+    "bytes": 9030,
+    "sha": "95122537ec42",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:14.830Z"
   }
 }

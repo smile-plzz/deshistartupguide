@@ -188,3 +188,62 @@ test('lint rejects and prune retires a media avatar withdrawn through an inline 
     {}
   )
 })
+
+test('prune preserves Startup 50 logos and social images referenced from data files', async (t) => {
+  const fixtureRoot = await mkdtemp(path.join(tmpdir(), 'deshi-data-media-'))
+  t.after(() => rm(fixtureRoot, { recursive: true, force: true }))
+
+  for (const directory of ['scripts/lib', 'data', 'app/generated', 'app/(contents)']) {
+    await mkdir(path.join(fixtureRoot, directory), { recursive: true })
+  }
+  for (const file of [
+    'scripts/media-prune.mjs',
+    'scripts/lib/media-lib.mjs',
+    'scripts/lib/contributor-media.mjs'
+  ]) {
+    await copyFile(path.join(repositoryRoot, file), path.join(fixtureRoot, file))
+  }
+
+  await writeFile(path.join(fixtureRoot, 'data/contributor-ledger.json'), JSON.stringify({ profiles: [] }))
+  await writeFile(path.join(fixtureRoot, 'data/contributors-policy.json'), JSON.stringify(policy()))
+  await writeFile(
+    path.join(fixtureRoot, 'data/startup-50-logos.json'),
+    JSON.stringify({ entries: [{ slug: 'example', src: '/media/startup-50/example.webp' }] })
+  )
+  await writeFile(
+    path.join(fixtureRoot, 'data/social-images.json'),
+    JSON.stringify({ example: { locales: { en: { src: '/media/og/en/example.png' } } } })
+  )
+  await writeFile(
+    path.join(fixtureRoot, 'app/generated/media.json'),
+    JSON.stringify({
+      '/media/startup-50/example.webp': {
+        key: 'startup-50/example.aaaaaaaaaaaa.webp', bytes: 100
+      },
+      '/media/og/en/example.png': {
+        key: 'og/en/example.bbbbbbbbbbbb.png', bytes: 100
+      },
+      '/media/startup-50/old.webp': {
+        key: 'startup-50/old.cccccccccccc.webp', bytes: 100
+      }
+    })
+  )
+  await writeFile(path.join(fixtureRoot, 'app/generated/media-retired.json'), '[]')
+
+  const prune = spawnSync(
+    process.execPath,
+    ['scripts/media-prune.mjs', '--retire-unreferenced'],
+    { cwd: fixtureRoot, encoding: 'utf8' }
+  )
+  const pruneOutput = `${prune.stdout}${prune.stderr}`
+  assert.equal(prune.status, 0, pruneOutput)
+  assert.match(pruneOutput, /retired \/media\/startup-50\/old\.webp/)
+  assert.doesNotMatch(pruneOutput, /retired \/media\/startup-50\/example\.webp/)
+  assert.doesNotMatch(pruneOutput, /retired \/media\/og\/en\/example\.png/)
+
+  const active = JSON.parse(await readFile(path.join(fixtureRoot, 'app/generated/media.json'), 'utf8'))
+  assert.deepEqual(Object.keys(active).sort(), [
+    '/media/og/en/example.png',
+    '/media/startup-50/example.webp'
+  ])
+})

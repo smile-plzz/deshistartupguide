@@ -285,20 +285,22 @@ export default function Startup50({ locale = 'bn' }: Startup50Props) {
         <h2 id="startup50-method-title">{isEn ? 'How startups make the list' : 'কোন স্টার্টআপ তালিকায় আসে'}</h2>
         <p className="startup50-methodology__lede">
           {isEn
-            ? 'Every startup on the list must meet the same basic requirements. We then compare customer adoption, recent growth, reach and funding. Funding is an important factor, but it is not the only one and does not guarantee a place on the list.'
-            : 'এই তালিকার প্রতিটি স্টার্টআপকেই একই প্রাথমিক শর্ত পূরণ করতে হয়। এরপর আমরা দেখি প্রডাক্টটি মানুষ কতটা ব্যবহার করছে, সম্প্রতি ব্যবসা কতটা এগিয়েছে, কাজের পরিসর কত বড় আর ফান্ডিং হয়েছে কি না। ফান্ডিং একটি গুরুত্বপূর্ণ বিষয়, তবে এটিই একমাত্র মাপকাঠি নয়। ফান্ডিং পেলেই তালিকায় জায়গা নিশ্চিত হয় না।'}
+            ? 'Every company must meet the requirements below. We then compare traction, recent growth, market reach and funding. Funding matters, but it is not the only factor.'
+            : 'প্রতিটি কোম্পানিকেই নিচের শর্তগুলো পূরণ করতে হবে। এরপর আমরা তাদের ট্র্যাকশন (traction), সাম্প্রতিক গ্রোথ, মার্কেটে কাজের পরিসর আর ফান্ডিং তুলনা করে দেখি। ফান্ডিং গুরুত্বপূর্ণ, তবে এটিই একমাত্র মাপকাঠি নয়।'}
         </p>
 
         <div className="startup50-methodology__body">
           <section>
             <h3>{isEn ? 'What we look for' : 'আমরা যা দেখি'}</h3>
             <ul>
-              <li>{isEn ? 'Founded in Bangladesh or primarily operating from Bangladesh' : 'বাংলাদেশে প্রতিষ্ঠিত, অথবা মূল কার্যক্রম বাংলাদেশ থেকে পরিচালিত'}</li>
-              <li>{isEn ? 'A live product or platform that can scale' : 'চালু আছে আর বড় পরিসরে চালানো যায়, এমন নিজস্ব প্রডাক্ট বা প্ল্যাটফর্ম'}</li>
+              <li>{isEn ? 'Founded in Bangladesh or primarily built and operated from Bangladesh' : 'বাংলাদেশে প্রতিষ্ঠিত, অথবা মূল ডেভেলপমেন্ট আর কার্যক্রম বাংলাদেশ থেকে পরিচালিত'}</li>
+              <li>{isEn ? 'An active startup or private scaleup, not mainly an agency, consultancy or traditional service business' : 'চালু কোনো স্টার্টআপ বা প্রাইভেট স্কেলআপ, প্রধানত এজেন্সি, কনসালটেন্সি বা সাধারণ সেবাভিত্তিক ব্যবসা হওয়া যাবে না'}</li>
+              <li>{isEn ? 'A live product or platform with real customers or active deployments' : 'বাস্তব কাস্টমার বা অ্যাকটিভ ডিপ্লয়মেন্ট (deployment) আছে, এমন চালু প্রডাক্ট বা প্ল্যাটফর্ম'}</li>
               <li>{isEn ? 'Verifiable activity within the past 12 months' : 'গত ১২ মাসের মধ্যে কাজের যাচাইযোগ্য অগ্রগতি'}</li>
-              <li>{isEn ? 'Evidence of customers, users, revenue, transactions, contracts or meaningful partnerships' : 'কাস্টমার, ইউজার, রেভিনিউ, ট্রানজ্যাকশন, চুক্তি বা গুরুত্বপূর্ণ পার্টনারশিপের প্রমাণ'}</li>
+              <li>{isEn ? 'Clear evidence of traction, such as customers, users, revenue, transactions, contracts or meaningful partnerships' : 'ট্র্যাকশনের (traction) স্পষ্ট প্রমাণ: যেমন কাস্টমার, ইউজার, রেভিনিউ, ট্রানজ্যাকশন, চুক্তি বা গুরুত্বপূর্ণ পার্টনারশিপ'}</li>
               <li>{isEn ? 'At least two reliable public sources, including one independent of the company' : 'অন্তত দুটি নির্ভরযোগ্য পাবলিক সোর্স, যার একটি কোম্পানির বাইরের'}</li>
             </ul>
+            <p>{isEn ? 'Meeting these requirements does not guarantee a place on the list.' : 'এই শর্তগুলো পূরণ করলেই তালিকায় জায়গা নিশ্চিত হয় না।'}</p>
           </section>
           <section>
             <h3>{isEn ? 'Keeping it current' : 'তালিকা যেভাবে আপডেট হয়'}</h3>

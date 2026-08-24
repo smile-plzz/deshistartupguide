@@ -17,14 +17,19 @@ import sharp from 'sharp'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const data = JSON.parse(await fs.readFile(path.join(root, 'data/startup-50.json'), 'utf8'))
+const requestedSlugs = new Set(process.argv.slice(2))
+const entries = requestedSlugs.size
+  ? data.entries.filter((entry) => requestedSlugs.has(entry.slug))
+  : data.entries
+const missingSlugs = [...requestedSlugs].filter((slug) => !entries.some((entry) => entry.slug === slug))
+if (missingSlugs.length) throw new Error(`Unknown Startup 50 slug: ${missingSlugs.join(', ')}`)
 const outputDir = path.join(root, 'media', 'startup-50')
 const reportPath = '/private/tmp/startup-50-logo-report.json'
 const userAgent = 'DeshiStartupLogoReview/1.0 (+https://deshistartup.com/about)'
 
 // A small reviewed override table for sites whose metadata points at partner
 // marks, store badges, white-only artwork, or a bot challenge. Every URL is an
-// asset published by the company itself, except the clearly licensed Sheba.xyz
-// file on Wikimedia Commons.
+// asset published by the company itself.
 const reviewedOverrides = {
   '10-minute-school': {
     url: 'https://cdn.10minuteschool.com/images/svg/10mslogo-svg.svg',
@@ -34,55 +39,77 @@ const reviewedOverrides = {
     url: 'https://cdn.prod.website-files.com/682b2e509c06fb31d9d240ce/682f6cead76dd449a7745a25_68106fb648460e8b171e0059_AS-Logo%20(1)%201.svg',
     kind: 'official-site header logo'
   },
-  'apon-wellbeing': {
-    url: 'https://apon.ibos.io/media/logos/apon.png',
-    kind: 'official company web-app logo',
-    background: '#123b57'
+  amarlab: {
+    url: 'https://amarlab.com/logo.png',
+    kind: 'official-site logo'
   },
   bkash: {
     url: 'https://payment.bkash.com/bKash-logo.png',
     kind: 'official payment portal logo'
   },
+  cassetex: {
+    url: 'https://www.cassetex.com/wp-content/uploads/2024/10/Cassetex-new-logo-white.png',
+    kind: 'official-site logo image',
+    background: '#192a3d'
+  },
   dubotech: {
     url: 'https://dubotech.com/favicon/apple-touch-icon.png',
     kind: 'official-site icon'
   },
+  doctorkoi: {
+    url: 'https://doctorkoi.com/assets/doctorkoi_logo-BFjc43J7.png',
+    kind: 'official-site logo image'
+  },
+  fashol: {
+    url: 'https://fashol.com/fashol-logo-full.png',
+    kind: 'official-site logo image'
+  },
+  hishabee: {
+    url: 'https://www.hishabee.io/hishabee.webp',
+    kind: 'official-site logo'
+  },
   jatri: {
     url: 'https://jatri.co/_nuxt/jatri-logo.sAXW7P9b.svg',
     kind: 'official-site logo'
-  },
-  'khaas-food': {
-    url: 'https://www.khaasfood.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fkhaasfood_white.0d0g39f2~ef.a.webp&w=3840&q=95',
-    kind: 'official-site Khaas Food logo'
   },
   'loop-freight': {
     url: 'https://loopfreight.io/static/media/logo-white.e51aa633.png',
     kind: 'official-site logo',
     background: '#202122'
   },
+  nuport: {
+    url: 'https://www.nuport.io/images/nuport-logo.png',
+    kind: 'official-site logo'
+  },
   'palki-motors': {
     url: 'https://palkimotors.com/logo.png',
     kind: 'official-site logo',
     background: '#17324d'
   },
-  pickaboo: {
-    url: 'https://www.pickaboo.com/assets/images/logo.svg',
-    kind: 'official-site logo',
-    background: '#35135f'
-  },
   priyoshop: {
     url: 'https://priyoshopretail.com/wp-content/uploads/2025/09/Frame-1-3.png',
     kind: 'official-site header logo'
   },
-  'sheba-xyz': {
-    url: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Sheba.xyz_Logo.png',
-    kind: 'CC BY-SA 4.0 logo copy',
-    license: 'https://creativecommons.org/licenses/by-sa/4.0/',
-    credit: 'Mehedi91, Wikimedia Commons'
+  relaxy: {
+    url: 'https://relaxy.com.bd/logo.webp',
+    kind: 'official-site logo'
+  },
+  shomvob: {
+    url: 'https://shomvob.com/assets/images/logos/shomvob_logo_white.png',
+    kind: 'official-site logo',
+    background: '#1c7230'
+  },
+  shuttle: {
+    url: 'https://www.shuttlebd.com/shuttle.svg',
+    kind: 'official-site logo'
   },
   sokrio: {
     url: 'https://sokrio.com/wp-content/themes/sokrio/assets/images/logo.png',
     kind: 'official-site header logo'
+  },
+  zatiq: {
+    url: 'https://zatiq.com/images/zatiq/Zatiq_Logo.svg',
+    kind: 'official-site logo'
   }
 }
 
@@ -285,8 +312,8 @@ const reports = []
 const failures = []
 let cursor = 0
 const workers = Array.from({ length: 5 }, async () => {
-  while (cursor < data.entries.length) {
-    const entry = data.entries[cursor++]
+  while (cursor < entries.length) {
+    const entry = entries[cursor++]
     try {
       const report = await processEntry(entry)
       reports.push(report)

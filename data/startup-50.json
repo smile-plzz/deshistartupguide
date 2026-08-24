@@ -1,7 +1,7 @@
 {
   "edition": 2026,
-  "lastResearched": "2026-08-23",
-  "activityWindowStart": "2025-02-23",
+  "lastResearched": "2026-08-24",
+  "activityWindowStart": "2025-08-24",
   "sectorGroups": {
     "education": {
       "en": "Education",
@@ -10,10 +10,6 @@
     "agriculture": {
       "en": "Agriculture",
       "bn": "কৃষি"
-    },
-    "worker-wellbeing": {
-      "en": "Worker wellbeing",
-      "bn": "শ্রমিক কল্যাণ"
     },
     "software": {
       "en": "Software and AI",
@@ -178,41 +174,82 @@
       }
     },
     {
-      "slug": "apon-wellbeing",
-      "name": "Apon Wellbeing",
-      "sortName": "Apon Wellbeing",
+      "slug": "airwork",
+      "name": "Airwork",
+      "sortName": "Airwork",
       "monogram": "AW",
-      "website": "https://aponbazaar.co/",
-      "sectorKey": "worker-wellbeing",
+      "website": "https://airwork.ai/",
+      "sectorKey": "software",
       "sector": {
-        "en": "Worker wellbeing",
-        "bn": "শ্রমিক কল্যাণ"
+        "en": "Hiring technology",
+        "bn": "হায়ারিং প্রযুক্তি"
       },
       "description": {
-        "en": "Delivers groceries, benefits and wellbeing services to factory workers through employers.",
-        "bn": "নিয়োগদাতাদের মাধ্যমে কারখানার শ্রমিকদের কাছে বাজারসদাই, সুবিধা ও কল্যাণসেবা পৌঁছে দেয়।"
+        "en": "An AI-assisted hiring platform connecting companies with vetted technical talent across emerging markets.",
+        "bn": "AI দিয়ে টেক ট্যালেন্ট যাচাই ও নিয়োগের কাজ সহজ করে এমন হায়ারিং প্ল্যাটফর্ম।"
       },
       "lesson": {
-        "en": "Using the workplace as a trusted channel to reach an underserved customer group.",
-        "bn": "কম সেবা পাওয়া গ্রাহকদের কাছে পৌঁছাতে কর্মস্থলকে ভরসার চ্যানেল হিসেবে কাজে লাগানো।"
+        "en": "Turning a service-led workflow into software that can scale across markets.",
+        "bn": "মানুষ দিয়ে করা হায়ারিংয়ের কাজ ধাপে ধাপে সফটওয়্যারে এনে একাধিক বাজারে নেওয়া।"
       },
       "background": {
-        "en": "Established in 2017, Apon runs discounted shops inside factories. Workers' purchases unlock health insurance and other benefits, turning everyday grocery spending into a route to wider financial and health support.",
-        "bn": "২০১৭ সালে চালু হওয়া আপন (Apon) কারখানার ভেতরে ডিসকাউন্ট শপ চালায়। শ্রমিকরা এখান থেকে কেনাকাটা করলে হেলথ ইনস্যুরেন্সসহ নানা সুবিধা পান, যার ফলে সাধারণ বাজারসদাইয়ের খরচ থেকেই বড় পরিসরে আর্থিক ও স্বাস্থ্যসেবা পাওয়ার রাস্তা তৈরি হয়।",
+        "en": "Airwork began in Dhaka by matching technical talent with companies one hire at a time. The team later turned that service workflow into a platform for screening, assessment and hiring.",
+        "bn": "একজন করে টেক ট্যালেন্টের সঙ্গে কোম্পানির পরিচয় করিয়ে দেওয়ার কাজ দিয়ে ঢাকায় এয়ারওয়ার্কের শুরু। পরে সেই কাজের ধরন থেকেই স্ক্রিনিং, অ্যাসেসমেন্ট আর হায়ারিংয়ের প্ল্যাটফর্ম গড়ে ওঠে।",
         "sources": [
-          "https://lightcastlepartners.com/cases/apon-wellbeing-providing-affordable-goods-and-services-for-the-industrial-workers-in-bangladesh"
+          "https://airwork.ai/about",
+          "https://www.thedailystar.net/news/tech-startup/news/how-bangladeshi-startups-are-building-global-revenue-4194406",
+          "https://www.exitstack.co/database/airwork"
         ]
       },
       "activity": {
-        "date": "2025-12-09",
-        "en": "Reported an expansion of its worker-wellbeing network.",
-        "bn": "শ্রমিক কল্যাণ নেটওয়ার্ক আরও বিস্তারের খবর দিয়েছে।",
-        "url": "https://www.linkedin.com/posts/aponbazaar_apon-workerwellbeing-financialinclusion-activity-7404118245630525440-1xU2"
+        "date": "2026-06-09",
+        "en": "Featured among Bangladesh-built companies earning from global markets, with clients reported across 45 countries.",
+        "bn": "বাংলাদেশ থেকে বিশ্ববাজারে আয় করা কোম্পানিগুলোর একটি হিসেবে ২০২৬ সালে এয়ারওয়ার্কের কথা এসেছে। ৪৫টি দেশে তাদের ক্লায়েন্ট থাকার কথাও জানানো হয়েছে।",
+        "url": "https://www.thedailystar.net/news/tech-startup/news/how-bangladeshi-startups-are-building-global-revenue-4194406"
       },
       "financing": {
-        "en": "$490,000 investment disclosed in April 2024.",
-        "bn": "২০২৪ সালের এপ্রিলে ৪ লাখ ৯০ হাজার ডলারের বিনিয়োগ প্রকাশ করা হয়।",
-        "url": "https://newsandviews.vilcap.com/press-releases/bangladesh-based-startup-apontech-ltd.receives-usd-490k-investment-from-village-capitals-reducing-inequalities-investment-facility"
+        "en": "$310,000 in investment and grants is disclosed on the company’s current website.",
+        "bn": "কোম্পানির বর্তমান ওয়েবসাইটে বিনিয়োগ আর গ্র্যান্ট মিলিয়ে ৩ লাখ ১০ হাজার ডলারের কথা বলা হয়েছে।",
+        "url": "https://airwork.ai/about"
+      }
+    },
+    {
+      "slug": "amarlab",
+      "name": "AmarLab",
+      "sortName": "AmarLab",
+      "monogram": "AL",
+      "website": "https://amarlab.com/",
+      "sectorKey": "health",
+      "sector": {
+        "en": "Home diagnostics",
+        "bn": "ঘরে ডায়াগনস্টিক সেবা"
+      },
+      "description": {
+        "en": "Lets people book diagnostic tests from home or work, choose a partner lab and receive reports online.",
+        "bn": "ঘর বা অফিস থেকে ডায়াগনস্টিক টেস্ট বুক করা, পছন্দের ল্যাব বেছে নেওয়া ও অনলাইনে রিপোর্ট পাওয়ার সুযোগ দেয়।"
+      },
+      "lesson": {
+        "en": "Coordinating laboratories, medical technologists and cold-chain logistics around one patient experience.",
+        "bn": "রোগীর জন্য ল্যাব, মেডিকেল টেকনোলজিস্ট আর কোল্ড-চেইন লজিস্টিকস একসঙ্গে সামলানো।"
+      },
+      "background": {
+        "en": "AmarLab started after its founders saw how much time patients lost travelling to and waiting at diagnostic centres for routine tests. It built a logistics layer that collects samples at home or work and sends them to the patient's chosen partner lab.",
+        "bn": "সাধারণ টেস্ট করাতেও রোগীদের ডায়াগনস্টিক সেন্টারে যাতায়াত আর অপেক্ষায় অনেক সময় চলে যেত। এই সমস্যা দেখে AmarLab ঘর বা অফিস থেকে স্যাম্পল কালেক্ট করে রোগীর পছন্দের পার্টনার ল্যাবে পাঠানোর ব্যবস্থা তৈরি করে।",
+        "sources": [
+          "https://www.tbsnews.net/bangladesh/health/too-sick-leave-bed-tests-call-amar-lab-1185561",
+          "https://futurestartup.com/2022/03/20/amarlab-ceo-tazin-shadid-on-building-a-pioneering-on-demand-at-home-pathology-test-services-company-in-bangladesh/"
+        ]
+      },
+      "activity": {
+        "date": "2026-02-19",
+        "en": "Partnered with CliniCall to connect digital consultations with diagnostic services.",
+        "bn": "অনলাইনে ডাক্তার দেখানোর সেবার সঙ্গে ডায়াগনস্টিক টেস্ট যুক্ত করতে CliniCall-এর সঙ্গে অংশীদারত্ব করেছে।",
+        "url": "https://www.linkedin.com/posts/amarlab_amarlab-clinicall-strategicpartnership-activity-7430172572530515968-JoJi"
+      },
+      "financing": {
+        "en": "Tk 1 crore pre-seed investment from Startup Bangladesh disclosed in March 2023.",
+        "bn": "২০২৩ সালের মার্চে Startup Bangladesh-এর ১ কোটি টাকার প্রি-সিড বিনিয়োগ প্রকাশ করা হয়।",
+        "url": "https://www.thedailystar.net/health/news/startup-bangladesh-invests-amarlab-3261401"
       }
     },
     {
@@ -368,40 +405,42 @@
       }
     },
     {
-      "slug": "biniyog-io",
-      "name": "biniyog.io",
-      "sortName": "biniyog.io",
-      "monogram": "BI",
-      "website": "https://biniyog.io/",
+      "slug": "bimafy",
+      "name": "Bimafy",
+      "sortName": "Bimafy",
+      "monogram": "BM",
+      "website": "https://bimafy.com/",
       "sectorKey": "finance",
       "sector": {
-        "en": "Investment technology",
-        "bn": "বিনিয়োগ প্রযুক্তি"
+        "en": "Insurance technology",
+        "bn": "ইনস্যুরেন্স প্রযুক্তি"
       },
       "description": {
-        "en": "A platform for accessing halal and alternative investment products in Bangladesh.",
-        "bn": "বাংলাদেশে হালাল ও বিকল্প বিনিয়োগের পণ্য খুঁজে পাওয়ার প্ল্যাটফর্ম।"
+        "en": "A digital insurance marketplace and embedded-insurance platform for individuals and businesses.",
+        "bn": "ব্যক্তি ও ব্যবসার জন্য ডিজিটাল ইনস্যুরেন্স মার্কেটপ্লেস ও এমবেডেড ইনস্যুরেন্স প্ল্যাটফর্ম।"
       },
       "lesson": {
-        "en": "Reducing the trust and access friction around a complex financial product.",
-        "bn": "জটিল আর্থিক পণ্যে ভরসা ও ব্যবহার শুরুর বাধা কমানো।"
+        "en": "Putting comparison, purchase, policy management and claims support into one digital flow.",
+        "bn": "পলিসি দেখা, কেনা, সামলানো আর ক্লেইমে সহায়তার কাজ এক ডিজিটাল প্রক্রিয়ায় আনা।"
       },
       "background": {
-        "en": "biniyog.io came from its founders' difficulty finding transparent Shariah-compliant investments. They built a platform that connects individual investors with business investment opportunities outside conventional interest-based products.",
-        "bn": "ফাউন্ডাররা যখন শরিয়াহসম্মত ও স্বচ্ছ ইনভেস্টমেন্ট পাচ্ছিলেন না, তখন সেই সমস্যা থেকেই বিনিয়োগ ডটআইওর (biniyog.io) শুরু। প্রথাগত সুদভিত্তিক পণ্যের বাইরে গিয়ে ব্যক্তিগত ইনভেস্টরদের ব্যবসার ইনভেস্টমেন্টের সঙ্গে যুক্ত করতে তারা এই প্ল্যাটফর্ম বানিয়েছেন।",
+        "en": "Bimafy started operations in 2019 after its founder worked across insurance research and operations. It built a marketplace for comparing and buying policies, then added embedded-insurance tools for partner platforms.",
+        "bn": "ইনস্যুরেন্স খাতের রিসার্চ আর অপারেশনে কাজ করার অভিজ্ঞতা থেকে ২০১৯ সালে বিমাফাইয়ের শুরু। প্রথমে বিভিন্ন পলিসি দেখা আর কেনার মার্কেটপ্লেস বানায়, পরে পার্টনার প্ল্যাটফর্মের জন্য এমবেডেড ইনস্যুরেন্স টুল যোগ করে।",
         "sources": [
-          "https://futurestartup.com/2023/08/29/building-a-halal-investment-platform-with-shabab-shahriar-khan-and-muhammad-saeedul-alam-biniyog-io/"
+          "https://www.startupbangladesh.vc/portfolio/bimafy/",
+          "https://idlc.com/mbr/images/public/ewyiPX4uRXGOz8pJdf9nZv.pdf"
         ]
       },
       "activity": {
-        "date": "2026-05-07",
-        "en": "A current operating profile documented the platform's four-year build.",
-        "bn": "সাম্প্রতিক একটি অপারেটিং প্রোফাইলে প্ল্যাটফর্মটির চার বছরের কাজ তুলে ধরা হয়েছে।",
-        "url": "https://futurestartup.com/2026/05/07/the-biniyog-io-story/"
+        "date": "2026-05-21",
+        "en": "Updated its customer app for buying and managing policies and getting claims support.",
+        "bn": "পলিসি কেনা, সামলানো আর ক্লেইমে সহায়তার অ্যাপটি ২০২৬ সালের মে মাসে আপডেট করেছে।",
+        "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.bimafy"
       },
       "financing": {
-        "en": "Accelerating Asia backing is disclosed. A reliable public amount was not found.",
-        "bn": "Accelerating Asia-এর বিনিয়োগের কথা প্রকাশ করা হয়েছে। নির্ভরযোগ্য প্রকাশ্য পরিমাণ পাওয়া যায়নি।"
+        "en": "Tk 1 crore investment from Startup Bangladesh disclosed in December 2022.",
+        "bn": "২০২২ সালের ডিসেম্বরে স্টার্টআপ বাংলাদেশের ১ কোটি টাকার বিনিয়োগ প্রকাশ করা হয়।",
+        "url": "https://www.tbsnews.net/economy/corporates/startup-bangladesh-invests-bimafy-547962"
       }
     },
     {
@@ -443,79 +482,42 @@
       }
     },
     {
-      "slug": "bondstein",
-      "name": "Bondstein",
-      "sortName": "Bondstein",
-      "monogram": "BD",
-      "website": "https://bondstein.com/",
-      "sectorKey": "mobility",
+      "slug": "cassetex",
+      "name": "Cassetex",
+      "sortName": "Cassetex",
+      "monogram": "CX",
+      "website": "https://www.cassetex.com/",
+      "sectorKey": "climate",
       "sector": {
-        "en": "Connected mobility",
-        "bn": "সংযুক্ত যানবাহন প্রযুক্তি"
+        "en": "Battery-swapping infrastructure",
+        "bn": "ব্যাটারি সোয়াপিং অবকাঠামো"
       },
       "description": {
-        "en": "Vehicle tracking, fleet telematics and connected-mobility systems.",
-        "bn": "যানবাহন ট্র্যাকিং, বহর ব্যবস্থাপনা ও কানেক্টেড-মোবিলিটি সিস্টেম।"
+        "en": "Solar-powered battery-swapping infrastructure for electric three-wheelers and other light vehicles.",
+        "bn": "বৈদ্যুতিক তিন চাকার যান আর অন্যান্য হালকা যানের জন্য সৌরবিদ্যুৎচালিত ব্যাটারি সোয়াপিং অবকাঠামো।"
       },
       "lesson": {
-        "en": "Combining hardware, connectivity and software in demanding field operations.",
-        "bn": "মাঠের কঠিন অপারেশনে হার্ডওয়্যার, কানেক্টিভিটি ও সফটওয়্যার একসঙ্গে চালানো।"
+        "en": "Making clean mobility practical by lowering battery cost and vehicle downtime.",
+        "bn": "ব্যাটারির খরচ আর গাড়ি বসে থাকার সময় কমিয়ে পরিচ্ছন্ন যাতায়াতকে ব্যবহারযোগ্য করা।"
       },
       "background": {
-        "en": "Bondstein grew out of science-club projects by two school friends, who started experimenting with connected devices before forming the company in 2014. It later focused that hardware-and-software work on vehicle tracking and fleet operations.",
-        "bn": "স্কুলের দুই বন্ধুর বিজ্ঞান ক্লাবের প্রজেক্ট থেকেই বন্ডস্টেইনের শুরু। ২০১৪ সালে কোম্পানি খোলার আগে থেকেই তাঁরা কানেক্টেড ডিভাইস নিয়ে পরীক্ষা-নিরীক্ষা শুরু করেন। পরে সেই হার্ডওয়্যার ও সফটওয়্যারভিত্তিক কাজকে ভেহিকল ট্র্যাকিং আর ফ্লিট অপারেশনে কাজে লাগান।",
+        "en": "Cassetex began in 2020 by testing lithium-ion batteries and swap hardware for electric three-wheelers. It launched commercially in 2021 and now combines locally built swapping equipment, software and solar charging in a battery-as-a-service model.",
+        "bn": "বৈদ্যুতিক তিন চাকার গাড়ির জন্য লিথিয়াম-আয়ন ব্যাটারি আর সোয়াপিং হার্ডওয়্যার পরীক্ষা দিয়ে ২০২০ সালে ক্যাসেটেক্সের শুরু। ২০২১ সালে বাণিজ্যিকভাবে চালু হয়ে পরে দেশেই বানানো সোয়াপিং যন্ত্র, সফটওয়্যার আর সৌর চার্জিংকে ব্যাটারি-অ্যাজ-এ-সার্ভিস মডেলে এক করেছে।",
         "sources": [
-          "https://www.tbsnews.net/features/panorama/bondstein-technologies-dhaka-college-science-club-forbes-30-under-30-list-448026"
+          "https://www.cassetex.com/milestones/",
+          "https://www.faraday.ac.uk/wp-content/uploads/2026/03/Charging-ahead-March2026-FINAL.pdf"
         ]
       },
       "activity": {
-        "date": "2026-05-18",
-        "en": "Announced a next-generation vehicle-telematics partnership with Banglalink.",
-        "bn": "Banglalink-এর সঙ্গে নতুন প্রজন্মের ভেহিকল টেলিমেটিকস নিয়ে অংশীদারত্ব ঘোষণা করেছে।",
-        "url": "https://www.linkedin.com/posts/bondstein_bondstein-smartmobility-iot-activity-7462129767165706240--1Ma"
+        "date": "2026-08-24",
+        "en": "The live swapping product, deployment model and customer flow were checked directly.",
+        "bn": "চালু সোয়াপিং পণ্য, স্টেশন বসানোর মডেল ও গ্রাহকের ব্যবহারের ধাপ সরাসরি দেখে নেওয়া হয়েছে।",
+        "url": "https://www.cassetex.com/"
       },
       "financing": {
-        "en": "$1 million funding disclosed in October 2021.",
-        "bn": "২০২১ সালের অক্টোবরে ১০ লাখ ডলারের ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.tbsnews.net/economy/corporates/bondstein-secures-1-million-fundraising-319786"
-      }
-    },
-    {
-      "slug": "chaldal",
-      "name": "Chaldal",
-      "sortName": "Chaldal",
-      "monogram": "CH",
-      "website": "https://chaldal.com/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "Online grocery",
-        "bn": "অনলাইন গ্রোসারি"
-      },
-      "description": {
-        "en": "Online grocery ordering supported by its own fulfilment and delivery operations.",
-        "bn": "নিজস্ব ফুলফিলমেন্ট ও ডেলিভারি অপারেশনসহ অনলাইন বাজারসদাইয়ের সেবা।"
-      },
-      "lesson": {
-        "en": "Designing dense fulfilment and last-mile operations around repeat household demand.",
-        "bn": "একই এলাকার যেসব পরিবার বারবার অর্ডার করে, তাদের চাহিদা ধরে ফুলফিলমেন্ট ও লাস্ট-মাইল অপারেশন সাজানো।"
-      },
-      "background": {
-        "en": "Chaldal's founders explored several ecommerce ideas before choosing groceries, a category people buy often but find inconvenient to shop for. The company then built warehouses and delivery operations to make online grocery dependable.",
-        "bn": "চালডালের ফাউন্ডাররা মুদিপণ্য (grocery) বেছে নেওয়ার আগে ই-কমার্সের নানা আইডিয়া নিয়ে ভেবেছেন। মানুষ এটি বারবার কিনলেও কেনাকাটা করাটা বেশ ঝামেলার। অনলাইনে বাজার করাকে নির্ভরযোগ্য করতে এরপর তারা ওয়্যারহাউস ও ডেলিভারি অপারেশন গড়ে তোলেন।",
-        "sources": [
-          "https://www.tbsnews.net/feature/panorama/story-behind-making-chaldal-conversation-zia-ashraf-134428"
-        ]
-      },
-      "activity": {
-        "date": "2026-08-23",
-        "en": "The live ordering service and current 2026 merchant offers were checked directly.",
-        "bn": "লাইভ অর্ডার সেবা ও ২০২৬ সালের চলতি মার্চেন্ট অফার সরাসরি দেখে নেওয়া হয়েছে।",
-        "url": "https://chaldal.com/"
-      },
-      "financing": {
-        "en": "Tk 2 crore investment disclosed in June 2024.",
-        "bn": "২০২৪ সালের জুনে ২ কোটি টাকার বিনিয়োগ প্রকাশ করা হয়।",
-        "url": "https://www.tbsnews.net/economy/bangladesh-venture-capital-invests-tk25cr-chaldal-and-sokrio-885051"
+        "en": "$1.6 million funding round disclosed in January 2025.",
+        "bn": "২০২৫ সালের জানুয়ারিতে ১৬ লাখ ডলারের ফান্ডিং প্রকাশ করা হয়।",
+        "url": "https://www.exitstack.co/posts/cassetex-secures-us-1-6mn-to-expand-battery-as-a-service-in-bangladesh-and-beyond"
       }
     },
     {
@@ -596,6 +598,45 @@
       }
     },
     {
+      "slug": "doctorkoi",
+      "name": "DoctorKoi",
+      "sortName": "DoctorKoi",
+      "monogram": "DK",
+      "website": "https://doctorkoi.com/",
+      "sectorKey": "health",
+      "sector": {
+        "en": "Clinical software",
+        "bn": "ক্লিনিক্যাল সফটওয়্যার"
+      },
+      "description": {
+        "en": "Digital prescription and practice-management software for doctors and clinics.",
+        "bn": "ডাক্তার আর ক্লিনিকের জন্য ডিজিটাল প্রেসক্রিপশন আর প্র্যাকটিস ম্যানেজমেন্ট সফটওয়্যার।"
+      },
+      "lesson": {
+        "en": "Starting with a frequent clinical task and expanding into the wider practice workflow.",
+        "bn": "ক্লিনিকের নিয়মিত একটি কাজ দিয়ে শুরু করে ধীরে ধীরে পুরো প্র্যাকটিসের কাজে ঢোকা।"
+      },
+      "background": {
+        "en": "DoctorKoi began with Digital RX, a prescription-writing tool built around Bangladesh’s medicine database. It later expanded into appointments, patient records, billing and clinic management.",
+        "bn": "বাংলাদেশের ওষুধের ডেটাবেস ধরে প্রেসক্রিপশন লেখার টুল ডিজিটাল আরএক্স দিয়ে ডক্টরকইয়ের শুরু। পরে অ্যাপয়েন্টমেন্ট, রোগীর রেকর্ড, বিলিং আর ক্লিনিক ম্যানেজমেন্টও যোগ করে।",
+        "sources": [
+          "https://doctorkoi.com/aboutCompany",
+          "https://www.thedailystar.net/toggle/news/four-bangladeshi-startups-among-accelerating-asias-11-high-potential-startups-2077197"
+        ]
+      },
+      "activity": {
+        "date": "2026-08-24",
+        "en": "The live subscription product showed current prescription, appointment, records and clinic-management tools.",
+        "bn": "চালু সাবস্ক্রিপশন পণ্যে প্রেসক্রিপশন, অ্যাপয়েন্টমেন্ট, রোগীর রেকর্ড আর ক্লিনিক ম্যানেজমেন্টের টুল দেখা গেছে।",
+        "url": "https://doctorkoi.com/digitalrx"
+      },
+      "financing": {
+        "en": "$500,000 seed funding disclosed in June 2022, bringing reported total funding to $700,000.",
+        "bn": "২০২২ সালের জুনে ৫ লাখ ডলারের সিড ফান্ডিং প্রকাশ করা হয়। এতে মোট প্রকাশিত ফান্ডিং ৭ লাখ ডলারে পৌঁছায়।",
+        "url": "https://www.dhakatribune.com/feature/tech/273222/doctorkoi-raises-500-000-in-latest-round-of-seed"
+      }
+    },
+    {
       "slug": "dorik",
       "name": "Dorik",
       "sortName": "Dorik",
@@ -631,44 +672,6 @@
         "en": "Pre-seed investment was announced in November 2022. The amount was not disclosed.",
         "bn": "২০২২ সালের নভেম্বরে প্রি-সিড বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
         "url": "https://www.dhakatribune.com/business/278927/sylheti-startup-dorik-raises-pre-seed-investment"
-      }
-    },
-    {
-      "slug": "dreamers-academy",
-      "name": "Dreamers Academy",
-      "sortName": "Dreamers Academy",
-      "monogram": "DA",
-      "website": "https://dreamersacademy.com.bd/",
-      "sectorKey": "education",
-      "sector": {
-        "en": "Coding education",
-        "bn": "কোডিং শিক্ষা"
-      },
-      "description": {
-        "en": "Live coding education for children in Bangladesh, delivered online and through partnerships.",
-        "bn": "বাংলাদেশের শিশুদের জন্য লাইভ অনলাইন কোডিং শিক্ষা ও অংশীদারভিত্তিক প্রোগ্রাম।"
-      },
-      "lesson": {
-        "en": "Growing a focused education business through parent trust and repeat cohorts.",
-        "bn": "অভিভাবকের ভরসা ও ধারাবাহিক ব্যাচ ধরে নির্দিষ্ট শিক্ষা ব্যবসা বড় করা।"
-      },
-      "background": {
-        "en": "Dreamers Academy began in 2021 as a side project run from a small apartment study room. A Tk 500 Facebook ad brought its first interested parents, helping validate demand for structured coding lessons for children.",
-        "bn": "ছোট একটি অ্যাপার্টমেন্টের পড়ার ঘর থেকে ২০২১ সালে একটি সাইড প্রজেক্ট হিসেবে ড্রিমার্স একাডেমির শুরু। ফেসবুকে ৫০০ টাকার একটি অ্যাড থেকে প্রথমবারের মতো আগ্রহী অভিভাবকদের পাওয়া যায়, যা দিয়ে শিশুদের জন্য গোছানো কোডিং লেসনের চাহিদা যাচাই করা সম্ভব হয়।",
-        "sources": [
-          "https://futurestartup.com/2025/08/10/how-dreamers-academy-built-a-5500-student-coding-school-from-a-500-taka-facebook-ad/"
-        ]
-      },
-      "activity": {
-        "date": "2026-08-11",
-        "en": "Partnered with Mutual Trust Bank on a year-long coding programme.",
-        "bn": "এক বছরের কোডিং প্রোগ্রামের জন্য Mutual Trust Bank-এর সঙ্গে কাজ শুরু করেছে।",
-        "url": "https://www.tbsnews.net/economy/corporates/mtb-partners-dreamers-academy-teach-coding-24-underprivileged-children-1512146"
-      },
-      "financing": {
-        "en": "Profiled as bootstrapped in August 2025.",
-        "bn": "২০২৫ সালের আগস্টে বুটস্ট্র্যাপড প্রতিষ্ঠান হিসেবে প্রোফাইল করা হয়েছে।",
-        "url": "https://futurestartup.com/2025/08/10/how-dreamers-academy-built-a-5500-student-coding-school-from-a-500-taka-facebook-ad/"
       }
     },
     {
@@ -774,15 +777,54 @@
         ]
       },
       "activity": {
-        "date": "2025-08-03",
-        "en": "A current founder profile documented the company's global bootstrapped operation.",
-        "bn": "সাম্প্রতিক ফাউন্ডার প্রোফাইলে তাদের গ্লোবাল বুটস্ট্র্যাপড অপারেশন তুলে ধরা হয়েছে।",
-        "url": "https://thefinancialexpress.com.bd/youth-and-entrepreneurship/bangladeshi-founder-bootstrapped-his-way-to-global-success"
+        "date": "2026-03-02",
+        "en": "Published a guide to hosting courses and selling products through one platform.",
+        "bn": "এক প্ল্যাটফর্মে কোর্স চালানো আর পণ্য বিক্রির গাইড প্রকাশ করেছে।",
+        "url": "https://ezycourse.com/blog/host-online-courses-and-sell-merchandise"
       },
       "financing": {
         "en": "The company has been profiled as bootstrapped. No institutional round was found in the reviewed sources.",
         "bn": "বুটস্ট্র্যাপড প্রতিষ্ঠান হিসেবে প্রোফাইল করা হয়েছে। দেখা সোর্সগুলোতে প্রাতিষ্ঠানিক রাউন্ড পাওয়া যায়নি।",
         "url": "https://thefinancialexpress.com.bd/youth-and-entrepreneurship/bangladeshi-founder-bootstrapped-his-way-to-global-success"
+      }
+    },
+    {
+      "slug": "fashol",
+      "name": "Fashol",
+      "sortName": "Fashol",
+      "monogram": "FS",
+      "website": "https://fashol.com/",
+      "sectorKey": "agriculture",
+      "sector": {
+        "en": "Agricultural supply chain",
+        "bn": "কৃষি সরবরাহব্যবস্থা"
+      },
+      "description": {
+        "en": "Connects farmers with retailers, restaurants and other buyers through software, collection hubs and logistics.",
+        "bn": "সফটওয়্যার, সংগ্রহকেন্দ্র ও লজিস্টিকসের মাধ্যমে কৃষকদের খুচরা বিক্রেতা, রেস্তোরাঁ ও অন্য ক্রেতাদের সঙ্গে যুক্ত করে।"
+      },
+      "lesson": {
+        "en": "Combining software with physical hubs to improve pricing, quality control and delivery in a fragmented supply chain.",
+        "bn": "খণ্ডিত সরবরাহব্যবস্থায় দাম, মান নিয়ন্ত্রণ আর ডেলিভারি ভালো করতে সফটওয়্যারের সঙ্গে মাঠের সংগ্রহকেন্দ্র মিলিয়ে কাজ করা।"
+      },
+      "background": {
+        "en": "Fashol began during the pandemic after founder Sakib Hossain bought poultry in his home district and sold it in Dhaka. Research with farmers and retailers led the team to build a wholesale produce network with collection centres, sorting and doorstep delivery.",
+        "bn": "মহামারির সময় ফাউন্ডার সাকিব হোসেন নিজ এলাকায় মুরগি কিনে ঢাকায় বিক্রি করেছিলেন। এরপর কৃষক আর খুচরা বিক্রেতাদের সঙ্গে কথা বলে টিমটি সংগ্রহকেন্দ্র, বাছাই আর দোকানে ডেলিভারিসহ পাইকারি কৃষিপণ্যের নেটওয়ার্ক গড়ে তোলে।",
+        "sources": [
+          "https://agfundernews.com/bangladeshs-fashol-tackles-the-agrifood-supply-chain-to-stabilize-food-prices-for-farmers-and-reduce-food-waste",
+          "https://www.thedailystar.net/business/economy/news/startup-fashol-gets-1m-investment-3296846"
+        ]
+      },
+      "activity": {
+        "date": "2026-06-02",
+        "en": "Reported that repeat customers accounted for 75% of its transactions.",
+        "bn": "তাদের হিসাবে মোট লেনদেনের ৭৫ শতাংশই করেছেন পুরোনো গ্রাহকেরা।",
+        "url": "https://www.linkedin.com/posts/fashol_at-fashol-75-of-our-transactions-are-repeat-activity-7467424767382548480-FdLW"
+      },
+      "financing": {
+        "en": "About $2.1 million in total funding reported by AgFunderNews in July 2024.",
+        "bn": "AgFunderNews-এর হিসাবে ২০২৪ সালের জুলাই পর্যন্ত মোট ফান্ডিং ছিল প্রায় ২১ লাখ ডলার।",
+        "url": "https://agfundernews.com/bangladeshs-fashol-tackles-the-agrifood-supply-chain-to-stabilize-food-prices-for-farmers-and-reduce-food-waste"
       }
     },
     {
@@ -824,6 +866,45 @@
       }
     },
     {
+      "slug": "hishabee",
+      "name": "Hishabee",
+      "sortName": "Hishabee",
+      "monogram": "HI",
+      "website": "https://www.hishabee.io/",
+      "sectorKey": "finance",
+      "sector": {
+        "en": "SME finance and business software",
+        "bn": "ক্ষুদ্র ব্যবসার অর্থায়ন আর সফটওয়্যার"
+      },
+      "description": {
+        "en": "Gives small retailers one app for bookkeeping, inventory, online sales and financing stock purchases.",
+        "bn": "ছোট দোকানদারদের হিসাব, স্টক, অনলাইন শপ আর পণ্য কেনার অর্থায়ন এক অ্যাপে দেয়।"
+      },
+      "lesson": {
+        "en": "Using everyday sales and stock records to help small retailers qualify for formal financing.",
+        "bn": "দৈনন্দিন বিক্রি ও স্টকের হিসাব ব্যবহার করে ছোট দোকানদারদের আনুষ্ঠানিক অর্থায়ন পেতে সাহায্য করা।"
+      },
+      "background": {
+        "en": "Hishabee began with mobile business-management software designed for small retailers. It later added online shops and inventory finance through Prime Bank, keeping accounts, stock and access to capital in the same app.",
+        "bn": "ছোট দোকানদারেরা সহজে হিসাব আর স্টক সামলাতে পারেন, এমন মোবাইল সফটওয়্যার দিয়ে Hishabee-এর শুরু। পরে তারা অনলাইন শপ আর Prime Bank-এর মাধ্যমে পণ্য কেনার অর্থায়নও একই অ্যাপে যোগ করে।",
+        "sources": [
+          "https://www.dhakatribune.com/business/279440/accelerating-asia-invests-in-bangladeshi-startup",
+          "https://www.thedailystar.net/business/news/prime-bank-hishabee-strike-mou-boost-retail-banking-3600496"
+        ]
+      },
+      "activity": {
+        "date": "2026-03-12",
+        "en": "Published its 2026 product guide covering POS, inventory and business management.",
+        "bn": "POS, স্টক আর ব্যবসা ব্যবস্থাপনার ২০২৬ সালের পণ্য গাইড প্রকাশ করেছে।",
+        "url": "https://www.hishabee.io/blog/best-pos-system-for-small-business-hishabee"
+      },
+      "financing": {
+        "en": "$500,000 in disclosed funding, according to ExitStack.",
+        "bn": "ExitStack-এর হিসাবে প্রকাশিত ফান্ডিং ৫ লাখ ডলার।",
+        "url": "https://www.exitstack.co/database/hishabee"
+      }
+    },
+    {
       "slug": "ifarmer",
       "name": "iFarmer",
       "sortName": "iFarmer",
@@ -862,82 +943,6 @@
       }
     },
     {
-      "slug": "inkam",
-      "name": "Inkam",
-      "sortName": "Inkam",
-      "monogram": "IN",
-      "website": "https://inkam.app/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "Digital distribution",
-        "bn": "ডিজিটাল ডিস্ট্রিবিউশন"
-      },
-      "description": {
-        "en": "Connects digital businesses with consumers through a distributed partner and agent network.",
-        "bn": "পার্টনার ও এজেন্ট নেটওয়ার্কের মাধ্যমে ডিজিটাল ব্যবসাকে গ্রাহকের সঙ্গে যুক্ত করে।"
-      },
-      "lesson": {
-        "en": "Using local field partners to distribute digital products beyond the usual online channels.",
-        "bn": "চেনা অনলাইন চ্যানেলের বাইরে ডিজিটাল পণ্য ছড়াতে মাঠের পার্টনারদের কাজে লাগানো।"
-      },
-      "background": {
-        "en": "Inkam started from a distribution problem: digital businesses were spending heavily on Facebook and Google but struggling to convert enough customers. It built a partner network that earns commissions by helping sell digital products.",
-        "bn": "ডিস্ট্রিবিউশনের একটি সমস্যা থেকে ইনকামের শুরু: ডিজিটাল ব্যবসাগুলো ফেসবুক আর গুগলে প্রচুর টাকা খরচ করলেও যথেষ্ট কাস্টমার পাচ্ছিল না। তারা এমন একটি পার্টনার নেটওয়ার্ক গড়ে তোলে, যারা ডিজিটাল পণ্য বিক্রি করে কমিশন আয় করতে পারে।",
-        "sources": [
-          "https://www.tbsnews.net/features/panorama/inkam-manual-solution-spreading-digital-products-525326"
-        ]
-      },
-      "activity": {
-        "date": "2026-08-23",
-        "en": "Published its 2026 divisional partner operating plan on the company site.",
-        "bn": "কোম্পানির সাইটে ২০২৬ সালের বিভাগীয় পার্টনার অপারেটিং পরিকল্পনা প্রকাশ করেছে।",
-        "url": "https://inkam.app/insights/market-presence-and-partnership-meeting"
-      },
-      "financing": {
-        "en": "The company reports $125,000 in pre-seed funding. Independent confirmation was not found.",
-        "bn": "কোম্পানির দাবি অনুযায়ী প্রি-সিড ফান্ডিং ১ লাখ ২৫ হাজার ডলার। স্বাধীনভাবে নিশ্চিত করা যায়নি।",
-        "url": "https://inkam.app/about"
-      }
-    },
-    {
-      "slug": "intelligent-machines",
-      "name": "Intelligent Machines",
-      "sortName": "Intelligent Machines",
-      "monogram": "IM",
-      "website": "https://intelmachines.ai/",
-      "sectorKey": "software",
-      "sector": {
-        "en": "Enterprise AI",
-        "bn": "এন্টারপ্রাইজ AI"
-      },
-      "description": {
-        "en": "AI and computer-vision systems for retail execution and enterprise operations.",
-        "bn": "রিটেইল এক্সিকিউশন ও এন্টারপ্রাইজ অপারেশনের জন্য AI ও কম্পিউটার ভিশন সিস্টেম।"
-      },
-      "lesson": {
-        "en": "Selling applied AI against measurable operational problems, not generic capability.",
-        "bn": "সাধারণ AI সক্ষমতা না বেচে মাপা যায় এমন অপারেশনাল সমস্যার সমাধান বিক্রি করা।"
-      },
-      "background": {
-        "en": "Intelligent Machines started in 2018 to build AI for specific enterprise problems rather than generic demonstrations. Its early work focused on areas such as retail visibility, fraud detection and factory operations.",
-        "bn": "সাধারণ এআই (AI) ডেমো বানানোর বদলে নির্দিষ্ট এন্টারপ্রাইজ সমস্যার সমাধান তৈরির লক্ষ্য নিয়ে ২০১৮ সালে ইন্টেলিজেন্ট মেশিনের শুরু। প্রথম দিকের কাজগুলো রিটেইল ভিজিবিলিটি, জালিয়াতি ধরা আর কারখানার অপারেশনের মতো নির্দিষ্ট ক্ষেত্র ঘিরে ছিল।",
-        "sources": [
-          "https://www.thedailystar.net/tech-startup/news/made-bangladesh-ai-the-roadblocks-and-the-future-3425796"
-        ]
-      },
-      "activity": {
-        "date": "2025-11-26",
-        "en": "Announced a retail-visibility technology partnership with Olympic Industries.",
-        "bn": "Olympic Industries-এর সঙ্গে রিটেইল ভিজিবিলিটি প্রযুক্তি নিয়ে অংশীদারত্ব ঘোষণা করেছে।",
-        "url": "https://www.linkedin.com/posts/intelligent-machines-ltd_aiforbusiness-aitransformation-smarttechnology-activity-7393863956777512960-nU8I"
-      },
-      "financing": {
-        "en": "Tk 4 crore investment disclosed in January 2021.",
-        "bn": "২০২১ সালের জানুয়ারিতে ৪ কোটি টাকার বিনিয়োগ প্রকাশ করা হয়।",
-        "url": "https://www.thedailystar.net/business/news/idlc-venture-invests-tk-4cr-intelligent-machines-2031261"
-      }
-    },
-    {
       "slug": "jatri",
       "name": "Jatri",
       "sortName": "Jatri",
@@ -973,44 +978,6 @@
         "en": "Gobi Partners investment was announced in April 2026. The amount was not disclosed.",
         "bn": "২০২৬ সালের এপ্রিলে Gobi Partners-এর বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
         "url": "https://www.gobi.vc/news/gobi-partners-makes-first-investment-in-bangladesh-backing-travel-tech-platform-jatri"
-      }
-    },
-    {
-      "slug": "khaas-food",
-      "name": "Khaas Food",
-      "sortName": "Khaas Food",
-      "monogram": "KF",
-      "website": "https://khaasfood.com/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "Food commerce",
-        "bn": "খাদ্য বাণিজ্য"
-      },
-      "description": {
-        "en": "Omnichannel retail for food products positioned around safety and sourcing trust.",
-        "bn": "নিরাপত্তা ও পণ্যের উৎসের ভরসাকে কেন্দ্র করে অনলাইন-অফলাইন খাদ্যপণ্যের ব্যবসা।"
-      },
-      "lesson": {
-        "en": "Compounding a trust-led consumer brand across digital and physical channels.",
-        "bn": "ডিজিটাল ও দোকান দুই চ্যানেলেই ভরসানির্ভর কনজিউমার ব্র্যান্ড ধাপে ধাপে বড় করা।"
-      },
-      "background": {
-        "en": "Khaas Food began in 2015 as a Facebook page selling milk, honey and other foods chosen for safer sourcing. The founders packed orders at a cofounder's home before expanding into ecommerce and physical shops.",
-        "bn": "নিরাপদ সোর্সিংয়ের জন্য বাছাই করা দুধ, মধু ও অন্যান্য খাবার বিক্রির ফেসবুক পেজ হিসেবে ২০১৫ সালে খাস ফুডের শুরু। ই-কমার্স আর ফিজিক্যাল শপ খোলার আগে ফাউন্ডাররা আরেক কো-ফাউন্ডারের বাসায় বসে অর্ডারের জিনিস প্যাক করতেন।",
-        "sources": [
-          "https://futurestartup.com/2019/12/04/how-khaas-food-was-created/"
-        ]
-      },
-      "activity": {
-        "date": "2026-04-11",
-        "en": "An eleven-year operating review documented current expansion plans.",
-        "bn": "এগারো বছরের অপারেটিং রিভিউতে তাদের চলতি বিস্তার পরিকল্পনা তুলে ধরা হয়েছে।",
-        "url": "https://futurestartup.com/2026/04/11/khaas-food-turns-11/"
-      },
-      "financing": {
-        "en": "Profiled as bootstrapped in April 2026.",
-        "bn": "২০২৬ সালের এপ্রিলে বুটস্ট্র্যাপড প্রতিষ্ঠান হিসেবে প্রোফাইল করা হয়েছে।",
-        "url": "https://futurestartup.com/2026/04/11/khaas-food-turns-11/"
       }
     },
     {
@@ -1128,44 +1095,6 @@
       }
     },
     {
-      "slug": "moner-bondhu",
-      "name": "Moner Bondhu",
-      "sortName": "Moner Bondhu",
-      "monogram": "MB",
-      "website": "https://monerbondhu.com/",
-      "sectorKey": "health",
-      "sector": {
-        "en": "Mental health",
-        "bn": "মানসিক স্বাস্থ্য"
-      },
-      "description": {
-        "en": "Mental-health counselling, wellbeing programmes and digital support services.",
-        "bn": "মানসিক স্বাস্থ্য কাউন্সেলিং, ওয়েলবিয়িং প্রোগ্রাম ও ডিজিটাল সহায়তা সেবা।"
-      },
-      "lesson": {
-        "en": "Reaching people through institutions while reducing stigma around a sensitive service.",
-        "bn": "সংবেদনশীল সেবার সামাজিক সংকোচ কমিয়ে প্রতিষ্ঠানের মাধ্যমে মানুষের কাছে পৌঁছানো।"
-      },
-      "background": {
-        "en": "Moner Bondhu grew from founder Tawhida Shiropa's experience supporting her mother through depression and hearing readers share similar struggles while she worked at Prothom Alo. She started the service in 2016 and later added online, in-person and workplace care.",
-        "bn": "তৌহিদা শিরোপা তাঁর মায়ের বিষণ্ণতার সময় পাশে ছিলেন। প্রথম আলোতে কাজ করার সময় পাঠকদের কাছ থেকেও একই ধরনের কষ্টের কথা শুনতেন। এই দুই অভিজ্ঞতা থেকেই মনের বন্ধুর শুরু। ২০১৬ সালে তিনি সেবাটি চালু করেন, পরে অনলাইন, সরাসরি ও কর্মস্থলের সেবা যোগ করেন।",
-        "sources": [
-          "https://www.undp.org/asia-pacific/news/barriers-and-challenges-can-be-your-best-friends-story-tawhida-shiropa"
-        ]
-      },
-      "activity": {
-        "date": "2026-01-31",
-        "en": "Launched a rural-student mental-wellness programme with EBL.",
-        "bn": "EBL-এর সঙ্গে গ্রামীণ শিক্ষার্থীদের মানসিক সুস্থতা প্রোগ্রাম চালু করেছে।",
-        "url": "https://monerbondhu.com/news/ebl-and-moner-bondhu-partner-to-launch-mental-wellness-program-for-rural-students"
-      },
-      "financing": {
-        "en": "UNICEF Venture Fund investment was announced in November 2024. The amount was not disclosed.",
-        "bn": "২০২৪ সালের নভেম্বরে UNICEF Venture Fund-এর বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
-        "url": "https://monerbondhu.com/news/moner-bondhu-secures-unicef-venture-fund-investment"
-      }
-    },
-    {
       "slug": "monsha",
       "name": "Monsha",
       "sortName": "Monsha",
@@ -1242,6 +1171,45 @@
       }
     },
     {
+      "slug": "nuport",
+      "name": "Nuport",
+      "sortName": "Nuport",
+      "monogram": "NU",
+      "website": "https://www.nuport.io/",
+      "sectorKey": "software",
+      "sector": {
+        "en": "E-commerce operations software",
+        "bn": "ই-কমার্স অপারেশন সফটওয়্যার"
+      },
+      "description": {
+        "en": "Brings orders, inventory, couriers and fulfilment together for online brands.",
+        "bn": "অনলাইন ব্র্যান্ডের অর্ডার, ইনভেন্টরি, কুরিয়ার আর ফুলফিলমেন্ট এক জায়গায় আনে।"
+      },
+      "lesson": {
+        "en": "Connecting separate commerce tools so the product becomes part of daily operations.",
+        "bn": "আলাদা কমার্স টুলগুলো যুক্ত করে পণ্যকে ব্যবসার প্রতিদিনের কাজের অংশ বানানো।"
+      },
+      "background": {
+        "en": "Nuport grew out of an earlier logistics venture. While working on delivery, founders Fahim Salam and Christopher Li saw a broader need to connect orders, warehouses, couriers and distribution in one system, and launched Nuport in 2021.",
+        "bn": "আগের একটি লজিস্টিকস উদ্যোগে কাজ করতে গিয়ে ফাহিম সালাম ও ক্রিস্টোফার লি দেখেন, সমস্যা শুধু ডেলিভারিতে নয়। অর্ডার, গুদাম, কুরিয়ার আর ডিস্ট্রিবিউশনকে এক সফটওয়্যারে আনার বড় সুযোগ ছিল। সেই ভাবনা থেকেই ২০২১ সালে Nuport-এর শুরু।",
+        "sources": [
+          "https://www.tbsnews.net/features/panorama/nuport-start-promises-cut-down-distribution-planning-time-85-364123",
+          "https://enterprise.nuport.io/blogs/nuport-the-dhaka-based-saas-startup-targeting-the-8-billion-e-commerce-industry-in-bangladesh"
+        ]
+      },
+      "activity": {
+        "date": "2026-01-06",
+        "en": "Reported 4.6 million orders processed in 2025 and 8,500 monthly active users in December.",
+        "bn": "২০২৫ সালে ৪৬ লাখ অর্ডার এবং ডিসেম্বরে ৮,৫০০ মাসিক সক্রিয় ব্যবহারকারীর কথা জানিয়েছে।",
+        "url": "https://www.linkedin.com/posts/nuport_nuport-ecommerceautomation-achievement-activity-7414275059512442880-VYBB"
+      },
+      "financing": {
+        "en": "$652,000 in disclosed funding, according to ExitStack.",
+        "bn": "ExitStack-এর হিসাবে প্রকাশিত ফান্ডিং ৬ লাখ ৫২ হাজার ডলার।",
+        "url": "https://www.exitstack.co/database/nuport"
+      }
+    },
+    {
       "slug": "ostad",
       "name": "Ostad",
       "sortName": "Ostad",
@@ -1264,7 +1232,8 @@
         "en": "Ostad's five cofounders surveyed students in 2020 and found many abandoned recorded courses because they lacked live interaction and accountability. They launched live, task-based courses in October that year.",
         "bn": "ওস্তাদের পাঁচজন কো-ফাউন্ডার ২০২০ সালে শিক্ষার্থীদের নিয়ে একটি সার্ভে করেন। তারা দেখেন, লাইভ ক্লাস আর জবাবদিহি না থাকায় অনেকেই রেকর্ড করা কোর্স অর্ধেক পথে ছেড়ে দেন। ওই বছরের অক্টোবরে তারা টাস্কভিত্তিক লাইভ কোর্স চালু করেন।",
         "sources": [
-          "https://en.prothomalo.com/youth/education/wlc3y5n7xq"
+          "https://en.prothomalo.com/youth/education/wlc3y5n7xq",
+          "https://www.exitstack.co/database/ostad"
         ]
       },
       "activity": {
@@ -1306,10 +1275,10 @@
         ]
       },
       "activity": {
-        "date": "2025-07-15",
-        "en": "Introduced the locally made ReVolt V3 electric pickup.",
-        "bn": "দেশে তৈরি ReVolt V3 বৈদ্যুতিক পিকআপের পরিচয় দিয়েছে।",
-        "url": "https://www.linkedin.com/posts/mstfmomin_introducing-revolt-v3-bangladeshs-first-activity-7350790184155705345-5gKF"
+        "date": "2026-04-03",
+        "en": "Reported 26 vehicles delivered and further production underway.",
+        "bn": "২৬টি গাড়ি ডেলিভারি দেওয়া আর আরও গাড়ির প্রডাকশন চালু থাকার কথা জানিয়েছে।",
+        "url": "https://palkimotors.com/assets/press/Palki-Motors-Zayed-Phase-II-Report.pdf"
       },
       "financing": {
         "en": "The company reports $100,000 in equity investment. Independent confirmation was not found.",
@@ -1353,84 +1322,6 @@
         "en": "$12 million pre-Series B funding disclosed in September 2024.",
         "bn": "২০২৪ সালের সেপ্টেম্বরে ১ কোটি ২০ লাখ ডলারের প্রি-সিরিজ B ফান্ডিং প্রকাশ করা হয়।",
         "url": "https://pathao.com/blog/press/pathao-raises-12m-to-drive-fintech-expansion/"
-      }
-    },
-    {
-      "slug": "pickaboo",
-      "name": "Pickaboo",
-      "sortName": "Pickaboo",
-      "monogram": "PK",
-      "website": "https://pickaboo.com/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "Electronics commerce",
-        "bn": "ইলেকট্রনিকস কমার্স"
-      },
-      "description": {
-        "en": "Online and assisted retail for phones, electronics and appliances.",
-        "bn": "ফোন, ইলেকট্রনিকস ও গৃহস্থালি যন্ত্রের অনলাইন ও সহায়তাভিত্তিক রিটেইল।"
-      },
-      "lesson": {
-        "en": "Competing in a trust-sensitive category through authorised supply and service.",
-        "bn": "অনুমোদিত সরবরাহ ও সেবা দিয়ে ভরসা-সংবেদনশীল পণ্যের বাজারে প্রতিযোগিতা করা।"
-      },
-      "background": {
-        "en": "Pickaboo launched in 2016 with a focus on phones and electronics, where genuine products, instalments and after-sales support mattered. After a difficult period, the business was restructured and relaunched in 2019.",
-        "bn": "যেখানে আসল পণ্য, কিস্তি সুবিধা আর বিক্রয়োত্তর সেবা (after-sales support) জরুরি, এমন ফোন ও ইলেকট্রনিকস পণ্যের ওপর জোর দিয়ে ২০১৬ সালে পিকাবুর শুরু। খারাপ সময় পার করার পর ২০১৯ সালে ব্যবসাটিকে নতুন করে সাজিয়ে আবার চালু করা হয়।",
-        "sources": [
-          "https://restofworld.org/profile/morin-talukder/",
-          "https://www.thedailystar.net/star-youth/news/building-prominent-presence-the-e-commerce-industry-2096193"
-        ]
-      },
-      "activity": {
-        "date": "2026-02-23",
-        "en": "Partnered with ACI Smart Tools to expand online sales.",
-        "bn": "অনলাইন বিক্রি বাড়াতে ACI Smart Tools-এর সঙ্গে অংশীদারত্ব করেছে।",
-        "url": "https://www.tbsnews.net/economy/corporates/aci-smart-tools-partners-pickaboocom-expand-online-sales-1369166"
-      },
-      "financing": {
-        "en": "$1.5 million pre-Series A funding disclosed in August 2023.",
-        "bn": "২০২৩ সালের আগস্টে ১৫ লাখ ডলারের প্রি-সিরিজ A ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.dhakatribune.com/business/323302/pickaboo-raises-1.5m-pre-series-a-round-led-by"
-      }
-    },
-    {
-      "slug": "praava-health",
-      "name": "Praava Health",
-      "sortName": "Praava Health",
-      "monogram": "PH",
-      "website": "https://praavahealth.com/",
-      "sectorKey": "health",
-      "sector": {
-        "en": "Healthcare services",
-        "bn": "স্বাস্থ্যসেবা"
-      },
-      "description": {
-        "en": "Integrated clinics, diagnostics and digital care built around a consistent patient record.",
-        "bn": "একই রোগীর রেকর্ড ধরে ক্লিনিক, ডায়াগনস্টিকস ও ডিজিটাল সেবা একসঙ্গে দেয়।"
-      },
-      "lesson": {
-        "en": "Using operations and service design to create consistency in a fragmented care market.",
-        "bn": "ভাঙা-ভাঙা স্বাস্থ্যসেবার বাজারে অপারেশন ও সেবার নকশা দিয়ে ধারাবাহিকতা আনা।"
-      },
-      "background": {
-        "en": "Praava Health was shaped by founder Sylvana Q. Sinha's experience when her mother nearly died after a botched appendectomy in Dhaka. Its first centre opened in 2017 with clinics and diagnostics designed around a consistent patient record.",
-        "bn": "ঢাকায় অ্যাপেনডিসাইটিসের ভুল অপারেশনের পর ফাউন্ডার সিলভানা কিউ. সিনহার মা প্রায় প্রাণ হারাতে বসেছিলেন। সেই অভিজ্ঞতা থেকেই প্রাভা হেলথ গড়ে ওঠে। ২০১৭ সালে তাদের প্রথম সেন্টার চালু হয়, যেখানে রোগীর একটি ধারাবাহিক রেকর্ড ধরে ক্লিনিক আর ডায়াগনস্টিকস সেবা সাজানো হয়।",
-        "sources": [
-          "https://hbr.org/2024/05/the-ceo-and-founder-of-praava-health-on-reimagining-care-in-an-emerging-market",
-          "https://www.thedailystar.net/supplements/international-womens-day-2023/news/the-future-healthcare-lies-finding-the-right-balance-between-technology-and-traditional-care-3265291"
-        ]
-      },
-      "activity": {
-        "date": "2026-03-10",
-        "en": "Reported a new employee and family healthcare partnership.",
-        "bn": "কর্মী ও তাঁদের পরিবারের স্বাস্থ্যসেবা নিয়ে নতুন অংশীদারত্বের খবর এসেছে।",
-        "url": "https://tadgroupbd.com/2026/03/10/strengthening-care-empowering-people-tad-group-partners-with-praava-health/"
-      },
-      "financing": {
-        "en": "$10.6 million Series A funding disclosed in March 2021.",
-        "bn": "২০২১ সালের মার্চে ১ কোটি ৬ লাখ ডলারের সিরিজ A ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://techcrunch.com/2021/03/07/praava-health-raises-10-6m-to-increase-access-to-quality-healthcare-in-bangladesh/"
       }
     },
     {
@@ -1510,6 +1401,45 @@
       }
     },
     {
+      "slug": "relaxy",
+      "name": "Relaxy",
+      "sortName": "Relaxy",
+      "monogram": "RX",
+      "website": "https://relaxy.com.bd/",
+      "sectorKey": "health",
+      "sector": {
+        "en": "Mental health technology",
+        "bn": "মানসিক স্বাস্থ্য প্রযুক্তি"
+      },
+      "description": {
+        "en": "Offers therapy, expert support, mood tracking and AI-assisted wellness tools.",
+        "bn": "থেরাপি, বিশেষজ্ঞ সহায়তা, মুড ট্র্যাকিং ও AI-ভিত্তিক ওয়েলনেস টুল দেয়।"
+      },
+      "lesson": {
+        "en": "Making it easier to seek sensitive care privately through a simple digital service.",
+        "bn": "গোপনীয়তা রেখে সহজ ডিজিটাল ব্যবস্থায় সংবেদনশীল সেবা নেওয়ার বাধা কমানো।"
+      },
+      "background": {
+        "en": "Jahnnobi Rahman experienced isolation and mental-health challenges while studying away from home. After seeing other young people face the same problem, she built Relaxy with two fellow students so people could seek support privately and speak with mental-health professionals.",
+        "bn": "বাড়ির বাইরে পড়তে গিয়ে জাহ্নবী রহমান একাকিত্ব আর মানসিক চাপের মুখোমুখি হন। একই সমস্যায় আরও অনেক তরুণকে দেখে তিনি দুই সহপাঠীর সঙ্গে Relaxy বানান, যাতে মানুষ গোপনে সাপোর্ট চাইতে আর প্রফেশনালদের সঙ্গে কথা বলতে পারে।",
+        "sources": [
+          "https://www.generationunlimited.org/stories/feeling-isolated-making-mental-healthcare-accessible",
+          "https://www.prothomalo.com/business/%E0%A6%89%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BE/tyybgfp4bq"
+        ]
+      },
+      "activity": {
+        "date": "2026-05-14",
+        "en": "Published new expert-led mental-health resources in May 2026.",
+        "bn": "২০২৬ সালের মে মাসে বিশেষজ্ঞদের লেখা নতুন মানসিক স্বাস্থ্য রিসোর্স প্রকাশ করেছে।",
+        "url": "https://relaxy.com.bd/blogs"
+      },
+      "financing": {
+        "en": "About Tk 70 lakh in grants and investment disclosed in January 2024.",
+        "bn": "২০২৪ সালের জানুয়ারিতে গ্র্যান্ট ও বিনিয়োগ মিলিয়ে প্রায় ৭০ লাখ টাকা পাওয়ার কথা প্রকাশ করা হয়।",
+        "url": "https://www.prothomalo.com/business/%E0%A6%89%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BE/tyybgfp4bq"
+      }
+    },
+    {
       "slug": "revora",
       "name": "Revora",
       "sortName": "Revora",
@@ -1546,44 +1476,6 @@
         "en": "$2 million seed funding disclosed in June 2026.",
         "bn": "২০২৬ সালের জুনে ২০ লাখ ডলারের সিড ফান্ডিং প্রকাশ করা হয়।",
         "url": "https://www.thedailystar.net/news/tech-startup/news/revora-formerly-myalice-raises-2-million-seed-round-4207146"
-      }
-    },
-    {
-      "slug": "shajgoj",
-      "name": "Shajgoj",
-      "sortName": "Shajgoj",
-      "monogram": "SJ",
-      "website": "https://shajgoj.com/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "Beauty commerce",
-        "bn": "বিউটি কমার্স"
-      },
-      "description": {
-        "en": "Beauty content, ecommerce and physical retail built around local consumers.",
-        "bn": "দেশের গ্রাহকদের ঘিরে বিউটি কনটেন্ট, ই-কমার্স ও দোকানের সমন্বিত ব্যবসা।"
-      },
-      "lesson": {
-        "en": "Using education and community to earn demand before and alongside commerce.",
-        "bn": "কমার্সের আগে ও পাশাপাশি শিক্ষা ও কমিউনিটি দিয়ে চাহিদা ও ভরসা তৈরি করা।"
-      },
-      "background": {
-        "en": "Shajgoj started as a beauty blog, using practical content to build trust before selling products. It opened its first physical shop in 2015 and launched ecommerce in 2018.",
-        "bn": "সাজগোজ শুরু হয়েছিল একটি বিউটি ব্লগ হিসেবে, যেখানে পণ্য বিক্রির আগে ব্যবহারিক কন্টেন্ট দিয়ে তারা মানুষের ভরসা অর্জন করে। ২০১৫ সালে তারা প্রথম ফিজিক্যাল শপ খোলে এবং ২০১৮ সালে ই-কমার্স সাইট চালু করে।",
-        "sources": [
-          "https://www.thedailystar.net/tech-startup/news/shajgoj-how-modern-day-beauty-platform-aims-become-household-name-3019106"
-        ]
-      },
-      "activity": {
-        "date": "2026-01-08",
-        "en": "Opened a new retail outlet in Khilgaon.",
-        "bn": "খিলগাঁওয়ে নতুন রিটেইল আউটলেট চালু করেছে।",
-        "url": "https://en.prothomalo.com/corporate/8yd2x9q9a2"
-      },
-      "financing": {
-        "en": "Tk 21 crore seed funding disclosed in January 2022.",
-        "bn": "২০২২ সালের জানুয়ারিতে ২১ কোটি টাকার সিড ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.tbsnews.net/bangladesh/beauty-start-shajgoj-raises-tk21-crore-sequoia-capital-india-362182"
       }
     },
     {
@@ -1625,44 +1517,6 @@
       }
     },
     {
-      "slug": "sheba-xyz",
-      "name": "Sheba.xyz",
-      "sortName": "Sheba.xyz",
-      "monogram": "SX",
-      "website": "https://sheba.xyz/",
-      "sectorKey": "commerce",
-      "sector": {
-        "en": "SME services",
-        "bn": "ক্ষুদ্র ব্যবসার ডিজিটাল সেবা"
-      },
-      "description": {
-        "en": "A platform combining service professionals, SME tools, payments and financing products.",
-        "bn": "সেবাদাতা পেশাজীবী, ক্ষুদ্র ব্যবসার টুল, পেমেন্ট ও অর্থায়ন এক করা প্ল্যাটফর্ম।"
-      },
-      "lesson": {
-        "en": "Evolving from a services marketplace into operating infrastructure for small businesses.",
-        "bn": "সার্ভিস মার্কেটপ্লেস থেকে ক্ষুদ্র ব্যবসার অপারেটিং অবকাঠামোতে বিস্তার করা।"
-      },
-      "background": {
-        "en": "Sheba.xyz started as an online marketplace for household and professional services. It later combined a managed service network with software, payments and financing tools for small businesses.",
-        "bn": "সেবা ডটএক্সওয়াইজেড (Sheba.xyz) মূলত গৃহস্থালি ও পেশাদার সেবার অনলাইন মার্কেটপ্লেস হিসেবে যাত্রা শুরু করে। পরে এটি ম্যানেজড সার্ভিস নেটওয়ার্কের সঙ্গে ছোট ব্যবসার জন্য সফটওয়্যার, পেমেন্ট ও অর্থায়নের টুল যোগ করে।",
-        "sources": [
-          "https://futurestartup.com/2022/03/06/the-making-and-ambition-of-sheba-adnan-imtiaz-halim/"
-        ]
-      },
-      "activity": {
-        "date": "2026-02-08",
-        "en": "Announced a digital nano-loan partnership with Trust Bank.",
-        "bn": "Trust Bank-এর সঙ্গে ডিজিটাল ন্যানো লোন সেবা নিয়ে অংশীদারত্ব ঘোষণা করেছে।",
-        "url": "https://www.tbsnews.net/economy/corporates/trust-bank-shebaxyz-sign-mou-launch-digital-nano-loan-facility-1355081"
-      },
-      "financing": {
-        "en": "$2.9 million Series A funding disclosed in January 2024.",
-        "bn": "২০২৪ সালের জানুয়ারিতে ২৯ লাখ ডলারের সিরিজ A ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.exitstack.co/posts/sheba-raises-funds-from-bsrm-and-startup-bangladesh-limited"
-      }
-    },
-    {
       "slug": "shikho",
       "name": "Shikho",
       "sortName": "Shikho",
@@ -1698,6 +1552,45 @@
         "en": "Strategic investment was announced in May 2025. The amount was not disclosed.",
         "bn": "২০২৫ সালের মে মাসে কৌশলগত বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
         "url": "https://www.startupbangladesh.vc/startup-bangladesh-shikho/"
+      }
+    },
+    {
+      "slug": "shomvob",
+      "name": "Shomvob",
+      "sortName": "Shomvob",
+      "monogram": "SH",
+      "website": "https://shomvob.com/",
+      "sectorKey": "software",
+      "sector": {
+        "en": "Job and HR technology",
+        "bn": "চাকরি আর HR প্রযুক্তি"
+      },
+      "description": {
+        "en": "Connects job seekers with employers and gives businesses hiring, staffing and payroll tools.",
+        "bn": "চাকরিপ্রার্থীদের নিয়োগদাতার সঙ্গে যুক্ত করে, আর ব্যবসাকে নিয়োগ, স্টাফিং আর পেরোলের টুল দেয়।"
+      },
+      "lesson": {
+        "en": "Building trust on both sides of a job marketplace with verified identities, skills and hiring tools.",
+        "bn": "যাচাই করা পরিচয়, দক্ষতা আর নিয়োগপ্রক্রিয়াকে ঘিরে চাকরির মার্কেটপ্লেসের দুই দিকই গড়ে তোলা।"
+      },
+      "background": {
+        "en": "Shomvob started in 2022 to replace paper-heavy recruitment that was hard to track. Job seekers build digital profiles and apply through the platform, while employers use it to find and manage candidates.",
+        "bn": "কাগজের আবেদন আর ছড়ানো-ছিটানো নিয়োগের কাজ সহজ করতে ২০২২ সালে সম্ভবের শুরু। চাকরিপ্রার্থীরা এখানে ডিজিটাল প্রোফাইল বানিয়ে আবেদন করতে পারেন, আর নিয়োগদাতারা একই প্ল্যাটফর্মে প্রার্থী খোঁজা আর নিয়োগের কাজ সামলান।",
+        "sources": [
+          "https://www.tbsnews.net/economy/corporates/jobtech-firm-shomvob-raises-1-million-pre-seed-funding-858886",
+          "https://www.thedailystar.net/tech-startup/news/bangladeshi-startups-earn-spot-forbes-asia-list-3971156"
+        ]
+      },
+      "activity": {
+        "date": "2026-04-28",
+        "en": "Announced a job-placement and soft-skills partnership with Bangla-German Sampreeti.",
+        "bn": "Bangla-German Sampreeti-এর সঙ্গে চাকরিতে নিয়োগ আর সফট স্কিল ট্রেনিং নিয়ে পার্টনারশিপ ঘোষণা করেছে।",
+        "url": "https://www.linkedin.com/posts/shomvobjobs_shomvob-mou-partnership-activity-7454808377068625920-UXwF"
+      },
+      "financing": {
+        "en": "$1 million pre-seed round led by Cocoon Capital disclosed in May 2024.",
+        "bn": "২০২৪ সালের মে মাসে Cocoon Capital-এর নেতৃত্বে ১০ লাখ ডলারের প্রি-সিড ফান্ডিং প্রকাশ করা হয়।",
+        "url": "https://www.tbsnews.net/economy/corporates/jobtech-firm-shomvob-raises-1-million-pre-seed-funding-858886"
       }
     },
     {
@@ -1737,6 +1630,45 @@
         "en": "$110 million merger funding disclosed in April 2025.",
         "bn": "২০২৫ সালের এপ্রিলে একীভূত প্রতিষ্ঠানের জন্য ১১ কোটি ডলারের ফান্ডিং প্রকাশ করা হয়।",
         "url": "https://www.bloomberg.com/news/articles/2025-04-09/peter-thiel-s-valar-saudi-arabia-s-sanabil-back-b2b-commerce-firm-silq"
+      }
+    },
+    {
+      "slug": "shuttle",
+      "name": "Shuttle",
+      "sortName": "Shuttle",
+      "monogram": "SL",
+      "website": "https://www.shuttlebd.com/",
+      "sectorKey": "mobility",
+      "sector": {
+        "en": "Shared and managed transport",
+        "bn": "শেয়ার্ড আর ম্যানেজড পরিবহন"
+      },
+      "description": {
+        "en": "Runs scheduled shared rides and managed employee transport for individuals, schools and businesses.",
+        "bn": "ব্যক্তি, স্কুল ও প্রতিষ্ঠানের জন্য নির্ধারিত শেয়ার্ড রাইড ও কর্মী পরিবহন পরিচালনা করে।"
+      },
+      "lesson": {
+        "en": "Starting with a narrow safety problem, then using route density and fleet operations to serve wider commuter groups.",
+        "bn": "নারীদের নিরাপদ যাতায়াতের নির্দিষ্ট সমস্যা দিয়ে শুরু করে, পরে রুটের চাহিদা আর ফ্লিট অপারেশন কাজে লাগিয়ে আরও যাত্রীকে সেবা দেওয়া।"
+      },
+      "background": {
+        "en": "Shuttle started in 2018 with two minivans and a women-only service after its founders interviewed more than 300 female students and office workers. It later added corporate transport, school commutes and other scheduled services.",
+        "bn": "৩০০ জনের বেশি ছাত্রী আর কর্মজীবী নারীর সঙ্গে কথা বলার পর ২০১৮ সালে দুটি মাইক্রোবাস আর নারীদের জন্য আলাদা সেবা নিয়ে শাটল শুরু হয়। পরে তারা করপোরেট ট্রান্সপোর্ট, স্কুল যাতায়াত আর অন্য নির্ধারিত রুটে কাজ বাড়ায়।",
+        "sources": [
+          "https://www.thedailystar.net/shout/life/news/making-public-commutes-safer-women-1679164",
+          "https://futurestartup.com/2023/01/30/reyasat-chowdhury-at-fs-talk-january/"
+        ]
+      },
+      "activity": {
+        "date": "2026-06-11",
+        "en": "Launched new Shuttle for Office routes from Uttara, Bashundhara and Mirpur to Gulshan 1.",
+        "bn": "উত্তরা, বসুন্ধরা ও মিরপুর থেকে গুলশান ১ পর্যন্ত নতুন শাটল ফর অফিস রুট চালু করেছে।",
+        "url": "https://www.linkedin.com/posts/shuttlebd_shuttleforoffice-activity-7470827844672069633-SOxS"
+      },
+      "financing": {
+        "en": "$1.5 million funding round disclosed in December 2022, bringing total investment to $2.5 million.",
+        "bn": "২০২২ সালের ডিসেম্বরে ১৫ লাখ ডলারের ফান্ডিং প্রকাশ করা হয়, ফলে মোট বিনিয়োগ দাঁড়ায় ২৫ লাখ ডলার।",
+        "url": "https://www.thedailystar.net/tech-startup/news/shuttle-raises-15mn-new-funding-3200606"
       }
     },
     {
@@ -1895,6 +1827,45 @@
       }
     },
     {
+      "slug": "togumogu",
+      "name": "ToguMogu",
+      "sortName": "ToguMogu",
+      "monogram": "TM",
+      "website": "https://togumogu.com/",
+      "sectorKey": "health",
+      "sector": {
+        "en": "Parenting and family health",
+        "bn": "প্যারেন্টিং আর পারিবারিক স্বাস্থ্য"
+      },
+      "description": {
+        "en": "A parenting platform combining personalised guidance, services, commerce and community.",
+        "bn": "ব্যক্তিভিত্তিক পরামর্শ, সেবা, পণ্য আর কমিউনিটি একসঙ্গে দেয় এমন প্যারেন্টিং প্ল্যাটফর্ম।"
+      },
+      "lesson": {
+        "en": "Building a long-term relationship around needs that change as a family grows.",
+        "bn": "পরিবার বড় হওয়ার সঙ্গে সঙ্গে বদলে যাওয়া চাহিদা ঘিরে দীর্ঘমেয়াদি সম্পর্ক তৈরি করা।"
+      },
+      "background": {
+        "en": "ToguMogu started in 2016 as a place for new parents to find reliable guidance and services. It grew into an app covering pregnancy and childhood, with products, providers, courses and community support.",
+        "bn": "নতুন মা-বাবার জন্য ভরসার তথ্য আর সেবা এক জায়গায় আনতে ২০১৬ সালে টগুমগুর শুরু। পরে গর্ভাবস্থা থেকে শৈশব পর্যন্ত পরামর্শ, পণ্য, সেবাদাতা, কোর্স আর কমিউনিটি নিয়ে অ্যাপটি বড় হয়েছে।",
+        "sources": [
+          "https://idlc.com/mbr/images/public/aRCRdOo1M0KDBVxwvHBVri2a.pdf",
+          "https://futurestartup.com/2025/05/27/parenting-app-togumogu-launches-togumogu-connect-to-bridge-brands-and-bangladeshs-40-million-families/"
+        ]
+      },
+      "activity": {
+        "date": "2026-05-13",
+        "en": "Ran the first Back to Work Fellowship cohort for mothers returning after a career break.",
+        "bn": "ক্যারিয়ার বিরতির পর কাজে ফিরতে চাওয়া মায়েদের জন্য ব্যাক টু ওয়ার্ক ফেলোশিপের প্রথম কোহর্ট চালিয়েছে।",
+        "url": "https://www.linkedin.com/posts/togumogu_togumogu-mothersday2026-backtowork-activity-7460192468265971712-rB_w"
+      },
+      "financing": {
+        "en": "Selected for an Orange Corners matching grant in May 2024. The company-specific amount was not published.",
+        "bn": "২০২৪ সালের মে মাসে অরেঞ্জ কর্নার্সের ম্যাচিং গ্র্যান্টের জন্য নির্বাচিত হয়। কোম্পানিটির আলাদা পরিমাণ প্রকাশ করা হয়নি।",
+        "url": "https://www.orangecorners.com/orange-corners-bangladesh-track-1-ceremony/"
+      }
+    },
+    {
       "slug": "truck-lagbe",
       "name": "Truck Lagbe",
       "sortName": "Truck Lagbe",
@@ -1955,7 +1926,8 @@
         "en": "WeGro was incorporated in 2021 and began with 35 farmers. Its model channels investor capital into farm inputs and shares proceeds after harvest, while partnerships add insurance, advice and market access.",
         "bn": "২০২১ সালে কোম্পানি হিসেবে নিবন্ধনের পর উইগ্রো ৩৫ জন কৃষককে নিয়ে কাজ শুরু করে। তাদের মডেলে ইনভেস্টরদের টাকা কৃষি উপকরণে খাটানো হয়, আর ফসল বিক্রির পর পাওয়া অর্থ ভাগ করা হয়। পার্টনারশিপের মাধ্যমে কৃষকেরা ইনস্যুরেন্স, পরামর্শ আর বাজারে পৌঁছানোর সুযোগও পান।",
         "sources": [
-          "https://www.undp.org/bangladesh/press-releases/wegro-better-way-provide-credit-support-farmers"
+          "https://www.undp.org/bangladesh/press-releases/wegro-better-way-provide-credit-support-farmers",
+          "https://www.exitstack.co/database/wegro"
         ]
       },
       "activity": {
@@ -1967,6 +1939,45 @@
       "financing": {
         "en": "No reliable public financing amount found in the reviewed sources.",
         "bn": "দেখা সোর্সগুলোতে নির্ভরযোগ্য প্রকাশ্য ফান্ডিং পরিমাণ পাওয়া যায়নি।"
+      }
+    },
+    {
+      "slug": "zatiq",
+      "name": "Zatiq",
+      "sortName": "Zatiq",
+      "monogram": "ZA",
+      "website": "https://zatiq.com/",
+      "sectorKey": "commerce",
+      "sector": {
+        "en": "SME commerce software",
+        "bn": "ক্ষুদ্র ব্যবসার কমার্স সফটওয়্যার"
+      },
+      "description": {
+        "en": "Gives small businesses online-store, sales, customer, payment and financing tools.",
+        "bn": "ছোট ব্যবসাকে অনলাইন শপ, বিক্রি, কাস্টমার, পেমেন্ট আর অর্থায়নের টুল দেয়।"
+      },
+      "lesson": {
+        "en": "Designing software around familiar merchant habits instead of forcing complex systems.",
+        "bn": "জটিল সিস্টেম চাপিয়ে না দিয়ে দোকানদারের চেনা কাজের ধরন ঘিরে সফটওয়্যার বানানো।"
+      },
+      "background": {
+        "en": "Zatiq began with payment hardware for small merchants. Early trials showed that even a calculator-like device could be too unfamiliar, so the team moved toward simpler software and built ZatiqEasy to combine online stores and sales operations.",
+        "bn": "ছোট ব্যবসার জন্য পেমেন্ট ডিভাইস দিয়ে Zatiq-এর শুরু। পরীক্ষামূলক ব্যবহারে দেখা যায়, ক্যালকুলেটরের মতো আলাদা ডিভাইসও অনেক দোকানদারের কাছে ঝামেলার। পরে তারা আরও সহজ সফটওয়্যারের দিকে যায়, আর ZatiqEasy-তে অনলাইন শপ আর বিক্রির কাজ এক করে।",
+        "sources": [
+          "https://www.tbsnews.net/features/panorama/zatiq-wants-simplify-accounting-smes-its-easier-said-done-700854",
+          "https://www.tbsnews.net/economy/corporates/zatiqeasys-unprecedented-success-digital-transformation-entrepreneurs-1116806"
+        ]
+      },
+      "activity": {
+        "date": "2026-08-24",
+        "en": "The live ZatiqEasy dashboard showed merchant orders for 14 to 24 August 2026.",
+        "bn": "ZatiqEasy-এর লাইভ ড্যাশবোর্ডে ২০২৬ সালের ১৪ থেকে ২৪ আগস্ট পর্যন্ত মার্চেন্ট অর্ডার দেখা গেছে।",
+        "url": "https://zatiqeasy.com/"
+      },
+      "financing": {
+        "en": "$1.6 million pre-seed funding disclosed in July 2023.",
+        "bn": "২০২৩ সালের জুলাইয়ে ১৬ লাখ ডলারের প্রি-সিড ফান্ডিং প্রকাশ করা হয়।",
+        "url": "https://www.thedailystar.net/tech-startup/news/local-startup-zatiq-receives-16-mil-pre-seed-round-3383031"
       }
     }
   ]

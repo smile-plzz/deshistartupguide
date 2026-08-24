@@ -25,6 +25,14 @@ test('the watchlist has exactly fifty unique companies in alphabetical order', (
   assert.deepEqual(names, [...names].sort(collator.compare))
 })
 
+test('the activity window covers exactly the previous twelve months', () => {
+  const lastResearched = new Date(`${data.lastResearched}T00:00:00Z`)
+  const expectedStart = new Date(lastResearched)
+  expectedStart.setUTCFullYear(expectedStart.getUTCFullYear() - 1)
+
+  assert.equal(data.activityWindowStart, expectedStart.toISOString().slice(0, 10))
+})
+
 test('every company has useful bilingual details and a recent public update', () => {
   for (const entry of data.entries) {
     assert.match(entry.website, /^https:\/\//, entry.name + ' website')
@@ -133,10 +141,14 @@ test('the company data cannot silently become a ranking', () => {
 })
 
 test('the public selection criteria are specific about evidence and funding', () => {
-  assert.match(componentSource, /Founded in Bangladesh or primarily operating from Bangladesh/)
+  assert.match(componentSource, /Founded in Bangladesh or primarily built and operated from Bangladesh/)
+  assert.match(componentSource, /not mainly an agency, consultancy or traditional service business/)
+  assert.match(componentSource, /A live product or platform with real customers or active deployments/)
   assert.match(componentSource, /Verifiable activity within the past 12 months/)
+  assert.match(componentSource, /Clear evidence of traction/)
   assert.match(componentSource, /At least two reliable public sources, including one independent of the company/)
-  assert.match(componentSource, /Funding is an important factor, but it is not the only one/)
+  assert.match(componentSource, /Funding matters, but it is not the only factor/)
+  assert.match(componentSource, /Meeting these requirements does not guarantee a place on the list/)
   assert.doesNotMatch(componentSource, /—/)
 })
 
