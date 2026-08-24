@@ -19,24 +19,6 @@
     "notes": "A Bangladesh payment gateway aggregator for businesses that want one integration for cards, mobile financial services, internet banking, wallets and bank EMI. The Basic package includes API integration and a merchant dashboard; settlement timing should be confirmed in the merchant agreement."
   },
   {
-    "name": "aamarPay",
-    "type": "Payment gateway aggregator",
-    "fees": "Quote-based; no monthly fee.",
-    "settlement": "Disbursed twice weekly on available working days; no payout on bank holidays, weekly closures or government holidays.",
-    "supportedMethods": [
-      "Cards",
-      "Mobile financial services",
-      "Internet banking",
-      "QR"
-    ],
-    "requiredDocs": "Trade licence, TIN, VAT certificate (if any), NID and one photo. Partnerships add the partnership deed; private limited companies add the incorporation certificate and memorandum and articles.",
-    "applicationPath": "Request a merchant quote online; applications are limited to registered Bangladeshi businesses.",
-    "website": "https://www.aamarpay.com/index.php",
-    "sourceUrl": "https://www.aamarpay.com/index.php/faq",
-    "lastVerified": "2026-08-19",
-    "notes": "A payment gateway for Bangladesh-registered businesses, with cards, mobile financial services and internet banking alongside QR collection, payment links and invoice tools. Merchants can monitor transactions, payouts, refunds and chargebacks through its panel or app; commercial pricing is provided by quote."
-  },
-  {
     "name": "ShurjoPay",
     "type": "Payment gateway aggregator",
     "fees": "Not publicly stated",

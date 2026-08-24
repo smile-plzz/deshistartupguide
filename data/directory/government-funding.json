@@ -34,18 +34,19 @@
   },
   {
     "name": "Bangladesh Bank Startup Fund",
-    "type": "Central-bank refinance scheme delivered through participating banks",
-    "eligibility": "Entrepreneurs aged 21–45 proposing a new, creative, technology-enabled venture and able to demonstrate relevant education, training, knowledge or experience; the participating lender conducts its own appraisal.",
-    "amount": "Up to BDT 1 crore per venture, disbursed in three instalments",
+    "type": "Central-bank startup-financing framework",
+    "eligibility": "Bangladesh-registered startups whose founders are aged 21 or above. New ventures and startups operating for up to 12 years from registration can apply, subject to appraisal by a participating bank or financial institution.",
+    "amount": "BDT 2–8 crore, depending on the startup's development stage",
     "stage": [
-      "Idea",
-      "Early stage"
+      "Seed",
+      "Growth",
+      "High growth"
     ],
-    "deadline": "Rolling through participating lenders",
-    "applicationPath": "Use Bangladesh Bank's Startup Fund Bank List to identify a participating bank and apply to that lender; applications are not made to Bangladesh Bank directly.",
-    "website": "https://www.bb.org.bd/smeportal/schemes.php",
-    "sourceUrl": "https://www.bb.org.bd/smeportal/pdf/startup_fund.pdf",
-    "lastVerified": "2026-08-19",
-    "notes": "This is bank financing backed by Bangladesh Bank's refinance fund, not a grant or venture-capital investment. The published scheme sheet allows a term of up to five years and caps the customer's annual simple interest or profit rate at 4%, subject to the lender's approval and conditions."
+    "deadline": "Rolling through participating banks and financial institutions",
+    "applicationPath": "Apply through a participating bank or financial institution; applications are not submitted directly to Bangladesh Bank.",
+    "website": "https://www.bb.org.bd/",
+    "sourceUrl": "https://www.bb.org.bd/mediaroom/circulars/smespd/jul092025smespd02.pdf",
+    "lastVerified": "2026-08-25",
+    "notes": "Bangladesh Bank's BDT 500 crore refinance fund supports startup loans and investments through participating banks and financial institutions. The maximum interest or profit rate is 4%, subject to the lender's appraisal and conditions."
   }
 ]

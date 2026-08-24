@@ -214,67 +214,63 @@
     "notes": "North South University's cohort-based startup platform has two 16-week tracks. Founders’ Lab helps idea-stage teams validate a business model and develop an initial MVP. Flagship Incubation supports launched, technology-enabled startups with early traction as they work towards product-market fit and investor readiness. Support includes structured reviews, mentors, workspace, tools and credits, investor exposure and two months of post-programme support for Flagship graduates."
   },
   {
-    "name": "Bangladesh Hi-Tech Park Authority (BHTPA)",
-    "type": "Government technology infrastructure and incubation",
-    "stage": [
-      "Idea",
-      "Early stage",
-      "Technology companies"
-    ],
-    "sectors": [
-      "ICT",
-      "IT/ITES",
-      "Hardware",
-      "Technology"
-    ],
-    "benefits": [
-      "Incubation and training facilities",
-      "Workspace and technology infrastructure",
-      "One Stop Service",
-      "Programme-specific mentoring and founder support"
-    ],
-    "cohortTiming": "Facility- and programme-specific; BHTPA does not run one standing national accelerator cohort.",
-    "costOrEquity": "Facility and programme terms vary.",
-    "notableAlumni": [],
-    "applicationPath": "Use BHTPA's One Stop Service for park and incubation services and follow BHTPA notices for cohort-based programmes.",
-    "website": "https://bhtpa.gov.bd/",
-    "sourceUrl": "https://ossbhtpa.gov.bd/",
-    "lastVerified": "2026-08-19",
-    "notes": "The government authority that develops and manages hi-tech parks, software technology parks and IT incubation or training centres across Bangladesh. Startups and technology companies can access facility-based workspace, infrastructure and government services; training and accelerator support depends on the centre or project."
-  },
-  {
-    "name": "iDEA Project",
-    "type": "Government grants and startup support",
+    "name": "University Innovation Hub Program (UIHP)",
+    "type": "University startup incubator",
     "stage": [
       "Idea",
       "Pre-seed",
-      "Early stage"
+      "Prototype"
     ],
     "sectors": [
-      "ICT",
       "Technology",
-      "Innovation"
+      "University innovation",
+      "Research commercialisation"
     ],
     "benefits": [
-      "Non-equity startup grants",
-      "Mentoring and training",
-      "Networking",
-      "Free co-working space",
-      "Hardware prototyping through iDEA Lab"
+      "Innovation and entrepreneurship training",
+      "Industry mentorship",
+      "Co-working and technical resources",
+      "Prototype and MVP development",
+      "Potential pre-seed or seed funding"
     ],
-    "cohortTiming": "No fixed cohort; grant and co-working applications run through the application portal, subject to current notices.",
-    "costOrEquity": "Startup grant: up to BDT 10 lakh, non-equity and non-repayable; co-working is free for up to six months.",
-    "notableAlumni": [
-      "Truck Lagbe",
-      "Markopolo AI",
-      "Moner Bondhu",
-      "Skoot"
+    "cohortTiming": "University-specific cohorts and deadlines; check the application page for each hub.",
+    "costOrEquity": "No participation fee. Equity terms: Not publicly stated.",
+    "notableAlumni": [],
+    "applicationPath": "Choose the relevant university innovation hub on the UIHP application page and follow that hub's registration instructions.",
+    "website": "https://uihp.org/",
+    "sourceUrl": "https://uihp.org/faq",
+    "lastVerified": "2026-08-25",
+    "notes": "A Bangladesh Hi-Tech Park Authority university incubation programme under the ICT Division, financed by the World Bank. It supports students, graduates, researchers and alumni in participating universities to develop technology-driven ideas into prototypes, startups or registered intellectual property."
+  },
+  {
+    "name": "Accelerating Bangladesh",
+    "type": "Government-backed startup accelerator",
+    "stage": [
+      "Idea",
+      "MVP",
+      "Early stage",
+      "Growth"
     ],
-    "applicationPath": "Apply through the iDEA portal. The startup-grant application asks for identity documents, a business description, short video, pitch deck and any available prototype or proof of concept.",
-    "website": "https://idea.gov.bd/",
-    "sourceUrl": "https://idea.gov.bd/p/7/faq",
-    "lastVerified": "2026-08-19",
-    "notes": "An ICT Division and Bangladesh Computer Council programme providing non-dilutive pre-seed funding and technical support to innovative, scalable Bangladesh startups. Separate services include mentoring, networking, free co-working space and access to hardware prototyping facilities."
+    "sectors": [
+      "Sector-agnostic",
+      "Technology-enabled startups",
+      "Women-led digital businesses"
+    ],
+    "benefits": [
+      "14-week coaching and applied curriculum",
+      "One-to-one mentoring",
+      "Networking and investor pitching sessions",
+      "Residential bootcamp",
+      "National demo day and post-programme support"
+    ],
+    "cohortTiming": "Industry-cohort registration is open only to startups shortlisted in the first round; no new first-round application window is published.",
+    "costOrEquity": "The programme is fully sponsored. Equity terms: Not publicly stated.",
+    "notableAlumni": [],
+    "applicationPath": "Shortlisted startups can use the industry-cohort form. Other founders should wait for the next first-round call.",
+    "website": "https://acceleratingbangladesh.com/",
+    "sourceUrl": "https://acceleratingbangladesh.com/early-stage-startups/",
+    "lastVerified": "2026-08-25",
+    "notes": "A Bangladesh Hi-Tech Park Authority and Digital Entrepreneurship and Innovation Ecosystem Development startup acceleration programme for Bangladesh founders from viable idea or MVP stage through growth. The programme combines coaching, mentoring, bootcamps, investor sessions and demo-day exposure."
   },
   {
     "name": "Accelerating Asia Accelerator",

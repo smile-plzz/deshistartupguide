@@ -11,7 +11,7 @@
       "Digital products and services",
       "Bangladesh-linked startups"
     ],
-    "chequeSize": "Typically US$50,000–US$500,000; sweet spot US$100,000–US$250,000",
+    "chequeSize": "Not publicly stated",
     "notableInvestments": [
       "Pathao",
       "Chaldal",
@@ -22,7 +22,7 @@
     "applicationPath": "Send a one-line company summary and PDF pitch deck through BAN's startup pitch form. Selected founders may be invited to a showcase and investor diligence.",
     "website": "https://bdangels.co/",
     "sourceUrl": "https://bdangels.co/faq",
-    "lastVerified": "2026-08-19",
+    "lastVerified": "2026-08-25",
     "notes": "A member-led angel network that syndicates investments into early-stage, Bangladesh-linked digital businesses. BAN helps selected founders prepare their deck, data room and fundraising strategy before presenting them to angels for diligence and a common term sheet."
   },
   {
@@ -123,30 +123,66 @@
     "notes": "A permanent venture-capital vehicle funded by 39 Bangladeshi commercial banks. Its US$35 million ONKUR fund is designed to co-invest in high-growth Bangladesh startups alongside a credible global or regional lead investor."
   },
   {
-    "name": "IDLC Venture Capital Fund",
-    "type": "Institutional venture capital",
+    "name": "Dekko ISHO Venture Capital (DIVC)",
+    "type": "Corporate venture capital investor",
     "stage": [
-      "Early stage"
+      "Idea",
+      "Early stage",
+      "Growth"
     ],
     "sectors": [
-      "Sector-agnostic",
-      "Technology",
-      "Technology-enabled businesses"
+      "Fintech",
+      "Cybersecurity and AI",
+      "Cleantech",
+      "SaaS and enterprise",
+      "Agritech and food supply chain",
+      "Proptech",
+      "Deeptech",
+      "Hospitality tech",
+      "E-commerce",
+      "Gaming and esports"
     ],
     "chequeSize": "Not publicly stated",
     "notableInvestments": [
-      "Arogga",
-      "Barikoi",
-      "iFarmer",
-      "Truck Lagbe",
-      "Intelligent Machines",
-      "Pickaboo"
+      "Markopolo.ai",
+      "Zatiq",
+      "Turtle Venture Studio",
+      "Ecobloc"
     ],
-    "applicationPath": "Contact the investment team using the email published on the IDLC Venture Capital site.",
-    "website": "https://www.idlcvc.com/",
-    "sourceUrl": "https://www.idlcvc.com/thesis",
-    "lastVerified": "2026-08-19",
-    "notes": "A roughly US$4 million, BSEC-registered fund for early-stage Bangladeshi technology and technology-enabled companies. It backs committed teams solving fundamental local problems with clear business models and large addressable markets."
+    "applicationPath": "Submit the startup and pitch deck through DIVC's rolling online application.",
+    "website": "https://www.di.vc/",
+    "sourceUrl": "https://www.di.vc/",
+    "lastVerified": "2026-08-25",
+    "notes": "A founder-focused venture investor backed by Dekko ISHO Group. It provides capital and hands-on support across strategy, operations, legal, hiring, branding and growth."
+  },
+  {
+    "name": "Bangladesh Venture Capital Limited (BVCL)",
+    "type": "Venture capital investor and fund manager",
+    "stage": [
+      "Pre-seed",
+      "Seed",
+      "Growth"
+    ],
+    "sectors": [
+      "Technology and software",
+      "Fintech",
+      "Agritech",
+      "Edtech",
+      "Healthtech",
+      "E-commerce"
+    ],
+    "chequeSize": "Not publicly stated",
+    "notableInvestments": [
+      "Chaldal",
+      "Sokrio Technologies",
+      "ADEFFI",
+      "Ayykori"
+    ],
+    "applicationPath": "Contact BVCL through its website with the business proposal and funding requirement.",
+    "website": "https://venture.com.bd/",
+    "sourceUrl": "https://venture.com.bd/portfolio/",
+    "lastVerified": "2026-08-25",
+    "notes": "A Bangladesh venture-capital and alternative-investment company providing capital, mentorship, industry connections and strategic guidance to startups and growth-stage businesses."
   },
   {
     "name": "YY Ventures",

@@ -27,12 +27,12 @@
     "name": "National Board of Revenue – e-TIN and income tax",
     "type": "Tax",
     "service": "Electronic Taxpayer Identification Number registration and income-tax return preparation, payment and filing.",
-    "process": "Register or manage a TIN at incometax.gov.bd, then use the separate e-Return system at etaxnbr.gov.bd to file applicable returns.",
+    "process": "Register or manage an e-TIN at secure.incometax.gov.bd, then use etaxnbr.gov.bd for applicable income-tax returns.",
     "ministry": "Internal Resources Division, Ministry of Finance",
-    "applicationPath": "Obtain an e-TIN at incometax.gov.bd/TINHome. For e-Return registration, individuals need an existing TIN and a mobile number registered biometrically against their NID.",
+    "applicationPath": "Obtain or manage an e-TIN at secure.incometax.gov.bd/TINHome. Use etaxnbr.gov.bd for e-Return registration and filing.",
     "website": "https://nbr.gov.bd/",
-    "sourceUrl": "https://nbr.gov.bd/all-faq/e-services/eng",
-    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://secure.incometax.gov.bd/TINHome",
+    "lastVerified": "2026-08-25",
     "notes": "An e-TIN is the taxpayer identifier; e-Return is the separate service used to prepare, pay and submit income-tax returns. A TIN is not company registration and does not by itself show that a taxpayer's filing obligations are up to date."
   },
   {

@@ -23,8 +23,8 @@
     "name": "Impact Hub Dhaka",
     "type": "Coworking space and innovation hub",
     "city": "Dhaka",
-    "locations": "Mirpur (9th Floor, Grameen Telecom Bhaban, Zoo Road) and Banani.",
-    "priceRange": "Coworking membership price not publicly stated. Private offices for one to six people are listed at BDT 52,000–115,000 per month, VAT included.",
+    "locations": "Mirpur (9th Floor, Grameen Telecom Bhaban, Zoo Road) and Banani (7th Floor, Momen Bari Heights, Plot 157, Road 12).",
+    "priceRange": "BDT 2,000 per month for 8 hours, BDT 8,000 for 50 hours, BDT 14,000 for 100 hours, or BDT 17,500 for unlimited office hours.",
     "facilities": [
       "Coworking space",
       "Private offices",
@@ -32,11 +32,11 @@
       "Entrepreneurship programmes",
       "Consultancy"
     ],
-    "hours": "Not publicly stated",
-    "applicationPath": "Book a free tour or submit the Become an Impact Maker form for coworking or office membership.",
+    "hours": "9:00 AM–6:00 PM",
+    "applicationPath": "Book a membership, free tour or team call through the co-working page.",
     "website": "https://dhaka.impacthub.net/",
     "sourceUrl": "https://dhaka.impacthub.net/co-working",
-    "lastVerified": "2026-08-19",
+    "lastVerified": "2026-08-25",
     "notes": "A coworking and innovation hub for entrepreneurs, freelancers, professionals and impact-focused teams. Alongside desks and private offices, members can access community events, entrepreneurship programmes, consultancy and connections across the wider Impact Hub network."
   },
   {
@@ -58,5 +58,28 @@
     "sourceUrl": "https://hubdhaka.com/take-the-test.html",
     "lastVerified": "2026-08-19",
     "notes": "A community-oriented Mirpur coworking space for freelancers, entrepreneurs and small teams. Membership includes workspace, backup internet and power, printing, lockers and event facilities without a long-term agreement; admission is application-based."
+  },
+  {
+    "name": "WorkStation 101",
+    "type": "Coworking space",
+    "city": "Dhaka",
+    "locations": "Uttara Tower, Level 4, 1 Jashimuddin Avenue, Sector 3, Uttara.",
+    "priceRange": "Hot desk BDT 100 per hour, BDT 700 per day or BDT 8,000 per month; private offices start from BDT 40,000 per month. Hot-desk prices exclude 15% VAT.",
+    "facilities": [
+      "Hot desks",
+      "Dedicated desks",
+      "Private offices",
+      "Meeting and conference rooms",
+      "Event space",
+      "High-speed Wi-Fi",
+      "Generator backup",
+      "Printing and lockers"
+    ],
+    "hours": "Saturday–Thursday, 9:00 AM–8:00 PM for hot desks and premium desks",
+    "applicationPath": "Book a desk or room through the co-working page, or contact WorkStation 101 for a private office.",
+    "website": "https://workstation101.com/",
+    "sourceUrl": "https://workstation101.com/co-working-space/",
+    "lastVerified": "2026-08-25",
+    "notes": "An Uttara coworking space for individual professionals and teams, with hourly, daily and monthly desks, private offices, meeting rooms, event space and virtual-office services."
   }
 ]

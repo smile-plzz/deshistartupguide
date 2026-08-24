@@ -42,20 +42,6 @@
     "notes": "An e-commerce delivery platform with COD reconciliation, non-delivery management, label printing, tracking and automated customer messages. The Standard plan is self-service; Express adds multiple pickup addresses, API access, setup assistance and optional dedicated account management."
   },
   {
-    "name": "Steadfast Courier",
-    "type": "E-commerce courier",
-    "coverage": "All 64 districts.",
-    "codSupport": "Yes — 1% cash-handling and risk-management charge after delivery charges are deducted.",
-    "pricing": "Up to 1 kg: BDT 70 inside Dhaka, BDT 100 in Dhaka suburbs and BDT 130 outside Dhaka. The calculator notes a BDT 80 minimum for pick-and-drop service; VAT and tax are excluded.",
-    "returnHandling": "No separate charge for returned parcels; delivery charges still apply to every parcel handed over, including cancelled shipments.",
-    "api": "Not publicly stated",
-    "applicationPath": "Sign up as a merchant on steadfast.com.bd.",
-    "website": "https://steadfast.com.bd/",
-    "sourceUrl": "https://www.steadfast.com.bd/terms-and-condition",
-    "lastVerified": "2026-08-19",
-    "notes": "A nationwide merchant courier providing pickup, home or hub delivery, COD collection, returns, warehousing, packaging and shipment tracking. Published 1 kg reference rates are available, and returned parcels do not incur a separate return fee, although the delivery charge still applies."
-  },
-  {
     "name": "REDX",
     "type": "E-commerce courier",
     "coverage": "All 64 districts, including 490+ upazilas.",
