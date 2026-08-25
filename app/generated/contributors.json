@@ -1,19 +1,19 @@
 {
   "schemaVersion": 3,
   "repository": "Deshi-Startup/deshistartup",
-  "refreshedAt": "2026-08-24T04:53:36.976Z",
+  "refreshedAt": "2026-08-25T15:27:09.386Z",
   "totals": {
     "contributors": 4,
-    "acceptedEvents": 13,
+    "acceptedEvents": 14,
     "pagesImproved": 37,
     "roleCategories": {
       "author": 11,
-      "editor": 1,
+      "editor": 2,
       "translator": 0,
       "researcher": 0,
       "operational-insight": 0,
       "reviewer": 0,
-      "product": 1
+      "product": 2
     }
   },
   "unattributedCount": 0,
@@ -645,6 +645,34 @@
           "review": null
         }
       ]
+    },
+    {
+      "id": "github-pr-92",
+      "acceptedAt": "2026-08-25",
+      "sourceType": "github-pr",
+      "attribution": null,
+      "locales": [
+        "bn",
+        "en"
+      ],
+      "evidenceUrl": "https://github.com/Deshi-Startup/deshistartup/pull/92",
+      "summary": {
+        "bn": "ল্যান্ডিং পেজের লেখা ও সাইডবার নেভিগেশন গুছিয়ে দেওয়া",
+        "en": "Improved the landing page copy and sidebar navigation"
+      },
+      "targets": [],
+      "credits": [
+        {
+          "mode": "person",
+          "profileId": "muhaiminul-islam-khan",
+          "organizationId": null,
+          "roles": [
+            "editor",
+            "product"
+          ],
+          "review": null
+        }
+      ]
     }
   ],
   "rankedProfiles": [
@@ -709,6 +737,34 @@
       "rank": 2
     },
     {
+      "id": "muhaiminul-islam-khan",
+      "slug": "muhaiminul-islam-khan",
+      "displayName": "Muhaiminul Islam Khan",
+      "headline": null,
+      "organizationId": null,
+      "githubLogin": "muhaiminulfahim",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/muhaiminulfahim"
+        }
+      ],
+      "avatarUrl": "https://avatars.githubusercontent.com/u/123251415?v=4&s=160",
+      "acceptedEventCount": 2,
+      "lastAcceptedAt": "2026-08-25",
+      "contributorSince": "2026-08-10",
+      "roleCategories": {
+        "author": 0,
+        "editor": 2,
+        "translator": 0,
+        "researcher": 0,
+        "operational-insight": 0,
+        "reviewer": 0,
+        "product": 1
+      },
+      "rank": 3
+    },
+    {
       "id": "uttam-deb",
       "slug": "uttam-deb",
       "displayName": "Uttam Deb",
@@ -737,34 +793,6 @@
         "operational-insight": 0,
         "reviewer": 0,
         "product": 1
-      },
-      "rank": 3
-    },
-    {
-      "id": "muhaiminul-islam-khan",
-      "slug": "muhaiminul-islam-khan",
-      "displayName": "Muhaiminul Islam Khan",
-      "headline": null,
-      "organizationId": null,
-      "githubLogin": "muhaiminulfahim",
-      "links": [
-        {
-          "label": "GitHub",
-          "url": "https://github.com/muhaiminulfahim"
-        }
-      ],
-      "avatarUrl": "https://avatars.githubusercontent.com/u/123251415?v=4&s=160",
-      "acceptedEventCount": 1,
-      "lastAcceptedAt": "2026-08-10",
-      "contributorSince": "2026-08-10",
-      "roleCategories": {
-        "author": 0,
-        "editor": 1,
-        "translator": 0,
-        "researcher": 0,
-        "operational-insight": 0,
-        "reviewer": 0,
-        "product": 0
       },
       "rank": 4
     }
