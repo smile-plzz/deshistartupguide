@@ -798,6 +798,21 @@ test('keeps bots out and core maintainers separate and unranked', async () => {
   assert.equal(snapshot.coreProfiles[0].displayName, 'Shamir Islam')
 })
 
+test('credits accepted community work from a core-opened pull request', async () => {
+  const alice = profile('alice')
+  const snapshot = await buildContributorSnapshot({
+    policy: policy([alice]),
+    ledger: ledger([alice], [event(1, 'alice')]),
+    targetCatalog: targetCatalog('/guides/example'),
+    fetchImpl: githubMock([pull(1, 'shamirislam')])
+  })
+  assert.equal(snapshot.totals.acceptedEvents, 1)
+  assert.deepEqual(snapshot.rankedProfiles.map((item) => item.id), ['alice'])
+  assert.equal(snapshot.rankedProfiles[0].acceptedEventCount, 1)
+  assert.equal(snapshot.coreProfiles.length, 1)
+  assert.equal(snapshot.coreProfiles[0].displayName, 'Shamir Islam')
+})
+
 test('removes an opted-out core maintainer from the public core-team list', async () => {
   const basePolicy = policy([])
   basePolicy.optOuts.githubLogins = ['SHAMIRISLAM']
