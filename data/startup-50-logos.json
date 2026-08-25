@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-08-24",
+  "reviewedAt": "2026-08-25",
   "note": "Company marks used for editorial identification. Sources were reviewed before upload; the image bytes live in R2, not Git.",
   "entries": [
     {
@@ -27,8 +27,8 @@
       "slug": "airwork",
       "name": "Airwork",
       "src": "/media/startup-50/airwork.webp",
-      "source": "https://framerusercontent.com/images/o6V7tKarKZlzWVceSv05s8C9WW4.png?width=1800&height=600",
-      "sourceKind": "official-site logo image"
+      "source": "https://framerusercontent.com/images/fgjDgpjChrJQt0wUvMb3hLOvd9A.svg",
+      "sourceKind": "official-site header logo"
     },
     {
       "slug": "amarlab",

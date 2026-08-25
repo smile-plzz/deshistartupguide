@@ -97,5 +97,13 @@
     "bytes": 4318,
     "retiredAt": "2026-08-24T18:48:59.428Z",
     "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/airwork.webp",
+    "key": "startup-50/airwork.275fd931d2a1.webp",
+    "bytes": 3700,
+    "retiredAt": "2026-08-25T10:15:44.512Z",
+    "reason": "superseded",
+    "replacementKey": "startup-50/airwork.1f4d476f4565.webp"
   }
 ]

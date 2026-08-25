@@ -39,6 +39,10 @@ const reviewedOverrides = {
     url: 'https://cdn.prod.website-files.com/682b2e509c06fb31d9d240ce/682f6cead76dd449a7745a25_68106fb648460e8b171e0059_AS-Logo%20(1)%201.svg',
     kind: 'official-site header logo'
   },
+  airwork: {
+    url: 'https://framerusercontent.com/images/fgjDgpjChrJQt0wUvMb3hLOvd9A.svg',
+    kind: 'official-site header logo'
+  },
   amarlab: {
     url: 'https://amarlab.com/logo.png',
     kind: 'official-site logo'

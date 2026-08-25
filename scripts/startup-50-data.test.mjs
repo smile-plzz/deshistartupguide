@@ -193,6 +193,12 @@ test('every company has one reviewed logo in the R2 media registry', () => {
     assert.match(media[logo.src]?.key || '', /^startup-50\/.+\.[a-f0-9]{12}\.webp$/)
   }
 
+  assert.equal(
+    logoBySlug.get('airwork')?.source,
+    'https://framerusercontent.com/images/fgjDgpjChrJQt0wUvMb3hLOvd9A.svg'
+  )
+  assert.equal(logoBySlug.get('airwork')?.sourceKind, 'official-site header logo')
+
   const licensed = logos.entries.filter((entry) => entry.license)
   for (const logo of licensed) {
     assert.ok(logo.credit?.trim(), logo.name + ' licensed logo credit')
