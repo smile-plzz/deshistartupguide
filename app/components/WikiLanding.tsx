@@ -164,7 +164,7 @@ const en: TranslationStrings = {
   infoboxName: 'Deshi Startup',
   infoboxTagline: 'The free, open-source manual for building startups in Bangladesh',
   infobox: (written, stubs) => [
-    ['For', 'New and women founders, student founders, startup teams, diaspora founders'],
+    ['For', 'New founders, women founders, student founders, startup teams and diaspora founders'],
     ['Covers', 'Idea validation, registration, payments, sales, hiring, funding'],
     ['Language', 'Bangla and English'],
     ['Price', 'Completely free; open source'],
@@ -175,20 +175,20 @@ const en: TranslationStrings = {
     'Nobody starts from the same place. Some are at the idea stage, some already run a Facebook page, some are stuck on registration. Pick the card that matches your situation, or type your question in the search above.',
   stages: [
     ['I\'m completely new', 'See the whole journey first – what comes first, what can wait.', 'Start here', '/en/start-here'],
-    ['I have an idea', 'Before building, check people truly feel the problem and will pay.', 'Validate your idea', '/en/validation'],
+    ['I have an idea', 'Before building, check that people feel the problem strongly enough to pay for a solution.', 'Validate your idea', '/en/validation'],
     ['I want to launch', 'Trade license, company, TIN, VAT, bank – which paper when, step by step.', 'See the legal path', '/en/legal-roadmap'],
     ['I need customers', 'Facebook, Messenger, WhatsApp, referrals – real paths to your first 100 customers.', 'Start selling', '/en/customers']
   ],
   topicTitle: 'Browse by topic',
   topicSub: 'Jump into the guide for the job you\'re doing right now. Every section page lists all of its guides.',
   topics: [
-    ['Ideas & market', 'Finding problems · market research · data sources · competitors', '/en/ideas'],
+    ['Ideas & market research', 'Finding problems · market research · data sources · competitors', '/en/ideas'],
     ['Idea validation', 'Customer interviews · demand tests · MVPs', '/en/validation'],
     ['Legal, tax & registration', 'Trade license · company · RJSC · e-TIN · VAT/BIN', '/en/legal-roadmap'],
     ['Payments & operations', 'bKash/Nagad · gateways · cash on delivery · couriers · refunds', '/en/payments'],
     ['Customers & sales', 'Facebook commerce · Messenger/WhatsApp · B2B sales · first 100 customers', '/en/customers'],
     ['Team & founder life', 'Co-founders · first hires · family pressure · burnout', '/en/founder-life'],
-    ['Funding & scale', 'Grants · angels · VC · pitch decks · government support', '/en/funding'],
+    ['Funding & scaling', 'Grants · angels · VC · pitch decks · government support', '/en/funding'],
     ['Templates & tools', 'Checklists · scripts · calculators · trackers', '/en/tools'],
     ['Directory', 'Investors · accelerators · programs · ecosystem', '/en/directory'],
     ['All topics', 'Every topic hub on one page – registration to sector playbooks', '/en/guides']

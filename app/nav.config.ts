@@ -77,7 +77,7 @@ export const enNav: NavSection[] = [
   {
     label: 'Start Here',
     items: [
-      ['/en/start-here', 'Starter roadmap'],
+      ['/en/start-here', 'Start here'],
       ['/en/roadmap', 'Step-by-step roadmap'],
       ['/en/ecosystem', 'Bangladesh ecosystem']
     ]
@@ -89,11 +89,11 @@ export const enNav: NavSection[] = [
       ['/en/ideas', 'Ideas & market research'],
       ['/en/validation', 'Idea validation'],
       ['/en/registration', 'Business registration'],
-      ['/en/tax', 'Tax, VAT & bookkeeping'],
-      ['/en/payments', 'Payments'],
-      ['/en/customers', 'Finding customers'],
+      ['/en/tax', 'Tax, VAT & accounting'],
+      ['/en/payments', 'Payments & operations'],
+      ['/en/customers', 'Customers & sales'],
       ['/en/team', 'Team & hiring'],
-      ['/en/funding', 'Funding'],
+      ['/en/funding', 'Funding & scaling'],
       ['/en/founder-life', 'Founder life']
     ]
   },
@@ -113,7 +113,7 @@ export const enNav: NavSection[] = [
     ]
   },
   {
-    label: 'Take Part',
+    label: 'About & Community',
     items: [
       ['/en/about', 'About & editorial policy'],
       ['/en/contact', 'Contact us'],
