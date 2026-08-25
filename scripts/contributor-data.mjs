@@ -730,9 +730,9 @@ export async function buildContributorSnapshot({
   for (const pull of pulls) {
     if (!pull.merged_at) continue
     const identity = identityForPull(pull, indexes)
+    const event = eventByPull.get(Number(pull.number))
     if (identity.status === 'excluded') continue
     if (identity.status === 'unattributed') {
-      const event = eventByPull.get(Number(pull.number))
       if (event) {
         const acceptedAt = new Date(pull.merged_at).toISOString().slice(0, 10)
         if (event.acceptedAt !== acceptedAt) {
@@ -752,10 +752,16 @@ export async function buildContributorSnapshot({
     }
     if (identity.status === 'core') {
       if (!coreIdentities.has(identity.key)) coreIdentities.set(identity.key, identity)
+      if (event) {
+        const acceptedAt = new Date(pull.merged_at).toISOString().slice(0, 10)
+        if (event.acceptedAt !== acceptedAt) {
+          throw new Error(`Ledger date for PR #${pull.number} does not match its merge date`)
+        }
+        seenLedgerPulls.add(Number(pull.number))
+      }
       continue
     }
 
-    const event = eventByPull.get(Number(pull.number))
     if (!event) {
       missingLedgerPulls.push(Number(pull.number))
       continue

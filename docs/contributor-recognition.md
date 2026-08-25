@@ -31,6 +31,13 @@ display name. There are no points or weights. Core maintainers are shown separat
 ranked. Their public snapshot records identity and avatar details, not pull-request totals or
 last-merge dates, so ordinary maintainer activity does not trigger a contributor-data release.
 
+The account that opens a pull request is not necessarily its only contributor. When accepted work
+from a commit author or co-author survives into a merged pull request, record each credited person
+in the same ledger event. A core maintainer may open or reassemble that pull request without
+suppressing the community credit; a pull request containing only core-maintainer work remains
+unranked. Git commit metadata and a superseded pull request can support the attribution, while the
+authored ledger remains the source of truth for the accepted event boundary and roles.
+
 ## Identity, organizations, and privacy
 
 Credit can be `person`, `person+organization`, or `anonymous`. Organization credit describes the
@@ -130,7 +137,9 @@ not satisfy this minimum on their own.
 ## Recording accepted work
 
 1. Confirm that the work is accepted and that its evidence URL is public.
-2. Decide the event boundary and roles. Record the exact published target paths.
+2. Decide the event boundary and roles. Check the pull-request opener, commit authors, co-author
+   trailers, and any superseded pull request, then credit each person's accepted work that remains
+   in the merged result. Record the exact published target paths.
 3. Confirm the exact wording of any new public headline or organization detail, every public link,
    and the selected avatar with the contributor.
 4. Add or update the ledger entry. Put the current GitHub login on the profile; reserve identity
