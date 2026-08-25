@@ -1067,7 +1067,7 @@ test('public snapshot validation rejects a profile value that would be silently 
   )
 })
 
-test('the authored current ledger reconciles to four contributors and thirteen community events', async () => {
+test('the authored current ledger reconciles to four contributors and fourteen community events', async () => {
   const [currentLedger, currentPolicy, catalog] = await Promise.all([
     fs.readFile(path.join(root, 'data', 'contributor-ledger.json'), 'utf8').then(JSON.parse),
     fs.readFile(path.join(root, 'data', 'contributors-policy.json'), 'utf8').then(JSON.parse),
@@ -1090,7 +1090,8 @@ test('the authored current ledger reconciles to four contributors and thirteen c
       merged_at: '2026-08-10T21:59:38Z',
       body: inlineBody,
       user: { login: 'app/deshistartup', type: 'Bot', avatar_url: null }
-    })
+    }),
+    pull(92, 'shamirislam', { merged_at: '2026-08-25T15:23:42Z' })
   ]
   const shoumikMedia = {
     '/media/contributors/shoumik-shahriar.webp': {
@@ -1116,13 +1117,15 @@ test('the authored current ledger reconciles to four contributors and thirteen c
     })
   })
   assert.equal(snapshot.totals.contributors, 4)
-  assert.equal(snapshot.totals.acceptedEvents, 13)
+  assert.equal(snapshot.totals.acceptedEvents, 14)
   assert.equal(snapshot.totals.pagesImproved, 37)
   const muhaimin = snapshot.rankedProfiles.find((profile) => profile.id === 'muhaiminul-islam-khan')
   const niloy = snapshot.rankedProfiles.find((profile) => profile.id === 'niloy-biswas')
   const shoumik = snapshot.rankedProfiles.find((profile) => profile.id === 'shoumik-shahriar')
   const uttam = snapshot.rankedProfiles.find((profile) => profile.id === 'uttam-deb')
   assert.equal(muhaimin.avatarUrl, 'https://avatars.githubusercontent.com/u/57?v=4&s=160')
+  assert.equal(muhaimin.acceptedEventCount, 2)
+  assert.equal(muhaimin.rank, 3)
   assert.equal(niloy.headline, 'Data & AI Professional')
   assert.deepEqual(niloy.links, [
     { label: 'GitHub', url: 'https://github.com/niloy-biswas' },
@@ -1139,12 +1142,20 @@ test('the authored current ledger reconciles to four contributors and thirteen c
     { label: 'GitHub', url: 'https://github.com/uttamdeb' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/uttam-deb' }
   ])
-  assert.deepEqual(snapshot.coreProfiles, [{
-    displayName: 'Mohammad Sultan Khaja',
-    githubLogin: 'M9S4K',
-    profileUrl: 'https://github.com/M9S4K',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/79?v=4&s=160'
-  }])
+  assert.deepEqual(snapshot.coreProfiles, [
+    {
+      displayName: 'Mohammad Sultan Khaja',
+      githubLogin: 'M9S4K',
+      profileUrl: 'https://github.com/M9S4K',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/79?v=4&s=160'
+    },
+    {
+      displayName: 'Shamir Islam',
+      githubLogin: 'shamirislam',
+      profileUrl: 'https://github.com/shamirislam',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/92?v=4&s=160'
+    }
+  ])
   assert.deepEqual(snapshot.organizations, [{
     id: 'lightcastle-partners',
     name: 'LightCastle Partners',

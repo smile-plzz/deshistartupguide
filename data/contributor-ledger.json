@@ -428,6 +428,28 @@
           ]
         }
       ]
+    },
+    {
+      "id": "github-pr-92",
+      "acceptedAt": "2026-08-25",
+      "sourceType": "github-pr",
+      "sourceRef": 92,
+      "evidenceUrl": "https://github.com/Deshi-Startup/deshistartup/pull/92",
+      "summary": {
+        "bn": "ল্যান্ডিং পেজের লেখা ও সাইডবার নেভিগেশন গুছিয়ে দেওয়া",
+        "en": "Improved the landing page copy and sidebar navigation"
+      },
+      "targetPaths": [],
+      "credits": [
+        {
+          "mode": "person",
+          "profileId": "muhaiminul-islam-khan",
+          "roles": [
+            "editor",
+            "product"
+          ]
+        }
+      ]
     }
   ]
 }
