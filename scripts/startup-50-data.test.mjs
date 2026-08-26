@@ -50,6 +50,11 @@ test('every company has useful bilingual details and a recent public update', ()
     for (const source of entry.background.sources) {
       assert.match(source, /^https:\/\//, entry.name + ' background source')
     }
+    for (const detail of [entry.activity, entry.financing]) {
+      for (const source of detail.sources || []) {
+        assert.match(source, /^https:\/\//, entry.name + ' detail source')
+      }
+    }
 
     assert.doesNotMatch(
       entry.background.en,
@@ -113,11 +118,12 @@ test('official websites are labelled with their root domains', () => {
   }
 })
 
-test('the English metadata positions the edition as top startups in Bangladesh', () => {
-  assert.match(englishPageSource, /title: "The Deshi Startup 50: Top startups in Bangladesh"/)
-  assert.match(englishPageSource, /description: ".*top startups in Bangladesh/i)
-  assert.match(componentSource, /'Top 50 Bangladeshi startups to watch in 2026\.'/)
-  assert.doesNotMatch(componentSource, /'50 Bangladeshi startups to watch in 2026\.'/)
+test('the English metadata positions the edition as an unranked editorial watchlist', () => {
+  assert.match(englishPageSource, /title: "The Deshi Startup 50: Bangladeshi startups to watch"/)
+  assert.match(englishPageSource, /description: ".*unranked editorial watchlist/i)
+  assert.match(componentSource, /'50 Bangladeshi startups to watch in 2026\.'/)
+  assert.match(componentSource, /'An unranked editorial watchlist/)
+  assert.doesNotMatch(componentSource, /Top 50 Bangladeshi startups|Bangladesh's leading startups|দেশের শীর্ষ ৫০টি/)
 })
 
 test('search, empty results and accessible row controls match the interface copy', () => {
@@ -146,14 +152,27 @@ test('the public selection criteria are specific about evidence and funding', ()
   assert.match(componentSource, /A live product or platform with real customers or active deployments/)
   assert.match(componentSource, /Verifiable activity within the past 12 months/)
   assert.match(componentSource, /Clear evidence of traction/)
-  assert.match(componentSource, /At least two reliable public sources, including one independent of the company/)
-  assert.match(componentSource, /Funding matters, but it is not the only factor/)
+  assert.match(componentSource, /one editorial or institutional source with no financial stake in the company/)
+  assert.match(componentSource, /Company and investor claims are attributed/)
+  assert.match(componentSource, /distinguish equity, grants and financing facilities/)
+  assert.match(componentSource, /unranked editorial watchlist, not a scorecard/)
   assert.match(componentSource, /Meeting these requirements does not guarantee a place on the list/)
   assert.doesNotMatch(componentSource, /—/)
 })
 
-test('every selected company has multiple sources including an independent publisher', () => {
+test('every selected company has multiple sources including a financially independent publisher', () => {
   const hostname = (value) => new URL(value).hostname.replace(/^www\./, '')
+  const interestedOrThinHosts = new Set([
+    'acceleratingasia.com',
+    'crunchbase.com',
+    'exitstack.co',
+    'finsmes.com',
+    'gobi.vc',
+    'linkedin.com',
+    'pitchbook.com',
+    'startupbangladesh.vc',
+    'tracxn.com'
+  ])
 
   for (const entry of data.entries) {
     const officialHostname = hostname(entry.website)
@@ -161,18 +180,52 @@ test('every selected company has multiple sources including an independent publi
       entry.website,
       ...entry.background.sources,
       entry.activity.url,
-      entry.financing.url
+      ...(entry.activity.sources || []),
+      entry.financing.url,
+      ...(entry.financing.sources || [])
     ].filter(Boolean)
 
     assert.ok(new Set(sources).size >= 2, entry.name + ' needs at least two public sources')
     assert.ok(
       sources.some((source) => {
         const sourceHostname = hostname(source)
-        return sourceHostname !== officialHostname && sourceHostname !== 'linkedin.com'
+        return sourceHostname !== officialHostname && !interestedOrThinHosts.has(sourceHostname)
       }),
-      entry.name + ' needs a source independent of the company'
+      entry.name + ' needs an editorial or institutional source without a financial stake'
     )
   }
+})
+
+test('the audited founder and funding corrections cannot regress', () => {
+  const bySlug = new Map(data.entries.map((entry) => [entry.slug, entry]))
+
+  assert.match(bySlug.get('ezycourse').background.en, /founder Md Sadek Hossain/)
+  assert.doesNotMatch(bySlug.get('ezycourse').background.en, /Zakir Hossain/)
+  assert.match(bySlug.get('aunkur').financing.en, /\$342,000/)
+  assert.match(bySlug.get('barikoi').financing.en, /BDT 2 crore/)
+  assert.match(bySlug.get('ostad').financing.en, /\$277,000/)
+  assert.match(bySlug.get('priyoshop').financing.en, /\$5 million pre-Series A/)
+  assert.match(bySlug.get('sharetrip').financing.en, /BDT 5 crore/)
+  assert.match(bySlug.get('tallykhata').financing.en, /\$7 million/)
+  assert.match(bySlug.get('wegro').financing.en, /\$100,000 in non-repayable matching funding/)
+
+  assert.match(bySlug.get('agroshift').financing.en, /\$1.8 million pre-seed/)
+  assert.match(bySlug.get('arogga').financing.en, /\$5.5 million seed/)
+  assert.match(bySlug.get('loop-freight').financing.en, /\$600,000 in initial funding/)
+  assert.match(bySlug.get('medeasy').financing.en, /about \$1.3 million/)
+  assert.match(bySlug.get('nuport').financing.en, /\$125,000 from ODX Flexport/)
+  assert.match(bySlug.get('hishabee').financing.en, /2022 Accelerating Asia investment/)
+  assert.match(bySlug.get('shikho').financing.en, /total funding past \$8 million/)
+  assert.match(bySlug.get('shopup-silq').financing.en, /both equity investment and a financing facility/)
+})
+
+test('every evidence category renders explicit source links', () => {
+  assert.match(componentSource, /function SourceLinks/)
+  assert.match(componentSource, /<SourceLinks urls=\{sourceUrls\(entry\.background\)\}/)
+  assert.match(componentSource, /<SourceLinks urls=\{sourceUrls\(entry\.activity\)\}/)
+  assert.match(componentSource, /<SourceLinks urls=\{sourceUrls\(entry\.financing\)\}/)
+  assert.match(componentSource, /Recent public activity/)
+  assert.doesNotMatch(componentSource, /Latest update|সর্বশেষ খবর/)
 })
 
 test('every company has one reviewed logo in the R2 media registry', () => {

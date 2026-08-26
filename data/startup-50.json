@@ -1,7 +1,7 @@
 {
   "edition": 2026,
-  "lastResearched": "2026-08-24",
-  "activityWindowStart": "2025-08-24",
+  "lastResearched": "2026-08-26",
+  "activityWindowStart": "2025-08-26",
   "sectorGroups": {
     "education": {
       "en": "Education",
@@ -168,9 +168,13 @@
         "url": "https://www.linkedin.com/posts/agroshift_city-bank-partners-with-milk-vita-agroshift-activity-7475163026061545473-5vN_"
       },
       "financing": {
-        "en": "ADB Ventures follow-on investment was announced in February 2024. The amount was not disclosed.",
-        "bn": "২০২৪ সালের ফেব্রুয়ারিতে ADB Ventures-এর পরবর্তী বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
-        "url": "https://ventures.adb.org/investor-confidence-grows-as-agroshift-secures-new-investment-from-adb-ventures/"
+        "en": "$1.8 million pre-seed funding was disclosed in October 2022. ADB Ventures announced a follow-on investment in February 2024 without disclosing its amount.",
+        "bn": "২০২২ সালের অক্টোবরে ১৮ লাখ ডলারের প্রি-সিড ফান্ডিং প্রকাশ করা হয়। ২০২৪ সালের ফেব্রুয়ারিতে ADB Ventures আরও বিনিয়োগের ঘোষণা দিলেও পরিমাণ জানায়নি।",
+        "url": "https://ventures.adb.org/investor-confidence-grows-as-agroshift-secures-new-investment-from-adb-ventures/",
+        "sources": [
+          "https://www.tbsnews.net/economy/corporates/agroshift-raises-18m-pre-seed-funding-519738",
+          "https://ventures.adb.org/investor-confidence-grows-as-agroshift-secures-new-investment-from-adb-ventures/"
+        ]
       }
     },
     {
@@ -323,9 +327,13 @@
         "url": "https://www.tbsnews.net/economy/corporates/novo-nordisk-arogga-sign-mou-expand-digital-diabetes-care-1315686"
       },
       "financing": {
-        "en": "Verge HealthTech Fund investment was announced in March 2026. The amount was not disclosed.",
-        "bn": "২০২৬ সালের মার্চে Verge HealthTech Fund-এর বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
-        "url": "https://www.linkedin.com/posts/arogga_excited-to-have-received-investment-from-activity-7439967473984135169-KLwQ"
+        "en": "$5.5 million seed funding was disclosed in October 2023. Verge HealthTech Fund announced a follow-on investment in March 2026 without disclosing its amount.",
+        "bn": "২০২৩ সালের অক্টোবরে ৫৫ লাখ ডলারের সিড ফান্ডিং প্রকাশ করা হয়। ২০২৬ সালের মার্চে Verge HealthTech Fund আরও বিনিয়োগের ঘোষণা দিলেও পরিমাণ জানায়নি।",
+        "url": "https://www.linkedin.com/posts/arogga_excited-to-have-received-investment-from-activity-7439967473984135169-KLwQ",
+        "sources": [
+          "https://futurestartup.com/2023/10/25/arogga-raises-5-5mn-seed-round/",
+          "https://www.linkedin.com/posts/arogga_excited-to-have-received-investment-from-activity-7439967473984135169-KLwQ"
+        ]
       }
     },
     {
@@ -362,8 +370,9 @@
         "url": "https://www.linkedin.com/posts/aunkur_a-new-milestone-in-building-smarter-data-driven-activity-7475434244023001088-V076"
       },
       "financing": {
-        "en": "No public financing amount found in the reviewed sources.",
-        "bn": "দেখা সোর্সগুলোতে ফান্ডিংয়ের প্রকাশ্য পরিমাণ পাওয়া যায়নি।"
+        "en": "Aunkur's predecessor iPage reported $342,000 in total funding by November 2022: a $102,000 angel round in 2019 and $239,000 in pre-seed and friends-and-family bridge funding in 2020–21.",
+        "bn": "অঙ্কুরের আগের প্রতিষ্ঠান iPage ২০২২ সালের নভেম্বর পর্যন্ত মোট ৩ লাখ ৪২ হাজার ডলার ফান্ডিংয়ের কথা জানায়। এর মধ্যে ২০১৯ সালে ১ লাখ ২ হাজার ডলারের অ্যাঞ্জেল রাউন্ড এবং ২০২০–২১ সালে ২ লাখ ৩৯ হাজার ডলারের প্রি-সিড ও বন্ধু-পরিবারের ব্রিজ ফান্ডিং ছিল।",
+        "url": "https://lightcastlepartners.com/wp-content/uploads/2023/08/BB-dealbook-Final-Version-update-Nov-2022.pdf"
       }
     },
     {
@@ -399,9 +408,13 @@
         "url": "https://www.linkedin.com/posts/barikoi_for-the-first-time-in-bangladeshs-history-activity-7490357338361458689-rkl0"
       },
       "financing": {
-        "en": "IDLC Venture Capital investment was announced in May 2024. The amount was not disclosed.",
-        "bn": "২০২৪ সালের মে মাসে IDLC Venture Capital-এর বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
-        "url": "https://www.dhakatribune.com/business/347008/idlc-vc-invests-in-barikoi"
+        "en": "IDLC Venture Capital announced a BDT 2 crore seed investment in May 2024.",
+        "bn": "২০২৪ সালের মে মাসে IDLC Venture Capital বারিকইয়ে ২ কোটি টাকার সিড বিনিয়োগের ঘোষণা দেয়।",
+        "url": "https://futurestartup.com/2024/05/18/idlc-venture-capital-backs-mapping-solutions-startup-barikoi/",
+        "sources": [
+          "https://futurestartup.com/2024/05/18/idlc-venture-capital-backs-mapping-solutions-startup-barikoi/",
+          "https://www.exitstack.co/posts/barikoi-raises-us-182k-in-seed-from-idlc"
+        ]
       }
     },
     {
@@ -517,7 +530,11 @@
       "financing": {
         "en": "$1.6 million funding round disclosed in January 2025.",
         "bn": "২০২৫ সালের জানুয়ারিতে ১৬ লাখ ডলারের ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.exitstack.co/posts/cassetex-secures-us-1-6mn-to-expand-battery-as-a-service-in-bangladesh-and-beyond"
+        "url": "https://www.cassetex.com/cassetex-secures-16m-investment/",
+        "sources": [
+          "https://www.cassetex.com/cassetex-secures-16m-investment/",
+          "https://www.exitstack.co/posts/cassetex-secures-us-1-6mn-to-expand-battery-as-a-service-in-bangladesh-and-beyond"
+        ]
       }
     },
     {
@@ -582,7 +599,8 @@
         "bn": "লজিস্টিকস খাতে কাজের অভিজ্ঞতা থাকা ফাউন্ডাররা ২০২২ সালে DIGIBOX চালু করেন। এর আইওটি (IoT) পার্সেল লকার ব্যবহার করে ই-কমার্স কোম্পানি, কুরিয়ার, ব্যাংক আর খুচরা বিক্রেতারা নিজেদের আলাদা লকার নেটওয়ার্ক না বসিয়েই নিরাপদ পিকআপ ও ড্রপ-অফের সুবিধা দিতে পারে।",
         "sources": [
           "https://digibox.com.bd/founders/",
-          "https://www.acceleratingasia.com/latest-news/acceleratingasia-c13-digibox"
+          "https://www.acceleratingasia.com/latest-news/acceleratingasia-c13-digibox",
+          "https://futurestartup.com/2026/06/09/accelerating-asia-backs-5-startups-in-cohort-13-including-two-bangladeshi-companies/"
         ]
       },
       "activity": {
@@ -770,8 +788,8 @@
         "bn": "ডিরেক্ট-রেসপন্স ডিস্ট্রিবিউশন ধরে সিলেট থেকে গ্লোবাল পণ্য বুটস্ট্র্যাপ করা।"
       },
       "background": {
-        "en": "EzyCourse began when founder Zakir Hossain wanted a simpler way to sell courses to his YouTube audience. He studied the market for a year, started development in 2020 and funded the product with freelance work.",
-        "bn": "ফাউন্ডার জাকির হোসেন যখন নিজের ইউটিউব দর্শকদের কাছে সহজ উপায়ে কোর্স বিক্রির পথ খুঁজছিলেন, তখন থেকেই ইজিকোর্সের শুরু। তিনি এক বছর ধরে বাজার নিয়ে পড়াশোনা করেন, ২০২০ সালে ডেভেলপমেন্ট শুরু করেন এবং ফ্রিল্যান্সিংয়ের টাকায় পণ্যটির ফান্ডিং করেন।",
+        "en": "EzyCourse began when founder Md Sadek Hossain wanted a simpler way to sell courses to his YouTube audience. He studied the market for a year, started development in 2020 and funded the product with freelance work.",
+        "bn": "ফাউন্ডার সাদেক হোসেন যখন নিজের ইউটিউব দর্শকদের কাছে সহজ উপায়ে কোর্স বিক্রির পথ খুঁজছিলেন, তখন থেকেই ইজিকোর্সের শুরু। তিনি এক বছর ধরে বাজার নিয়ে পড়াশোনা করেন, ২০২০ সালে ডেভেলপমেন্ট শুরু করেন এবং ফ্রিল্যান্সিংয়ের টাকায় পণ্যটির ফান্ডিং করেন।",
         "sources": [
           "https://thefinancialexpress.com.bd/youth-and-entrepreneurship/bangladeshi-founder-bootstrapped-his-way-to-global-success"
         ]
@@ -899,9 +917,13 @@
         "url": "https://www.hishabee.io/blog/best-pos-system-for-small-business-hishabee"
       },
       "financing": {
-        "en": "$500,000 in disclosed funding, according to ExitStack.",
-        "bn": "ExitStack-এর হিসাবে প্রকাশিত ফান্ডিং ৫ লাখ ডলার।",
-        "url": "https://www.exitstack.co/database/hishabee"
+        "en": "A 2022 Accelerating Asia investment was announced without an amount. In 2024, Biniyog Briddhi selected Hishabee for up to $100,000 in matching funding. Reliable public sources do not support a reconciled lifetime total.",
+        "bn": "২০২২ সালে Accelerating Asia-এর বিনিয়োগ ঘোষণা হলেও পরিমাণ জানানো হয়নি। ২০২৪ সালে Biniyog Briddhi সর্বোচ্চ ১ লাখ ডলারের ম্যাচিং ফান্ডিংয়ের জন্য Hishabee-কে বেছে নেয়। নির্ভরযোগ্য প্রকাশ্য সোর্স থেকে মোট ফান্ডিংয়ের অঙ্ক মেলানো যায়নি।",
+        "url": "https://lightcastlepartners.com/news/b-briddhi-catalytic-funding/",
+        "sources": [
+          "https://www.dhakatribune.com/business/279440/accelerating-asia-invests-in-bangladeshi-startup",
+          "https://lightcastlepartners.com/news/b-briddhi-catalytic-funding/"
+        ]
       }
     },
     {
@@ -1013,9 +1035,13 @@
         "url": "https://www.linkedin.com/posts/startup-bangladesh-limited_ictdivision-startupbangladesh-ictdivision-activity-7469293324126994433-fI4Z"
       },
       "financing": {
-        "en": "Startup Bangladesh investment is disclosed. The amount is not publicly stated.",
-        "bn": "Startup Bangladesh-এর বিনিয়োগের কথা প্রকাশ করা হয়েছে। পরিমাণ প্রকাশ্যে বলা নেই।",
-        "url": "https://www.startupbangladesh.vc/portfolio/loop/"
+        "en": "$600,000 in initial funding from Anchorless Bangladesh was disclosed in 2020. A later Startup Bangladesh investment is public, but its amount is not.",
+        "bn": "২০২০ সালে Anchorless Bangladesh-এর কাছ থেকে ৬ লাখ ডলারের প্রাথমিক ফান্ডিং পাওয়ার কথা প্রকাশ করা হয়। পরে Startup Bangladesh বিনিয়োগ করলেও সেই পরিমাণ জানানো হয়নি।",
+        "url": "https://www.tbsnews.net/feature/panorama/loop-freight-modernising-bangladeshs-goods-transport-industry-137800",
+        "sources": [
+          "https://www.tbsnews.net/feature/panorama/loop-freight-modernising-bangladeshs-goods-transport-industry-137800",
+          "https://www.startupbangladesh.vc/portfolio/loop/"
+        ]
       }
     },
     {
@@ -1053,7 +1079,11 @@
       "financing": {
         "en": "$2 million seed funding disclosed in May 2025.",
         "bn": "২০২৫ সালের মে মাসে ২০ লাখ ডলারের সিড ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.finsmes.com/2025/05/markopolo-ai-raises-usd-2m-in-seed-funding.html"
+        "url": "https://www.finsmes.com/2025/05/markopolo-ai-raises-usd-2m-in-seed-funding.html",
+        "sources": [
+          "https://www.finsmes.com/2025/05/markopolo-ai-raises-usd-2m-in-seed-funding.html",
+          "https://markopolo.ai/newsroom/t2-partnership-saudi-arabia/"
+        ]
       }
     },
     {
@@ -1084,14 +1114,18 @@
       },
       "activity": {
         "date": "2026-01-13",
-        "en": "Announced a new consumer-wellbeing partnership.",
-        "bn": "ভোক্তা কল্যাণসেবা নিয়ে নতুন অংশীদারত্ব ঘোষণা করেছে।",
+        "en": "Signed an exclusive MoU with The Beauty Science, parent company of skincare brands Innsaei and skinO, for its personal-care business.",
+        "bn": "পারসোনাল কেয়ার ব্যবসার জন্য Innsaei ও skinO স্কিনকেয়ার ব্র্যান্ডের মূল প্রতিষ্ঠান The Beauty Science-এর সঙ্গে একচেটিয়া সমঝোতা করেছে।",
         "url": "https://www.linkedin.com/posts/arefinzaman_pleased-to-share-that-medeasy-has-signed-activity-7416787628332642305-o7ZO"
       },
       "financing": {
-        "en": "Up to $250,000 in results-based financing announced in November 2024.",
-        "bn": "২০২৪ সালের নভেম্বরে সর্বোচ্চ ২ লাখ ৫০ হাজার ডলারের ফলাফলভিত্তিক অর্থায়ন ঘোষণা করা হয়।",
-        "url": "https://en.prothomalo.com/corporate/bbzm5lywut"
+        "en": "A February 2025 Biniyog Briddhi dealbook reported about $1.3 million raised across pre-seed, seed and seed-extension rounds. Up to $250,000 in separate results-based financing was announced in November 2024.",
+        "bn": "Biniyog Briddhi-এর ২০২৫ সালের ফেব্রুয়ারির ডিলবুক অনুযায়ী প্রি-সিড, সিড ও সিড-এক্সটেনশন রাউন্ড মিলিয়ে প্রায় ১৩ লাখ ডলার তোলা হয়েছে। এর বাইরে ২০২৪ সালের নভেম্বরে সর্বোচ্চ ২ লাখ ৫০ হাজার ডলারের ফলাফলভিত্তিক অর্থায়ন ঘোষণা করা হয়।",
+        "url": "https://www.sie-b.org/wp-content/uploads/2025/02/Investor-Dealbook_Feb-2025-low.pdf",
+        "sources": [
+          "https://www.sie-b.org/wp-content/uploads/2025/02/Investor-Dealbook_Feb-2025-low.pdf",
+          "https://en.prothomalo.com/corporate/bbzm5lywut"
+        ]
       }
     },
     {
@@ -1204,9 +1238,9 @@
         "url": "https://www.linkedin.com/posts/nuport_nuport-ecommerceautomation-achievement-activity-7414275059512442880-VYBB"
       },
       "financing": {
-        "en": "$652,000 in disclosed funding, according to ExitStack.",
-        "bn": "ExitStack-এর হিসাবে প্রকাশিত ফান্ডিং ৬ লাখ ৫২ হাজার ডলার।",
-        "url": "https://www.exitstack.co/database/nuport"
+        "en": "$125,000 from ODX Flexport was disclosed in December 2021. Reliable public sources do not support a reconciled lifetime total.",
+        "bn": "২০২১ সালের ডিসেম্বরে ODX Flexport-এর কাছ থেকে ১ লাখ ২৫ হাজার ডলার পাওয়ার কথা প্রকাশ করা হয়। নির্ভরযোগ্য প্রকাশ্য সোর্স থেকে মোট ফান্ডিংয়ের অঙ্ক মেলানো যায়নি।",
+        "url": "https://futurestartup.com/2021/12/10/nuport-receives-funding-from-us-based-freight-forwarder-flexport-supply-chain-automation-and-nuports-ambition/"
       }
     },
     {
@@ -1243,8 +1277,13 @@
         "url": "https://www.linkedin.com/posts/waheed-labib-45b1b625a_bkash-ostad-have-exclusively-launched-the-activity-7462028721814929408-ebjz"
       },
       "financing": {
-        "en": "No reliable public financing amount found in the reviewed sources.",
-        "bn": "দেখা সোর্সগুলোতে নির্ভরযোগ্য প্রকাশ্য ফান্ডিং পরিমাণ পাওয়া যায়নি।"
+        "en": "Public reporting records $277,000 across four rounds through December 2022. Ostad later received a BDT 1 crore Shark Tank Bangladesh investment in May 2024.",
+        "bn": "প্রকাশ্য খবর অনুযায়ী ২০২২ সালের ডিসেম্বর পর্যন্ত চারটি রাউন্ডে মোট ২ লাখ ৭৭ হাজার ডলার তোলা হয়। পরে ২০২৪ সালের মে মাসে Shark Tank Bangladesh থেকে ১ কোটি টাকার বিনিয়োগ পায়।",
+        "url": "https://publisher.tbsnews.net/bangladesh/ostad-secures-tk1cr-investment-shark-tank-bangladesh-852076",
+        "sources": [
+          "https://en.prothomalo.com/youth/education/wlc3y5n7xq",
+          "https://publisher.tbsnews.net/bangladesh/ostad-secures-tk1cr-investment-shark-tank-bangladesh-852076"
+        ]
       }
     },
     {
@@ -1321,7 +1360,11 @@
       "financing": {
         "en": "$12 million pre-Series B funding disclosed in September 2024.",
         "bn": "২০২৪ সালের সেপ্টেম্বরে ১ কোটি ২০ লাখ ডলারের প্রি-সিরিজ B ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://pathao.com/blog/press/pathao-raises-12m-to-drive-fintech-expansion/"
+        "url": "https://pathao.com/blog/press/pathao-raises-12m-to-drive-fintech-expansion/",
+        "sources": [
+          "https://pathao.com/blog/press/pathao-raises-12m-to-drive-fintech-expansion/",
+          "https://www.thedailystar.net/business/news/pathao-raises-12-million-foreign-funds-3702771"
+        ]
       }
     },
     {
@@ -1357,9 +1400,13 @@
         "url": "https://www.tbsnews.net/economy/corporates/priyoshop-expands-retail-network-250000-neighbourhood-shops-1498476"
       },
       "financing": {
-        "en": "$5 million Series A funding disclosed in February 2024.",
-        "bn": "২০২৪ সালের ফেব্রুয়ারিতে ৫০ লাখ ডলারের সিরিজ A ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://technode.global/2024/02/20/bangladeshs-priyoshop-raises-5m-in-series-a-funding-led-by-century-oak-ventures/"
+        "en": "$5 million pre-Series A funding was disclosed in February 2024.",
+        "bn": "২০২৪ সালের ফেব্রুয়ারিতে ৫০ লাখ ডলারের প্রি-সিরিজ A ফান্ডিং প্রকাশ করা হয়।",
+        "url": "https://priyoshopretail.com/priyoshop-raised-5-million-in-pre-series-funding-to-empower-msmes-in-bangladesh/",
+        "sources": [
+          "https://priyoshopretail.com/priyoshop-raised-5-million-in-pre-series-funding-to-empower-msmes-in-bangladesh/",
+          "https://www.tbsnews.net/economy/corporates/priyoshop-raises-5-million-digitalize-distribution-infrastructure-msmes"
+        ]
       }
     },
     {
@@ -1428,9 +1475,9 @@
         ]
       },
       "activity": {
-        "date": "2026-05-14",
-        "en": "Published new expert-led mental-health resources in May 2026.",
-        "bn": "২০২৬ সালের মে মাসে বিশেষজ্ঞদের লেখা নতুন মানসিক স্বাস্থ্য রিসোর্স প্রকাশ করেছে।",
+        "date": "2026-08-15",
+        "en": "Published new expert-led resources about marriage and relationship counselling.",
+        "bn": "বিয়ে ও সম্পর্কের কাউন্সেলিং নিয়ে বিশেষজ্ঞের লেখা নতুন রিসোর্স প্রকাশ করেছে।",
         "url": "https://relaxy.com.bd/blogs"
       },
       "financing": {
@@ -1511,9 +1558,13 @@
         "url": "https://news.sharetrip.net/press-releases/sharetrip-introduces-passport-scan-for-faster-and-easier-flight-bookings/"
       },
       "financing": {
-        "en": "Startup Bangladesh investment is disclosed. The latest amount is not publicly stated.",
-        "bn": "Startup Bangladesh-এর বিনিয়োগের কথা প্রকাশ করা হয়েছে। সর্বশেষ পরিমাণ প্রকাশ্যে বলা নেই।",
-        "url": "https://www.bangladeshmonitor.com.bd/en/sharetrip-countrys-first-travel-tech-company-to-evolve-into-lifestyle-brand"
+        "en": "Startup Bangladesh announced a BDT 5 crore investment in August 2022.",
+        "bn": "২০২২ সালের আগস্টে Startup Bangladesh ৫ কোটি টাকার বিনিয়োগের ঘোষণা দেয়।",
+        "url": "https://www.thedailystar.net/tech-startup/news/sharetrip-secures-bdt-5-crore-investment-startup-bangladesh-3090576",
+        "sources": [
+          "https://www.thedailystar.net/tech-startup/news/sharetrip-secures-bdt-5-crore-investment-startup-bangladesh-3090576",
+          "https://www.bangladeshmonitor.com.bd/en/sharetrip-countrys-first-travel-tech-company-to-evolve-into-lifestyle-brand"
+        ]
       }
     },
     {
@@ -1549,9 +1600,13 @@
         "url": "https://www.tbsnews.net/economy/corporates/grameenphone-shikho-partner-expand-digital-learning-access-1423831"
       },
       "financing": {
-        "en": "Strategic investment was announced in May 2025. The amount was not disclosed.",
-        "bn": "২০২৫ সালের মে মাসে কৌশলগত বিনিয়োগ ঘোষণা হয়। পরিমাণ প্রকাশ করা হয়নি।",
-        "url": "https://www.startupbangladesh.vc/startup-bangladesh-shikho/"
+        "en": "A strategic investment announced in May 2025 took Shikho's total funding past $8 million; the amount of that transaction was not disclosed.",
+        "bn": "২০২৫ সালের মে মাসে কৌশলগত বিনিয়োগের পর শিখোর মোট ফান্ডিং ৮০ লাখ ডলার ছাড়ায়। তবে ওই বিনিয়োগের আলাদা পরিমাণ জানানো হয়নি।",
+        "url": "https://www.dhakatribune.com/business/380604/shikho-raises-funds-to-accelerate-ai-powered",
+        "sources": [
+          "https://www.dhakatribune.com/business/380604/shikho-raises-funds-to-accelerate-ai-powered",
+          "https://www.startupbangladesh.vc/startup-bangladesh-shikho/"
+        ]
       }
     },
     {
@@ -1627,9 +1682,13 @@
         "url": "https://www.thedailystar.net/business/news/shopups-parent-platform-raises-100m-saudi-financing-push-4246856"
       },
       "financing": {
-        "en": "$110 million merger funding disclosed in April 2025.",
-        "bn": "২০২৫ সালের এপ্রিলে একীভূত প্রতিষ্ঠানের জন্য ১১ কোটি ডলারের ফান্ডিং প্রকাশ করা হয়।",
-        "url": "https://www.bloomberg.com/news/articles/2025-04-09/peter-thiel-s-valar-saudi-arabia-s-sanabil-back-b2b-commerce-firm-silq"
+        "en": "A $110 million package backing the April 2025 merger included both equity investment and a financing facility for SILQ Financial.",
+        "bn": "২০২৫ সালের এপ্রিলের একীভূতকরণে ১১ কোটি ডলারের যে প্যাকেজ ঘোষণা হয়, তাতে ইকুইটি বিনিয়োগের পাশাপাশি SILQ Financial-এর জন্য অর্থায়ন সুবিধাও ছিল।",
+        "url": "https://blog.sary.com/en/posts/shopup-and-sary-merge-to-create-silq-gulf-emerging-asias-largest-b2b-commerce-platform-secures-usd110m-funding.html",
+        "sources": [
+          "https://blog.sary.com/en/posts/shopup-and-sary-merge-to-create-silq-gulf-emerging-asias-largest-b2b-commerce-platform-secures-usd110m-funding.html",
+          "https://www.tbsnews.net/economy/shopup-sary-merge-form-silq-110m-saudi-us-investment-1111361"
+        ]
       }
     },
     {
@@ -1783,8 +1842,13 @@
         "url": "https://www.linkedin.com/posts/tallykhata_tallypay-billpayment-utilitypayment-activity-7472536175358959616-JJSc"
       },
       "financing": {
-        "en": "No reliable public financing amount found in the reviewed sources.",
-        "bn": "দেখা সোর্সগুলোতে নির্ভরযোগ্য প্রকাশ্য ফান্ডিং পরিমাণ পাওয়া যায়নি।"
+        "en": "A 2023 ecosystem report lists TallyKhata at $7 million in funding, matching SureCash's disclosed 2015 Series B. Public sources do not isolate how much funded TallyKhata after its later launch.",
+        "bn": "২০২৩ সালের একটি ইকোসিস্টেম রিপোর্টে টালিখাতার ফান্ডিং ৭০ লাখ ডলার দেখানো হয়েছে, যা SureCash-এর ২০১৫ সালের প্রকাশিত সিরিজ B রাউন্ডের সমান। পরে চালু হওয়া টালিখাতায় ওই টাকার কতটা খরচ হয়েছে, প্রকাশ্য সোর্সে তা আলাদা করে বলা নেই।",
+        "url": "https://www.startupbangladesh.vc/wp-content/uploads/2023/08/Bangladesh-Startup-Investment-Report-2023.pdf",
+        "sources": [
+          "https://www.startupbangladesh.vc/wp-content/uploads/2023/08/Bangladesh-Startup-Investment-Report-2023.pdf",
+          "https://www.prnewswire.co.uk/news-releases/mobile-banking-and-payment-operator-surecash-raises-usd-7-million-series-b-investment-500911581.html"
+        ]
       }
     },
     {
@@ -1937,8 +2001,13 @@
         "url": "https://www.linkedin.com/posts/wegro-global_wegro-grameen-bank-partner-to-boost-farmers-activity-7421102816238333953-Enod"
       },
       "financing": {
-        "en": "No reliable public financing amount found in the reviewed sources.",
-        "bn": "দেখা সোর্সগুলোতে নির্ভরযোগ্য প্রকাশ্য ফান্ডিং পরিমাণ পাওয়া যায়নি।"
+        "en": "WeGro received $100,000 in non-repayable matching funding from Biniyog Briddhi in October 2022. Earlier public records listed $25,000 in equity and grant funding.",
+        "bn": "২০২২ সালের অক্টোবরে WeGro Biniyog Briddhi থেকে ১ লাখ ডলারের ম্যাচিং ফান্ডিং পায়, যা ফেরত দিতে হয় না। এর আগের প্রকাশ্য হিসাবে ইকুইটি ও গ্র্যান্ট মিলিয়ে ২৫ হাজার ডলারের কথা ছিল।",
+        "url": "https://futurestartup.com/2022/10/03/wegro-technologies-receives-us100000-investment-from-biniyog-briddhis-impact-ready-matching-fund/",
+        "sources": [
+          "https://futurestartup.com/2022/10/03/wegro-technologies-receives-us100000-investment-from-biniyog-briddhis-impact-ready-matching-fund/",
+          "https://lightcastlepartners.com/wp-content/uploads/2023/08/BB-dealbook-Final-Version-update-Nov-2022.pdf"
+        ]
       }
     },
     {

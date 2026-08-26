@@ -2879,6 +2879,24 @@ html[lang='bn'] .startup50-hero__folio strong {
   line-height: 1.55;
 }
 
+.startup50-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.startup50-sources > span {
+  font-weight: var(--w-strong);
+}
+
+.startup50-sources a {
+  overflow-wrap: anywhere;
+}
+
 /* Each threshold is the sum of that layout's own column minimums plus a few
    pixels, so a tier is never asked to draw itself into less room than it
    needs: 636px for the four-column row, 718px compact, 796px roomy. */
