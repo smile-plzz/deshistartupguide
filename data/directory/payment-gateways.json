@@ -1,0 +1,54 @@
+[
+  {
+    "name": "SSLCOMMERZ",
+    "type": "Payment gateway aggregator",
+    "fees": "Basic plan: BDT 25,500 one-time setup, then 2.5% per successful transaction (3.5% for American Express).",
+    "settlement": "Not publicly stated",
+    "supportedMethods": [
+      "Cards",
+      "Mobile financial services",
+      "Internet banking",
+      "Wallets",
+      "Bank EMI"
+    ],
+    "requiredDocs": "Proprietorship: trade licence, company bank account and cheque leaf, signatory photo and NID, TIN certificate, DBID, signed MEF and undertaking. Partnership adds the partnership deed, company BIN and letter of authorisation. Limited company: trade licence, incorporation certificate, MOA/AOA, Form XII, company BIN/VAT certificate, bank cheque leaf, signatory NID and photo, signed MEF.",
+    "applicationPath": "Create a merchant application at join.sslcommerz.com, then submit the documents required for your business type.",
+    "website": "https://sslcommerz.com/",
+    "sourceUrl": "https://sslcommerz.com/pricing/",
+    "lastVerified": "2026-08-19",
+    "notes": "A Bangladesh payment gateway aggregator for businesses that want one integration for cards, mobile financial services, internet banking, wallets and bank EMI. The Basic package includes API integration and a merchant dashboard; settlement timing should be confirmed in the merchant agreement."
+  },
+  {
+    "name": "ShurjoPay",
+    "type": "Payment gateway aggregator",
+    "fees": "Not publicly stated",
+    "settlement": "Withdrawals are available once a week; timing can vary with bank working days, holidays and verification.",
+    "supportedMethods": [
+      "Cards",
+      "Mobile financial services",
+      "Bank EMI",
+      "QR"
+    ],
+    "requiredDocs": "Signed application and terms acceptance forms, trade licence, BDT 300 stamped sub-merchant agreement, two recent photographs, TIN/VAT certificate and NID.",
+    "applicationPath": "Submit the merchant enquiry form to receive a quotation and onboarding documents; each additional website requires a separate merchant registration.",
+    "website": "https://shurjopay.com.bd/",
+    "sourceUrl": "https://shurjopay.com.bd/",
+    "lastVerified": "2026-08-19",
+    "notes": "A Bangladesh payment gateway operated by shurjoMukhi, supporting card and mobile-financial-service payments, bank EMI, international collections and plugins for web and mobile applications. Commercial terms are quote-based, and withdrawals are available once a week, subject to bank working days and verification."
+  },
+  {
+    "name": "bKash Online Payment Gateway",
+    "type": "Mobile financial service, direct integration",
+    "fees": "Not publicly stated",
+    "settlement": "Not publicly stated",
+    "supportedMethods": [
+      "Mobile financial services"
+    ],
+    "requiredDocs": "Not publicly itemised. The online-business application asks about business type and bank-account status; businesses without a trade licence are directed to the separate Personal Retail Account route.",
+    "applicationPath": "Submit the Online Business application. Existing bKash merchants can register for the Business Dashboard; integration guides are at developer.bka.sh.",
+    "website": "https://www.bkash.com/en/business/online-business",
+    "sourceUrl": "https://www.bkash.com/en/business",
+    "lastVerified": "2026-08-19",
+    "notes": "A direct bKash integration for online businesses that want to accept payments from bKash wallets through hosted or tokenized checkout. The wider business platform also supports subscriptions, instant refunds, B2C payouts and APIs, but it does not add cards or other wallets to the checkout."
+  }
+]

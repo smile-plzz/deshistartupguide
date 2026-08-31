@@ -1,0 +1,78 @@
+name: "🟢 স্টার্টআপ ৫০-এর জন্য নাম প্রস্তাব করুন · Suggest a startup"
+description: "দেশি স্টার্টআপ ৫০-এর জন্য একটি বাংলাদেশি স্টার্টআপ প্রস্তাব করুন। · Suggest a Bangladeshi startup for our watchlist."
+title: "Startup 50 suggestion: "
+labels: ["needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        আপনার মতে কোন স্টার্টআপটি তালিকায় থাকা উচিত? নামটি বলুন এবং সম্ভব হলে এমন একটি লিংক দিন, যেখানে তাদের সাম্প্রতিক কাজ দেখা যায়। বাংলা বা ইংরেজি, যেটা সহজ, সেটাতেই লিখুন।
+
+        *Which startup should be on the list? Tell us its name and, if you can, share a link showing its recent work. Write in Bangla or English.*
+  - type: input
+    id: startup
+    attributes:
+      label: "স্টার্টআপের নাম · Startup name"
+      placeholder: "Company name"
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: "ওয়েবসাইট বা চালু পণ্য · Website or live product"
+      placeholder: "https://..."
+    validations:
+      required: true
+  - type: textarea
+    id: background
+    attributes:
+      label: "পেছনের গল্প · Background"
+      description: "স্টার্টআপটি কোথা থেকে শুরু হয়েছে এবং কী বানাচ্ছে? · Where did the startup begin, and what is it building?"
+    validations:
+      required: true
+  - type: textarea
+    id: recent_work
+    attributes:
+      label: "সাম্প্রতিক কাজ · Recent work"
+      description: "সাম্প্রতিক কোনো পণ্য, অগ্রগতি বা খবরের লিংক দিন। · Share a link to a recent product, milestone or update."
+      placeholder: "What happened, when, and https://..."
+    validations:
+      required: true
+  - type: textarea
+    id: why_watch
+    attributes:
+      label: "কেন নজরে রাখা উচিত? · Why should people pay attention?"
+      description: "এক বা দুই বাক্যে বলুন। · Tell us in one or two sentences."
+    validations:
+      required: true
+  - type: textarea
+    id: financing
+    attributes:
+      label: "ফান্ডিং তথ্য · Funding information"
+      description: "সাম্প্রতিক ফান্ডিংয়ের নির্ভরযোগ্য লিংক থাকলে দিন। · If available, share a reliable link to recent funding information."
+    validations:
+      required: false
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: "আপনার সম্পর্ক · Your relationship"
+      options:
+        - "আমি প্রতিষ্ঠাতা, কর্মী বা শেয়ারহোল্ডার · I am a founder, employee or shareholder"
+        - "আমি বিনিয়োগকারী, উপদেষ্টা, গ্রাহক বা পার্টনার · I am an investor, adviser, customer or partner"
+        - "আমার সরাসরি সম্পর্ক নেই · I have no direct relationship"
+    validations:
+      required: true
+  - type: textarea
+    id: logo
+    attributes:
+      label: "লোগোর লিংক · Logo link"
+      description: "সম্ভব হলে অফিসিয়াল লোগো বা প্রেস কিটের লিংক দিন। আপনি কোম্পানির সঙ্গে যুক্ত হলে, লোগো ব্যবহারের অনুমতি আছে কি না জানাতে পারেন। · If possible, link to an official logo or press kit. If you are with the company, you can also tell us whether its use is approved."
+    validations:
+      required: false
+  - type: checkboxes
+    id: public_issue
+    attributes:
+      label: "পাবলিক ইস্যু · Public issue"
+      options:
+        - label: "আমি বুঝেছি, এই তথ্য ও লিংক একটি পাবলিক GitHub ইস্যুতে দেখা যাবে। · I understand that this information and these links will be visible in a public GitHub issue."
+          required: true

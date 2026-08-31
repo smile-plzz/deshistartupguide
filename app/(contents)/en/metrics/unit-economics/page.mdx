@@ -33,15 +33,28 @@ Let's break Rahim's 1,200-taka shirt order down step by step. At each step, watc
 | Less ad cost to win the order | 80 | 160 |
 | **Contribution margin per order** |  | **160** |
 
+<Waterfall
+  digits="en"
+  steps={[
+    { label: "Sale", delta: 1200, total: true },
+    { label: "Shirt cost (COGS)", delta: -800 },
+    { label: "Courier", delta: -120 },
+    { label: "Packaging", delta: -20 },
+    { label: "Cash-collection fee", delta: -20 },
+    { label: "Ad cost to win the order", delta: -80 },
+    { label: "Contribution margin", total: true },
+  ]}
+/>
+
 So not 400 but 160 taka is what Rahim actually keeps. Where did that 80 taka of ads come from? Say Rahim boosts with 10,000 taka a month and gets 125 orders. That's an average ad cost of 80 taka to win one order, and that is exactly **CAC (customer acquisition cost)**, the cost of winning one customer. The plain meaning of the term is in the [glossary](/en/start-here/glossary).
 
 ### Now take the hit from returned orders
 
-The biggest leak is still ahead. Not every cash-on-delivery (COD) parcel gets accepted. On a returned one the sale is zero, yet the two-way courier, the packaging, and the ad spend that won it all remain. This return is called **RTO (return to origin)**, and it's where COD businesses lose the most money. Ways to manage it are in the [Payments](/en/payments) section.
+The biggest leak is still ahead. Not every cash-on-delivery (<Term name="cod">COD</Term>) parcel gets accepted. On a returned one the sale is zero, yet the two-way courier, the packaging, and the ad spend that won it all remain. This return is called **RTO (return to origin)**, and it's where COD businesses lose the most money. Ways to manage it are in the [Payments](/en/payments) section.
 
 Say 1 in every 5 of Rahim's orders comes back. The loss on one returned order is 200 taka of two-way courier, 20 of packaging, 80 of ads, so 300 taka in all. Now take 5 orders together. 4 go through fine, leaving 160 each, so 640 taka. 1 comes back and eats 300. Real contribution across the 5 orders is 640 minus 300, that is 340 taka. Divide by orders and it's 68 taka each.
 
-See what happened: 160 on the ledger, 68 in reality once returns are counted. This one number saves Rahim, because now it's clear whether his shop rent, his own pocket money, and his phone bill will come out of that 68 taka. Push the return rate from 1-in-5 to 1-in-3 and the maths goes into a loss, something he'd otherwise only notice by staring at the bank at month's end.
+See what happened: 160 on the ledger, 68 in reality once returns are counted. This one number saves Rahim, because now it's clear whether his shop rent, his own pocket money, and his phone bill will come out of that 68 taka. Push the return rate from 1 in 5 to 1 in 3 and only about 7 taka per order is left. At a return rate of about 35%, the contribution turns negative. Without this calculation, Rahim might only notice the loss in his bank balance at month's end.
 
 ## One order or one customer, which to count
 
@@ -92,9 +105,3 @@ Add up the contribution across all orders and average it over the number of retu
 - For a buy-again business, worked the per-customer maths once too
 
 Rule of thumb: settle the maths of one order before you scale. If one order doesn't pay, a thousand orders lose a thousand times as much.
-
-## Relevant Sources
-
-- [LightCastle Partners](https://lightcastlepartners.com/insights) – where the cost-and-revenue reality of local business and e-commerce gets analysed
-- [Future Startup](https://futurestartup.com) – hear founders think through unit economics in their own words
-- [The Business Standard](https://www.tbsnews.net) – coverage of the country's e-commerce and delivery costs

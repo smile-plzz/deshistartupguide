@@ -1,47 +1,18 @@
 /* ---------------------------------------------------------------------------
    দেশি স্টার্টআপ – classic wiki shell
    The original Wikipedia-inspired look: warm paper page, white content canvas
-   with a deep-green top rule, serif Bangla headings (weight reduced to 700),
-   familiar blue links, yellow accents. Bengali webfonts are self-hosted,
-   Bengali-subset, local()-first so most Android devices download nothing.
+   with a deep-green top rule, familiar blue links and yellow accents.
+
+   Latin uses the platform sans stack: no download and no font swap. Bengali
+   uses one self-hosted variable face, renamed after subsetting to comply with
+   the original font's Reserved Font Name. The stack resolves per character, so
+   mixed Bangla and English text needs no locale wrapper or hand-written spans.
    --------------------------------------------------------------------------- */
 
-/* Both files are cut to exactly the unicode-range declared below, with the
-   glyph-name and vertical-metrics tables dropped: nothing outside that range
-   can ever be drawn from these faces, so the names, the space and the vertical
-   metrics were bytes no reader could ever see. Reproduce with:
-
-     pyftsubset <in>.woff2 --output-file=<out>.woff2 --flavor=woff2 \
-       --unicodes="U+0951-0952,U+0964-0965,U+0980-09FE,U+1CD0,U+1CD2,\
-U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,\
-U+20B9,U+25CC,U+A8F1" \
-       --layout-features='*' --no-hinting --no-glyph-names --name-IDs='' \
-       --drop-tables+=vhea,vmtx,gasp,STAT
-
-   --layout-features='*' is load-bearing: Bengali conjuncts are GSUB
-   substitutions, so dropping features would silently break যুক্তাক্ষর. */
-
 @font-face {
-  font-family: 'Noto Sans Bengali';
-  /* Plain woff2, not the old woff2-variations draft value: a browser must skip
-     any src whose format() it does not recognise, and variable support is read
-     from the file itself. The stale keyword risked dropping the source entirely
-     on the devices least able to spare a fallback. */
-  src: local('Noto Sans Bengali Regular'), local('NotoSansBengali-Regular'),
-    url('./fonts/noto-sans-bengali-var.woff2') format('woff2');
+  font-family: 'Deshi Sans Bengali';
+  src: url('./fonts/deshi-sans-bengali-var.woff2') format('woff2');
   font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2,
-    U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7,
-    U+200C-200D, U+20B9, U+25CC, U+A8F1;
-}
-
-@font-face {
-  font-family: 'Noto Serif Bengali';
-  src: local('Noto Serif Bengali Bold'), local('NotoSerifBengali-Bold'),
-    url('./fonts/noto-serif-bengali-700.woff2') format('woff2');
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2,
@@ -82,16 +53,28 @@ U+20B9,U+25CC,U+A8F1" \
      construction, because a scrim that drifts off the ink it is made from is
      the kind of thing nobody notices until the palette moves. */
   --ink-channels: 32 33 34;
-  /* Longest comfortable prose line. Only bites above ~1500px, where the canvas
-     would otherwise run to 86 Bangla characters a line. */
+  /* Longest comfortable prose line. The shell has no right-hand rail, so the
+     established 65rem measure lets guides belong to the wide reading canvas
+     without making prose fully fluid. Dense tables, code and the generated
+     indexes are exempt below and keep the full canvas. */
   --measure: 65rem;
   /* Sticky-header clearance for the edit bar. Measured and overwritten from JS
      while editing, because the header stacks to a second row on phones. */
   --header-h: 84px;
   --shadow: 0 14px 32px rgb(var(--ink-channels) / 8%);
-  --sans: '.SF Bangla', system-ui, -apple-system, BlinkMacSystemFont, 'Nirmala UI', 'Noto Sans Bengali',
-    'Noto Sans', 'Segoe UI', sans-serif;
-  --serif: 'Noto Serif Bengali', 'Noto Serif', Georgia, serif;
+  /* The Bengali face leads the stack on purpose. Matching is per character and
+     the @font-face above is fenced to the Bengali range, so Latin skips it and
+     lands on the platform sans. Listed last it would never be reached at all:
+     macOS resolves system-ui to SF Pro's composite cascade, which already
+     carries a Bengali fallback, so the system font claims the character first. */
+  --sans: 'Deshi Sans Bengali', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Display stays a named role even while it shares the low-bandwidth family.
+     Size, weight, balanced wrapping and the hairline rules carry the hierarchy. */
+  --display: var(--sans);
+  --w-display: 500;
+  --w-heading: 600;
+  --w-strong: 600;
 }
 
 * {
@@ -126,17 +109,26 @@ a:hover {
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
-:where(a, button, input, select, summary):focus-visible {
+:where(a, button, input, select, textarea, summary):focus-visible {
   outline: 2px solid var(--green-deep);
   outline-offset: 3px;
 }
 
 p {
   margin: 0 0 1em;
+}
+
+/* Bengali scripts do not have a native italic convention in this family.
+   Preserve semantic emphasis without browser-synthesised slanting conjuncts. */
+:lang(bn) em {
+  font-style: normal;
+  font-weight: var(--w-strong);
 }
 
 .sr-only {
@@ -151,8 +143,12 @@ p {
   border: 0;
 }
 
+/* Fixed, not absolute. Absolute pins it to the top of the document, so a reader
+   who tabs into the page after scrolling focuses a control that is off screen
+   and the browser yanks them back to the top to show it. Fixed keeps it at the
+   corner of the viewport, which is where a skip link is supposed to appear. */
 .skip-link {
-  position: absolute;
+  position: fixed;
   top: 8px;
   left: 8px;
   z-index: 20;
@@ -195,7 +191,7 @@ p {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   min-width: 0;
   color: var(--ink);
   text-decoration: none;
@@ -207,8 +203,8 @@ p {
 }
 
 .brand img {
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   flex: 0 0 auto;
 }
 
@@ -220,7 +216,7 @@ p {
   display: block;
   color: var(--ink);
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: var(--w-strong);
   line-height: 1.1;
   white-space: nowrap;
 }
@@ -258,9 +254,28 @@ p {
   outline: none;
 }
 
+/* The placeholder is not decoration here – it is where the reader learns what
+   this site can be asked about. Left to the browser it is #757575 in Chrome but
+   40% black in Safari, which is 3.6:1 on white. State it. */
+.search input::placeholder {
+  color: var(--faint);
+  opacity: 1;
+}
+
 .search input:focus {
   border-color: var(--green);
   box-shadow: inset 0 0 0 1px var(--green);
+}
+
+/* `outline: none` above drops the site-wide focus ring, and the green border
+   alone reads as "active field" rather than "your keyboard is here". Keyboard
+   focus gets the same ring every other control on the site gets; a mouse click
+   keeps the quieter border-only treatment. */
+.search input:focus-visible {
+  outline: 2px solid var(--green-deep);
+  /* Inset, because the field shares an edge with the submit button and a ring
+     drawn outside it would cut across the button instead of closing. */
+  outline-offset: -2px;
 }
 
 .search .search-submit {
@@ -327,8 +342,14 @@ p {
   font-weight: 600;
 }
 
+/* Two lines each, so eight results scan as a list rather than as eight blocks
+   of different heights. Pagefind returns whatever window matched, and a Bengali
+   sentence can be three lines of it. */
 .search-result .result-excerpt {
-  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
   margin-top: 2px;
   color: var(--muted);
   font-size: 0.85rem;
@@ -411,8 +432,10 @@ p {
   width: 34px;
   height: 22px;
   color: var(--muted);
-  font-size: 10px;
-  font-weight: 800;
+  /* Two capitals in a 34px cell: the extra pixel costs no geometry and this is
+     the smallest type in the header. */
+  font-size: 11px;
+  font-weight: var(--w-strong);
   line-height: 1;
 }
 
@@ -480,7 +503,7 @@ p {
   border-top: 1px solid var(--line-warm);
   padding-top: 14px;
   color: var(--muted);
-  font-weight: 700;
+  font-weight: var(--w-strong);
   font-size: 0.82rem;
 }
 
@@ -497,7 +520,7 @@ p {
 
 .sidebar-group a.is-active {
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .sidebar-note {
@@ -529,6 +552,10 @@ p {
   padding: 28px 48px 0;
 }
 
+.article-tabs--actions-only {
+  justify-content: flex-end;
+}
+
 .tab-group {
   display: flex;
 }
@@ -553,7 +580,7 @@ a.tab {
   border-top: 3px solid var(--green);
   background: var(--canvas);
   color: var(--ink);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .article-actions {
@@ -573,7 +600,7 @@ a.tab {
    the current one, set in ink, and the other stays a link. */
 .article-actions .is-current {
   color: var(--ink);
-  font-weight: 700;
+  font-weight: var(--w-strong);
   cursor: default;
 }
 
@@ -586,6 +613,18 @@ a.tab {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* The route policy removes data-owned actions during SSR. These selectors are
+   the no-flash fallback for source states only the rendered article can reveal:
+   stubs and a SectionIndex shell with no authored section.
+   The client removes the same controls after hydration, and the API allowlist
+   independently rejects those routes. */
+.content-canvas:has(.article [data-pagefind-meta='stub'])
+  :is(.article-actions .act-edit, .article-footer .contrib-edit),
+.content-canvas:has(.article > [data-inline-edit-source='section-index']):not(:has(.article > h2))
+  :is(.article-actions .act-edit, .article-footer .contrib-edit) {
+  display: none;
 }
 
 /* --------------------------------------------------- breadcrumbs and meta */
@@ -643,15 +682,49 @@ a.tab {
   font-weight: 600;
 }
 
-.article-meta a {
+.article-meta > a {
   color: var(--muted);
 }
 
-.article-meta a:hover {
+.article-meta > a:hover {
   color: var(--blue);
 }
 
-/* "ভুল জানান" is the one repair action on every page, and at the meta line's
+/* Postbuild fills this from the same events as the record below the article.
+   Until then it is empty, and an empty flex item would still spend the row's
+   18px gap, so it leaves the row entirely. */
+.article-byline:empty {
+  display: none;
+}
+
+.article-byline {
+  color: var(--muted);
+}
+
+/* A contributor's name is a link to a person, so it is set as one. The repair
+   link beside it stays muted on purpose: that is a utility, this is the credit,
+   and telling them apart is most of why the line is worth adding. */
+.article-byline a {
+  color: var(--blue);
+}
+
+.article-byline a:hover {
+  color: var(--blue-hover);
+  text-decoration: underline;
+}
+
+.article-byline .byline-sep {
+  color: var(--faint);
+}
+
+/* A verb, a name and the counted tail each stay whole when the line turns. The
+   browser was otherwise free to break inside them, and did: "Muhaiminul Islam /
+   Khan" on every phone width up to 414px. */
+.article-byline .byline-nb {
+  white-space: nowrap;
+}
+
+/* "ফিডব্যাক দিন" is the one repair action on every page, and at the meta line's
    0.85rem it lands at 23px tall – a pixel under WCAG 2.2 SC 2.5.8. Give it the
    24px on touch only, so the line keeps its weight under a mouse. */
 @media (pointer: coarse) {
@@ -673,7 +746,7 @@ a.tab {
 }
 
 /* Cap the prose measure. The canvas has no right-hand rail, so on a wide
-   monitor a paragraph would otherwise run to ~86 Bangla characters a line and
+   monitor a paragraph would otherwise run to ~97 Bangla graphemes a line and
    the eye loses its place returning. Headings are capped with the text so their
    hairline underline ends on the same edge; tables, code and the generated
    indexes keep the full canvas, because they need the room. */
@@ -690,6 +763,16 @@ a.tab {
   /* Keeps a paragraph from ending on a single stranded word. Bengali sentences
      are long and the mobile column is narrow, so this fires often. */
   text-wrap: pretty;
+}
+
+/* `anywhere` also lets the browser count a broken word when it sizes a column,
+   which is what a narrow table wants – but inside a 110px column on a phone it
+   took the invitation everywhere and set "E-commerce" as "E-/commerc/e". Cells
+   break only what genuinely cannot fit a line on its own; what keeps the table
+   inside the canvas is the fixed layout on a phone, not shredded words. */
+.article :is(td, th) {
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 /* Bengali headings are long, and a wrapped one used to drop its last word alone
@@ -714,9 +797,9 @@ h1 {
   margin: 0 0 18px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 14px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(2.1rem, 3vw, 3.2rem);
-  font-weight: 700;
+  font-weight: var(--w-display);
   line-height: 1.3;
 }
 
@@ -724,15 +807,15 @@ h2 {
   margin: 34px 0 12px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 7px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 1.55rem;
-  font-weight: 700;
+  font-weight: var(--w-heading);
 }
 
 h3 {
   margin: 24px 0 10px;
   font-size: 1.08rem;
-  font-weight: 700;
+  font-weight: var(--w-heading);
 }
 
 .lead,
@@ -756,6 +839,272 @@ h3 {
   font-size: 0.78em;
   vertical-align: 1px;
   opacity: 0.8;
+}
+
+/* Keep the two higher-commitment contribution actions visible without turning
+   the article into a grid of competing cards. */
+.contribution-invite {
+  max-width: var(--measure);
+  margin: 20px 0 30px;
+  border: 1px solid var(--green);
+  background: var(--green-ground);
+  padding: 20px 22px;
+}
+
+.contribution-invite__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  border: 1px solid var(--green-deep);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 9px 18px;
+  color: var(--green-deep);
+  font-weight: var(--w-strong);
+  text-decoration: none;
+}
+
+.contribution-invite__action::after {
+  content: '→';
+  transition: transform 140ms ease-out;
+}
+
+.article .contribution-invite__action:visited {
+  color: var(--green-deep);
+}
+
+.contribution-invite__action:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+.contribution-invite__action:hover::after {
+  transform: translateX(3px);
+}
+
+.contribution-invite p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* --- Contact form --- */
+
+/* The one place a reader writes to us from inside the site. It is a plain
+   bordered card rather than the green invitation card, because the page's
+   green already belongs to the addresses beside it, and a form the reader is
+   filling in should not compete with them. Every address on the page works
+   without this island, so nothing here is load-bearing. */
+.contact-form {
+  --field-h: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--measure);
+  margin: 20px 0 30px;
+  border: 1px solid var(--line);
+  background: var(--canvas-soft);
+  padding: 22px;
+}
+
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* A label belongs to its own control and to nothing else, so the gap inside a
+   field is a third of the gap between fields. At the old 5px against a 1.72
+   line-height the label's half-leading closed most of that difference, and the
+   next label sat on the previous control's focus ring. */
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: var(--w-strong);
+  line-height: 1.35;
+}
+
+/* Chrome forces `line-height: normal` on a select, so a select left to its own
+   height lands 6px short of the inputs beside it. One height for every control
+   in the form, declared once. */
+.contact-form__input {
+  width: 100%;
+  min-height: var(--field-h);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 10px 11px;
+  color: var(--ink);
+  font: inherit;
+}
+
+/* Chrome treats a click into a text field as keyboard focus, so the site ring
+   shows either way. The border moving to green is all this needs on top of it;
+   an inset fill as well read as two rings around one control. */
+.contact-form__input:focus {
+  border-color: var(--green);
+}
+
+/* Error red on the border, never as a fill, and only on the field that is
+   actually wrong. */
+.contact-form__input[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.contact-form__select {
+  padding-right: 6px;
+}
+
+.contact-form__textarea {
+  min-height: 150px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.contact-form__hint {
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+/* Off-screen rather than display:none: a bot that skips hidden inputs is not
+   the one this catches, and a bot that fills every field still reaches it. */
+.contact-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* A message about one field sits with that field. Only a failure that belongs
+   to the whole submission (the network, the rate limit) sits by the button.
+   The extra 4px clears the focus ring: naming a field also focuses it, so the
+   ring and the message are always on screen together. */
+.contact-form__field-error {
+  margin: 4px 0 0;
+  color: var(--error);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.contact-form__error {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.92rem;
+}
+
+.contact-form__submit,
+.contact-form__again {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--field-h);
+  border: 1px solid var(--green-deep);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 10px 20px;
+  color: var(--green-deep);
+  font-weight: var(--w-strong);
+  cursor: pointer;
+}
+
+.contact-form__submit:hover:not(:disabled),
+.contact-form__again:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.contact-form__submit:disabled {
+  border-color: var(--line-soft);
+  color: var(--faint);
+  font-weight: 400;
+  cursor: default;
+}
+
+/* The page's one authored moment: the panel that replaces the form arrives
+   rather than appearing, so a reader who was mid-scroll sees the swap. It takes
+   focus when it mounts, and the outline is the panel's own edge rather than the
+   site ring, which at 3px offset would trace a second box around the card. */
+.contact-form--sent {
+  display: block;
+  border-color: var(--green);
+  background: var(--green-ground);
+  animation: contact-sent 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.contact-form--sent:focus {
+  outline: none;
+}
+
+.contact-form--sent:focus-visible {
+  outline: 2px solid var(--green-deep);
+  outline-offset: -1px;
+}
+
+@keyframes contact-sent {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.contact-form__sent-title {
+  margin: 0 0 6px;
+  color: var(--green-deep);
+  font-size: 1.05rem;
+  font-weight: var(--w-strong);
+}
+
+.contact-form__sent-body {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form--sent {
+    animation: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .contact-form {
+    gap: 16px;
+    padding: 16px 15px;
+  }
+
+  .contact-form__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .contact-form__actions {
+    align-items: stretch;
+  }
+
+  .contact-form__submit,
+  .contact-form__again {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* The সারকথা block at the top of every guide. Bounded on all four sides like the
@@ -799,12 +1148,20 @@ hr {
   border-top: 0;
 }
 
+/* Tables fill their available space by default. Dense datasets with four or
+   more columns keep the wider canvas; simpler reference tables are aligned to
+   the prose measure below so their cells do not turn into empty horizontal
+   fields on a wide screen. */
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 18px 0;
   background: var(--canvas);
   font-size: 0.9rem;
+}
+
+.article > table:not(:has(tr > :nth-child(4))) {
+  max-width: var(--measure);
 }
 
 th,
@@ -817,7 +1174,7 @@ td {
 
 th {
   background: var(--shade);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 ul,
@@ -849,17 +1206,40 @@ pre {
   padding: 16px;
 }
 
+/* Every fenced block on this site holds Bengali: a message template, a fee sum,
+   a share calculation. The monospace families cover none of it, so the script
+   fell through to whatever Bengali face the platform keeps behind `monospace`
+   and a paragraph of prose changed typeface mid-page. The self-hosted face
+   leads for the same reason it leads --sans: it is fenced to the Bengali range,
+   so Latin, digits and punctuation skip it and still land on the monospace. */
 code {
   border-radius: 3px;
   background: var(--shade);
   padding: 1px 4px;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: 'Deshi Sans Bengali', 'SFMono-Regular', Consolas,
+    'Liberation Mono', monospace;
   font-size: 0.92em;
+}
+
+/* The fenced blocks in these guides are Bangla: a message template, a fee sum,
+   a share calculation. Monospace buys them nothing – the digits are Bengali and
+   resolve to the same face either way – while its space advance is close to
+   twice the proportional one, which opens visible gutters through a Bangla
+   sentence. The border, the ground and the preserved line breaks are what set
+   the block apart; the letters belong in the reading face. Inline code keeps
+   the monospace, where it is naming a field, a file or a form. */
+pre,
+pre code {
+  font-family: var(--sans);
 }
 
 pre code {
   background: transparent;
   padding: 0;
+  /* Inline code shrinks slightly so it does not shout inside a sentence. A
+     whole block has the border and the ground to set it apart, and the reader
+     is meant to work from the text in it, so it keeps the body size. */
+  font-size: 1em;
 }
 
 img {
@@ -917,6 +1297,341 @@ p:has(> .fb-video) {
   display: block;
   color: var(--faint);
   font-size: 0.82rem;
+}
+
+/* --- Data bars --- */
+
+/* A minimal horizontal bar chart for small comparisons. Pure CSS, so there is
+   no raster to upload, no SVG to sanitize and no client JavaScript. The bar
+   length is the only data channel; the label and value are real text, so the
+   meaning survives printing, a screen reader or a failed stylesheet. */
+.databars {
+  margin: 22px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.databars__row + .databars__row {
+  margin-top: 14px;
+}
+
+.databars__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.databars__label {
+  font-weight: var(--w-strong);
+}
+
+.databars__value {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.databars__track {
+  height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--canvas-soft);
+  overflow: hidden;
+}
+
+.databars__bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--green);
+}
+
+/* --- Waterfall --- */
+
+/* A horizontal waterfall: anchored start/end bars sit on the zero edge while
+   the steps in between float as red (out) or green (in) segments, so the eye
+   follows the money down the ladder. The numbers are text beside each row. */
+.waterfall {
+  margin: 22px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.waterfall__row + .waterfall__row {
+  margin-top: 12px;
+}
+
+.waterfall__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.waterfall__label {
+  font-weight: var(--w-strong);
+}
+
+.waterfall__delta {
+  color: var(--faint);
+  font-weight: 400;
+}
+
+.waterfall__value {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.waterfall__track {
+  position: relative;
+  height: 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: var(--canvas-soft);
+  overflow: hidden;
+}
+
+.waterfall__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.waterfall__bar--total,
+.waterfall__bar--pos {
+  background: var(--green);
+}
+
+.waterfall__bar--neg {
+  background: var(--error);
+}
+
+/* --- Timeline --- */
+
+/* A horizontal band timeline on a shared tick axis. A hollow, amber span
+   marks the window where nothing has landed yet — the cash-flow gap. */
+.timeline {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 14px;
+  row-gap: 12px;
+  align-items: center;
+  margin: 22px auto;
+}
+
+.timeline__ticks,
+.timeline__track {
+  display: grid;
+  gap: 4px;
+}
+
+.timeline__tick {
+  overflow: hidden;
+  color: var(--faint);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline__label {
+  font-weight: var(--w-strong);
+  line-height: 1.3;
+  text-align: right;
+}
+
+.timeline__span {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  min-width: 0;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--green);
+  overflow: hidden;
+}
+
+.timeline__span--gap {
+  border: 1px dashed var(--warn-border);
+  background: var(--warn-bg);
+}
+
+.timeline__span-label {
+  overflow: hidden;
+  color: #fff;
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline__span--gap .timeline__span-label {
+  color: var(--warn-ink);
+}
+
+/* --- Calculator --- */
+
+/* A small client island: the inputs edit the worked example the server already
+   rendered, so nothing depends on JavaScript to show the default numbers. */
+.calc {
+  margin: 22px auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--canvas-soft);
+}
+
+.calc__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.calc__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.calc__input {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--canvas);
+  color: var(--ink);
+  font: inherit;
+}
+
+.calc__hint {
+  color: var(--faint);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.calc__results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.calc__result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: var(--canvas);
+}
+
+.calc__result dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.calc__result dd {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: var(--w-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.calc__result--main {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.calc__result--main dd {
+  color: var(--green-deep);
+  font-size: 1.2rem;
+}
+
+.calc__verdict {
+  margin: 12px 0 0;
+  color: var(--warn-ink);
+  font-size: 0.92rem;
+}
+
+/* --- Charts and calculator: small screens --- */
+
+/* Most readers are on a narrow phone, so the two-column input grid folds and
+   the timeline drops its label gutter, putting each row label above its own
+   track instead of squeezing the axis into what is left. */
+@media (max-width: 620px) {
+  .calc {
+    padding: 14px;
+  }
+
+  .calc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 4px;
+  }
+
+  .timeline__corner {
+    display: none;
+  }
+
+  .timeline__label {
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .timeline__tick {
+    font-size: 0.68rem;
+  }
+
+  .timeline__ticks,
+  .timeline__track {
+    gap: 2px;
+  }
+
+  .databars__head,
+  .waterfall__head {
+    flex-wrap: wrap;
+    gap: 0 12px;
+  }
+}
+
+/* --- Charts and calculator: print --- */
+
+/* Browsers drop background colours when printing, which would leave every bar
+   blank and the white span labels invisible. The bar length is the data, so
+   the colours have to survive. */
+@media print {
+  .databars__bar,
+  .waterfall__bar,
+  .waterfall__track,
+  .databars__track,
+  .timeline__span {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .databars__row,
+  .waterfall__row,
+  .calc {
+    break-inside: avoid;
+  }
+
+  .calc__input {
+    border-color: #999;
+  }
 }
 
 /* --- YouTube facade --- */
@@ -991,7 +1706,7 @@ p:has(> .fb-video) {
   background: linear-gradient(to top, rgb(var(--ink-channels) / 82%), transparent);
   color: #fff;
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1.5;
 }
 
@@ -1032,7 +1747,7 @@ p:has(> .fb-video) {
   color: rgb(255 255 255 / 9%);
   font-family: var(--sans);
   font-size: clamp(9rem, 30vw, 18rem);
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1;
 }
 
@@ -1072,7 +1787,7 @@ p:has(> .fb-video) {
   background: linear-gradient(to top, rgb(var(--ink-channels) / 88%), transparent);
   color: #fff;
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1.5;
 }
 
@@ -1108,11 +1823,36 @@ p:has(> .fb-video) {
   font-size: 0.9rem;
 }
 
+/* The site's stated open/closed sign, the same one .home-faq uses. The browser
+   triangle was the only disclosure control on the site still drawn by the
+   browser, and it read as a different family from the accordions beside it. */
 .page-toc summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   padding: 9px 14px;
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
   cursor: pointer;
+  list-style: none;
+}
+
+.page-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-toc summary::before {
+  content: '+';
+  flex: 0 0 auto;
+  width: 0.8em;
+}
+
+.page-toc[open] > summary::before {
+  content: '–';
+}
+
+.page-toc summary:hover {
+  background: var(--green-soft);
 }
 
 .page-toc ul {
@@ -1124,9 +1864,180 @@ p:has(> .fb-video) {
   margin: 4px 0;
 }
 
+/* Exactly one "on this page" at every width: the sidebar owns it from 1024px
+   up, where the rail is on screen beside the article, and this accordion owns
+   it below, where the rail is either a drawer or a long scroll away. Keeping
+   both meant the reader met the same list twice on the same screen. The two
+   rules are a pair – move one and the other has to move with it.
+
+   The `:has()` is load-bearing, not tidiness. The accordion only exists on
+   pages that render an article lede and clear its own heading threshold, so an
+   unconditional hide would leave /contributors with no list at all below
+   1024px. Hide the rail's copy only where the accordion is there to take over.
+   Where `:has()` is unsupported both stay, which is what happens today. */
 @media (min-width: 1024px) {
   .page-toc {
     display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .page-shell:has(.page-toc) .sidebar-group--toc {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------ page contribution credit */
+
+/* Postbuild fills this sibling from the public ledger. Until then it remains
+   empty in dev and must not reserve a blank band below every article. */
+.page-contribution-credits:empty {
+  display: none;
+}
+
+.page-contribution-credits {
+  margin: 40px 48px 0;
+  /* The record closes the article, so it ends where the article's text ends.
+     Left uncapped it kept growing with the window while the prose stopped at
+     the measure, and on a wide monitor its rules ran ~240px past the last line
+     above them. */
+  max-width: var(--measure);
+  border-top: 1px solid var(--line);
+  padding: 18px 0 30px;
+  /* The byline sends readers here from the top of the page; land clear of the
+     sticky header rather than underneath it. */
+  scroll-margin-block-start: calc(var(--header-h) + 24px);
+}
+
+.page-contribution-credits:target .page-contribution-credits__header {
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  animation: target-land 1800ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-contribution-credits:target .page-contribution-credits__header {
+    animation: none;
+    background-color: var(--green-ground);
+  }
+}
+
+.page-contribution-credits__header h2 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.page-credit-list {
+  margin: 15px 0 0;
+  border-top: 1px solid var(--line-soft);
+  padding: 0;
+  list-style-type: none;
+}
+
+/* One entry per accepted contribution. The people who share it are listed
+   inside it, above the one summary, date and evidence link they share. */
+.page-credit {
+  margin: 0;
+  border-bottom: 1px solid var(--line-soft);
+  padding: 15px 0;
+}
+
+.page-credit__people {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-credit__credit {
+  margin: 0;
+}
+
+.page-credit__credit + .page-credit__credit {
+  margin-top: 7px;
+}
+
+.page-credit__line,
+.page-credit__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 10px;
+  align-items: baseline;
+}
+
+/* The name leads. Reading the role first left every name starting wherever the
+   role word happened to end — a column that stepped 68px between rows in the
+   English edition, where "Author" and "Editing · Review" sit above each other. */
+.page-credit__line {
+  margin: 0;
+}
+
+.page-credit__roles {
+  color: var(--green-deep);
+  font-size: 0.78rem;
+  font-weight: var(--w-strong);
+}
+
+.page-credit__roles span + span::before {
+  content: ' · ';
+  color: var(--faint);
+}
+
+.page-credit__person {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: var(--w-heading);
+}
+
+/* Someone who asked not to be named is a fact about the credit, not a name.
+   Setting the sentence at a name's weight made it read as one. */
+.page-credit__anon {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.page-credit__scope,
+.page-credit__affiliation,
+.page-credit__review,
+.page-credit__meta {
+  margin: 5px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.page-credit__scope {
+  margin-top: 8px;
+  color: var(--ink);
+}
+
+.page-credit__affiliation,
+.page-credit__review,
+.page-credit__meta {
+  color: var(--muted);
+}
+
+.page-credit__meta {
+  gap: 3px 7px;
+}
+
+.page-credit__sep {
+  color: var(--faint);
+}
+
+/* Same 24px floor the meta row already gives its links: at this size a name
+   link stands 18px and the evidence link 20px, both under WCAG 2.2 SC 2.5.8.
+   Touch only, so the list keeps its weight under a mouse. */
+@media (pointer: coarse) {
+  .page-credit__person a,
+  .page-credit__affiliation a,
+  .page-credit__meta a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
   }
 }
 
@@ -1134,6 +2045,7 @@ p:has(> .fb-video) {
 
 .article-footer {
   margin: 0 48px;
+  max-width: var(--measure);
   border-top: 1px solid var(--line);
   padding: 18px 0 40px;
 }
@@ -1228,7 +2140,7 @@ a.is-stub-link:hover {
   padding: 0 8px;
   color: var(--warn-ink);
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1.7;
   white-space: nowrap;
   vertical-align: 2px;
@@ -1329,6 +2241,10 @@ a.is-stub-link:hover {
   margin: 22px 0;
 }
 
+/* Filter count varies by directory category, so the track list is keyed off a
+   data attribute rather than an inline style: an inline grid-template-columns
+   outranks the mobile collapse below and pushes the Reset button off-screen. */
+
 .directory-controls {
   display: grid;
   grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(150px, 1fr)) auto;
@@ -1340,12 +2256,20 @@ a.is-stub-link:hover {
   padding: 12px;
 }
 
+.directory-controls[data-filters='1'] {
+  grid-template-columns: minmax(220px, 1.4fr) minmax(150px, 1fr) auto;
+}
+
+.directory-controls[data-filters='2'] {
+  grid-template-columns: minmax(220px, 1.4fr) repeat(2, minmax(150px, 1fr)) auto;
+}
+
 .directory-controls label {
   display: grid;
   gap: 4px;
   color: var(--muted);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .directory-controls input,
@@ -1373,7 +2297,7 @@ a.is-stub-link:hover {
   color: var(--green-deep);
   font: inherit;
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   cursor: pointer;
 }
 
@@ -1391,214 +2315,860 @@ a.is-stub-link:hover {
   padding: 4px 12px;
   color: var(--muted);
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
-.directory-table-wrap {
-  overflow-x: auto;
+/* One card per entry instead of a wide table. Directory values are sentences —
+   coverage areas, rate bands, application steps — and a column grid gave each of
+   them a track too narrow to hold a word, so text broke mid-character. Cards
+   also mean a new field costs one more labelled line, not one more squeezed
+   column, and there is no horizontal scroll at any width. */
+
+.directory-cards {
+  display: grid;
+  gap: 12px;
+}
+
+.directory-card {
   border: 1px solid var(--line);
   background: var(--canvas);
+  padding: 16px 18px;
 }
 
-.directory-list table {
-  min-width: 860px;
+.directory-card h2 {
   margin: 0;
-  font-size: 0.85rem;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: var(--w-strong);
 }
 
-.directory-list td:first-child {
-  min-width: 190px;
-}
-
-.directory-list td strong,
-.directory-list td span {
-  display: block;
-}
-
-.directory-list td span {
-  margin-top: 4px;
+.directory-card__note {
+  margin: 6px 0 0;
   color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.directory-card dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 20px;
+  margin: 14px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.directory-card dt {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: var(--w-strong);
+  letter-spacing: 0.02em;
+}
+
+.directory-card dd {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.directory-card__source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: baseline;
+  margin: 12px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
   font-size: 0.82rem;
-  line-height: 1.45;
+}
+
+.directory-card__source span {
+  color: var(--muted);
 }
 
 .directory-empty {
   margin: 0;
   padding: 22px;
   color: var(--muted);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
-/* ----------------------------------------------------------- contributors */
+/* --------------------------------------------------------- Deshi Startup 50 */
 
-/* A credit list, not a scoreboard: one row per person, all the same size and
-   the same ground, hairlines doing the separating, and the only number on the
-   row being the one thing that is actually counted. Order carries the ranking;
-   nothing else needs to. */
+/* A wide, quiet watchlist: one oversized 50, then a flat ruled list. */
 
-.contributor-summary {
+/* One ramp for the seam, from the phone masthead up to the widest canvas.
+   There is no per-breakpoint override below: the folio is sized from this
+   track rather than from the viewport, so the number cannot outgrow its own
+   column at any width. The old 112px seam paired with a 19vw numeral did
+   exactly that between 681px and 860px, printing the 50 over the body copy. */
+.startup50 {
+  --startup50-seam: clamp(150px, 21vw, 300px);
+  width: 100%;
+  color: var(--ink);
+}
+
+/* The hero and the edition band below it are one masthead. The spine runs the
+   full height of both, a hairline divides them, and the heavy green rule
+   closes the block at the bottom rather than bisecting it. Height comes from
+   the content and the padding stated here; there is no min-height inventing
+   space that nobody authored. */
+.startup50-hero {
+  display: grid;
+  grid-template-columns: var(--startup50-seam) minmax(0, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+
+.startup50-hero__folio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  border-right: 2px solid var(--green-deep);
+  padding: 24px 18px 24px 0;
+  color: var(--green-deep);
+}
+
+.startup50-hero__folio strong {
+  display: block;
+  /* Cancels the numeral's left side bearing, so the folio starts on the same
+     edge as the edition line under it instead of a dozen pixels inside it. */
+  margin: 0 0 0 -0.05em;
+  /* Sized from the seam, never the viewport. At 0.8 of the track the wider of
+     the two numerals still clears the rule by about 7% of the track, so the
+     folio can never reach the spine, whichever face the platform serves the
+     Latin digits from. */
+  font-size: min(15rem, calc(var(--startup50-seam) * 0.8));
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  letter-spacing: -0.09em;
+  line-height: 1;
+  /* A 240px line box carries only about 175px of ink, so centring the box left
+     the number sitting low in its own column. Trimming to cap and baseline
+     centres what a reader actually sees. Unsupported engines keep the
+     untrimmed box, which is the behaviour this replaces. */
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+/* Bengali numerals are already tightly drawn by the self-hosted face. The
+   Latin display tracking above makes 50 feel like one folio mark, but applying
+   the same ten-pixel collision to ৫০ deforms the open counters.
+   They also stop about 0.035em short of the cap line the box is trimmed to,
+   where Latin figures overshoot it slightly, so ৫০ centred eight pixels low in
+   its column. Half the difference comes off the top and the mark sits on the
+   same axis in both editions. */
+html[lang='bn'] .startup50-hero__folio strong {
+  margin-block: -0.07em 0;
+  letter-spacing: -0.02em;
+}
+
+.startup50-hero__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 44px 0 48px 48px;
+}
+
+/* Title, deck, description and actions are four levels, so the intervals
+   between them are four steps rather than one repeated value. The title and
+   its deck are a pair and sit tight; every gap below opens. */
+.startup50-hero__copy h1 {
+  max-width: 47rem;
+  margin: 0 0 10px;
+  border: 0;
+  padding: 0;
+  font-size: clamp(2.35rem, 4.3vw, 4.7rem);
+  font-weight: 580;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+.startup50-hero__promise {
+  max-width: 44rem;
+  margin: 0;
+  font-size: clamp(1.12rem, 1.6vw, 1.42rem);
+  font-weight: var(--w-strong);
+  line-height: 1.45;
+}
+
+/* Narrower than the deck above it on purpose: at 680px this ran past 90
+   characters a line and broke 91/37, which is a hard line to track back to on
+   a phone-sized reading habit. */
+.startup50-hero__description {
+  max-width: 36rem;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.startup50-hero__actions,
+.startup50-methodology__actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 4px 20px;
-  margin: 0;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 9px;
-  color: var(--muted);
-  font-size: 0.86rem;
+  gap: 10px;
+  margin-top: 24px;
 }
 
-.contributor-list {
-  margin: 0 0 34px;
+.startup50-hero__actions {
+  margin-top: 32px;
+}
+
+.startup50-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 10px 18px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: var(--w-strong);
+  text-decoration: none;
+}
+
+.article .startup50-action:visited {
+  color: var(--ink);
+}
+
+.startup50-action:hover {
+  border-color: var(--green-deep);
+  background: var(--green-ground);
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+.startup50-action--primary {
+  border-color: var(--green-deep);
+  background: var(--green-ground);
+  color: var(--green-deep);
+}
+
+.article .startup50-action--primary:visited {
+  color: var(--green-deep);
+}
+
+.startup50-register-section,
+.startup50-methodology {
+  scroll-margin-top: 112px;
+}
+
+/* The second row of the masthead, and the rule that closes it. */
+.startup50-register-heading {
+  display: grid;
+  grid-template-columns: var(--startup50-seam) minmax(0, 1fr);
+  border-bottom: 2px solid var(--green-deep);
+}
+
+/* Left, like the folio above it and like everything else on this site. Centred
+   text here gave the seam column two alignments in the space of 200px, which
+   read as an accident rather than as a masthead. */
+.startup50-register-heading__rail {
+  min-width: 0;
+  border-right: 2px solid var(--green-deep);
+  padding: 26px 18px 28px 0;
+}
+
+.startup50-register-heading__rail h2 {
+  margin: 0;
+}
+
+.startup50-register-heading h2,
+.startup50-methodology > h2 {
+  border: 0;
+  font-size: 1.55rem;
+}
+
+.startup50-register-heading__updated {
+  margin: 6px 0 0;
+  color: var(--faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* Same top padding as the rail. The heading and this line then start on the
+   same cap, because the smaller line carries proportionally more of its own
+   leading and the two cancel out. Nothing here has to be kept in step with a
+   font size by hand. */
+.startup50-register-heading > p {
+  max-width: 34rem;
+  margin: 0;
+  padding: 26px 0 28px 48px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.startup50-filters {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.4fr) minmax(190px, 0.8fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  background: var(--canvas-soft);
+  padding: 12px;
+}
+
+.startup50-filters label {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: var(--w-strong);
+}
+
+.startup50-filters input,
+.startup50-filters select,
+.startup50-filters button {
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--canvas);
+  padding: 7px 10px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.startup50-filters input:focus,
+.startup50-filters select:focus,
+.startup50-filters button:focus-visible {
+  border-color: var(--green);
+  outline: 2px solid color-mix(in srgb, var(--green-deep), transparent 72%);
+  outline-offset: 1px;
+}
+
+.startup50-filters button {
+  padding-inline: 16px;
+  color: var(--green-deep);
+  font-weight: var(--w-strong);
+  cursor: pointer;
+}
+
+.startup50-filters button:hover {
+  border-color: var(--green-deep);
+  background: var(--green-ground);
+}
+
+.startup50-filters__count {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.startup50-filters__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 10px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+/* The row is sized by the canvas it sits in, not by the window, because those
+   two are not the same measurement here. The navigation rail keeps its full
+   width until 860px, so a 900px window leaves this list a 598px canvas while
+   an 860px window leaves it 824px. Keyed to the window, the row asked for
+   718px of columns inside 559px and pushed the whole page sideways between
+   861px and 1019px. Keyed to the canvas it simply drops a column.
+   Stacked is the base and the columns are layered on with min-width queries,
+   so an engine without container queries still gets a readable row rather than
+   a grid three times wider than the phone it is on. */
+.startup50-register {
+  container: startup50-list / inline-size;
+  margin: 0;
+  border-top: 2px solid var(--green-deep);
   padding: 0;
   list-style: none;
-  counter-reset: none;
 }
 
-.contributor-row {
-  display: grid;
-  grid-template-columns: 34px 56px minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: center;
+.startup50-register > li {
   margin: 0;
   border-bottom: 1px solid var(--line-soft);
-  padding: 16px 12px 16px 4px;
 }
 
-.contributor-row__rank {
-  color: var(--green-deep);
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  text-align: right;
+.startup50-register > li[hidden] {
+  display: none;
 }
 
-.contributor-avatar {
-  position: relative;
+.startup50-entry {
   display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  overflow: hidden;
+  grid-template-columns: 88px minmax(0, 1fr);
+  padding: 16px 0;
+  background: var(--canvas);
+}
+
+.startup50-entry:hover,
+.startup50-entry:focus-within {
+  background: var(--green-ground);
+}
+
+.startup50-entry__mark {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 2px 8px 12px 0;
+}
+
+.startup50-entry__mark img {
+  display: block;
+  width: 80px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.startup50-entry__identity,
+.startup50-entry__description,
+.startup50-entry__lesson,
+.startup50-details {
+  min-width: 0;
+  margin: 0;
+}
+
+.startup50-entry__identity {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 2px 0 12px 12px;
+}
+
+.startup50-entry__description,
+.startup50-entry__lesson,
+.startup50-details,
+.startup50-details[open] {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line-soft);
+  padding: 13px 0 0;
+}
+
+.startup50-entry__lesson,
+.startup50-details,
+.startup50-details[open] {
+  margin-top: 13px;
+}
+
+.startup50-entry__identity h2 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.startup50-entry__identity h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.article .startup50-entry__identity h2 a:visited {
+  color: var(--ink);
+}
+
+.startup50-entry__identity h2 a:hover {
+  color: var(--blue-hover);
+  text-decoration: underline;
+}
+
+.startup50-entry__identity p,
+.startup50-entry__description,
+.startup50-entry__lesson p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.56;
+}
+
+.startup50-entry__identity p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.startup50-entry__description {
+  color: var(--ink);
+}
+
+.startup50-entry__lesson > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: var(--w-strong);
+  line-height: 1.35;
+}
+
+.startup50-entry__lesson p {
+  color: var(--muted);
+}
+
+.startup50-details {
+  align-self: stretch;
+}
+
+.startup50-details summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--blue-soft);
+  background: var(--canvas);
+  padding: 8px 10px;
   color: var(--green-deep);
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
 }
 
-.contributor-avatar img {
+.startup50-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.startup50-details summary::after {
+  content: '+';
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  color: transparent;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  line-height: 1;
 }
 
-.contributor-row__identity {
+.startup50-details[open] {
+  padding-top: 13px;
+}
+
+.startup50-details[open] summary::after {
+  content: '−';
+}
+
+.startup50-details dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px 24px;
+  margin: 16px 0 0;
+}
+
+.startup50-details dl > div {
   min-width: 0;
 }
 
-.contributor-row__identity strong,
-.contributor-row__identity > span {
-  display: block;
+.startup50-details dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: var(--w-strong);
+  line-height: 1.35;
+}
+
+.startup50-details dd {
+  margin: 4px 0 0;
+  font-size: 0.83rem;
+  line-height: 1.55;
+}
+
+.startup50-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.startup50-sources > span {
+  font-weight: var(--w-strong);
+}
+
+.startup50-sources a {
   overflow-wrap: anywhere;
 }
 
-.contributor-row__identity strong {
-  font-family: var(--serif);
-  font-size: 1.14rem;
-  font-weight: 700;
-  line-height: 1.3;
+/* Each threshold is the sum of that layout's own column minimums plus a few
+   pixels, so a tier is never asked to draw itself into less room than it
+   needs: 636px for the four-column row, 718px compact, 796px roomy. */
+@container startup50-list (min-width: 660px) {
+  .startup50-entry {
+    grid-template-columns: 96px minmax(150px, 0.82fr) minmax(190px, 1fr) minmax(200px, 1.08fr);
+    min-height: 126px;
+    padding: 0;
+  }
+
+  .startup50-entry__mark {
+    align-items: flex-start;
+    padding: 22px 8px;
+  }
+
+  .startup50-entry__mark img {
+    width: 88px;
+    height: 52px;
+  }
+
+  .startup50-entry__identity,
+  .startup50-entry__description,
+  .startup50-entry__lesson,
+  .startup50-details {
+    border-left: 1px solid var(--line-soft);
+    padding: 16px 12px;
+  }
+
+  .startup50-entry__identity {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .startup50-entry__description,
+  .startup50-entry__lesson {
+    grid-column: auto;
+    border-top: 0;
+    margin-top: 0;
+  }
+
+  /* The disclosure keeps the fourth column while it is shut and takes the
+     whole width under the row once it is open, which is the one place this
+     row genuinely changes shape on a click. */
+  .startup50-details {
+    grid-column: 2 / -1;
+    border-top: 1px solid var(--line-soft);
+    border-left: 0;
+    margin-top: 0;
+    padding: 16px 12px;
+  }
+
+  .startup50-details[open] {
+    grid-column: 2 / -1;
+    padding-top: 16px;
+  }
+
+  .startup50-details dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.contributor-row__identity strong a {
-  color: var(--ink);
+@container startup50-list (min-width: 730px) {
+  .startup50-entry {
+    grid-template-columns: 96px minmax(135px, 0.75fr) minmax(170px, 1fr) minmax(185px, 1.1fr) minmax(132px, 0.68fr);
+  }
+
+  .startup50-details {
+    grid-column: auto;
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+    align-self: stretch;
+    padding: 16px 12px;
+  }
+
+  .startup50-details[open] {
+    grid-column: 2 / -1;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 14px;
+  }
 }
 
-.contributor-row__identity strong a:hover {
-  color: var(--blue-hover);
+@container startup50-list (min-width: 810px) {
+  .startup50-entry {
+    grid-template-columns: 108px minmax(150px, 0.78fr) minmax(190px, 1.08fr) minmax(210px, 1.24fr) minmax(138px, 0.7fr);
+  }
+
+  .startup50-entry__mark {
+    padding-inline: 10px;
+  }
+
+  .startup50-entry__identity,
+  .startup50-entry__description,
+  .startup50-entry__lesson,
+  .startup50-details {
+    padding: 18px 16px;
+  }
 }
 
-.contributor-row__identity > span {
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 0.82rem;
+.startup50-methodology {
+  margin-top: 54px;
+  border-top: 2px solid var(--green-deep);
+  padding-top: 30px;
 }
 
-.contributor-row__count {
-  display: block;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.contributor-row__count a,
-.contributor-row__count > span {
-  color: var(--ink);
-  font-size: 0.86rem;
-}
-
-.contributor-row__count a:hover {
-  color: var(--blue-hover);
-}
-
-.contributor-row__count b {
-  color: var(--green-deep);
-  font-family: var(--serif);
-  font-size: 1.32rem;
-}
-
-.contributor-row__count time {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 0.76rem;
-}
-
-/* The core team keeps the ranked columns so the two lists line up, but the rank
-   cell stays empty: they are credited, not placed. */
-
-.contributor-method,
-.contributor-empty {
+.startup50-methodology > h2 {
   margin: 0;
-  border-top: 1px solid var(--line);
-  padding-top: 14px;
+  padding: 0;
+}
+
+.startup50-methodology__lede {
+  max-width: 830px;
+  margin: 14px 0 0;
   color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.startup50-methodology__body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 26px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.startup50-methodology__body > section {
+  padding: 20px 28px 20px 0;
+}
+
+.startup50-methodology__body > section + section {
+  border-left: 1px solid var(--line);
+  padding-right: 0;
+  padding-left: 28px;
+}
+
+.startup50-methodology__body h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.startup50-methodology__body ul {
+  margin: 0;
+  padding-inline-start: 24px;
+}
+
+.startup50-methodology__body li,
+.startup50-methodology__body p {
+  margin-top: 0;
   font-size: 0.88rem;
   line-height: 1.65;
 }
 
-.contributor-method strong {
-  color: var(--ink);
+.startup50-methodology__body li + li {
+  margin-top: 7px;
 }
 
-@media (max-width: 620px) {
-  .contributor-row {
-    grid-template-columns: 26px 48px minmax(0, 1fr);
-    gap: 6px 14px;
-    padding-right: 4px;
+.startup50-methodology__body p + p {
+  margin-top: 10px;
+}
+
+@media (max-width: 1120px) {
+  .startup50-hero__copy {
+    padding: 38px 0 42px 32px;
   }
 
-  .contributor-avatar {
-    width: 48px;
-    height: 48px;
-    font-size: 0.95rem;
+  .startup50-register-heading > p {
+    padding-left: 32px;
   }
 
-  .contributor-row__count {
-    grid-column: 3 / -1;
-    display: flex;
-    gap: 4px 12px;
-    align-items: baseline;
-    text-align: left;
+}
+
+@media (max-width: 860px) {
+  .startup50-hero__folio {
+    padding-right: 14px;
   }
 
-  .contributor-row__count time {
-    margin-top: 0;
+  .startup50-hero__copy {
+    padding: 32px 0 36px 26px;
+  }
+
+  .startup50-hero__copy h1 {
+    font-size: clamp(2.15rem, 7vw, 3.5rem);
+  }
+
+  .startup50-hero__actions {
+    margin-top: 26px;
+  }
+
+  .startup50-register-heading__rail {
+    padding: 22px 14px 24px 0;
+  }
+
+  .startup50-register-heading > p {
+    padding: 22px 0 24px 26px;
+  }
+}
+
+/* Below the two-column masthead the spine turns on its side: the folio takes
+   its own band closed by the same green rule, and the rest of the block reads
+   straight down in one column. */
+@media (max-width: 680px) {
+  .startup50-hero {
+    display: block;
+  }
+
+  .startup50-hero__folio {
+    display: block;
+    border-right: 0;
+    border-bottom: 2px solid var(--green-deep);
+    padding: 6px 0 16px;
+  }
+
+  /* The stacked masthead authors its own band padding, so the centring
+     correction above has nothing left to correct. */
+  .startup50-hero__folio strong {
+    margin-block: 0;
+    font-size: clamp(5.2rem, 22vw, 7.6rem);
+  }
+
+  .startup50-hero__copy {
+    padding: 26px 0 30px;
+  }
+
+  .startup50-hero__actions {
+    margin-top: 26px;
+  }
+
+  /* Two abreast while the canvas can hold them, one when it cannot. A single
+     full-bleed column turned a 44px control into a 540px slab at 600px. */
+  .startup50-hero__actions,
+  .startup50-methodology__actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+
+  .startup50-register-heading {
+    display: block;
+  }
+
+  .startup50-register-heading__rail {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0 18px;
+  }
+
+  .startup50-register-heading > p {
+    padding: 16px 0 22px;
+  }
+
+  .startup50-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .startup50-filters input,
+  .startup50-filters select,
+  .startup50-filters button {
+    min-height: 44px;
+    max-width: 100%;
+  }
+
+  .startup50-methodology__body {
+    grid-template-columns: 1fr;
+  }
+
+  .startup50-methodology__body > section,
+  .startup50-methodology__body > section + section {
+    border-left: 0;
+    padding: 18px 0;
+  }
+
+  .startup50-methodology__body > section + section {
+    border-top: 1px solid var(--line-soft);
   }
 }
 
@@ -1637,7 +3207,7 @@ a.is-stub-link:hover {
 .wiki-kicker {
   margin: 0 0 4px;
   color: var(--green-deep);
-  font-weight: 800;
+  font-weight: var(--w-strong);
 }
 
 /* The one ranked pair of actions on the site. Kept inside the flat, bordered
@@ -1673,7 +3243,7 @@ a.is-stub-link:hover {
   border-color: var(--green-deep);
   background: var(--green-ground);
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .wiki-start .is-primary::after {
@@ -1688,7 +3258,7 @@ a.is-stub-link:hover {
 .wiki-subtitle {
   margin: 0 0 14px;
   color: var(--muted);
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 1.08rem;
 }
 
@@ -1742,13 +3312,13 @@ a.is-stub-link:hover {
   display: block;
   width: 112px;
   height: 112px;
-  margin: 24px auto 10px;
+  margin: 20px auto 14px;
 }
 
 .wiki-infobox strong {
   display: block;
   text-align: center;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 1.08rem;
 }
 
@@ -1784,7 +3354,7 @@ a.is-stub-link:hover {
 
 .wiki-infobox dt {
   color: var(--muted);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .wiki-section {
@@ -1896,7 +3466,7 @@ a.is-stub-link:hover {
   padding-top: 14px;
   color: var(--green-deep);
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .wiki-path-card__go::after {
@@ -1936,7 +3506,7 @@ a.is-stub-link:hover {
   align-items: baseline;
   gap: 10px;
   padding: 13px 18px;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   cursor: pointer;
   list-style: none;
 }
@@ -1950,7 +3520,7 @@ a.is-stub-link:hover {
   flex: 0 0 auto;
   width: 0.8em;
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .home-faq details[open] > summary::before {
@@ -2006,7 +3576,7 @@ a.is-stub-link:hover {
 
 .contrib-section .contrib-stats b {
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 /* recently updated */
@@ -2038,6 +3608,11 @@ a.is-stub-link:hover {
 
 /* ---------------------------------------------------------------- footer */
 
+/* The footer is a sibling of .page-shell, not a child, so it cannot inherit the
+   grid: the left padding is the sidebar column (282px) plus the 28px gutter,
+   hand-computed to line the footer text up with the content canvas. That makes
+   it a magic number tied to .page-shell's first column — every breakpoint that
+   resizes or removes that column has to re-state this padding below. */
 .site-footer {
   width: min(1660px, 100%);
   margin: 0 auto;
@@ -2064,7 +3639,7 @@ a.is-stub-link:hover {
   margin: 0;
   color: var(--faint);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1.7;
 }
 
@@ -2115,6 +3690,11 @@ a.is-stub-link:hover {
     grid-template-columns: 238px minmax(0, 1fr);
   }
 
+  /* Follows the narrower sidebar column above: 238px + the 28px gutter. */
+  .site-footer {
+    padding-left: 266px;
+  }
+
   .sidebar {
     padding-left: 22px;
     padding-right: 22px;
@@ -2131,6 +3711,7 @@ a.is-stub-link:hover {
     padding-right: 32px;
   }
 
+  .page-contribution-credits,
   .article-footer {
     margin-left: 32px;
     margin-right: 32px;
@@ -2150,13 +3731,26 @@ a.is-stub-link:hover {
 }
 
 @media (max-width: 860px) {
-  /* The header stacks to two rows here (~121px), so anchors need to clear it. */
+  /* The header stacks to two rows here. It is 121px while the tagline fits on
+     one line and 140px on a 390px screen, where it wraps – so the clearance is
+     set from the taller case. Measured; 132px left the target heading tucked
+     under the header on a phone, which is the width this matters on. */
   html {
-    scroll-padding-top: 132px;
+    scroll-padding-top: 152px;
   }
 
+  /* The phone is the reading device, so it gets the larger body, not the
+     smaller one. Bengali carries matra above and conjuncts below the line, and
+     at 15px the stacked forms – ক্ত, ষ্ঠ, ঙ্গ – are where a founder on a
+     mid-range Android starts guessing. 16px costs about one word a line and
+     buys back the shapes. The leading below is the other half of it: the same
+     ratio that reads calm in Latin runs tight once the matra is in it. */
   body {
-    font-size: 15px;
+    font-size: 16px;
+  }
+
+  .article :is(p, li, dd, td, th, blockquote) {
+    line-height: 1.78;
   }
 
   .header-inner {
@@ -2166,8 +3760,8 @@ a.is-stub-link:hover {
   }
 
   .brand img {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 
   .top-actions .social-link {
@@ -2272,6 +3866,16 @@ a.is-stub-link:hover {
     max-height: none;
   }
 
+  /* This drawer is the whole navigation on a phone, and DESIGN.md puts the
+     important mobile actions at 44px. At the desktop density these rows are
+     29px, which is a thumb-width target for the site's primary menu. */
+  .sidebar-group a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+  }
+
   .content-canvas {
     width: 100%;
     max-width: 100vw;
@@ -2287,11 +3891,26 @@ a.is-stub-link:hover {
   /* The row collapses to the one control a phone reader can act on. "পড়ুন" is
      the view they are already in, and commit history is a poor thing to open on
      a phone – but the founder who spots a wrong fee on the bus is exactly the
-     person this editor is for, so সম্পাদনা stays, drawn as something tappable. */
+     person this editor is for, so এডিট stays, drawn as something tappable. */
   .article-actions {
     gap: 12px;
     padding-bottom: 10px;
     font-size: 0.9rem;
+  }
+
+  /* Read is already the current view and History is intentionally desktop-only
+     here. Once Edit is ineligible, remove the otherwise empty mobile action
+     slot; an actions-only utility strip should disappear with it. */
+  .article-actions--without-edit,
+  .content-canvas:has(.article [data-pagefind-meta='stub']) .article-actions,
+  .content-canvas:has(.article > [data-inline-edit-source='section-index']):not(:has(.article > h2)) .article-actions {
+    display: none;
+  }
+
+  .article-tabs--actions-only:has(.article-actions--without-edit),
+  .content-canvas:has(.article [data-pagefind-meta='stub']) .article-tabs--actions-only,
+  .content-canvas:has(.article > [data-inline-edit-source='section-index']):not(:has(.article > h2)) .article-tabs--actions-only {
+    display: none;
   }
 
   .article-actions .act-history,
@@ -2328,13 +3947,74 @@ a.is-stub-link:hover {
     padding: 22px 18px 44px;
   }
 
+  /* Dense comparison grids need more than a phone can offer without turning
+     every heading into a tall stack of syllables. The table becomes its own
+     native horizontal scroll surface; simple two- and three-column references
+     continue to fit the article normally. */
+  .article > table:has(tr > :nth-child(4)) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .article > table:has(tr > :nth-child(4)) :is(th, td) {
+    min-width: 8rem;
+  }
+
+  /* Everything narrower stays in the column and divides it evenly. Automatic
+     layout sizes a table from its longest word, so one "Requirements" in a
+     three-column reference walked the whole table 9px past the canvas and gave
+     the page a sideways scroll. Fixed layout settles the columns first and lets
+     the text wrap inside them, which is the arrangement a phone can read. */
+  .article > table:not(:has(tr > :nth-child(4))) {
+    table-layout: fixed;
+  }
+
+  .page-contribution-credits,
   .article-footer {
     margin-left: 18px;
     margin-right: 18px;
   }
 
+  /* The sidebar is an off-canvas drawer from here down, so there is no column
+     to clear: the 310px reserved for it would otherwise squeeze the footer into
+     a ~50px strip on a phone. Match the article's 18px gutters instead. */
+  .site-footer {
+    padding: 24px 18px 32px;
+  }
+
   h1 {
     font-size: 2.05rem;
+  }
+
+  /* A heading that fits one line on a monitor takes two or three on a phone, so
+     the leading stops being a detail of the first line and becomes the texture
+     of the whole block. 1.25 left the matra of a second line sitting on the
+     descenders of the first. h3 moves up as well: against a 16px body it was a
+     1.28px step, which is a weight change, not a level. */
+  h2,
+  h3 {
+    line-height: 1.34;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Nothing in these blocks is code. They hold a Bangla message template, a fee
+     sum, a share calculation – prose that happens to want a fixed frame – and a
+     phone is exactly where sideways scrolling loses the end of the line. */
+  .article pre {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  /* "লেখা বাকি" sits beside a link the reader is deciding whether to follow, so
+     it has to be readable at a glance, not merely present. Bengali at 10.9px on
+     a phone is neither. */
+  .stub-chip {
+    font-size: 0.78rem;
   }
 
   .wiki-title-row {
@@ -2345,7 +4025,10 @@ a.is-stub-link:hover {
     margin: 0 0 14px;
   }
 
+  /* Matches the specificity of the per-count rules above and comes later, so
+     every directory collapses to one column here. */
   .directory-controls,
+  .directory-controls[data-filters],
   .wiki-scope-grid,
   .wiki-source-list {
     grid-template-columns: 1fr;
@@ -2357,12 +4040,68 @@ a.is-stub-link:hover {
     min-height: 44px;
   }
 
+  /* A one-column grid track still floors at the widest thing inside it, and a
+     <select> reports its longest option as min-content. On a 320px screen that
+     pushed the whole filter panel 24px past the canvas. The label is a grid of
+     its own, so the floor has to be released on both. */
+  .directory-controls label {
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .directory-controls input,
+  .directory-controls select,
+  .directory-controls button {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .wiki-infobox dl div {
     grid-template-columns: 104px 1fr;
   }
 
-  .site-footer {
-    padding: 22px 18px 28px;
+  .directory-card {
+    padding: 14px;
+  }
+}
+
+/* The production date arrives from postbuild metadata after hydration. On a
+   narrow phone it occupies the first line and the repair link the second, so
+   reserve that exact grid before the date arrives and keep the article still. */
+@media (max-width: 420px) {
+  .article-meta {
+    display: grid;
+    grid-template-rows: minmax(1.5em, auto) auto;
+    row-gap: 4px;
+    column-gap: 0;
+    justify-items: start;
+  }
+
+  .article-meta .meta-date {
+    grid-row: 1;
+  }
+
+  .article-meta > a {
+    grid-row: 2;
+  }
+
+  /* The byline is in the HTML at first paint, so it needs no reservation of its
+     own; only the client-formatted date does. Adding its track conditionally
+     keeps every page without a byline laid out exactly as before. */
+  .article-meta:has(.article-byline:not(:empty)) {
+    grid-template-rows: auto minmax(1.5em, auto) auto;
+  }
+
+  .article-meta:has(.article-byline:not(:empty)) .article-byline {
+    grid-row: 1;
+  }
+
+  .article-meta:has(.article-byline:not(:empty)) .meta-date {
+    grid-row: 2;
+  }
+
+  .article-meta:has(.article-byline:not(:empty)) > a {
+    grid-row: 3;
   }
 }
 
@@ -2632,7 +4371,7 @@ body.auth-open {
 
 .modal-error .modal-error__label {
   margin: 0 0 3px;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .modal-error__actions {
@@ -2691,7 +4430,7 @@ body.auth-open {
 }
 
 /* ------------------------------------------------------ in-canvas editing */
-/* The wiki move: pressing সম্পাদনা does not hand you an editor, it turns the
+/* The wiki move: pressing এডিট does not hand you an editor, it turns the
    page into one. The text keeps its column, its measure and its faces, so the
    paragraph a founder was reading is still exactly where they left it, now with
    a caret in it. Edit mode adds two objects and no new colour: a bar on the
@@ -2795,7 +4534,7 @@ body.auth-open {
   border-color: var(--green-deep);
   background: var(--green-ground);
   color: var(--green-deep);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-btn.is-primary:hover:not(:disabled) {
@@ -2855,7 +4594,7 @@ body.auth-open {
   --crepe-color-hover: var(--green-soft);
   --crepe-color-selected: var(--green-soft);
   --crepe-color-inline-area: var(--line-soft);
-  --crepe-font-title: var(--serif);
+  --crepe-font-title: var(--display);
   --crepe-font-default: var(--sans);
   --crepe-font-code: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --crepe-shadow-1: 0 2px 10px rgb(var(--ink-channels) / 10%);
@@ -2871,7 +4610,7 @@ body.auth-open {
    `.milkdown .ProseMirror x` and injected after this file, so every rule below
    carries `.edit-live .milkdown` to outrank it. The values are the article's own,
    restated deliberately: if one of them drifts, the text jumps when you press
-   সম্পাদনা, and the whole point of this mode is that it does not. */
+   এডিট, and the whole point of this mode is that it does not. */
 
 .edit-live .milkdown .ProseMirror {
   --prosemirror-virtual-cursor-color: var(--green-deep);
@@ -2905,8 +4644,8 @@ body.auth-open {
 .edit-live .milkdown .ProseMirror :is(h1, h2, h3, h4, h5, h6) {
   padding: 0;
   color: var(--ink);
-  font-family: var(--serif);
-  font-weight: 700;
+  font-family: var(--display);
+  font-weight: var(--w-heading);
   line-height: 1.25;
   letter-spacing: 0;
 }
@@ -3003,7 +4742,7 @@ body.auth-open {
 
 .edit-live .milkdown .ProseMirror th {
   background: var(--shade);
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 /* Blue is this site's link colour and nothing else's; Crepe would paint links in
@@ -3059,7 +4798,7 @@ body.auth-open {
   color: var(--warn-ink);
   font-family: var(--sans);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-live .milkdown .milkdown-code-block[data-locked] .cm-editor {
@@ -3137,7 +4876,7 @@ body.auth-open {
   color: rgb(255 255 255 / 9%);
   font-family: var(--sans);
   font-size: clamp(9rem, 30vw, 18rem);
-  font-weight: 700;
+  font-weight: var(--w-strong);
   line-height: 1;
 }
 
@@ -3150,7 +4889,7 @@ body.auth-open {
   padding: 3px 7px;
   color: #fff;
   font-size: 0.76rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-video__play {
@@ -3189,7 +4928,7 @@ body.auth-open {
   margin-bottom: 4px;
   color: var(--muted);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-live .milkdown .edit-video__field input,
@@ -3207,7 +4946,7 @@ body.auth-open {
 }
 
 .edit-live .milkdown .edit-video__title {
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-live .milkdown .edit-video__field input:focus,
@@ -3238,7 +4977,7 @@ body.auth-open {
   min-height: 32px;
   color: var(--green-deep);
   cursor: pointer;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-video__details-grid {
@@ -3271,7 +5010,7 @@ body.auth-open {
   cursor: pointer;
   font: inherit;
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   text-decoration: none;
 }
 
@@ -3331,7 +5070,7 @@ body.auth-open {
 .edit-media__heading h2 {
   margin: 0 0 4px;
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 1.25rem;
 }
 
@@ -3422,7 +5161,7 @@ body.auth-open {
   gap: 5px;
   color: var(--ink);
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-media-item :is(input, textarea),
@@ -3504,7 +5243,7 @@ body.auth-open {
   display: block;
   color: var(--ink);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .edit-publish__hint {
@@ -3553,6 +5292,11 @@ body.auth-open {
   padding: 10px 12px;
   color: var(--warn-ink);
   font-size: 0.9rem;
+}
+
+.edit-publish__error:focus {
+  outline: 2px solid var(--green-deep);
+  outline-offset: 2px;
 }
 
 .edit-publish__error p {
@@ -3712,7 +5456,7 @@ body.auth-open {
   margin: 0 0 6px;
   color: var(--green-deep);
   font-size: 0.86rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .media-review__header h1 {
@@ -3720,7 +5464,7 @@ body.auth-open {
   border-bottom: 1px solid var(--line);
   padding-bottom: 12px;
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(2.1rem, 3vw, 3.2rem);
   line-height: 1.3;
 }
@@ -3833,7 +5577,7 @@ body.auth-open {
 
 .media-review-item__title h2 {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 1.55rem;
 }
 
@@ -3870,7 +5614,7 @@ body.auth-open {
 .media-review-item dt {
   color: var(--faint);
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .media-review-item dd {
@@ -3905,7 +5649,7 @@ body.auth-open {
   display: grid;
   gap: 5px;
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
 }
 
 .media-review__moderation-actions {
@@ -3936,9 +5680,9 @@ body.auth-open {
     padding: 10px 18px;
   }
 
-  /* One row while nothing is at stake: page name on the left, the two actions on
-     the right. The status line only claims a second row once there is something
-     to say, which on a 714px-tall phone is a row worth not spending. */
+  /* At compact tablet widths the page name and available actions share the
+     first row when they fit. The status only claims another row once there is
+     something to say; the narrower phone rule below groups actions explicitly. */
   .edit-bar__what {
     flex: 1 1 8rem;
   }
@@ -3959,6 +5703,14 @@ body.auth-open {
 
   .edit-flash__close {
     width: 44px;
+  }
+
+  /* A phone cannot hold four thumb-sized actions on a sticky bar without
+     spending a third row of a 714px screen. So the bar keeps the step that
+     comes first — look at what changed — and sends from inside that sheet or
+     from the publish panel, the way a mobile wiki editor already works. */
+  .edit-bar__actions .edit-btn--send {
+    display: none;
   }
 
   .edit-live {
@@ -4044,6 +5796,36 @@ body.auth-open {
     flex-basis: 100%;
     margin-left: 0;
   }
+
+  /* Keep the sticky editor at two rows across narrow phones: identity and
+     status share the first, while the three available actions divide the
+     second. A dirty-state message must not create a third persistent row. */
+  .edit-bar__status {
+    order: 0;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 48%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .edit-bar__actions {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .edit-bar__actions .edit-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding-inline: 8px;
+    text-align: center;
+  }
+
+  .edit-bar__actions .edit-bar__warn {
+    flex: 1 1 100%;
+  }
 }
 
 @media (pointer: coarse) {
@@ -4104,7 +5886,7 @@ body.auth-open {
   align-items: center;
   gap: 6px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   color: var(--green-deep);
   background: var(--green-soft);
   padding: 3px 9px;
@@ -4123,7 +5905,7 @@ body.auth-open {
 }
 
 .expert-review__name {
-  font-weight: 700;
+  font-weight: var(--w-strong);
   color: var(--ink);
 }
 
@@ -4201,6 +5983,15 @@ body.auth-open {
   padding-inline-start: 1.75rem;
 }
 
+/* Lists that carry their own markers, or none, opt out here rather than
+   trying to out-specify this rule locally: `list-style: none` on the list
+   itself loses to it and the marker came back in Bangla only. */
+html[lang='bn'] ol:not(
+    .breadcrumbs ol,
+    .contributor-list,
+    .contributor-trail ol,
+    .page-credit-list
+  ),
 html[lang='bn'] .reference-list {
   list-style-type: bengali-decimal;
 }
@@ -4321,7 +6112,7 @@ html[lang='en'] .glossary-copy--en {
   gap: 6px;
   margin-bottom: 6px;
   font-size: 0.76rem;
-  font-weight: 700;
+  font-weight: var(--w-strong);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--green-deep);
@@ -4384,6 +6175,477 @@ html[lang='en'] .glossary-copy--en {
   }
 }
 
+/* ---------------------------------------------- glossary page (A–Z lookup) */
+
+/* The glossary is a lookup surface before it is a reading surface: a founder
+   arrives having just heard one English word and wants its meaning in seconds.
+   So the spine is alphabetical rather than thematic, the headword is the English
+   term in both editions, and the theme is a filter instead of the structure.
+
+   Every entry is server-rendered here, and the controls only hide rows, so the
+   whole glossary is present for browser find, for Pagefind and for a reader
+   whose JavaScript never arrives. There are no h2s on the page on purpose: the
+   letter strip is the table of contents, and a rail listing A, B, C would be a
+   worse one. */
+
+.glossary {
+  max-width: var(--measure);
+  margin-top: 20px;
+}
+
+/* Controls: the same cool-white utility panel as the directory filters, because
+   they are the same kind of object and should not read as two systems. */
+.glossary-controls {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  background: var(--canvas-soft);
+  padding: 12px;
+}
+
+.glossary-controls__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.glossary-search {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+}
+
+.glossary-search input {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  padding: 6px 10px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.glossary-search input::placeholder {
+  color: var(--faint);
+  opacity: 1;
+}
+
+.glossary-search input:focus {
+  border-color: var(--green);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+
+.glossary-count {
+  margin: 0 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--canvas);
+  padding: 4px 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: var(--w-strong);
+  white-space: nowrap;
+}
+
+/* Pills, because these are toggles. That is the only thing a pill means here. */
+.glossary-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.glossary-groups button {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--canvas);
+  padding: 4px 14px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: var(--w-strong);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+
+.glossary-groups button:hover {
+  border-color: var(--green);
+  background: var(--green-ground);
+  color: var(--green-deep);
+}
+
+.glossary-groups button[aria-pressed='true'] {
+  border-color: var(--green-deep);
+  background: var(--green-soft);
+  color: var(--green-deep);
+}
+
+/* The recovery is its own line rather than a control stranded mid-sentence at
+   whatever width the message happens to wrap. */
+.glossary-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.glossary-empty p {
+  margin: 0;
+}
+
+.glossary-reset {
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  padding: 3px 10px;
+  color: var(--green-deep);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: var(--w-strong);
+  cursor: pointer;
+}
+
+.glossary-reset:hover {
+  border-color: var(--green-deep);
+  background: var(--green-ground);
+}
+
+/* The letter strip is this page's table of contents. auto-fit keeps every cell
+   the same size at every width, so it wraps into even rows on a phone instead of
+   becoming a sideways scroll the reader has to discover. */
+.glossary-alphabet {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.glossary-alphabet a,
+.glossary-alphabet span {
+  display: grid;
+  place-items: center;
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--canvas);
+  color: var(--blue);
+  font-size: 0.9rem;
+  font-weight: var(--w-strong);
+  text-decoration: none;
+}
+
+.glossary-alphabet a:visited {
+  color: var(--blue);
+}
+
+.glossary-alphabet a:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+.glossary-alphabet span,
+.glossary-alphabet a.is-empty {
+  border-color: var(--line-soft);
+  color: var(--faint);
+  font-weight: 400;
+  pointer-events: none;
+}
+
+/* Entries, cross-references and the starter row all sit on one two-column grid:
+   headword rail on the left, meaning on the right. The rail is what the eye runs
+   down when looking a word up, and it is the reason this is not a card list. */
+.glossary-starters,
+.glossary-entry,
+.glossary-xref {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: 8px 32px;
+  margin-inline: -12px;
+  border-bottom: 1px solid var(--line-soft);
+  padding: 16px 12px;
+}
+
+.glossary-starters {
+  border-bottom-color: var(--line);
+}
+
+.glossary-starters__title {
+  margin: 0;
+  color: var(--green-deep);
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+}
+
+.glossary-starters__list,
+.glossary-starters__note {
+  margin: 0;
+  grid-column: 2;
+}
+
+.glossary-starters__list {
+  font-weight: var(--w-strong);
+  line-height: 1.9;
+}
+
+.glossary-starters__note {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.glossary-letter {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 36px 0 0;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+}
+
+.glossary-letter__mark {
+  color: var(--green-deep);
+  font-size: 1.55rem;
+  font-weight: var(--w-heading);
+  line-height: 1.25;
+}
+
+.glossary-letter__back {
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+}
+
+.glossary-list {
+  margin: 0;
+}
+
+/* Keep every term in the HTML while skipping layout and paint for letter
+   groups that are still far below the viewport. `auto` remembers each group's
+   real size after first render; the fallback estimate keeps the scroll range
+   stable on the first pass through the page. */
+.glossary-letter-block {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* A fragment link needs the browser's real preceding geometry before it picks
+   a scroll offset. Fall back to ordinary layout only for that linked visit;
+   the unlinked lookup surface keeps the faster off-screen rendering path. */
+.glossary:has(:target) .glossary-letter-block {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+/* The root otherwise smooth-scrolls the full glossary, which can leave a
+   shared term link travelling through the page for more than a second. */
+html:has(.glossary :target) {
+  scroll-behavior: auto;
+}
+
+.glossary-entry__term {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.glossary-entry__head {
+  color: var(--ink);
+  font-size: 1.08rem;
+  font-weight: var(--w-heading);
+  line-height: 1.25;
+}
+
+.glossary-entry__expansion,
+.glossary-entry__gloss {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.glossary-entry__group {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+}
+
+.glossary-entry__body {
+  margin: 0;
+}
+
+.glossary-entry__def {
+  margin: 0;
+}
+
+.glossary-entry__note {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Labelled the way a printed reference labels a note: a word, not a coloured
+   slab down one edge. Notice Ink marks the caution without spending a fill on
+   sixty entries. */
+.glossary-entry__label {
+  margin-inline-end: 6px;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: var(--w-strong);
+}
+
+.glossary-entry__note--warn .glossary-entry__label {
+  color: var(--warn-ink);
+}
+
+.glossary-entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
+.glossary-entry__guide {
+  font-weight: var(--w-strong);
+}
+
+.glossary-entry__guide::after {
+  content: '→';
+  display: inline-block;
+  margin-inline-start: 5px;
+  transition: transform 120ms ease;
+}
+
+.glossary-entry__guide:hover::after {
+  transform: translateX(3px);
+}
+
+.glossary-entry__see {
+  color: var(--muted);
+}
+
+.glossary-entry__source {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* A cross-reference is a signpost, not an entry: it recedes so the alphabetical
+   rail still reads as a list of real terms. */
+.glossary-xref .glossary-entry__head {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.glossary-xref__to {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* The one authored moment on the page. Arriving from a term popover or a shared
+   link, the reader has to find where they landed among eighty-eight entries; the
+   ground answers that once and then gets out of the way. */
+.glossary-entry:target {
+  animation: target-land 1800ms ease-out;
+}
+
+/* The site's one landing cue, shared by the glossary entry and the page's
+   contribution record: both are places a reader arrives at by anchor and has to
+   find among everything else on the page. */
+@keyframes target-land {
+  0%,
+  35% {
+    background-color: var(--green-soft);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* The controls hide rows by setting `hidden`, and these are grids, so the
+   attribute's own `display: none` would otherwise lose. */
+.glossary-starters[hidden],
+.glossary-entry[hidden],
+.glossary-xref[hidden],
+.glossary-letter-block[hidden] {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .glossary-starters,
+  .glossary-entry,
+  .glossary-xref {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .glossary-starters__list,
+  .glossary-starters__note {
+    grid-column: 1;
+  }
+
+  /* The rail collapses, so the headword takes its own line and everything that
+     qualified it in the rail runs together beneath as one muted meta line. Left
+     as a wrapping flex row, the expansion, the Bangla gloss and the theme ran
+     into each other with nothing to say where one ended. */
+  .glossary-entry__term {
+    display: block;
+  }
+
+  .glossary-entry__head {
+    display: block;
+  }
+
+  .glossary-entry__expansion,
+  .glossary-entry__gloss,
+  .glossary-entry__group {
+    display: inline;
+    margin-top: 0;
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+
+  .glossary-entry__expansion + .glossary-entry__gloss::before,
+  .glossary-entry__expansion + .glossary-entry__group::before,
+  .glossary-entry__gloss + .glossary-entry__group::before {
+    content: ' · ';
+  }
+
+  .glossary-controls__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .glossary-count {
+    justify-self: start;
+    margin-bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glossary-entry:target {
+    animation: none;
+    background-color: var(--green-ground);
+  }
+
+  .glossary-groups button,
+  .glossary-entry__guide::after {
+    transition: none;
+  }
+}
+
 /* Enhanced Print Optimization */
 @media print {
   /* Hide interactive/chrome elements */
@@ -4401,8 +6663,25 @@ html[lang='en'] .glossary-copy--en {
   .recent-list,
   .nav-toggle,
   .sidebar-close,
-  .glossary-popover {
+  .glossary-popover,
+  .glossary-controls,
+  .glossary-alphabet,
+  .glossary-letter__back {
     display: none !important;
+  }
+
+  /* A printed glossary is read as a list, and a term split across a page break
+     is the one thing that makes it unusable at a counter. */
+  .glossary-entry,
+  .glossary-xref,
+  .glossary-starters {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .glossary-letter-block {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
   }
 
   body {
@@ -4424,6 +6703,13 @@ html[lang='en'] .glossary-copy--en {
     background: transparent !important;
   }
 
+  /* The article loses its screen gutters in print, so its closing record must
+     lose the matching screen gutters and measure cap as well. */
+  .page-contribution-credits {
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+
   h1, h2, h3, h4 {
     color: #000000 !important;
     page-break-after: avoid;
@@ -4441,6 +6727,7 @@ html[lang='en'] .glossary-copy--en {
   }
 
   /* Prevent awkward breaks inside components */
+  .page-credit,
   table,
   blockquote,
   .wiki-notice,
@@ -4480,5 +6767,61 @@ html[lang='en'] .glossary-copy--en {
     content: " (" attr(href) ")";
     font-size: 0.85em;
     color: #444;
+  }
+}
+
+/* ------------------------------------------------------ touch input floor */
+
+/* iOS Safari zooms the viewport when a focused control renders text under 16px
+   and never zooms back out, which leaves a reader scrolling sideways through
+   the rest of the page. Every control below runs a deliberately small label at
+   desktop width; on a touch pointer it gets the body size back instead. Last in
+   the file and selector-for-selector with the rules above, so each one is
+   overridden where it is set rather than at a specificity nobody can predict. */
+
+@media (pointer: coarse) {
+  /* Search inherits the body, which now holds 16px on a phone. It stays on the
+     list because it is the one control every reader touches first, and it
+     should not become a zoom trap again if the body size is ever revisited. */
+  .search input,
+  .glossary-search input,
+  .directory-controls input,
+  .directory-controls select,
+  .edit-media-item :is(input, textarea),
+  .media-review__moderation input,
+  .edit-publish__summary,
+  .edit-live .milkdown .milkdown-image-block > .caption-input {
+    font-size: 1rem;
+  }
+
+  /* Named in DESIGN.md: the important mobile actions are at least 44px. The
+     directory filters are the whole interface on that page. */
+  .directory-controls input,
+  .directory-controls select,
+  .directory-controls button {
+    min-height: 44px;
+  }
+
+  /* Same reasoning on the glossary: the filter field, the theme pills and the
+     letter strip are the whole interface of that page. The letters run 40px
+     rather than 44px because twenty-six cells at 44 push the first term most of
+     a screen down on a 360px phone. */
+  .glossary-search input,
+  .glossary-groups button {
+    min-height: 44px;
+  }
+
+  .glossary-alphabet a,
+  .glossary-alphabet span {
+    min-height: 40px;
+    font-size: 1rem;
+  }
+
+  /* The citation marker is the smallest target on a source-backed page and the
+     one a founder checking a fee actually reaches for. Its sup carries
+     line-height 0, so vertical padding grows the target to ~24px without moving
+     a single line of the paragraph around it. */
+  .article .cite-link {
+    padding-block: 6px;
   }
 }

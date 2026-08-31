@@ -330,17 +330,17 @@ export default function AuthModal({
   const errorMessage =
     error === 'no_client_id'
       ? t(
-          'এই সাইটে Google সাইন-ইন এখন পাওয়া যাচ্ছে না। আপাতত GitHub-এ সম্পাদনা করতে পারেন।',
+          'এই সাইটে Google সাইন-ইন এখন পাওয়া যাচ্ছে না। আপাতত GitHub-এ এডিট করতে পারেন।',
           'Google sign-in is not available right now. You can edit on GitHub instead.'
         )
       : error === 'script_load_failed'
         ? t(
-            'Google সাইন-ইন লোড হয়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।',
+            'Google সাইন-ইন লোড হয়নি। ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।',
             'Google sign-in did not load. Check your connection and try again.'
           )
         : error
           ? t(
-              'Google সাইন-ইন শেষ করা যায়নি। আবার চেষ্টা করুন।',
+              'Google সাইন-ইন সম্পূর্ণ হয়নি। আবার চেষ্টা করুন।',
               'Google sign-in could not be completed. Please try again.'
             )
           : null
@@ -371,7 +371,7 @@ export default function AuthModal({
         <h2 id={headingId}>{t('Google দিয়ে সাইন ইন করুন', 'Sign in with Google')}</h2>
         <p className="modal-lede" id={descriptionId}>
           {t(
-            'এই পাতায় সম্পাদনা শুরু করতে সাইন ইন করুন। GitHub অ্যাকাউন্ট লাগবে না।',
+            'এই পেজ এডিট করতে সাইন ইন করুন। GitHub অ্যাকাউন্ট লাগবে না।',
             'Sign in to start editing this page. No GitHub account needed.'
           )}
         </p>
@@ -381,7 +381,7 @@ export default function AuthModal({
             <div className="google-btn-wrap" ref={containerRef} />
             {loading && (
               <p className="modal-status" role="status">
-                {t('সাইন-ইন প্রস্তুত হচ্ছে…', 'Preparing sign-in…')}
+                {t('লোড হচ্ছে...', 'Preparing sign-in…')}
               </p>
             )}
           </div>
@@ -401,7 +401,7 @@ export default function AuthModal({
               )}
               {fallbackHref && (
                 <a className="edit-btn" href={fallbackHref} target="_blank" rel="noopener noreferrer">
-                  {t('GitHub-এ সম্পাদনা করুন', 'Edit on GitHub')}
+                  {t('GitHub-এ এডিট করুন', 'Edit on GitHub')}
                 </a>
               )}
             </div>
@@ -410,7 +410,7 @@ export default function AuthModal({
 
         <p className="modal-note">
           {t(
-            'জমা দিলে রিভিউয়ের জন্য একটি পুল রিকোয়েস্ট তৈরি হবে। অনুমোদনের আগে সাইটে কিছু বদলাবে না।',
+            'সাবমিট করলে রিভিউয়ের জন্য একটি পুল রিকোয়েস্ট তৈরি হবে। অ্যাপ্রুভ হওয়ার আগে সাইটে কিছু বদলাবে না।',
             'Submitting creates a pull request for review. Nothing changes on the site until it is approved.'
           )}
         </p>

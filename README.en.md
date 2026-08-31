@@ -1,10 +1,10 @@
 <div align="center">
 
-<a href="https://deshistartup.com/en"><img src=".github/assets/social-preview.png" alt="Deshi Startup – the open-source manual for building a startup in Bangladesh" width="720" /></a>
+<a href="https://deshistartup.com/en"><img src=".github/assets/social-preview.png" alt="Deshi Startup – the open-source manual for building startups in Bangladesh" width="720" /></a>
 
 # Deshi Startup
 
-**The free, open-source manual for building a startup in Bangladesh**
+**The free, open-source manual for building startups in Bangladesh**
 
 [Read the site](https://deshistartup.com/en) · [বাংলা README](./README.md)
 
@@ -21,11 +21,12 @@ the practical knowledge is scattered across Facebook posts and personal experien
 guides can offer useful ideas, but their advice does not always survive contact with Bangladesh's
 offices, markets, payment systems and trust constraints.
 
-Deshi Startup checks that scattered information and explains it in practical Bangla. It does not
-assume that a first-time founder already speaks the language of law, accounting or startups. A
-useful page should leave the reader knowing what to do next, where to go and what to verify again.
+Deshi Startup checks that scattered information and explains it clearly. It does not assume that a
+first-time founder already speaks the language of law, accounting or startups. A useful page
+should leave the reader knowing what to do next, where to go and what to verify again.
 
-Bengali is the source edition. Matching English pages live under `/en/...`.
+Every completed guide is available in Bangla and English. English pages live under `/en/...`, and
+the two editions keep their information and sources in step.
 
 ## What you will find
 
@@ -79,6 +80,12 @@ This remains general guidance, not a government service or personal legal or tax
 consequential decisions against current official information and consult an appropriate
 professional when needed.
 
+## Beyond the manual
+
+The manual is the current focus. Over time, Deshi Startup may also support a founder community,
+practical tools and shared infrastructure. Where practical, that work will also be free and open
+source.
+
 ## Open planning
 
 The repository shows what will be written, which sources come first and what must be rechecked:
@@ -86,6 +93,7 @@ The repository shows what will be written, which sources come first and what mus
 - [Plan and backlog](./plan/)
 - [Project direction](./plan/vision.md)
 - [Contribution rules](./CONTRIBUTING.md)
+- [Security policy](./SECURITY.md)
 - [Discussions](https://github.com/Deshi-Startup/deshistartup/discussions)
 
 ## For developers

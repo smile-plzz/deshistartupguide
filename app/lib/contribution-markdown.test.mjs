@@ -7,7 +7,6 @@ import {
   encodeLockedMdx,
   lockedMdxBlocks,
   normalizeContributionMarkdown,
-  normalizeTables,
   sameLockedMdx
 } from './contribution-markdown.ts'
 import {
@@ -63,6 +62,23 @@ test('tilde fences and indented component blocks are preserved', () => {
   assert.deepEqual(lockedMdxBlocks(source), [
     '<StubNotice path="ideas/test" locale="en" />'
   ])
+})
+
+test('a multi-line chart component survives the editor as one protected block', () => {
+  const chart = [
+    '<DataBars',
+    '  unit="%"',
+    '  max={100}',
+    '  data={[',
+    '    { label: "১২০০ টাকার পণ্য", value: 79, display: "৭৯%" },',
+    '    { label: "৬০০ টাকার পণ্য", value: 30, display: "৩০%" },',
+    '  ]}',
+    '/>'
+  ].join('\n')
+  const source = ['Some prose.', '', chart, '', 'More prose.', ''].join('\n')
+
+  assert.equal(decodeLockedMdx(encodeLockedMdx(source)), source)
+  assert.deepEqual(lockedMdxBlocks(source), [chart])
 })
 
 test('protected-component validation catches changes, additions and deletion', () => {
@@ -189,7 +205,7 @@ test('a table already in the repo shape is left byte-identical', () => {
     '| সাম্প্রতিক ঘটনা শুনেছি? | না | একটা |',
     ''
   ].join('\n')
-  assert.equal(normalizeTables(table), table)
+  assert.equal(normalizeContributionMarkdown(table), table)
 })
 
 test('the serializer’s padded table collapses back to the repo shape', () => {
@@ -200,7 +216,7 @@ test('the serializer’s padded table collapses back to the repo shape', () => {
     ''
   ].join('\n')
   assert.equal(
-    normalizeTables(padded),
+    normalizeContributionMarkdown(padded),
     ['| প্রশ্ন | ০ | ১ |', '|---|---|---|', '| সাম্প্রতিক ঘটনা শুনেছি? | না | একটা |', ''].join(
       '\n'
     )
@@ -210,19 +226,19 @@ test('the serializer’s padded table collapses back to the repo shape', () => {
 test('column alignment survives the collapse', () => {
   const aligned = ['| a | b | c |', '| :--- | ---: | :---: |', '| 1 | 2 | 3 |', ''].join('\n')
   assert.equal(
-    normalizeTables(aligned),
+    normalizeContributionMarkdown(aligned),
     ['| a | b | c |', '|:---|---:|:---:|', '| 1 | 2 | 3 |', ''].join('\n')
   )
 })
 
 test('an empty cell keeps its single space of padding on each side', () => {
   const table = ['| a |  | c |', '|---|---|---|', '| 1 |  | 3 |', ''].join('\n')
-  assert.equal(normalizeTables(table), table)
+  assert.equal(normalizeContributionMarkdown(table), table)
 })
 
 test('an escaped pipe stays inside its cell', () => {
   const table = ['| a \\| b | c |', '|---|---|', '| d | e |', ''].join('\n')
-  assert.equal(normalizeTables(table), table)
+  assert.equal(normalizeContributionMarkdown(table), table)
 })
 
 test('an even backslash before a pipe remains a cell boundary', () => {
@@ -241,18 +257,18 @@ test('a pipe table inside a code fence is left alone', () => {
     '```',
     ''
   ].join('\n')
-  assert.equal(normalizeTables(fenced), fenced)
+  assert.equal(normalizeContributionMarkdown(fenced), fenced)
 })
 
 test('prose containing a pipe is not mistaken for a table', () => {
   const prose = ['Use `a | b` to pipe.', '', 'Not a table.', ''].join('\n')
-  assert.equal(normalizeTables(prose), prose)
+  assert.equal(normalizeContributionMarkdown(prose), prose)
 })
 
 test('normalizing is idempotent', () => {
   const padded = ['| a   | b |', '| --- | - |', '| 1   | 2 |', ''].join('\n')
-  const once = normalizeTables(padded)
-  assert.equal(normalizeTables(once), once)
+  const once = normalizeContributionMarkdown(padded)
+  assert.equal(normalizeContributionMarkdown(once), once)
 })
 
 test('nested tables keep their blockquote and list containers', () => {
@@ -356,6 +372,10 @@ test('every current content page is already in the normalized table shape', () =
   assert.ok(pages.length > 800, `expected the full corpus, saw ${pages.length}`)
   for (const file of pages) {
     const source = readFileSync(file, 'utf8')
-    assert.equal(normalizeTables(source), source, `${file} would be rewritten on submission`)
+    assert.equal(
+      normalizeContributionMarkdown(source),
+      source,
+      `${file} would be rewritten on submission`
+    )
   }
 })

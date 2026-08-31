@@ -1,137 +1,330 @@
-# সম্পাদকীয় মান
+# Editorial Standards
 
-এই নথি বলে একটি পাতা কী শেখাবে, কীভাবে প্রমাণ দেবে এবং পাঠককে কীভাবে কাজে নামাবে।
-বাংলা কীভাবে শোনাবে, তা [STYLE.md](./STYLE.md)-এ আছে।
+This document says what a page must teach, how it must prove it, and how it must put the reader to
+work. English is the canonical authoring edition; how the Bangla translation should sound lives in
+[STYLE.md](./STYLE.md). Finished guides meet the same editorial standard in Bangla and English.
+The workflow and visual toolkit live in
+[plan/guide-playbook.md](./plan/guide-playbook.md).
 
-## মূল পরীক্ষা
+## The main test
 
-পাতা পড়ে একজন প্রথমবারের ফাউন্ডার যেন তিনটি প্রশ্নের উত্তর দিতে পারেন:
+A first-time founder reading the page should be able to answer three questions:
 
-1. বিষয়টি আমার জন্য প্রযোজ্য কি না
-2. এখন ঠিক কী করতে হবে
-3. কোন তথ্য বিশ্বাস করব এবং কোথায় আবার যাচাই করব
+1. Does this apply to my situation?
+2. What exactly do I do now?
+3. Which facts can I trust, and where do I re-check?
 
-পাঠক বুদ্ধিমান, কিন্তু আগে থেকেই আইন, হিসাব, টেক বা স্টার্টআপের শব্দ জানেন ধরে নেবেন না।
+Assume intelligence, not prior knowledge of law, accounting, tech, or startup vocabulary.
 
-## কঠিন ধারণা শেখানো
+## Every guide stands alone
 
-কঠিন বা সিদ্ধান্ত বদলায় এমন ধারণায় প্রয়োজনমতো এই পাঁচটি ধাপ ব্যবহার করুন:
+Readers usually land on a page straight from search, not after reading the ones before it. Each
+page must work on its own. Standalone does not mean answering every question; it means the reader
+can do the job or make the decision they came for without opening another link.
 
-1. **নাম:** প্রচলিত টার্মটি বলুন।
-2. **সহজ অর্থ:** এক বাক্যে মানে বোঝান।
-3. **দেশি উদাহরণ:** পরিচিত বাংলাদেশি পরিস্থিতি দিন।
-4. **হিসাব বা প্রক্রিয়া:** টাকা বা ধাপ থাকলে দেখান।
-5. **করণীয়:** পাঠক এখন কী করবেন বলুন।
+A finished guide has four layers:
 
-প্রতিটি ছোট তথ্যকে পাঁচ ধাপে টেনে বড় করবেন না। ধারণা যত কঠিন বা ঝুঁকিপূর্ণ, ব্যাখ্যাও তত
-গভীর হবে।
+1. **Orientation:** who it is for, who it is not for, what job or decision it serves, and what the
+   reader will have at the end.
+2. **Minimum mental model:** only the concepts this task needs, explained at first use. Any
+   required background is recapped inline in a sentence or two.
+3. **Execution:** what to prepare, the steps in order, a worked Bangladesh-specific example, costs
+   and time, common mistakes, and honest uncertainty.
+4. **Verification:** what "done" looks like — which document, portal state, or number should
+   exist — plus a short checklist, sources, and the next safe action.
 
-উদাহরণ:
+More rules:
 
-> **ক্যাশ ফ্লো** মানে কখন টাকা হাতে ঢুকছে আর বের হচ্ছে। ধরুন, ঢাকায় ৫০টি COD অর্ডার
-> পাঠালেন। বিক্রি ৫০,০০০ টাকা হলেও কুরিয়ার সাত দিন পরে টাকা দিলে আজকের ব্যাংক ব্যালেন্সে
-> সেই টাকা নেই। তাই আগামী সপ্তাহের প্যাকেজিং খরচ ধরার সময় বিক্রি নয়, হাতে থাকা ক্যাশ দেখুন।
+- Links offer depth, exceptions, or the next task. Understanding the main answer must never
+  require opening one.
+- Open with the reader's situation, not the site's taxonomy. "Who needs this" should branch: "if
+  you are in situation X, then →".
+- Define every term at its first use on this page, even if another page defines it too.
 
-## উদাহরণ ও গল্প
+Test: give the page to someone who has never seen the site, hide the navigation, and ask them to
+do the task. If the main decision needs another internal page, the guide is not finished.
 
-- নাম, শহর, পণ্য ও টাকা দিয়ে উদাহরণকে দৃশ্যমান করুন।
-- কাল্পনিক হলে “ধরুন” লিখুন। সত্য ঘটনা হলে সূত্র দিন।
-- হিসাবের সিদ্ধান্ত লিখলে অঙ্ক দেখান।
-- গল্প কেবল তখনই রাখুন, যখন সেটি নিয়ম, ঝুঁকি বা সিদ্ধান্ত বোঝায়।
-- সাজানো উদ্ধৃতি, বানানো পরিসংখ্যান বা কাল্পনিক ঘটনাকে বাস্তব হিসেবে লিখবেন না।
+## Before drafting: the page brief
 
-একটি ভালো উদাহরণ ব্যাখ্যাকে ছোট করে। উদাহরণ দেওয়ার পর একই কথা তিনভাবে আবার বলবেন না।
+Write these down before the first draft. Review will be judged against them:
 
-## আইন, কর, ফি ও ঝুঁকিপূর্ণ বিষয়
+- Which search or question brings the reader here
+- How much the reader knows at the start
+- The page's single job
+- What the reader will have at the end
+- The most dangerous misunderstanding to prevent
+- What evidence is needed
+- Which visuals are candidates, and what each one teaches
+- Which facts change quickly, and how often they must be re-checked
 
-এখানে সহজ ভাষা মানে আইনি অর্থ ছোট করা নয়।
+## Teaching hard concepts
 
-- প্রথমে নিয়মটি বলুন, তারপর “আপনার জন্য এর মানে” হিসেবে সিদ্ধান্ত বা করণীয় দিন।
-- কোন ব্যক্তি, কোম্পানি, এলাকা বা সময়ের জন্য নিয়ম প্রযোজ্য, তা লিখুন।
-- সরকারি মূল উৎস ব্যবহার করুন। ব্লগ দিয়ে সরকারি দাবি প্রমাণ করবেন না।
-- ফি, সীমা, ফর্ম ও সময়সীমার সঙ্গে সাল বা `verified:` তারিখ দিন।
-- সরকারি তথ্য অস্পষ্ট বা অফিসভেদে বদলালে পরিসর ও অনিশ্চয়তা স্পষ্ট করুন।
-- যা যাচাই হয়নি, বাদ দিন বা “যাচাই প্রয়োজন” লিখুন।
-- চুক্তি, মালিকানা, কর, বৈদেশিক মুদ্রা বা বড় আর্থিক ঝুঁকিতে পেশাজীবীর সাহায্য কখন দরকার,
-  তা বলুন।
-- কোনো বিশেষজ্ঞ সত্যিই পাতাটি পর্যালোচনা করলে এবং নাম প্রকাশে তাঁর সম্মতি থাকলেই
-  `<ExpertReview>` ব্যবহার করুন। নাম, তারিখ, পর্যালোচনার পরিসর ও সীমাবদ্ধতা লিখে রাখুন,
-  আর নমুনা হিসেবে এই বক্স ব্যবহার করবেন না।
+For a concept that is hard or changes a decision, use these five steps where needed:
 
-কোনো পাতা নতুন করে সরকারি উৎসে মিলিয়ে না দেখে `verified:` তারিখ বদলাবেন না।
+1. **Name:** the term people actually use.
+2. **Plain meaning:** one sentence.
+3. **Bangladesh example:** a familiar local situation.
+4. **Maths or process:** show the money or the steps.
+5. **Action:** what the reader does now.
 
-## সূত্র
+Do not stretch every small fact into five steps. The harder or riskier the concept, the deeper the
+explanation.
 
-দাবি যত গুরুত্বপূর্ণ, সূত্র তত শক্ত ও দাবির তত কাছে থাকবে।
+## Examples and stories
 
-অগ্রাধিকার:
+- Make examples visible with names, cities, products, and money.
+- Mark a fictional scenario with "say" or "imagine"; cite a real event.
+- When a decision rests on arithmetic, show the working.
+- Keep a story only when it explains a rule, risk, or decision.
+- Never present invented quotes, statistics, or events as real.
 
-1. আইন, গেজেট, নিয়ন্ত্রক ও সরকারি পোর্টাল
-2. মূল রিপোর্ট, ডেটাসেট ও স্বীকৃত গবেষণা
-3. নির্ভরযোগ্য সংবাদ বা বিষয়ভিত্তিক প্রকাশনা
-4. কোম্পানির নিজের তথ্য, “কোম্পানির দাবি” হিসেবে
-5. ফাউন্ডারের বক্তব্য, অভিজ্ঞতা হিসেবে
+A good example shortens the explanation. After giving one, do not restate the same point three
+ways.
 
-আরও নিয়ম:
+**A named character carries the whole guide, or does not appear at all.** An opening vignette that
+is never mentioned again is a hook, not a teaching device: the reader warms to a person, the person
+vanishes, and the rest of the page reads as a reference sheet. If a guide opens with someone, that
+same person supplies the worked example, the arithmetic, and the closing decision. Their problem in
+paragraph one must be answered somewhere on the page — a guide that opens with "the bank demanded
+land Nabil does not have" and never says what to offer instead has abandoned its own premise.
 
-- সাধারণ source list-এর URL [plan/sources.csv](./plan/sources.csv) থেকে নিন।
-- কোনো নির্দিষ্ট সংখ্যা বা সিদ্ধান্তের জন্য দরকার হলে যাচাই করা exact report/page URL দিন।
-- কোম্পানির প্রচারসংখ্যা ও স্বাধীন তথ্য এক করে লিখবেন না।
-- facts, anecdotes ও hypotheses আলাদা রাখুন।
-- তৃতীয় পক্ষের লেখা নিজের ভাষায় শেখান ও সূত্র দিন; অনুবাদ বা দীর্ঘ অংশ কপি করবেন না।
-- চার্ট বা ছবির ভেতরে সূত্র লুকিয়ে রাখবেন না। পাঠযোগ্য টেক্সটেও দিন।
+## Law, tax, fees, and risk
 
-## কাজে লাগার মতো পাতা
+Plain language must not shrink legal meaning.
 
-সাধারণ গাইডে পাঠক যেন এগুলো পান:
+- State the rule first, then what it means for the reader and what to do.
+- Say which person, company, area, or period the rule covers.
+- Use official primary sources; never prove a government claim with a blog.
+- Date fees, limits, forms, and deadlines, or set `verified:`.
+- Where official information is vague or varies by office, state the range and the uncertainty.
+- Drop or mark unverified claims as "needs verification".
+- Say when professional help is needed for contracts, ownership, tax, foreign exchange, or large
+  financial risk.
+- Use `<ExpertReview>` only when an expert really reviewed the page, the scope and date are
+  recorded, and the reviewer agreed to be named. Do not use the box as a template.
 
-- কার কখন দরকার
-- কোথায় যাবেন বা কোন পোর্টাল ব্যবহার করবেন
-- কী কাগজ বা তথ্য লাগবে
-- ধাপে ধাপে করণীয়
-- খরচ ও সময়, বদলালে সালসহ
-- সিদ্ধান্তের শর্ত বা তুলনা
-- সাধারণ ভুল
-- শেষের ছোট চেকলিস্ট
-- প্রাসঙ্গিক সূত্র
+Never bump `verified:` without re-checking the page against official sources.
 
-সব পাতায় একই heading জোর করে বসাবেন না। টেমপ্লেট, journey, case study, calculator ও directory
-নিজের কাজ অনুযায়ী ছোট কাঠামো ব্যবহার করবে।
+## Sources
 
-**সারকথা** হলো পাতার সংক্ষিপ্ত উত্তর, ভূমিকা নয়। সেখানে সিদ্ধান্ত, বড় সতর্কতা ও পরের কাজ
-থাকবে। শরীরের লেখা শুধু সারকথার পুনরাবৃত্তি হবে না।
+The stronger the claim, the stronger and closer the source.
 
-## তুলনা, চার্ট ও ক্যালকুলেটর
+Priority:
 
-ভিজ্যুয়াল কেবল তখনই দিন, যখন সম্পর্কটি গদ্য বা ছোট টেবিলের চেয়ে দ্রুত বোঝায়।
+1. Laws, gazettes, regulators, and official portals
+2. Primary reports, datasets, and recognised research
+3. Reliable news or specialist publications
+4. Company information, labelled as "company's claim"
+5. Founder statements, as experience
 
-- দুই-তিনটি বিকল্পে ছোট টেবিল যথেষ্ট।
-- সময়ের পরিবর্তনে line chart, শ্রেণির তুলনায় bar chart, প্রক্রিয়ায় diagram ব্যবহার করুন।
-- ডেটা না থাকলে chart বানাবেন না।
-- axis, unit, সময়কাল, sample ও source স্পষ্ট রাখুন।
-- মোবাইলে পড়া যায় কি না এবং alt text আছে কি না দেখুন।
-- calculator-এর input, formula, assumption, unit ও সীমা লিখুন। ফলাফলকে নিশ্চয়তা হিসেবে
-  দেখাবেন না।
+More rules:
 
-## পাতা-ধরনের বিশেষ নিয়ম
+- Take general source-list URLs from [plan/sources.csv](./plan/sources.csv).
+- Give an exact, checked report or page URL when a specific number or decision needs one.
+- Never blend a company's promotional figures with independent data.
+- Keep facts, anecdotes, and hypotheses separate.
+- Teach third-party material in your own words and cite it; do not copy or wholesale-translate
+  long passages.
+- Never hide a source inside an image; repeat it in readable text.
 
-- **Case study:** [plan/case-study-format.md](./plan/case-study-format.md) অনুসরণ করুন। কী জানা,
-  কে দাবি করেছে এবং কী অজানা, আলাদা রাখুন।
-- **Journey:** কেবল বিদ্যমান গাইডকে ক্রমে সাজায়। প্রতিটি ধাপে একটি পরিষ্কার ফল থাকবে।
-- **Directory:** prose table নয়; `data/directory/`-এর structured data ব্যবহার করুন। প্রতিটি entry-তে
-  source URL ও last verified date দিন।
-- **Template/script:** কপি করে ব্যবহার করা যায় এমন অংশ আগে, ব্যাখ্যা পরে।
-- **Stub:** `<StubNotice />` ও শুরু করার সূত্র ছাড়া পূর্ণ গাইডের মতো boilerplate রাখবেন না।
+## What a useful page contains
 
-## জমা দেওয়ার আগে
+A general guide gives the reader:
 
-- [ ] প্রথমবারের পাঠক বুঝবেন কার জন্য উত্তরটি
-- [ ] কঠিন ধারণার সহজ অর্থ ও দরকারি উদাহরণ আছে
-- [ ] করণীয়তে কোথায়, কী লাগবে, খরচ ও সময় বলা আছে
-- [ ] সিদ্ধান্তের জন্য দরকারি হিসাব দেখানো হয়েছে
-- [ ] আইন, ফি, সীমা ও সংখ্যার শক্ত সূত্র আছে
-- [ ] অনিশ্চয়তা, কোম্পানির দাবি ও অভিজ্ঞতা ঠিকভাবে চিহ্নিত
-- [ ] কাল্পনিক তথ্য, উদ্ধৃতি বা পরিসংখ্যান নেই
-- [ ] অপ্রয়োজনীয় গল্প, পুনরাবৃত্তি ও visual বাদ দেওয়া হয়েছে
-- [ ] শেষে পাঠকের পরিষ্কার পরের কাজ আছে
-- [ ] বাংলা পাতায় STYLE.md-এর checklist-ও মিলেছে
+- who needs it and when
+- where to go or which portal to use
+- what papers or information to prepare
+- step-by-step actions
+- costs and time, dated where they change
+- decision conditions or comparisons
+- common mistakes
+- a short closing checklist
+- relevant sources
+
+Do not force identical headings on every page. Templates, journeys, case studies, calculators,
+and directories keep the smaller structure their job needs.
+
+**In short** is the page's compact answer, not an introduction: the decision, the big warning, and
+the next action. The body must not simply repeat it.
+
+## Highlight boxes
+
+A fixed set of boxes separates the important moments so a scanning reader finds them:
+
+- **Warning:** where a mistake costs money or worse
+- **Rule:** the rule first, then what it means for you
+- **Common mistakes:** what to avoid
+- **Example:** a concrete scenario, marked imaginary when it is
+- **Keep in mind:** a rule of thumb or a time-saving decision
+
+Use boxes sparingly. If everything is highlighted, nothing is.
+
+## Visuals, charts, and calculators
+
+A visual is a second channel for the same message, not decoration. Add one when it removes the
+reader's biggest remaining confusion faster than prose or a small table. A chart never repairs
+weak evidence; it makes weak evidence look stronger. Fix the evidence first, then the visual.
+
+Which visual when:
+
+| Reader's difficulty | Best start | Example |
+|---|---|---|
+| "Which path applies to me?" | decision tree | full VAT registration vs turnover tax |
+| "What happens in what order?" | process diagram or timeline | name clearance → documents → submission → certificate |
+| "Where do I click, and what do I see?" | annotated screenshot | RJSC application or query screen |
+| "How do the options differ?" | comparison table | sole proprietorship vs private limited |
+| "How does one number affect another?" | chart | margin vs break-even return rate |
+| "How do I work out my situation?" | worked example, then calculator | unit economics |
+| "What does good behaviour sound like?" | short video or role-play | good vs leading interview questions |
+| Nothing is hard to imagine | text only | a short definition or checklist |
+
+### Charts
+
+A chart's one job is answering one question faster than prose.
+
+- Put the finding in the title: "cheap products break even at far lower return rates", not "RTO
+  chart".
+- State the takeaway in text above or below.
+- Show units, dates, base, definitions, assumptions, and sources.
+- Label directly; skip legends and decoration.
+- No data, no chart; never build one from a single isolated statistic.
+- Never dual axes or 3D.
+- Design at 360 px first. Bars start at zero, labels stay horizontal, long names get horizontal
+  bars. At most 5–7 bars and 4 lines.
+- Keep the numbers in a table too, so screen readers, slow connections, and blocked images still
+  get the full meaning.
+- Keep the data and the calculation so the chart can be regenerated.
+
+### Screenshots
+
+Screenshots teach recognition and navigation, not procedure.
+
+- One screenshot, one action. A wide orientation shot first, then readable crops.
+- Mark the control under discussion with a number or outline.
+- Put the instruction beside the screenshot, not paragraphs away.
+- Keep the portal's exact English label; explain it in plain words.
+- Show error and completion states, not only the happy path.
+- Use dummy data; redact personal information.
+- Add source and checked dates, and a rule for replacing the image when the interface changes.
+
+### Tables
+
+- Tables are for exact comparison, not sequential instructions.
+- Usually two to four meaningful columns.
+- Units and dates go in column headers.
+- Split tables that answer more than one question.
+- Put the decision takeaway in prose; never make the reader infer it from twenty cells.
+- Test every table at 320 px and at large text size.
+
+**Sandwich every table.** A line of prose above says which question this table answers; a line or
+two below says the thing a reader would otherwise have to infer from the cells — which row matters
+most, which one ends applications late, which two are really the same rule seen twice. A page where
+tables sit back to back with only a heading between them has stopped teaching and become a
+reference sheet: accurate, scannable, and impossible to learn from. The test is to read only the
+prose, skipping every table, and check that the argument still runs end to end.
+
+Where a table is the *explanation* rather than the summary, put the three or four numbers that
+actually drive the decision into prose first, and let the table stand behind them as the full
+reference. A ten-row parameter table is something a reader returns to, not something they learn
+from on first pass.
+
+### Worked examples, templates, and calculators
+
+Show one complete worked example before asking the reader to do their own. Every quantitative
+guide offers:
+
+1. a Bangladesh-specific scenario
+2. inputs and their sources
+3. the visible formula
+4. the intermediate steps
+5. the result
+6. which decision the result changes
+7. a blank, copy-ready version
+
+Start with a table or worksheet. Build an interactive calculator only when the page's whole job is
+the reader's own calculation — and keep it a small client island: the server renders the worked
+example as static HTML, and JavaScript only enables editing. Write the inputs, formula,
+assumptions, units, and limits; default the numbers to a real Bangladesh example; never present
+the result as a guarantee.
+
+### Video
+
+Video earns its place when the movement itself is the message: a screen walkthrough, a demo, a
+role-play, pronunciation, or a story where sequence and human behaviour matter.
+
+- One video, one job.
+- Keep the key answer and steps in text; the page must survive the video disappearing.
+- Title, thumbnail, upload or check date, and caption.
+- Human-checked subtitles and a descriptive transcript; automatic captions alone are not enough.
+- Original Bangla video gets English subtitles or a transcript, not a second production.
+- Describe the scene in the narration: which field, graph, or action is visible.
+- Never autoplay.
+- Third-party video starts at the relevant moment and says why that segment is included.
+
+### The media brief
+
+Before adding any image, chart, or video, record:
+
+- which confusion it removes
+- why text or a table is not enough
+- source and rights
+- caption and text alternative
+- how each locale will treat it
+- check date
+- what happens on mobile and slow connections
+- what event should trigger replacing it
+
+### Media in two languages
+
+- Share one dataset and concept across locales.
+- Translate captions, transcripts, descriptions, and chart labels.
+- Annotate screenshots with numbers so one clean image serves both languages.
+- Preserve exact official portal terminology.
+- Do not bake long text into raster images.
+
+## Page-type rules
+
+- **Case study:** follow [plan/case-study-format.md](./plan/case-study-format.md). Separate what
+  is known, who claims it, and what is unknown.
+- **Journey:** orders existing guides only. Every step has a clear outcome.
+- **Directory:** structured data in `data/directory/`, never a prose table. Every entry carries a
+  source URL and last-verified date.
+- **Template/script:** copy-ready material first, explanation after.
+- **Stub:** `<StubNotice />` and starting sources only — no full-guide boilerplate.
+
+## Does the writing work
+
+Written, built, and attractive is not finished. Have a cold reader attempt the real task and
+record where they stop, decide wrongly, skip steps, or misread a visual. Rewrite those places.
+
+## Before submitting
+
+- [ ] A first-time reader knows who the answer is for
+- [ ] The main answer and next action work without opening a link
+- [ ] Hard concepts have plain meanings and useful examples
+- [ ] The action says where, what to prepare, cost, and time
+- [ ] Arithmetic behind decisions is shown
+- [ ] Laws, fees, limits, and numbers have strong sources
+- [ ] Uncertainty, company claims, and experience are labelled
+- [ ] No invented facts, quotes, or statistics
+- [ ] No unnecessary stories, repetition, or visuals
+- [ ] Every chart or image has a one-line "what it shows" and the numbers in a table
+- [ ] Charts survive mobile width; screenshots hide personal data and carry source and check dates
+- [ ] The reader has a clear next action
+- [ ] The Bangla edition, once translated, passes STYLE.md's checklist
+
+### Five gates before calling it done
+
+A guide is finished when all five gates open. A broken gate cannot be bought off with good visuals
+or nice prose.
+
+1. **Cold entry:** a new reader can name the scope, applicability, outcome, and first action.
+2. **Task:** the decision or task completes without browsing other pages.
+3. **Trust:** consequential claims are sourced, dated, scoped, and honest about uncertainty.
+4. **Media:** every visual removes a named confusion, and the page survives without images or
+   sound.
+5. **Reality:** at least a few target readers have attempted the task on an ordinary phone.
+
+Measure task completion, dangerous mistakes, time to first useful action, recognising "done", and
+confidence versus correctness. Pageviews, dwell time, and video plays are secondary — longer time
+on a page often just means more confusion.

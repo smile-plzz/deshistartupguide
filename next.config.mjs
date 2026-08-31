@@ -26,17 +26,9 @@ const withNextra = nextra({
   staticImage: false
 })
 
-// Deploy targets mount the site at different roots:
-//   - GitHub Pages serves the project under /deshistartup (a repo subpath)
-//   - deshistartup.com (Cloudflare Pages or Workers) serves from the root
-// DEPLOY_BASE_PATH overrides everything. The explicit Worker target is inherited
-// by the Cloudflare static-assets build.
-const isRootDeployment =
-  process.env.CF_PAGES === '1' ||
-  process.env.DESHI_DEPLOY_TARGET === 'cloudflare-worker'
-const basePath =
-  process.env.DEPLOY_BASE_PATH ??
-  (process.env.NODE_ENV === 'production' && !isRootDeployment ? '/deshistartup' : '')
+// Production serves from the custom-domain root. Forks that deliberately deploy
+// under a subpath can opt in at build time with DEPLOY_BASE_PATH.
+const basePath = process.env.DEPLOY_BASE_PATH ?? ''
 
 // Images live in R2, not in the repo. An explicit empty value opts out and
 // serves them from public/media instead.
@@ -48,9 +40,32 @@ const nextConfig = {
   // Content is a static asset. The small native Worker in worker/ owns only
   // /api/*, so adding guides does not increase the Worker script bundle.
   turbopack: { root: projectRoot },
+  // `next dev` and `next build` otherwise share one .next directory, and a dev
+  // server left running in an editor writes into it while a build is reading
+  // it. That does not fail loudly: builds die on a different random route each
+  // time ("Cannot find module for page", "Failed to collect page data"), or
+  // worse, succeed and export a stale client chunk, so a fix appears to have
+  // been deployed when the old code shipped. Give dev its own directory and
+  // the two stop touching the same files. Nothing else reads .next-dev; the
+  // build tooling (postbuild-seo, build-output) is production-only.
+  ...(isDevelopment ? { distDir: '.next-dev' } : {}),
   basePath,
   ...(isDevelopment
     ? {
+        async redirects() {
+          return [
+            {
+              source: '/50',
+              destination: '/startup-50',
+              permanent: true
+            },
+            {
+              source: '/en/50',
+              destination: '/en/startup-50',
+              permanent: true
+            }
+          ]
+        },
         async rewrites() {
           return [
             {
@@ -68,7 +83,10 @@ const nextConfig = {
     // A subpath mirror that is also self-hosting its media has neither, so it
     // gets the original file. DESHI_MEDIA_TRANSFORM=0 turns it off everywhere.
     NEXT_PUBLIC_MEDIA_TRANSFORM:
-      process.env.DESHI_MEDIA_TRANSFORM !== '0' && (mediaBaseUrl || isRootDeployment) ? '1' : '',
+      process.env.DESHI_MEDIA_TRANSFORM !== '0' &&
+      (mediaBaseUrl || process.env.DESHI_DEPLOY_TARGET === 'cloudflare-worker')
+        ? '1'
+        : '',
     // Where /media/... actually resolves. Defaults to the R2 bucket's public
     // host; set DESHI_MEDIA_BASE_URL to an empty string to self-host the files
     // from public/media instead (a fork with no bucket of its own).

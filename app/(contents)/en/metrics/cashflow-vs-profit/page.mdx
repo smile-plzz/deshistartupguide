@@ -1,11 +1,11 @@
 ---
 title: "Cashflow vs Profit: A Simple Explanation for Founders"
-description: "Profit is what the ledger says you made. Cash flow is what's actually sitting in the bank. Through Nasrin's COD business in Sylhet and the B2B receivables gap, this guide shows why the two diverge, plus one lasting habit for tracking cash."
+description: "Profit is what the ledger records; cash flow is the money actually reaching the bank. See how COD payouts and B2B receivables create the gap, and adopt one weekly habit for tracking cash."
 ---
 
 # Cashflow vs Profit: A Simple Explanation for Founders
 
-> **In short:** Profit is what your accounting ledger says you made. Cash flow is what's actually moving in and out of your bank account. When the day a sale is booked and the day its money actually arrives don't match, a ledger can show profit while the bank shows nothing. Courier payouts on COD orders lag by days; B2B sales run on 30-60 day credit terms. Both create this same gap. So don't judge a month by the ledger; check the cash sitting in the bank, every week.
+> **In short:** Profit is what your accounting ledger says you made. Cash flow is what's actually moving in and out of your bank account. When the day a sale is booked and the day its money actually arrives don't match, a ledger can show profit while the bank shows nothing. Courier payouts on <Term name="cod">COD</Term> orders lag by days; B2B sales run on 30-60 day credit terms. Both create this same gap. So don't judge a month by the ledger; check the cash sitting in the bank, every week.
 
 ## Why profit and cash flow aren't the same thing
 
@@ -21,6 +21,23 @@ Say Nasrin runs a cosmetics page on Facebook out of Sylhet, entirely cash-on-del
 |---|---|---|
 | Monday, orders shipped | 45,000 taka | 0 taka |
 | The following Monday, courier pays out | 45,000 taka | 45,000 taka |
+
+<Timeline
+  ticks={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]}
+  rows={[
+    {
+      label: "On the ledger",
+      spans: [{ start: 0, end: 8, label: "45,000 taka booked on Monday, and it stays booked" }],
+    },
+    {
+      label: "In the bank",
+      spans: [
+        { start: 0, end: 7, tone: "gap", label: "no cash for six days — the gap" },
+        { start: 7, end: 8, label: "45,000 lands the next Monday" },
+      ],
+    },
+  ]}
+/>
 
 Now say a 20,000 taka supplier bill is due that Wednesday. Monday's sale sits on the ledger, but the money isn't in the bank yet; it's still with the courier. The ledger says the business is profitable, yet there's no cash in hand to pay the supplier. That's the cash flow gap: the sale happened, the profit is booked, but the money is still on its way.
 

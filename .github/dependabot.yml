@@ -1,0 +1,65 @@
+# Dependency updates. Kept deliberately low-noise: one grouped npm PR and one
+# grouped GitHub Actions PR per week, and security fixes come in on their own.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '05:00'
+      timezone: Asia/Dhaka
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: chore
+      include: scope
+    # Two majors that the toolchain cannot take yet, so Dependabot stops
+    # reopening them every week. Security updates ignore this list.
+    ignore:
+      # Next 16 breaks Nextra 4: "loader nextra/loader.cjs ... does not have
+      # serializable options". Lift this once Nextra supports Next 16.
+      - dependency-name: next
+        update-types: ['version-update:semver-major']
+      # TypeScript 7, the native port, breaks the Next/webpack type layer:
+      # "Cannot read properties of undefined (reading 'readFile')".
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+    groups:
+      # react and react-dom pin each other, so a PR carrying one without the
+      # other cannot even `npm ci`. Keep the four together, majors included.
+      # This group is listed first because the one below matches everything.
+      react:
+        applies-to: version-updates
+        patterns:
+          - react
+          - react-dom
+          - '@types/react'
+          - '@types/react-dom'
+      # One PR for routine patch/minor bumps; majors still arrive separately
+      # so a breaking Next/Nextra upgrade is reviewed on its own.
+      dependencies:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+      security:
+        applies-to: security-updates
+        patterns:
+          - '*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '05:00'
+      timezone: Asia/Dhaka
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      actions:
+        patterns:
+          - '*'

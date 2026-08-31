@@ -3,7 +3,8 @@
  * bangla-lint.mjs — advisory linter for the Bangla style guide (STYLE.md).
  *
  * Scans Bengali content pages for the *mechanical* tells of translated Bangla:
- * banned calques, officialese, em dashes (hard), semicolons in Bangla prose, raw Latin-script English
+ * banned calques, officialese, em dashes (hard), Bengali-numeral list markers (hard),
+ * semicolons in Bangla prose, raw Latin-script English
  * words mid-sentence, stray Devanagari characters, English digits in Bangla prose,
  * formal suffixes (-সমূহ / -ীকরণ), self-description tics (চেষ্টা করি, "আপনার জন্য এর মানে" mold),
  * sentence-rhythm (over-long or drum-machine-uniform sentences),
@@ -54,6 +55,17 @@ const BANNED = [
   ['করা হয়ে থাকে', 'সক্রিয় বাক্য লিখুন ("হয়")'],
   ['খোলা জ্ঞানভাণ্ডার', '"উন্মুক্ত জ্ঞানভাণ্ডার" লিখুন'],
   ['খোলা প্রজেক্ট', '"ওপেন-সোর্স প্রজেক্ট" লিখুন'],
+  ['শাজগোজ', 'কোম্পানির নিজের বাংলা বানান "সাজগোজ" লিখুন'],
+  ['রোকোমারি', 'কোম্পানির নিজের বাংলা বানান "রকমারি" লিখুন'],
+  ['অন্নরোকম', 'কোম্পানির নিজের বাংলা বানান "অন্যরকম" লিখুন'],
+  ['আরোগা', 'কোম্পানির নিজের বাংলা বানান "আরোগ্য" লিখুন'],
+  ['গোজায়ান', 'নিবন্ধিত বাংলা বানান "গোযায়ান" লিখুন'],
+  ['Nagad ও Rocket', 'প্রতিষ্ঠিত বাংলা বানান "নগদ ও রকেট" লিখুন'],
+  ['Pathao, Steadfast, RedX, Paperfly', 'বাংলা পেজে প্রতিষ্ঠিত বাংলা বানানগুলো লিখুন'],
+  ['remote/outsourced hiring', 'বাংলা পাঠকের জন্য স্বাভাবিক বাংলায় লিখুন'],
+  ['SSLCommerz', 'কোম্পানির নিজের বানান "SSLCOMMERZ" লিখুন'],
+  ['প্রাথমিক বিষয়াবলী', '"প্রাথমিক ধারণা" বা বিষয়টির সরাসরি নাম লিখুন'],
+  ['সোর্সবের', '"উৎসবের" লিখুন'],
 ]
 
 // Soft: officialese that almost always wants the everyday word.
@@ -107,7 +119,7 @@ const LATIN_ALLOW = new Set(
     // official body names & company suffixes legitimately written in Latin (§3.4 point 3)
     'Registrar', 'Joint', 'Stock', 'Companies', 'Firms', 'and', 'Ltd', 'Limited', 'com',
     'Canva', 'Wix', 'Framer', 'Notion', 'Trello', 'Slack', 'Zoom', 'Figma', 'Shikho',
-    'Shorts', 'Shop', 'Grameenphone', 'Robi', 'Banglalink', 'Fashol', 'iFarmer',
+    'Shorts', 'Shop', 'Grameenphone', 'Robi', 'Banglalink', 'Fashol', 'iFarmer', 'Revora',
   ].map((w) => w.toLowerCase()),
 )
 
@@ -126,7 +138,7 @@ const DENSITY = [
   [/গুরুত্বপূর্ণ/g, 'গুরুত্বপূর্ণ', 2, 'জরুরি/দরকারি/কারণ বলুন'],
   [/[ঀ-৿]+ভাবে/g, '-ভাবে', 5, 'ক্রিয়া দিয়ে লিখুন'],
   [/ হলো /g, 'হলো', 6, '"X হলো Y" রিফ্লেক্স ভাঙুন'],
-  [/মানে শুধু/g, 'মানে শুধু', 1, 'এক পাতায় একবারই – আর সারকথা-ওপেনার হিসেবে সাইটজুড়ে ছাঁচ বানাবেন না'],
+  [/মানে শুধু/g, 'মানে শুধু', 1, 'এক পেজে একবারই – আর সারকথা-ওপেনার হিসেবে সাইটজুড়ে ছাঁচ বানাবেন না'],
   [/আপনার/g, 'আপনার', 12, 'ইংরেজি "your"-এর প্রতিধ্বনি – বেশির ভাগ ফেলে দিন'],
   [/চেষ্টা করি/g, 'চেষ্টা করি', 3, 'আত্ম-বর্ণনায় হেজ – অনুচ্ছেদে একবারই যথেষ্ট'],
   [/আপনার জন্য এর মানে/g, 'আপনার জন্য এর মানে', 1, 'ছাঁচ-বাক্য ঘুরিয়ে লিখুন (তাহলে দাঁড়াল / সোজা কথায় / মোদ্দা কথা…)'],
@@ -148,11 +160,24 @@ function collectPages(dir) {
 }
 
 /** Strip regions where English/symbols are legitimate. */
+/**
+ * A component block in MDX is data, not prose: `value: 79` is a bar length and
+ * `label`/`display` are prop names, so linting them as Bangla sentences only
+ * produces noise. Keep the quoted strings that actually reach the reader.
+ */
+function jsxProse(line) {
+  return [...line.matchAll(/"([^"]*)"/g)]
+    .map((match) => match[1])
+    .filter((text) => BANGLA.test(text))
+    .join(' ')
+}
+
 function preprocess(source) {
   const lines = source.split('\n')
   const keep = []
   let inFrontmatter = false
   let inCode = false
+  let inJsx = false
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i]
     if (i === 0 && line.trim() === '---') { inFrontmatter = true; keep.push(''); continue }
@@ -160,6 +185,16 @@ function preprocess(source) {
     if (line.trim().startsWith('```')) { inCode = !inCode; keep.push(''); continue }
     if (inCode) { keep.push(''); continue }
     if (/^\s*(import|export)\s/.test(line)) { keep.push(''); continue }
+    if (inJsx) {
+      if (/\/>\s*$/.test(line)) inJsx = false
+      keep.push(jsxProse(line))
+      continue
+    }
+    if (/^\s*<[A-Z]/.test(line)) {
+      inJsx = !/\/>\s*$/.test(line)
+      keep.push(jsxProse(line))
+      continue
+    }
     if (/^\s*<[A-Za-z]/.test(line) && !BANGLA.test(line)) { keep.push(''); continue }
     line = line
       .replace(/`[^`]*`/g, ' ')             // inline code
@@ -185,12 +220,16 @@ function sentenceRhythm(raw) {
   const kept = []
   let fm = false
   let code = false
+  let jsx = false
   for (let i = 0; i < lines.length; i++) {
     const t = lines[i].trim()
     if (i === 0 && t === '---') { fm = true; continue }
     if (fm) { if (t === '---') fm = false; continue }
     if (t.startsWith('```')) { code = !code; continue }
     if (code || !t) continue
+    // Component props are labels, not sentences — they have no rhythm to judge.
+    if (jsx) { if (/\/>$/.test(t)) jsx = false; continue }
+    if (/^<[A-Z]/.test(t)) { jsx = !/\/>$/.test(t); continue }
     if (t.startsWith('#') || t.startsWith('|') || /^[-*]\s/.test(t) || /^\d+[.)]\s/.test(t)) continue
     if (/^(import|export)\s/.test(t)) continue
     if (/^<[A-Za-z]/.test(t) && !BANGLA.test(t)) continue
@@ -242,6 +281,18 @@ function lintFile(file) {
     // NB: দাঁড়ি (। U+0964) and ॥ live in the Devanagari block but are correct Bangla — excluded.
     const dev = line.match(/[ऀ-ॣ०-ॿ]+/)
     if (dev) hard.push([no, `দেবনাগরী অক্ষর "${dev[0]}" — MT artifact, ঠিক করুন`])
+
+    // Bengali numerals as an ordered-list marker. remark-parse reads `১. ` as
+    // paragraph text, so the list never becomes an <ol> and the numbering is
+    // dead. globals.css already renders ASCII markers as ০-৯ under
+    // html[lang='bn'], so `1. ` is both correct and shows the right digits.
+    // preprocess() blanks fenced code, so worksheets and ASCII cards are safe.
+    const bnList = line.match(/^\s{0,6}([০-৯]+)[.)]\s/)
+    if (bnList)
+      hard.push([
+        no,
+        `"${bnList[1]}." দিয়ে লিস্ট — remark একে প্যারাগ্রাফ ধরে, <ol> হয় না; ASCII "1." লিখুন, CSS বাংলা সংখ্যা দেখাবে`
+      ])
 
     if (!hasBangla) return
 
@@ -305,7 +356,18 @@ function lintFile(file) {
 
 // Bangla UI copy that lives outside app/(contents)/ — the homepage strings escaped every
 // sweep until reader feedback caught billboard-style Bangla there.
-const EXTRA_BN_SOURCES = ['app/components/WikiLanding.tsx', 'app/nav.config.ts']
+const EXTRA_BN_SOURCES = [
+  'app/components/WikiLanding.tsx',
+  'app/nav.config.ts',
+  // The glossary moved out of prose and into structured data, and its Bangla
+  // definitions are the same reader-facing copy they were as MDX bullets.
+  'data/glossary.json',
+  'app/components/Glossary.tsx',
+  'app/components/GlossaryControls.tsx',
+  // The contributor surfaces name real people in Bangla and were never swept.
+  'app/components/ContributorLeaderboard.tsx',
+  'app/components/ContributorProfile.tsx',
+]
 
 const targets = fileArgs.length
   ? fileArgs

@@ -4,14 +4,20 @@ Deshi Startup uses one Cloudflare Worker deployment with two deliberately separa
 
 - `out/` contains the static Next.js/Nextra site, Pagefind index, fonts, and generated discovery
   files. Cloudflare Static Assets serve matching requests without running Worker code.
-- `worker/` contains the small request-time application. It handles `/api/*` for contributions and
-  redirects old `/contribute/review/:id` links to the static `/contribute/review?id=...` page.
+- `worker/` contains the small request-time application. It handles `/api/contact`, the
+  contribution APIs, old contribution-review redirects, and the permanent `/50` and `/en/50`
+  shortcuts for Startup 50.
 - R2 continues to hold public media and private contributor quarantine objects. Article HTML and
   MDX do not belong in R2 because Static Assets already provide clean URLs, caching, compression,
   and atomic versioned deployment.
 
 This boundary makes content growth independent of the Worker script-size limit. Adding Bangla or
 English guides adds static assets; it does not compile the guide bodies into the Worker.
+
+Static Assets answer navigation requests before Worker code unless the route is listed under
+`assets.run_worker_first` in `wrangler.jsonc`. Every redirect owned by `worker/index.ts` must also
+have its exact route spellings there, including any supported trailing slash. Otherwise the static
+404 page wins and the redirect code never runs.
 
 ## Free-plan guardrails
 
@@ -37,6 +43,7 @@ silence the counter; preserve crawlable static pages and clean routing.
 
 ```bash
 npm run dev
+npm run test:contact
 npm run build:worker
 npm run check:worker
 npm run preview:worker
@@ -46,6 +53,12 @@ npm run preview:worker
 `/api/*` requests; Next proxies them to Wrangler on port 8787. Local Worker secrets come from the
 gitignored `.env.local`.
 
+`CONTACT_INBOX` is the account-level verified Email Routing destination behind the public
+`hello@deshistartup.com` alias. Keep that private destination in the Worker secret; do not put it in
+`wrangler.jsonc` or other tracked files.
+
+`npm run test:contact` exercises request admission, body and field limits, rate limiting, and email
+composition with local mocks. It never sends a real email.
 `npm run build:worker` creates the production `out/` directory and runs Pagefind and the SEO audit.
 `npm run check:worker` regenerates Cloudflare types from `wrangler.jsonc`, typechecks the Worker,
 packages a dry run, and checks both budgets. Deploy and upload commands build first and preserve

@@ -1,24 +1,31 @@
 # অবদান রাখুন · Contributing
 
-দেশি স্টার্টআপ সবার জন্য উন্মুক্ত একটি জ্ঞানভাণ্ডার, আর পাঠকেরাই এটিকে আরও ভালো করে
-তুলতে পারেন। পুরোনো ফি বদলে বর্তমান ফি লেখা, জটিল একটি বাক্য সহজ করা বা নিজের জানা
-একটি বিষয় নিয়ে পূর্ণ গাইড লেখা, সব ধরনের অবদানই কাজে লাগে।
+দেশি স্টার্টআপ বাংলাদেশে স্টার্টআপ গড়ার ফ্রি, ওপেন-সোর্স ম্যানুয়াল, বাংলা ও
+ইংরেজিতে। পাঠকেরাই ম্যানুয়ালটিকে আরও ভালো করে তুলতে পারেন। পুরোনো ফি বদলে বর্তমান
+ফি লেখা, জটিল একটি বাক্য সহজ করা বা নিজের জানা একটি বিষয় নিয়ে পূর্ণ গাইড লেখা,
+সব ধরনের অবদানই কাজে লাগে।
 
 লেখা বদলাতে কোড জানা বা নিজের কম্পিউটারে প্রজেক্ট চালানো লাগে না। সাইটের
-[অবদান পাতায়](https://deshistartup.com/contribute) ব্রাউজার থেকে কাজ করার পুরো ধাপ আছে।
+[অবদান পেজে](https://deshistartup.com/contribute) ব্রাউজার থেকে কাজ করার পুরো ধাপ আছে।
 
-## শুরু করার ৩টি পথ
+প্রজেক্টের কাজ নিয়ে আলোচনা আর সমন্বয়ের জন্য সক্রিয় কন্ট্রিবিউটররা
+[কন্ট্রিবিউটর ডিসকর্ড](https://discord.gg/Wsgn3CaFyD) ব্যবহার করেন।
 
-1. **ভুল জানান:** পাতার **ভুল জানান** লিংকে কোন তথ্যটি ভুল বা অস্পষ্ট, তা লিখুন।
+## শুরু করার ৪টি পথ
+
+1. **ফিডব্যাক দিন:** পেজের **ফিডব্যাক দিন** অপশনে কোন তথ্যটি ভুল বা অস্পষ্ট, তা লিখুন।
    সঠিক তথ্য বা সরকারি সূত্র জানা থাকলে সঙ্গে দিন। রিপোর্ট পাঠাতে GitHub-এ সাইন ইন
    করতে হতে পারে।
-2. **ছোট সংশোধন করুন:** পাতার **সম্পাদনা** বোতাম চাপুন, Google দিয়ে সাইন ইন করুন,
+2. **ছোট পরিবর্তন করুন:** পেজের **এডিট** বাটন চাপুন, Google দিয়ে সাইন ইন করুন,
    লেখা ঠিক করে **রিভিউতে পাঠান** চাপুন। GitHub অ্যাকাউন্ট লাগবে না। সাইট নিজেই
    একটি পুল রিকোয়েস্ট তৈরি করবে।
-3. **পূর্ণ গাইড লিখুন:** কোনো **লেখা বাকি** পাতা বেছে নিন। একই বিষয়ে দুজন যেন
+3. **পূর্ণ গাইড লিখুন:** কোনো **লেখা বাকি** পেজ বেছে নিন। একই বিষয়ে দুজন যেন
    একসঙ্গে কাজ না করেন, শুরু করার আগে ওই ইস্যুতে “আমি লিখছি” লিখুন।
+4. **নতুন বিষয় প্রস্তাব করুন:** সাইটে নেই এমন কোনো বিষয় জানলে GitHub-এ
+   [নতুন বিষয়ের ইস্যু](https://github.com/Deshi-Startup/deshistartup/issues/new?template=new-topic.yml)
+   খুলুন। খসড়া থাকলে ইস্যুতেই পেস্ট করুন – দ্রুত প্রকাশ করা যায়।
 
-GitHub ব্যবহার করতে চাইলে পাতার নিচের **GitHub-এ সম্পাদনা** লিংকও ব্যবহার করতে পারেন।
+GitHub ব্যবহার করতে চাইলে পেজের নিচের **GitHub-এ এডিট করুন** লিংকও ব্যবহার করতে পারেন।
 
 ## পূর্ণ গাইড লেখার ধাপ
 
@@ -28,15 +35,15 @@ GitHub ব্যবহার করতে চাইলে পাতার নি
    নথি বা মূল সূত্র আগে দেখুন। কোনো তথ্য নিশ্চিত না হলে সেটি স্পষ্ট করে লিখুন।
 3. **পাঠকের কাজ ধরে সাজান।** কার এই তথ্য দরকার, আগে কী প্রস্তুত করবেন, কোথায় যাবেন,
    কত সময় বা টাকা লাগতে পারে এবং এরপর কী করবেন, এগুলোর উত্তর দিন।
-4. **বাংলায় ভেবে লিখুন।** ইংরেজি খসড়া অনুবাদ না করে পরিচিত শব্দে সরাসরি বোঝান।
+4. **সহজ ভাষায় লিখুন।** মূল গাইড ইংরেজিতে লেখা হয়। বাংলায় লিখলে STYLE.md মেনে সরাসরি বাংলায় ভাবুন, ইংরেজি খসড়া শব্দে শব্দে অনুবাদ করবেন না।
    শেষ হলে জোরে পড়ে যেসব বাক্য মুখে বলা যায় না, সেগুলো আবার লিখুন।
 5. **সূত্র ও সাল দিন।** আইন, ফি, সীমা ও নিয়মের দাবির কাছে সূত্র দিন। বদলাতে পারে
    এমন সংখ্যা বা ফি-এর সঙ্গে সাল বা যাচাইয়ের তারিখ দিন।
 6. **খসড়া পাঠান।** প্রথম খসড়া নিখুঁত হওয়ার অপেক্ষা করবেন না। তথ্য ও সূত্র ঠিক
    থাকলে রিভিউতে ভাষা ও গঠন আরও ভালো করা যাবে।
 
-GitHub থেকে লিখলে দাবির পরে `[^source-name]` দিন। `## প্রাসঙ্গিক সূত্র` অংশে একই নামে
-`[^source-name]: [সূত্রের নাম](URL)` লিখলে সাইট নম্বর ও ফিরে যাওয়ার লিংক নিজেই বসাবে।
+GitHub থেকে লিখলে দাবির পরে `[^source-name]` দিন। `## প্রাসঙ্গিক সোর্স` অংশে একই নামে
+`[^source-name]: [সোর্সের নাম](URL)` লিখলে সাইট নম্বর ও ফিরে যাওয়ার লিংক নিজেই বসাবে।
 
 সব গাইডে একই শিরোনাম লাগবে না। বিষয়টিতে যেগুলো দরকার, শুধু সেগুলো রাখুন। শুরু
 করার জন্য এই ছাঁচ ব্যবহার করতে পারেন:
@@ -51,12 +58,13 @@ GitHub থেকে লিখলে দাবির পরে `[^source-name]` �
 ## খরচ ও সময়
 ## সাধারণ ভুল
 ## চেকলিস্ট
-## প্রাসঙ্গিক সূত্র
+## প্রাসঙ্গিক সোর্স
 ```
 
 শুরুর `<StubNotice ... />` শুধু পূর্ণ গাইড শেষ হলে সরান। অসম্পূর্ণ কাজও পাঠাতে পারেন,
-তবে সেটিকে শেষ লেখা হিসেবে দেখাবেন না। বাংলা পাতাই মূল সংস্করণ। ইংরেজি মিরর দিলে
-ভালো, না পারলেও বাংলা অবদান জমা দিন।
+তবে সেটিকে শেষ লেখা হিসেবে দেখাবেন না। সম্পাদনার সুবিধার জন্য ইংরেজি গাইডটি আগে শেষ ও
+রিভিউ করা হয়, তারপর স্বাভাবিক বাংলা সংস্করণ তৈরি হয়। যে ভাষায় সুবিধা হয়, সেই ভাষায়
+অবদান পাঠান।
 
 ভাষার উদাহরণ ও শেষবার মিলিয়ে দেখার জন্য [STYLE.md](./STYLE.md), আর গবেষণা, সূত্র ও
 শেখানোর মানের জন্য [EDITORIAL.md](./EDITORIAL.md) পড়ুন।
@@ -87,6 +95,10 @@ Facebook ভিডিওটি পাবলিক না হলে সাইট�
 রেজিস্ট্রেশন, শ্রম, পেমেন্ট ও ফান্ডিংয়ের মতো বড় সিদ্ধান্তের লেখায় প্রয়োজন হলে
 বিশেষজ্ঞের মত নেওয়া হয়।
 
+পূর্ণ গাইড মার্জ করার আগে একজন মেইনটেইনার রিভিউ করেন। কারও পদবি একা সূত্রের বিকল্প
+নয়। কোনো পেজে রিভিউয়ারের নাম বা তারিখ তখনই দেখানো হবে, যখন সেই রিভিউ সত্যিই
+হয়েছে, কী দেখা হয়েছে তা নথিভুক্ত আছে এবং নাম প্রকাশের অনুমতি আছে।
+
 পরিবর্তন চাইলে আমরা লেখাটি নিয়েই কথা বলব, লেখককে নিয়ে নয়। মতভেদ হলে মূল সূত্র,
 পাঠকের সম্ভাব্য ক্ষতি এবং কোন ব্যাখ্যাটি বোঝা সহজ, এগুলো ধরে সিদ্ধান্ত হবে।
 
@@ -113,14 +125,17 @@ SEO আউটপুট বিল্ডে তৈরি হয়। এগুল
 
 # Contributing
 
-Deshi Startup is an open manual that readers can improve. Correcting an outdated fee, simplifying
-a confusing sentence and writing a complete guide from your own knowledge are all useful
-contributions.
+Deshi Startup is the free, open-source manual for building startups in Bangladesh, published in
+Bangla and English. Readers can improve it by correcting an outdated fee, simplifying a confusing
+sentence or writing a complete guide from their own knowledge.
 
 You do not need to know GitHub, code or run the project locally to edit the writing. The
 [contribute page](https://deshistartup.com/en/contribute) explains the complete browser workflow.
 
-## Three ways to start
+Active contributors use the [Contributor Discord](https://discord.gg/Wsgn3CaFyD) for project
+discussions and coordination.
+
+## Four ways to start
 
 1. **Report a problem:** use **Report a mistake** on the page and describe what is wrong or
    unclear. Add the corrected information or an official source if you have one. GitHub may ask
@@ -129,6 +144,9 @@ You do not need to know GitHub, code or run the project locally to edit the writ
    **Send for review**. No GitHub account is required; the site creates the pull request.
 3. **Write a guide:** choose a **to be written** page. If it has a matching issue, comment that
    you are working on it so two people do not unknowingly duplicate the work.
+4. **Suggest a new topic:** know a subject the site doesn't cover? Open a
+   [New topic issue](https://github.com/Deshi-Startup/deshistartup/issues/new?template=new-topic.yml)
+   on GitHub. Paste your draft into the issue if you have one – it publishes faster.
 
 If you prefer working through GitHub, use **Edit on GitHub** at the bottom of a page.
 
@@ -140,9 +158,9 @@ If you prefer working through GitHub, use **Edit on GitHub** at the bottom of a 
    government-process claims. State uncertainty instead of filling a gap with a guess.
 3. **Follow the reader's decision.** Explain who needs this, what to prepare, where to go, what it
    may cost, how long it may take and what to do next.
-4. **Write the Bengali source directly in Bangla.** Do not translate an English draft sentence by
-   sentence. Read it aloud and rewrite anything that does not sound like something a person would
-   naturally say.
+4. **Write plainly.** The canonical guide is written in natural English. If you write in Bangla,
+   follow STYLE.md and compose directly in Bangla rather than translating an English draft word for
+   word. Read it aloud and rewrite anything that does not sound like a person talking.
 5. **Cite and date claims.** Put sources near consequential claims. Date fees, thresholds and other
    facts that may change.
 6. **Submit the draft.** It does not need perfect prose. Review can improve language and structure
@@ -169,8 +187,9 @@ starting shape:
 ```
 
 Remove `<StubNotice ... />` only when the guide is genuinely complete. Partial work is welcome,
-but do not present it as finished. Bengali is the source edition; an English mirror is welcome but
-optional.
+but do not present it as finished. For a consistent editorial workflow, the English guide is
+completed and reviewed first, followed by the natural-Bangla edition. Contribute in whichever
+language you are comfortable with.
 
 Use [STYLE.md](./STYLE.md) for natural Bangla and [EDITORIAL.md](./EDITORIAL.md) for research,
 teaching and evidence standards. [/en/start-here](https://deshistartup.com/en/start-here) is a
@@ -198,6 +217,10 @@ with permission can open them on Facebook.
 Reviewers check facts, sources, whether the next action is clear, possible harm and copyright.
 Content about legal, tax, registration, employment, payments and funding may need expert review.
 
+A maintainer reviews every complete guide before merge. A person's title is not a substitute for
+evidence. A page names and dates a reviewer only when that review happened, its scope was recorded
+and the reviewer allowed the project to identify them.
+
 Feedback should be about the page, not the person who wrote it. When reviewers disagree, primary
 sources, likely reader harm and clarity guide the decision.
 
@@ -213,6 +236,8 @@ npm run build
 
 Architecture and repository rules live in [AGENTS.md](./AGENTS.md). Files under `app/generated/`
 and generated SEO outputs are build products; do not edit them by hand.
+Maintainers recording accepted public credit should follow the
+[contributor recognition policy](./docs/contributor-recognition.md).
 
 ## License
 

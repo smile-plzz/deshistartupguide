@@ -1,0 +1,356 @@
+{
+  "reviewedAt": "2026-08-25",
+  "note": "Company marks used for editorial identification. Sources were reviewed before upload; the image bytes live in R2, not Git.",
+  "entries": [
+    {
+      "slug": "10-minute-school",
+      "name": "10 Minute School",
+      "src": "/media/startup-50/10-minute-school.webp",
+      "source": "https://cdn.10minuteschool.com/images/svg/10mslogo-svg.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "agricore",
+      "name": "AgriCore (formerly InsureCow)",
+      "src": "/media/startup-50/agricore.webp",
+      "source": "https://insurecow.com/favicon.ico?favicon.b5c73edd.ico",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "agroshift",
+      "name": "Agroshift",
+      "src": "/media/startup-50/agroshift.webp",
+      "source": "https://cdn.prod.website-files.com/682b2e509c06fb31d9d240ce/682f6cead76dd449a7745a25_68106fb648460e8b171e0059_AS-Logo%20(1)%201.svg",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "airwork",
+      "name": "Airwork",
+      "src": "/media/startup-50/airwork.webp",
+      "source": "https://framerusercontent.com/images/fgjDgpjChrJQt0wUvMb3hLOvd9A.svg",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "amarlab",
+      "name": "AmarLab",
+      "src": "/media/startup-50/amarlab.webp",
+      "source": "https://amarlab.com/logo.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "apploye",
+      "name": "Apploye",
+      "src": "/media/startup-50/apploye.webp",
+      "source": "https://cdn.prod.website-files.com/64bf6aa2443faa46c887a8c0/64c8ad1e4d77e15467726c08_logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "arogga",
+      "name": "Arogga",
+      "src": "/media/startup-50/arogga.webp",
+      "source": "https://www.arogga.com/assets/arogga-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "aunkur",
+      "name": "Aunkur",
+      "src": "/media/startup-50/aunkur.webp",
+      "source": "https://aunkur.ai/assets/images/favicons/apple-touch-icon.png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "barikoi",
+      "name": "Barikoi",
+      "src": "/media/startup-50/barikoi.webp",
+      "source": "https://barikoi.com/lovable-uploads/03d24b15-45b3-4023-8b96-84c6a7a64267.png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "bimafy",
+      "name": "Bimafy",
+      "src": "/media/startup-50/bimafy.webp",
+      "source": "http://bimafy.com/images/logo/logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "bkash",
+      "name": "bKash",
+      "src": "/media/startup-50/bkash.webp",
+      "source": "https://payment.bkash.com/bKash-logo.png",
+      "sourceKind": "official payment portal logo"
+    },
+    {
+      "slug": "cassetex",
+      "name": "Cassetex",
+      "src": "/media/startup-50/cassetex.webp",
+      "source": "https://www.cassetex.com/wp-content/uploads/2024/10/Cassetex-new-logo-white.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "chamak",
+      "name": "Chamak",
+      "src": "/media/startup-50/chamak.webp",
+      "source": "https://chamak-assets.s3.ap-southeast-1.amazonaws.com/chamak_logo_04.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "digibox",
+      "name": "DIGIBOX",
+      "src": "/media/startup-50/digibox.webp",
+      "source": "https://digibox.com.bd/wp-content/uploads/2025/09/digi-logo-scaled.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "doctorkoi",
+      "name": "DoctorKoi",
+      "src": "/media/startup-50/doctorkoi.webp",
+      "source": "https://doctorkoi.com/assets/doctorkoi_logo-BFjc43J7.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "dorik",
+      "name": "Dorik",
+      "src": "/media/startup-50/dorik.webp",
+      "source": "https://cdn.dorik.com/5e373b6c43a72a001f56dbf6/61a1f4035bfd7b0011fb92f9/images/logo-dark_jta933n2.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "dubotech",
+      "name": "Dubotech",
+      "src": "/media/startup-50/dubotech.webp",
+      "source": "https://dubotech.com/favicon/apple-touch-icon.png",
+      "sourceKind": "official-site icon"
+    },
+    {
+      "slug": "ecovia",
+      "name": "Ecovia",
+      "src": "/media/startup-50/ecovia.webp",
+      "source": "https://cdn.prod.website-files.com/6709161cf99db2549fda7a27/69c7b178459471bea91d24a9_Ecovia%20Fav%20(7).png",
+      "sourceKind": "apple touch icon"
+    },
+    {
+      "slug": "ezycourse",
+      "name": "EzyCourse",
+      "src": "/media/startup-50/ezycourse.webp",
+      "source": "https://f.ezycourse.net/2456/cm8qwjlaa008e1f8z99u5a7ue.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "fashol",
+      "name": "Fashol",
+      "src": "/media/startup-50/fashol.webp",
+      "source": "https://fashol.com/fashol-logo-full.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "gozayaan",
+      "name": "GoZayaan",
+      "src": "/media/startup-50/gozayaan.webp",
+      "source": "https://gozayaan.com/gz-favicon.svg",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "hishabee",
+      "name": "Hishabee",
+      "src": "/media/startup-50/hishabee.webp",
+      "source": "https://www.hishabee.io/hishabee.webp",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "ifarmer",
+      "name": "iFarmer",
+      "src": "/media/startup-50/ifarmer.webp",
+      "source": "https://framerusercontent.com/images/xLYkgyfP9RcxFdqFQBFVZxS0MBc.png",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "jatri",
+      "name": "Jatri",
+      "src": "/media/startup-50/jatri.webp",
+      "source": "https://jatri.co/_nuxt/jatri-logo.sAXW7P9b.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "loop-freight",
+      "name": "Loop Freight",
+      "src": "/media/startup-50/loop-freight.webp",
+      "source": "https://loopfreight.io/static/media/logo-white.e51aa633.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "markopolo-ai",
+      "name": "Markopolo.ai",
+      "src": "/media/startup-50/markopolo-ai.webp",
+      "source": "https://framerusercontent.com/images/ha4kYkWvG1CQYDQWIG6MqCXASL0.png",
+      "sourceKind": "site icon"
+    },
+    {
+      "slug": "medeasy",
+      "name": "MedEasy",
+      "src": "/media/startup-50/medeasy.webp",
+      "source": "https://medeasy.health/assets/images/medEasyIcon.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "monsha",
+      "name": "Monsha",
+      "src": "/media/startup-50/monsha.webp",
+      "source": "https://cdn.prod.website-files.com/67f7f7f50ddeef0ebca4c8de/67ff9e5adcd6627c196a77ea_monsha.avif",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "nodes-digital",
+      "name": "Nodes Digital",
+      "src": "/media/startup-50/nodes-digital.webp",
+      "source": "https://nodesdigitalbd.com/wp-content/uploads/2023/11/nodes-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "nuport",
+      "name": "Nuport",
+      "src": "/media/startup-50/nuport.webp",
+      "source": "https://www.nuport.io/images/nuport-logo.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "ostad",
+      "name": "Ostad",
+      "src": "/media/startup-50/ostad.webp",
+      "source": "https://cdn.ostad.app/public/upload/2024-03-20T04-26-32.799Z-ostad_logo_light@512x%20(2).png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "palki-motors",
+      "name": "Palki Motors",
+      "src": "/media/startup-50/palki-motors.webp",
+      "source": "https://palkimotors.com/logo.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "pathao",
+      "name": "Pathao",
+      "src": "/media/startup-50/pathao.webp",
+      "source": "https://pathao.com/wp-content/uploads/2023/10/Pathao-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "priyoshop",
+      "name": "PriyoShop",
+      "src": "/media/startup-50/priyoshop.webp",
+      "source": "https://priyoshopretail.com/wp-content/uploads/2025/09/Frame-1-3.png",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "pulsetech",
+      "name": "PulseTech",
+      "src": "/media/startup-50/pulsetech.webp",
+      "source": "https://pulsetechltd.com/logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "relaxy",
+      "name": "Relaxy",
+      "src": "/media/startup-50/relaxy.webp",
+      "source": "https://relaxy.com.bd/logo.webp",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "revora",
+      "name": "Revora",
+      "src": "/media/startup-50/revora.webp",
+      "source": "https://userevora.com/favicon.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "sharetrip",
+      "name": "ShareTrip",
+      "src": "/media/startup-50/sharetrip.webp",
+      "source": "https://assets.sharetrip.net/b2c-web-public/public/images/safari-pinned-tab.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "shikho",
+      "name": "Shikho",
+      "src": "/media/startup-50/shikho.webp",
+      "source": "https://shikho.com/shikho-logo.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "shomvob",
+      "name": "Shomvob",
+      "src": "/media/startup-50/shomvob.webp",
+      "source": "https://shomvob.com/assets/images/logos/shomvob_logo_white.png",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "shopup-silq",
+      "name": "ShopUp (SILQ)",
+      "src": "/media/startup-50/shopup-silq.webp",
+      "source": "https://cdn.prod.website-files.com/6538a2c4ccf1fed5a7d6e311/6538ad340785ff4bb377fd77_ShopUp-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "shuttle",
+      "name": "Shuttle",
+      "src": "/media/startup-50/shuttle.webp",
+      "source": "https://www.shuttlebd.com/shuttle.svg",
+      "sourceKind": "official-site logo"
+    },
+    {
+      "slug": "sokrio",
+      "name": "Sokrio",
+      "src": "/media/startup-50/sokrio.webp",
+      "source": "https://sokrio.com/wp-content/themes/sokrio/assets/images/logo.png",
+      "sourceKind": "official-site header logo"
+    },
+    {
+      "slug": "solshare",
+      "name": "SOLshare",
+      "src": "/media/startup-50/solshare.webp",
+      "source": "http://solshare.com/wp-content/uploads/2022/08/SOLShare-Logo.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "tallykhata",
+      "name": "TallyKhata",
+      "src": "/media/startup-50/tallykhata.webp",
+      "source": "https://www.tallykhata.com/wp-content/uploads/2022/11/TallyKhata-Registered-BN-Logo-Horizontal-with-background.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "tiger-new-energy",
+      "name": "Tiger New Energy",
+      "src": "/media/startup-50/tiger-new-energy.webp",
+      "source": "https://www.tigernewenergy.com/imgs/footer-logo.svg",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "togumogu",
+      "name": "ToguMogu",
+      "src": "/media/startup-50/togumogu.webp",
+      "source": "https://static.togumogu.com/uploads/2025/04/togumogu.png",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "truck-lagbe",
+      "name": "Truck Lagbe",
+      "src": "/media/startup-50/truck-lagbe.webp",
+      "source": "http://trucklagbe.com/wp-content/uploads/2025/10/truck-lagbe-dark.svg",
+      "sourceKind": "json-ld logo"
+    },
+    {
+      "slug": "wegro",
+      "name": "WeGro",
+      "src": "/media/startup-50/wegro.webp",
+      "source": "https://www.wegro.global/newWegroLogo.png",
+      "sourceKind": "official-site logo image"
+    },
+    {
+      "slug": "zatiq",
+      "name": "Zatiq",
+      "src": "/media/startup-50/zatiq.webp",
+      "source": "https://zatiq.com/images/zatiq/Zatiq_Logo.svg",
+      "sourceKind": "official-site logo"
+    }
+  ]
+}

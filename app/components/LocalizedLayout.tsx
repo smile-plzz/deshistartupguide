@@ -5,13 +5,15 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import LanguageSwitcher from './LanguageSwitcher'
 import SearchBox from './SearchBox'
-import AuthModal from './AuthModal'
 import type { SubmitResult } from './ContributionEditor'
+import { cleanRoute } from '../lib/clean-route'
 import { clearAuth, getStoredAuth, UserInfo } from '../lib/client-auth'
+import { pageChromePolicy } from '../lib/page-chrome'
 import {
   bnNav,
   DISCORD_URL,
   enNav,
+  FACEBOOK_GROUP_URL,
   FACEBOOK_URL,
   LINKEDIN_URL,
   REPO_URL,
@@ -21,6 +23,9 @@ import sectionsLite from '../generated/sections-lite.json'
 
 // Heavy (Milkdown) – only loads when a contributor opens the editor.
 const ContributionEditor = dynamic(() => import('./ContributionEditor'), { ssr: false })
+// Google Identity Services and a focus-trapping dialog, for the small share of
+// readers who sign in. Kept out of the chunk every reader downloads.
+const AuthModal = dynamic(() => import('./AuthModal'), { ssr: false })
 
 interface SectionsLite {
   en?: Record<string, string>
@@ -42,6 +47,23 @@ function sourceFileFor(pathname: string) {
     return `app/(contents)/en${rest}/page.mdx`
   }
   return `app/(contents)/(bn)${pathname === '/' ? '' : pathname}/page.mdx`
+}
+
+/**
+ * The server allowlist makes this a security-independent UX guard. These
+ * markers are rendered with the page, so the shell can avoid shipping a route
+ * catalogue merely to learn whether the visible content lives in the MDX.
+ */
+function articleSupportsInlineEdit(article: HTMLElement | null) {
+  if (!article) return true
+  if (article.querySelector('[data-pagefind-meta="stub"]')) return false
+
+  const directChildren = Array.from(article.children)
+  const hasSectionIndex = directChildren.some(
+    (child) => child.getAttribute('data-inline-edit-source') === 'section-index'
+  )
+  const hasAuthoredSection = directChildren.some((child) => child.tagName === 'H2')
+  return !hasSectionIndex || hasAuthoredSection
 }
 
 function formatDate(iso: string | null, isEn: boolean) {
@@ -66,15 +88,22 @@ function GitHubIcon() {
   )
 }
 
-function DiscordIcon() {
+function FacebookIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20.3 4.4A17.5 17.5 0 0 0 16 3l-.5 1a16 16 0 0 0-7 0L8 3a17.5 17.5 0 0 0-4.3 1.4C1 8.4.3 12.3.7 16.1a17.3 17.3 0 0 0 5.2 2.6l1.3-1.8-2-1a12 12 0 0 0 1.2.6 13.6 13.6 0 0 0 11.2 0 12 12 0 0 0 1.2-.6l-2 1 1.3 1.8a17.3 17.3 0 0 0 5.2-2.6c.5-4.4-.8-8.2-3-11.7ZM8.5 14.6c-1 0-1.9-1-1.9-2.2 0-1.2.8-2.2 1.9-2.2 1 0 1.9 1 1.9 2.2 0 1.2-.9 2.2-1.9 2.2Zm7 0c-1 0-1.9-1-1.9-2.2 0-1.2.8-2.2 1.9-2.2 1 0 1.9 1 1.9 2.2 0 1.2-.9 2.2-1.9 2.2Z" />
+    <svg viewBox="2 2 20 20" aria-hidden="true">
+      {/* One path, evenodd: the "f" is a hole punched through the disc, not a
+          white shape painted on top. A knocked-out counter stays correct on
+          whatever surface the header happens to be, so the icon never has to
+          know the background colour. */}
+      <path
+        fillRule="evenodd"
+        d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM13.5 21v-8h2.75l.41-3.13H13.5v-2c0-.91.25-1.53 1.58-1.53h1.69V3.54a22.6 22.6 0 0 0-2.46-.13c-2.43 0-4.1 1.49-4.1 4.2v2.26H7.46V13h2.75v8h3.29Z"
+      />
     </svg>
   )
 }
 
-/* Carried by the সম্পাদনা action so it still reads as "edit" on a phone, where
+/* Carried by the এডিট action so it still reads as "edit" on a phone, where
    the row collapses to that one control and the neighbouring words are gone. */
 function ActionPencil() {
   return (
@@ -87,6 +116,61 @@ function ActionPencil() {
 interface HeadingItem {
   id: string
   text: string
+}
+
+/* Both "On this page" lists are built from the article's own h2s. The shell is
+   one shared client component that cannot know the route while the static HTML
+   is rendered, so the lists used to be filled in after hydration – and a
+   collapsed accordion appearing above the article pushed the whole page down
+   the moment the JavaScript landed. The postbuild pass now writes both lists
+   into the HTML and marks the page with `deshi:toc`; when that marker is there
+   the first client render reads the same h2s and reproduces the same markup, so
+   there is nothing left to shift. `next dev` runs no postbuild pass, hence the
+   unmarked path stays exactly as it was. */
+
+const HEADING_LIMIT = 16
+
+function slugifyHeading(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+/** `assignIds` is the unmarked path: give an id to any h2 that reached the
+ *  browser without one, so its link still has somewhere to go. A production
+ *  build runs rehype-slug and never needs it. */
+function collectHeadings(assignIds: boolean): HeadingItem[] {
+  const article = document.querySelector('.article')
+  if (!article) return []
+
+  const nodes = [...article.querySelectorAll('h2:not([data-toc-ignore])')].slice(0, HEADING_LIMIT)
+
+  if (assignIds) {
+    const seen = new Set<string>()
+    nodes.forEach((heading, index) => {
+      if (!heading.id) {
+        let id = slugifyHeading(heading.textContent || '') || `section-${index + 1}`
+        while (seen.has(id)) id = `${id}-${index}`
+        heading.id = id
+      }
+      seen.add(heading.id)
+    })
+  }
+
+  return nodes
+    .map((heading) => ({ id: heading.id, text: heading.textContent?.trim() || '' }))
+    .filter((heading) => heading.id && heading.text)
+}
+
+function hasServerRenderedToc() {
+  return !!document.querySelector('meta[name="deshi:toc"]')
+}
+
+function initialHeadings(): HeadingItem[] {
+  if (typeof document === 'undefined') return []
+  return hasServerRenderedToc() ? collectHeadings(false) : []
 }
 
 interface SidebarProps {
@@ -146,8 +230,8 @@ function Sidebar({ isEn, pathname, headings, onNavigate, onClose, closeButtonRef
         ))}
 
         {headings.length > 0 && (
-          <div className="sidebar-group">
-            <p>{isEn ? 'On This Page' : 'এই পাতায়'}</p>
+          <div className="sidebar-group sidebar-group--toc">
+            <p>{isEn ? 'On This Page' : 'এই পেজে'}</p>
             {headings.map((heading) => (
               <a href={`#${heading.id}`} key={heading.id} onClick={onNavigate}>
                 {heading.text}
@@ -159,7 +243,7 @@ function Sidebar({ isEn, pathname, headings, onNavigate, onClose, closeButtonRef
         <p className="sidebar-note">
           {isEn
             ? 'Free & open source. Every guide can be improved by anyone – including you.'
-            : 'সম্পূর্ণ ফ্রি ও ওপেন সোর্স। প্রতিটি গাইড যে কেউ সংশোধন করতে পারেন, আপনিও।'}
+            : 'সম্পূর্ণ ফ্রি ও ওপেন সোর্স। যে কেউ এডিট বা আপডেট করতে পারেন, আপনিও।'}
         </p>
       </nav>
     </aside>
@@ -178,7 +262,7 @@ function Breadcrumbs({ isEn, pathname, pageTitle }: BreadcrumbsProps) {
   if (rest.length === 0) return null
 
   const sectionTitles = (isEn ? typedSectionsLite.en : typedSectionsLite.bn) || {}
-  const crumbs = [{ href: isEn ? '/en' : '/', label: isEn ? 'Home' : 'প্রধান পাতা' }]
+  const crumbs = [{ href: isEn ? '/en' : '/', label: isEn ? 'Home' : 'হোম' }]
 
   if (rest.length > 1) {
     const sectionSlug = rest[0]
@@ -207,8 +291,8 @@ const bnTabs = {
   article: 'গাইড',
   talk: 'আলোচনা',
   read: 'পড়ুন',
-  edit: 'সম্পাদনা',
-  history: 'ইতিহাস'
+  edit: 'এডিট',
+  history: 'কী বদলেছে'
 }
 
 interface LocalizedLayoutProps {
@@ -216,7 +300,7 @@ interface LocalizedLayoutProps {
 }
 
 export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
-  const pathname = usePathname()
+  const pathname = cleanRoute(usePathname())
   const isEn = pathname.startsWith('/en/') || pathname === '/en'
   const isLanding = pathname === '/' || pathname === '/en'
   const isPrivateReview =
@@ -225,7 +309,14 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   // lede has nothing true to say about it: "Home › Contributors" is a crumb to
   // nowhere, there is no edit date to report and a mistake belongs in a rename
   // request, not a content correction.
-  const isCredits = pathname === '/contributors' || pathname === '/en/contributors'
+  const isCredits =
+    pathname === '/contributors' ||
+    pathname.startsWith('/contributors/') ||
+    pathname === '/en/contributors' ||
+    pathname.startsWith('/en/contributors/')
+  const isStandaloneFeature =
+    isCredits || pathname === '/startup-50' || pathname === '/en/startup-50'
+  const isContact = pathname === '/contact' || pathname === '/en/contact'
   // One 404 document serves every unmatched URL, so the router reports the
   // synthetic `/_not-found` route. There is no source file behind it: an
   // "Edit on GitHub" link would open GitHub's new-file editor at a path that
@@ -233,8 +324,20 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   // a page nobody can read. Drop the page-contribution chrome; the 404 body
   // carries its own way out.
   const isNotFound = pathname === '/_not-found' || pathname === '/en/_not-found'
+  const {
+    showContentTabs,
+    showPageActions,
+    showEditAction: routeShowsEditAction
+  } = pageChromePolicy(pathname)
+  const [sourceSupportsEdit, setSourceSupportsEdit] = useState(true)
+  const showEditAction = routeShowsEditAction && sourceSupportsEdit
+  const showPageChrome =
+    !isPrivateReview &&
+    !isStandaloneFeature &&
+    !isNotFound &&
+    (showContentTabs || showPageActions)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [headings, setHeadings] = useState<HeadingItem[]>([])
+  const [headings, setHeadings] = useState<HeadingItem[]>(initialHeadings)
   const [pageTitle, setPageTitle] = useState('')
   const [lastUpdated, setLastUpdated] = useState<string | null>(null)
   const [lastVerified, setLastVerified] = useState<string | null>(null)
@@ -246,6 +349,23 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   const [exitSignal, setExitSignal] = useState(0)
   const [flash, setFlash] = useState<SubmitResult | null>(null)
   const [authOpen, setAuthOpen] = useState(false)
+  // Production HTML may already contain route-specific, postbuild-generated
+  // credits. Adopt that trusted static markup on the first client render so
+  // hydration preserves it. This reads the document once; it does not import
+  // the ledger, fetch data, or run contributor-specific code on guide pages.
+  const [staticCreditsHtml] = useState(() => {
+    if (typeof document === 'undefined') return ''
+    return document.querySelector<HTMLElement>('[data-deshi-credits="true"]')?.innerHTML || ''
+  })
+  // Same contract, one line instead of a record: the meta row's byline is
+  // written into the HTML by postbuild, and adopted here so hydration keeps it.
+  const [staticBylineHtml] = useState(() => {
+    if (typeof document === 'undefined') return ''
+    return document.querySelector<HTMLElement>('[data-deshi-byline="true"]')?.innerHTML || ''
+  })
+  // Latched separately from `authOpen` so the dialog stays mounted through its
+  // close, instead of being torn out mid-transition the first time it is used.
+  const [authMounted, setAuthMounted] = useState(false)
   const navToggleRef = useRef<HTMLButtonElement>(null)
   const sidebarRef = useRef<HTMLDivElement>(null)
   const sidebarCloseRef = useRef<HTMLButtonElement>(null)
@@ -261,13 +381,23 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
       setAuthToken(stored.token)
     }
     const wantsEdit = new URLSearchParams(window.location.search).get('action') === 'edit'
-    if (!wantsEdit || pathname === '/' || pathname === '/en' || isPrivateReview || isNotFound) return
+    if (
+      !wantsEdit ||
+      !routeShowsEditAction ||
+      !articleSupportsInlineEdit(articleRef.current) ||
+      pathname === '/' ||
+      pathname === '/en' ||
+      isPrivateReview ||
+      isStandaloneFeature ||
+      isNotFound
+    ) return
     if (stored) setIsEditing(true)
-    else setAuthOpen(true)
+    else openAuth()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const enterEdit = useCallback(() => {
+    if (!routeShowsEditAction || !articleSupportsInlineEdit(articleRef.current)) return
     scrollBeforeEdit.current = window.scrollY
     setFlash(null)
     setIsEditing(true)
@@ -276,7 +406,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
       url.searchParams.set('action', 'edit')
       window.history.pushState({ editing: true }, '', url)
     }
-  }, [])
+  }, [routeShowsEditAction])
 
   const exitEdit = useCallback((result?: SubmitResult) => {
     setIsEditing(false)
@@ -295,23 +425,39 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   const handleExit = useCallback(() => exitEdit(), [exitEdit])
   const handleSubmitted = useCallback((result: SubmitResult) => exitEdit(result), [exitEdit])
 
+  // The route policy handles pages whose source ownership is known from the
+  // URL. Rendered markers cover stubs and thin SectionIndex shells without
+  // putting hundreds of route strings in every reader's JavaScript bundle.
+  useEffect(() => {
+    const supportsEdit = routeShowsEditAction && articleSupportsInlineEdit(articleRef.current)
+    setSourceSupportsEdit(supportsEdit)
+    const hasEditQuery = new URLSearchParams(window.location.search).get('action') === 'edit'
+    if (!supportsEdit && (isEditing || hasEditQuery)) exitEdit()
+  }, [exitEdit, isEditing, pathname, routeShowsEditAction])
+
   // The server rejected the stored token. Forget it here so the next press of
-  // সম্পাদনা offers a fresh sign-in rather than the same failure again.
+  // এডিট offers a fresh sign-in rather than the same failure again.
   const handleSessionExpired = useCallback(() => {
     clearAuth()
     setSession(null)
     setAuthToken(null)
   }, [])
 
+  function openAuth() {
+    setAuthMounted(true)
+    setAuthOpen(true)
+  }
+
   function handleContribute() {
+    if (!showEditAction || !articleSupportsInlineEdit(articleRef.current)) return
     if (session && authToken) enterEdit()
-    else setAuthOpen(true)
+    else openAuth()
   }
 
   function handleAuthenticated(user: UserInfo, token: string) {
     setSession(user)
     setAuthToken(token)
-    if (!isEditing) enterEdit()
+    if (!isEditing && showEditAction) enterEdit()
   }
 
   function handleRead() {
@@ -321,6 +467,28 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
     }
     exitEdit()
   }
+
+  // Opening a URL that names a #fragment has to actually land on it. The router
+  // settles the scroll position itself while hydrating, so a reader arriving at
+  // a shared footnote, a heading from search, or a glossary term from an inline
+  // definition popover was being dropped at the top of a long page instead. This
+  // only fires when nothing has scrolled yet, so it never fights a restored
+  // position, and it scrolls instantly rather than animating the length of the
+  // document past the reader.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id) return undefined
+    let frame = 0
+    const settle = () => {
+      if (window.scrollY > 0) return
+      document.getElementById(id)?.scrollIntoView({ behavior: 'auto', block: 'start' })
+    }
+    frame = window.requestAnimationFrame(() => {
+      frame = window.requestAnimationFrame(settle)
+    })
+    return () => window.cancelAnimationFrame(frame)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Nobody loses an edit to a stray reload, tab close or Android back gesture.
   useEffect(() => {
@@ -457,7 +625,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
   useEffect(() => {
     document.documentElement.lang = isEn ? 'en' : 'bn'
     if (pathname === '/en') {
-      document.title = 'Deshi Startup – The Bangla-first guide to building a startup in Bangladesh'
+      document.title = 'Deshi Startup – The free, open-source manual for building startups in Bangladesh'
     }
   }, [isEn, pathname])
 
@@ -471,20 +639,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
     // Short form for chrome (breadcrumb leaf, issue titles): cut at the em dash.
     setPageTitle(h1 ? h1.textContent?.split('–')[0].trim() || '' : '')
 
-    const slugify = (value: string) =>
-      value.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '')
-
-    const seen = new Set<string>()
-    const nextHeadings = [...article.querySelectorAll('h2')].slice(0, 16).map((heading, index) => {
-      if (!heading.id) {
-        let id = slugify(heading.textContent || '') || `section-${index + 1}`
-        while (seen.has(id)) id = `${id}-${index}`
-        heading.id = id
-      }
-      seen.add(heading.id)
-      return { id: heading.id, text: heading.textContent?.trim() || '' }
-    })
-    setHeadings(nextHeadings)
+    setHeadings(collectHeadings(!hasServerRenderedToc()))
   }, [pathname])
 
   // Both dates for this route, read from the meta tags the postbuild pass writes
@@ -549,10 +704,10 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
       <header className="site-header">
         <div className="header-inner">
           <a className="brand" href={localHref(isEn ? '/en' : '/')} aria-label={isEn ? 'Deshi Startup home' : 'দেশি স্টার্টআপ হোম'}>
-            <img src={localHref('/deshi-mark.svg')} alt="" width="54" height="54" />
+            <img src={localHref('/deshi-mark.webp')} alt="" width="50" height="50" />
             <span>
               <strong>{isEn ? 'Deshi Startup' : 'দেশি স্টার্টআপ'}</strong>
-              <small>{isEn ? 'The Bangladeshi startup manual' : 'বাংলাদেশে স্টার্টআপ গড়ার গাইড'}</small>
+              <small>{isEn ? 'Startup manual for Bangladesh' : 'বাংলাদেশে স্টার্টআপ গড়ার ম্যানুয়াল'}</small>
             </span>
           </a>
 
@@ -561,19 +716,29 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
           </div>
 
           <nav className="top-actions" aria-label={isEn ? 'Site actions' : 'সাইটের কাজ'}>
-            <a className="social-link" href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            {/* Both social links carry an aria-label: below 1180px the span is
+                display:none, which drops it from the accessibility tree, and
+                the icon is aria-hidden; without the label the link would have
+                no accessible name at all in that range. */}
+            <a
+              className="social-link"
+              href={REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={isEn ? 'Deshi Startup on GitHub' : 'GitHub-এ দেশি স্টার্টআপ'}
+            >
               <GitHubIcon />
               <span>GitHub</span>
             </a>
             <a
               className="social-link"
-              href={DISCORD_URL}
+              href={FACEBOOK_GROUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={isEn ? 'Join the Deshi Startup Discord' : 'Deshi Startup Discord কমিউনিটিতে যোগ দিন'}
+              aria-label={isEn ? 'Join the Deshi Startup Facebook community' : 'দেশি স্টার্টআপ ফেসবুক কমিউনিটিতে যোগ দিন'}
             >
-              <DiscordIcon />
-              <span>Discord</span>
+              <FacebookIcon />
+              <span>{isEn ? 'Community' : 'কমিউনিটি'}</span>
             </a>
             {!isPrivateReview && <LanguageSwitcher />}
             <button
@@ -623,52 +788,60 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
         </div>
 
         <main className="content-canvas" id="main">
-          {!isPrivateReview && !isNotFound && <nav className="article-tabs" aria-label={isEn ? 'About this page' : 'এই পাতা নিয়ে'}>
-            <div className="tab-group">
-              <span className="tab active" aria-current="page">{tabs.article}</span>
-              <a
-                className="tab"
-                href={`${REPO_URL}/discussions`}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={isEn ? 'Discuss on GitHub' : 'গিটহাবে আলোচনা করুন'}
-              >
-                {tabs.talk}
-              </a>
-            </div>
-            <div className="article-actions">
-              {isEditing ? (
-                <button type="button" className="act-read tab-action-btn" onClick={handleRead}>
-                  {tabs.read}
-                </button>
-              ) : (
-                <span className="act-read is-current" aria-current="page">
-                  {tabs.read}
-                </span>
+          {showPageChrome && (
+            <nav
+              className={`article-tabs${showContentTabs ? '' : ' article-tabs--actions-only'}`}
+              aria-label={isEn ? 'About this page' : 'এই পেজ নিয়ে'}
+            >
+              {showContentTabs && (
+                <div className="tab-group">
+                  <span className="tab active" aria-current="page">{tabs.article}</span>
+                  <a
+                    className="tab"
+                    href={`${REPO_URL}/discussions`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={isEn ? 'Discuss on GitHub' : 'গিটহাবে আলোচনা করুন'}
+                  >
+                    {tabs.talk}
+                  </a>
+                </div>
               )}
+              {showPageActions && (
+                <div
+                  className={`article-actions${showEditAction ? '' : ' article-actions--without-edit'}`}
+                >
+                  {isEditing ? (
+                    <button type="button" className="act-read tab-action-btn" onClick={handleRead}>
+                      {tabs.read}
+                    </button>
+                  ) : (
+                    <span className="act-read is-current" aria-current="page">
+                      {tabs.read}
+                    </span>
+                  )}
 
-              {isLanding ? (
-                <a className="act-edit" href={`${REPO_URL}/edit/main/${file}`} target="_blank" rel="noopener noreferrer">
-                  <ActionPencil />
-                  {tabs.edit}
-                </a>
-              ) : isEditing ? (
-                <span className="act-edit is-current" aria-current="page">
-                  <ActionPencil />
-                  {tabs.edit}
-                </span>
-              ) : (
-                <button type="button" className="act-edit tab-action-btn" onClick={handleContribute}>
-                  <ActionPencil />
-                  {tabs.edit}
-                </button>
+                  {showEditAction && (
+                    isEditing ? (
+                      <span className="act-edit is-current" aria-current="page">
+                        <ActionPencil />
+                        {tabs.edit}
+                      </span>
+                    ) : (
+                      <button type="button" className="act-edit tab-action-btn" onClick={handleContribute}>
+                        <ActionPencil />
+                        {tabs.edit}
+                      </button>
+                    )
+                  )}
+
+                  <a className="act-history" href={`${REPO_URL}/commits/main/${file}`} target="_blank" rel="noopener noreferrer">
+                    {tabs.history}
+                  </a>
+                </div>
               )}
-
-              <a className="act-history" href={`${REPO_URL}/commits/main/${file}`} target="_blank" rel="noopener noreferrer">
-                {tabs.history}
-              </a>
-            </div>
-          </nav>}
+            </nav>
+          )}
 
           {flash && !isEditing && !isPrivateReview && (
             <div className="edit-flash" role="status">
@@ -677,14 +850,14 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
                   {flash.updated
                     ? isEn
                       ? 'Your draft has been updated.'
-                      : 'আপনার ড্রাফট হালনাগাদ হয়েছে।'
+                      : 'আপনার ড্রাফট আপডেট হয়েছে।'
                     : isEn
                       ? 'Your contribution has been submitted.'
-                      : 'আপনার অবদান জমা পড়েছে।'}
+                      : 'আপনার এডিট জমা হয়েছে।'}
                 </strong>{' '}
                 {isEn
                   ? 'A reviewer will take a look, and once it is approved the change appears on this page.'
-                  : 'একজন রিভিউয়ার এটা দেখবেন। অনুমোদন হয়ে গেলে পরিবর্তনটা এই পাতায় যুক্ত হবে।'}
+                  : 'রিভিউয়ার অ্যাপ্রুভ করলে চেঞ্জগুলো এই পেজে লাইভ হবে।'}
               </p>
               <div className="edit-flash__actions">
                 <a className="edit-btn" href={flash.prUrl} target="_blank" rel="noopener noreferrer">
@@ -704,7 +877,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             </div>
           )}
 
-          {isEditing && !isPrivateReview && (
+          {isEditing && showEditAction && !isPrivateReview && (
             <ContributionEditor
               pathname={pathname}
               isEn={isEn}
@@ -715,39 +888,50 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
               onExit={handleExit}
               onSubmitted={handleSubmitted}
               onSessionExpired={handleSessionExpired}
-              onReauthenticate={() => setAuthOpen(true)}
+              onReauthenticate={openAuth}
               onReadyChange={setEditorReady}
               onDirtyChange={setIsDirty}
             />
           )}
 
-          {!isLanding && !isEditing && !isPrivateReview && !isCredits && !isNotFound && (
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && (
             <div className="article-lede">
               <Breadcrumbs isEn={isEn} pathname={pathname} pageTitle={pageTitle} />
-              <div className="article-meta">
-                {/* One date, not two. "Last updated" is the last commit, so a typo fix bumps it;
-                    `verified:` means someone re-checked the claims against the official source.
-                    Where a page carries the stronger signal, that is the one worth showing. */}
-                {verifiedLabel ? (
-                  <span className="meta-date">
-                    {isEn ? 'Last verified: ' : 'সর্বশেষ যাচাই: '}
-                    {verifiedLabel}
-                  </span>
-                ) : (
-                  dateLabel && (
+              {!isContact && (
+                <div className="article-meta">
+                  {/* Who, then when, then how to correct it: a reference work's
+                      colophon order. The slot is empty until postbuild fills it,
+                      and empty on every page that is not a written guide. */}
+                  <div
+                    className="article-byline"
+                    data-deshi-byline="true"
+                    suppressHydrationWarning
+                    dangerouslySetInnerHTML={{ __html: staticBylineHtml }}
+                  />
+                  {/* One date, not two. "Last updated" is the last commit, so a typo fix bumps it;
+                      `verified:` means someone re-checked the claims against the official source.
+                      Where a page carries the stronger signal, that is the one worth showing. */}
+                  {verifiedLabel ? (
                     <span className="meta-date">
-                      {isEn ? 'Last updated: ' : 'সর্বশেষ হালনাগাদ: '}
-                      {dateLabel}
+                      {isEn ? 'Last verified: ' : 'সর্বশেষ যাচাই: '}
+                      {verifiedLabel}
                     </span>
-                  )
-                )}
-                <a href={issueUrl} target="_blank" rel="noopener noreferrer">
-                  {isEn ? 'Report a mistake' : 'ভুল জানান'}
-                </a>
-              </div>
+                  ) : (
+                    dateLabel && (
+                      <span className="meta-date">
+                        {isEn ? 'Last updated: ' : 'সর্বশেষ আপডেট: '}
+                        {dateLabel}
+                      </span>
+                    )
+                  )}
+                  <a href={issueUrl} target="_blank" rel="noopener noreferrer">
+                    {isEn ? 'Report a mistake' : 'ফিডব্যাক দিন'}
+                  </a>
+                </div>
+              )}
               {headings.length > 2 && (
                 <details className="page-toc">
-                  <summary>{isEn ? 'On this page' : 'এই পাতায়'}</summary>
+                  <summary>{isEn ? 'On this page' : 'এই পেজে'}</summary>
                   <ul>
                     {headings.map((heading) => (
                       <li key={heading.id}>
@@ -770,17 +954,39 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             {children}
           </article>
 
-          {!isLanding && !isEditing && !isPrivateReview && !isNotFound && (
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && !isContact && (
+            <section
+              id="credits"
+              className="page-contribution-credits"
+              data-deshi-credits="true"
+              aria-labelledby="credits-heading"
+              suppressHydrationWarning
+              // The production postbuild fills this static slot from the
+              // committed public ledger. The first client render adopts those
+              // existing children, preserving them without shipping the ledger
+              // or any route-specific contributor data to guide bundles.
+              dangerouslySetInnerHTML={{ __html: staticCreditsHtml }}
+            />
+          )}
+
+          {!isLanding && !isEditing && !isPrivateReview && !isStandaloneFeature && !isNotFound && !isContact && (
             <footer className="article-footer">
-              <h2>{isEn ? 'Help improve this page' : 'এই পাতা আরও ভালো করুন'}</h2>
+              <h2>{isEn ? 'Help improve this page' : 'এই পেজ আরও ভালো করুন'}</h2>
               <div className="contrib-row">
-                <a href={`${REPO_URL}/edit/main/${file}`} target="_blank" rel="noopener noreferrer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /></svg>
-                  {isEn ? 'Edit on GitHub' : 'GitHub-এ সম্পাদনা করুন'}
-                </a>
+                {showEditAction && (
+                  <a
+                    className="contrib-edit"
+                    href={`${REPO_URL}/edit/main/${file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /></svg>
+                    {isEn ? 'Edit on GitHub' : 'GitHub-এ এডিট করুন'}
+                  </a>
+                )}
                 <a href={issueUrl} target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /></svg>
-                  {isEn ? 'Report a mistake' : 'ভুল পেলে জানান'}
+                  {isEn ? 'Report a mistake' : 'ফিডব্যাক দিন'}
                 </a>
                 <a href={localHref(isEn ? '/en/contribute' : '/contribute')}>
                   {isEn ? 'How to contribute' : 'কীভাবে অবদান রাখবেন'}
@@ -800,7 +1006,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
         <nav className="footer-nav" aria-label={isEn ? 'Footer navigation' : 'আরও লিংক'}>
           <div className="footer-link-group">
             <p className="footer-link-label" id="footer-project-label">
-              {isEn ? 'Project' : 'প্রকল্প'}
+              {isEn ? 'Project' : 'প্রজেক্ট'}
             </p>
             <ul className="footer-link-list" aria-labelledby="footer-project-label">
               <li>
@@ -811,6 +1017,11 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
               <li>
                 <a href={localHref(isEn ? '/en/about' : '/about')}>
                   {isEn ? 'About & editorial policy' : 'পরিচিতি ও সম্পাদকীয় নীতি'}
+                </a>
+              </li>
+              <li>
+                <a href={localHref(isEn ? '/en/contact' : '/contact')}>
+                  {isEn ? 'Contact us' : 'যোগাযোগ করুন'}
                 </a>
               </li>
               <li>
@@ -831,7 +1042,14 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             </p>
             <ul className="footer-link-list" aria-labelledby="footer-community-label">
               <li>
-                <a href={FACEBOOK_URL} target="_blank" rel="me noopener noreferrer">Facebook</a>
+                <a href={FACEBOOK_GROUP_URL} target="_blank" rel="noopener noreferrer">
+                  {isEn ? 'Join the Facebook community' : 'ফেসবুক কমিউনিটিতে যোগ দিন'}
+                </a>
+              </li>
+              <li>
+                <a href={FACEBOOK_URL} target="_blank" rel="me noopener noreferrer">
+                  {isEn ? 'Facebook page' : 'ফেসবুক পেজ'}
+                </a>
               </li>
               <li>
                 <a href={LINKEDIN_URL} target="_blank" rel="me noopener noreferrer">LinkedIn</a>
@@ -843,7 +1061,9 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
                 <a href={REPO_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
               </li>
               <li>
-                <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer">
+                  {isEn ? 'Contributor Discord' : 'কন্ট্রিবিউটর ডিসকর্ড'}
+                </a>
               </li>
             </ul>
           </div>
@@ -854,7 +1074,7 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
             <ul className="footer-link-list" aria-labelledby="footer-help-label">
               <li>
                 <a href={`${REPO_URL}/issues`} target="_blank" rel="noopener noreferrer">
-                  {isEn ? 'Report a mistake' : 'ভুল জানান'}
+                  {isEn ? 'Report a mistake' : 'ফিডব্যাক দিন'}
                 </a>
               </li>
               <li>
@@ -873,17 +1093,19 @@ export default function LocalizedLayout({ children }: LocalizedLayoutProps) {
         <p className="footer-legal">
           {isEn
             ? 'This site is general guidance, not legal or tax advice. Fees, forms and rules change – always confirm with official government sources (RJSC, NBR, Bangladesh Bank) before acting.'
-            : 'এই সাইট সাধারণ গাইড দেয়। আইনি বা কর পরামর্শ নয়। ফি, ফর্ম ও নিয়ম বদলায়। কাজের আগে সরকারি উৎস (RJSC, NBR, বাংলাদেশ ব্যাংক) থেকে যাচাই করে নিন।'}
+            : 'এই সাইট সাধারণ গাইড দেয়। আইনি বা কর পরামর্শ নয়। ফি, ফর্ম ও নিয়ম বদলায়। কাজের আগে সরকারি সোর্স (RJSC, NBR, বাংলাদেশ ব্যাংক) থেকে যাচাই করে নিন।'}
         </p>
       </footer>
 
-      <AuthModal
-        open={authOpen}
-        onClose={() => setAuthOpen(false)}
-        onAuthenticated={handleAuthenticated}
-        isEn={isEn}
-        fallbackHref={`${REPO_URL}/edit/main/${file}`}
-      />
+      {authMounted && (
+        <AuthModal
+          open={authOpen}
+          onClose={() => setAuthOpen(false)}
+          onAuthenticated={handleAuthenticated}
+          isEn={isEn}
+          fallbackHref={`${REPO_URL}/edit/main/${file}`}
+        />
+      )}
     </>
   )
 }

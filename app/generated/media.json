@@ -1,1 +1,479 @@
-{}
+{
+  "/media/contributors/shoumik-shahriar.webp": {
+    "key": "contributors/shoumik-shahriar.860da7a3d696.webp",
+    "w": 384,
+    "h": 384,
+    "bytes": 9344,
+    "sha": "860da7a3d696",
+    "remote": true,
+    "uploadedAt": "2026-08-18T21:34:09.801Z"
+  },
+  "/media/og/bn/startup-50.png": {
+    "key": "og/bn/startup-50.b36805afc551.png",
+    "w": 1200,
+    "h": 630,
+    "bytes": 57357,
+    "sha": "b36805afc551",
+    "remote": true,
+    "uploadedAt": "2026-08-24T12:15:08.523Z"
+  },
+  "/media/og/en/startup-50.png": {
+    "key": "og/en/startup-50.94e9c57fe2b5.png",
+    "w": 1200,
+    "h": 630,
+    "bytes": 54742,
+    "sha": "94e9c57fe2b5",
+    "remote": true,
+    "uploadedAt": "2026-08-24T11:58:07.858Z"
+  },
+  "/media/startup-50/10-minute-school.webp": {
+    "key": "startup-50/10-minute-school.0f0f373d12e6.webp",
+    "w": 320,
+    "h": 88,
+    "bytes": 10044,
+    "sha": "0f0f373d12e6",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:12:52.122Z"
+  },
+  "/media/startup-50/agricore.webp": {
+    "key": "startup-50/agricore.8be2f4bb6098.webp",
+    "w": 138,
+    "h": 160,
+    "bytes": 12826,
+    "sha": "8be2f4bb6098",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:12:54.244Z"
+  },
+  "/media/startup-50/agroshift.webp": {
+    "key": "startup-50/agroshift.2d28e5cfc1e3.webp",
+    "w": 304,
+    "h": 160,
+    "bytes": 7334,
+    "sha": "2d28e5cfc1e3",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:12:56.947Z"
+  },
+  "/media/startup-50/airwork.webp": {
+    "key": "startup-50/airwork.1f4d476f4565.webp",
+    "w": 320,
+    "h": 55,
+    "bytes": 8440,
+    "sha": "1f4d476f4565",
+    "remote": true,
+    "uploadedAt": "2026-08-25T10:15:44.514Z"
+  },
+  "/media/startup-50/amarlab.webp": {
+    "key": "startup-50/amarlab.2c8a55dbec42.webp",
+    "w": 149,
+    "h": 160,
+    "bytes": 5710,
+    "sha": "2c8a55dbec42",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:19.440Z"
+  },
+  "/media/startup-50/apploye.webp": {
+    "key": "startup-50/apploye.eeb85b9c3f75.webp",
+    "w": 320,
+    "h": 55,
+    "bytes": 7646,
+    "sha": "eeb85b9c3f75",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:01.195Z"
+  },
+  "/media/startup-50/arogga.webp": {
+    "key": "startup-50/arogga.89c3401be67d.webp",
+    "w": 320,
+    "h": 112,
+    "bytes": 14198,
+    "sha": "89c3401be67d",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:03.413Z"
+  },
+  "/media/startup-50/aunkur.webp": {
+    "key": "startup-50/aunkur.491f2f981b65.webp",
+    "w": 140,
+    "h": 160,
+    "bytes": 7082,
+    "sha": "491f2f981b65",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:05.686Z"
+  },
+  "/media/startup-50/barikoi.webp": {
+    "key": "startup-50/barikoi.0a0744865056.webp",
+    "w": 106,
+    "h": 160,
+    "bytes": 6820,
+    "sha": "0a0744865056",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:08.152Z"
+  },
+  "/media/startup-50/bimafy.webp": {
+    "key": "startup-50/bimafy.bc5405cbeb3e.webp",
+    "w": 320,
+    "h": 101,
+    "bytes": 8332,
+    "sha": "bc5405cbeb3e",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:39.567Z"
+  },
+  "/media/startup-50/bkash.webp": {
+    "key": "startup-50/bkash.4200621a6935.webp",
+    "w": 320,
+    "h": 149,
+    "bytes": 10840,
+    "sha": "4200621a6935",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:12.930Z"
+  },
+  "/media/startup-50/cassetex.webp": {
+    "key": "startup-50/cassetex.eb65e0c35ee7.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 4156,
+    "sha": "eb65e0c35ee7",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:41.777Z"
+  },
+  "/media/startup-50/chamak.webp": {
+    "key": "startup-50/chamak.c43370096b1c.webp",
+    "w": 320,
+    "h": 68,
+    "bytes": 8340,
+    "sha": "c43370096b1c",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:19.478Z"
+  },
+  "/media/startup-50/digibox.webp": {
+    "key": "startup-50/digibox.ce736c9733a2.webp",
+    "w": 320,
+    "h": 62,
+    "bytes": 8206,
+    "sha": "ce736c9733a2",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:21.486Z"
+  },
+  "/media/startup-50/doctorkoi.webp": {
+    "key": "startup-50/doctorkoi.ae8ed2b76509.webp",
+    "w": 320,
+    "h": 150,
+    "bytes": 10708,
+    "sha": "ae8ed2b76509",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:43.919Z"
+  },
+  "/media/startup-50/dorik.webp": {
+    "key": "startup-50/dorik.f11ce693f53c.webp",
+    "w": 320,
+    "h": 99,
+    "bytes": 7086,
+    "sha": "f11ce693f53c",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:23.682Z"
+  },
+  "/media/startup-50/dubotech.webp": {
+    "key": "startup-50/dubotech.7ee234090123.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 4442,
+    "sha": "7ee234090123",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:28.057Z"
+  },
+  "/media/startup-50/ecovia.webp": {
+    "key": "startup-50/ecovia.5df14167c414.webp",
+    "w": 127,
+    "h": 160,
+    "bytes": 10968,
+    "sha": "5df14167c414",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:30.194Z"
+  },
+  "/media/startup-50/ezycourse.webp": {
+    "key": "startup-50/ezycourse.b1fb23e4cdec.webp",
+    "w": 320,
+    "h": 57,
+    "bytes": 5354,
+    "sha": "b1fb23e4cdec",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:32.196Z"
+  },
+  "/media/startup-50/fashol.webp": {
+    "key": "startup-50/fashol.77a700f12196.webp",
+    "w": 320,
+    "h": 71,
+    "bytes": 10208,
+    "sha": "77a700f12196",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:21.736Z"
+  },
+  "/media/startup-50/gozayaan.webp": {
+    "key": "startup-50/gozayaan.334146aa6c6d.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 4948,
+    "sha": "334146aa6c6d",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:34.207Z"
+  },
+  "/media/startup-50/hishabee.webp": {
+    "key": "startup-50/hishabee.ea5dc28bbb11.webp",
+    "w": 320,
+    "h": 75,
+    "bytes": 6200,
+    "sha": "ea5dc28bbb11",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:05.776Z"
+  },
+  "/media/startup-50/ifarmer.webp": {
+    "key": "startup-50/ifarmer.1d490d42dea4.webp",
+    "w": 221,
+    "h": 160,
+    "bytes": 7794,
+    "sha": "1d490d42dea4",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:36.300Z"
+  },
+  "/media/startup-50/jatri.webp": {
+    "key": "startup-50/jatri.8768d080af18.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 9500,
+    "sha": "8768d080af18",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:42.795Z"
+  },
+  "/media/startup-50/loop-freight.webp": {
+    "key": "startup-50/loop-freight.e1c8d4ecae80.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 2432,
+    "sha": "e1c8d4ecae80",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:57.554Z"
+  },
+  "/media/startup-50/markopolo-ai.webp": {
+    "key": "startup-50/markopolo-ai.22869d613ce3.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 872,
+    "sha": "22869d613ce3",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:13:59.623Z"
+  },
+  "/media/startup-50/medeasy.webp": {
+    "key": "startup-50/medeasy.0e037de62e48.webp",
+    "w": 163,
+    "h": 160,
+    "bytes": 3524,
+    "sha": "0e037de62e48",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:01.776Z"
+  },
+  "/media/startup-50/monsha.webp": {
+    "key": "startup-50/monsha.53250aac253a.webp",
+    "w": 320,
+    "h": 67,
+    "bytes": 10426,
+    "sha": "53250aac253a",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:05.964Z"
+  },
+  "/media/startup-50/nodes-digital.webp": {
+    "key": "startup-50/nodes-digital.14667961710d.webp",
+    "w": 320,
+    "h": 142,
+    "bytes": 13434,
+    "sha": "14667961710d",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:08.111Z"
+  },
+  "/media/startup-50/nuport.webp": {
+    "key": "startup-50/nuport.85a738cd8742.webp",
+    "w": 320,
+    "h": 36,
+    "bytes": 4712,
+    "sha": "85a738cd8742",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:07.883Z"
+  },
+  "/media/startup-50/ostad.webp": {
+    "key": "startup-50/ostad.6faa4de6965a.webp",
+    "w": 320,
+    "h": 86,
+    "bytes": 8074,
+    "sha": "6faa4de6965a",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:10.200Z"
+  },
+  "/media/startup-50/palki-motors.webp": {
+    "key": "startup-50/palki-motors.e3860af8dc13.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 2432,
+    "sha": "e3860af8dc13",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:12.497Z"
+  },
+  "/media/startup-50/pathao.webp": {
+    "key": "startup-50/pathao.d3ebf18975db.webp",
+    "w": 320,
+    "h": 91,
+    "bytes": 10844,
+    "sha": "d3ebf18975db",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:14.555Z"
+  },
+  "/media/startup-50/priyoshop.webp": {
+    "key": "startup-50/priyoshop.f0de4a0461f3.webp",
+    "w": 320,
+    "h": 80,
+    "bytes": 8758,
+    "sha": "f0de4a0461f3",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:21.202Z"
+  },
+  "/media/startup-50/pulsetech.webp": {
+    "key": "startup-50/pulsetech.dcaa25f6b3fa.webp",
+    "w": 320,
+    "h": 74,
+    "bytes": 10904,
+    "sha": "dcaa25f6b3fa",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:23.329Z"
+  },
+  "/media/startup-50/relaxy.webp": {
+    "key": "startup-50/relaxy.3e1adec94a09.webp",
+    "w": 320,
+    "h": 82,
+    "bytes": 11030,
+    "sha": "3e1adec94a09",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:10.353Z"
+  },
+  "/media/startup-50/revora.webp": {
+    "key": "startup-50/revora.591d67fc9ce1.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 1786,
+    "sha": "591d67fc9ce1",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:25.442Z"
+  },
+  "/media/startup-50/sharetrip.webp": {
+    "key": "startup-50/sharetrip.0a9d4f601730.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 4574,
+    "sha": "0a9d4f601730",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:29.751Z"
+  },
+  "/media/startup-50/shikho.webp": {
+    "key": "startup-50/shikho.9acfd504b3a5.webp",
+    "w": 320,
+    "h": 135,
+    "bytes": 13052,
+    "sha": "9acfd504b3a5",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:33.879Z"
+  },
+  "/media/startup-50/shomvob.webp": {
+    "key": "startup-50/shomvob.30e8bedd776a.webp",
+    "w": 320,
+    "h": 160,
+    "bytes": 4488,
+    "sha": "30e8bedd776a",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:12.683Z"
+  },
+  "/media/startup-50/shopup-silq.webp": {
+    "key": "startup-50/shopup-silq.cf4fe41add09.webp",
+    "w": 320,
+    "h": 93,
+    "bytes": 10224,
+    "sha": "cf4fe41add09",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:36.106Z"
+  },
+  "/media/startup-50/shuttle.webp": {
+    "key": "startup-50/shuttle.bae18419eb07.webp",
+    "w": 173,
+    "h": 160,
+    "bytes": 9964,
+    "sha": "bae18419eb07",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:36:23.940Z"
+  },
+  "/media/startup-50/sokrio.webp": {
+    "key": "startup-50/sokrio.607b90495f33.webp",
+    "w": 162,
+    "h": 160,
+    "bytes": 8466,
+    "sha": "607b90495f33",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:38.245Z"
+  },
+  "/media/startup-50/solshare.webp": {
+    "key": "startup-50/solshare.a4bc49bc2fe5.webp",
+    "w": 320,
+    "h": 66,
+    "bytes": 6966,
+    "sha": "a4bc49bc2fe5",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:40.399Z"
+  },
+  "/media/startup-50/tallykhata.webp": {
+    "key": "startup-50/tallykhata.059a90b40589.webp",
+    "w": 320,
+    "h": 90,
+    "bytes": 5214,
+    "sha": "059a90b40589",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:42.476Z"
+  },
+  "/media/startup-50/tiger-new-energy.webp": {
+    "key": "startup-50/tiger-new-energy.6f3a36f7e03d.webp",
+    "w": 320,
+    "h": 125,
+    "bytes": 17250,
+    "sha": "6f3a36f7e03d",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:44.640Z"
+  },
+  "/media/startup-50/togumogu.webp": {
+    "key": "startup-50/togumogu.7498805b5b9e.webp",
+    "w": 320,
+    "h": 73,
+    "bytes": 9040,
+    "sha": "7498805b5b9e",
+    "remote": true,
+    "uploadedAt": "2026-08-24T19:40:46.092Z"
+  },
+  "/media/startup-50/truck-lagbe.webp": {
+    "key": "startup-50/truck-lagbe.8c29b5165f68.webp",
+    "w": 320,
+    "h": 79,
+    "bytes": 5916,
+    "sha": "8c29b5165f68",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:47.177Z"
+  },
+  "/media/startup-50/wegro.webp": {
+    "key": "startup-50/wegro.712df6b136b2.webp",
+    "w": 320,
+    "h": 90,
+    "bytes": 9970,
+    "sha": "712df6b136b2",
+    "remote": true,
+    "uploadedAt": "2026-08-23T18:14:49.593Z"
+  },
+  "/media/startup-50/zatiq.webp": {
+    "key": "startup-50/zatiq.95122537ec42.webp",
+    "w": 320,
+    "h": 119,
+    "bytes": 9030,
+    "sha": "95122537ec42",
+    "remote": true,
+    "uploadedAt": "2026-08-24T17:07:14.830Z"
+  }
+}

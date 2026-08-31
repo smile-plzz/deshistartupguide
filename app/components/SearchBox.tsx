@@ -1,7 +1,12 @@
 'use client'
 
 import React, { useEffect, useId, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+
+import {
+  trackSearchOnce,
+  trackSearchResultSelect,
+  type SearchReportState
+} from '../lib/search-analytics'
 
 interface PagefindItem {
   id: string
@@ -21,7 +26,12 @@ interface Pagefind {
   search: (query: string) => Promise<{
     results: PagefindItem[]
   }>
-  options: (opts: { baseUrl: string }) => Promise<void>
+  options: (opts: {
+    baseUrl: string
+    ranking?: {
+      metaWeights?: Record<string, number>
+    }
+  }) => Promise<void>
 }
 
 // Extend global window interface
@@ -44,7 +54,18 @@ async function loadPagefind(basePath = ''): Promise<Pagefind | null> {
       // @ts-ignore
       pagefindPromise = import(/* webpackIgnore: true */ pagefindUrl).then((module) => {
         window.pagefind = module
-        return window.pagefind!.options({ baseUrl: basePath || '/' }).then(() => window.pagefind!)
+        return window.pagefind!
+          .options({
+            baseUrl: basePath || '/',
+            ranking: {
+              // The translated page title is a search alias, not a second
+              // result title. Keep the visible title's built-in 5x lead while
+              // making an equivalent query in the other site language rank
+              // well above an incidental body-text match.
+              metaWeights: { 'alternate-title': 4 }
+            }
+          })
+          .then(() => window.pagefind!)
       })
     }
     await pagefindPromise
@@ -57,11 +78,29 @@ function cleanTitle(data: any) {
   return data?.meta?.title || data?.title || data?.url || ''
 }
 
-function cleanExcerpt(data: any) {
-  if (data?.excerpt) {
-    return data.excerpt.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+/* Pagefind indexes the h1 as the first words of the page, so nearly every
+   excerpt opened by restating the title printed directly above it – the reader
+   had to get past a line they had already read to reach the first new word.
+   Drop that opening, including the partial the excerpt window sometimes starts
+   mid-title with, and the separator the h1 leaves behind. */
+function stripTitleEcho(excerpt: string, title: string) {
+  const trimmed = title.trim()
+  if (!trimmed) return excerpt
+  const words = trimmed.split(/\s+/)
+  for (let start = 0; start < words.length; start += 1) {
+    const candidate = words.slice(start).join(' ')
+    if (candidate.length > 3 && excerpt.startsWith(candidate)) {
+      return excerpt.slice(candidate.length).replace(/^[\s.।,–—-]+/, '')
+    }
   }
-  return (data?.content || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').slice(0, 160)
+  return excerpt
+}
+
+function cleanExcerpt(data: any, title: string) {
+  const raw = data?.excerpt
+    ? data.excerpt.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+    : (data?.content || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').slice(0, 160)
+  return stripTitleEcho(raw, title)
 }
 
 interface SearchResult {
@@ -77,8 +116,8 @@ interface SearchBoxProps {
 }
 
 export default function SearchBox({ isEn = false }: SearchBoxProps) {
-  const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
+  const searchReportRef = useRef<SearchReportState>({ term: null })
   const listboxId = `${useId()}listbox`
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
@@ -111,6 +150,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
 
   useEffect(() => {
     const trimmedQuery = query.trim()
+    searchReportRef.current.term = null
     setActiveIndex(-1)
 
     if (!trimmedQuery) {
@@ -121,6 +161,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
     }
 
     let isActive = true
+    let reportTimeout = 0
     const timeout = window.setTimeout(async () => {
       setIsLoading(true)
       setError(false)
@@ -133,11 +174,12 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
         const searchResults = await Promise.all(
           response.results.slice(0, 10).map(async (item) => {
             const data = await item.data()
+            const title = cleanTitle(data)
             return {
               id: item.id,
               url: data.url,
-              title: cleanTitle(data),
-              excerpt: cleanExcerpt(data),
+              title,
+              excerpt: cleanExcerpt(data, title),
               isStub: Boolean(data?.meta?.stub)
             }
           })
@@ -153,6 +195,15 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
           setResults(ranked)
           setActiveIndex(-1)
           setIsOpen(true)
+
+          /* Typing "ট্রেড লাইসেন্স" would otherwise report eleven searches, one
+             per keystroke, and bury the query the reader actually meant under
+             ten prefixes of it. The next keystroke re-runs this effect and the
+             cleanup below cancels this timer, so only a query left alone long
+             enough to be read is counted. */
+          reportTimeout = window.setTimeout(() => {
+            trackSearchOnce(searchReportRef.current, trimmedQuery, ranked.length, isEn)
+          }, 900)
         }
       } catch {
         if (isActive) {
@@ -168,8 +219,9 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
     return () => {
       isActive = false
       window.clearTimeout(timeout)
+      window.clearTimeout(reportTimeout)
     }
-  }, [query, basePath])
+  }, [query, basePath, isEn])
 
   // Keep the arrow-selected option inside the scrolling popover.
   useEffect(() => {
@@ -179,12 +231,22 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
       ?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
   }, [activeIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const goTo = (url: string) => {
+  // `selected` is absent when the reader leaves for the sitemap rather than for
+  // a result, which is a different thing to have happened and stays uncounted.
+  const goTo = (url: string, selected?: { index: number; isStub: boolean }) => {
     const nextUrl = basePath && url.startsWith(basePath) ? url.slice(basePath.length) || '/' : url
-    router.push(nextUrl)
-    setQuery('')
-    setIsOpen(false)
-    setActiveIndex(-1)
+    if (selected) {
+      // Selecting a result is conclusive intent. Flush the settled-search event
+      // now in case this reader was faster than the quiet-period timer.
+      trackSearchOnce(searchReportRef.current, query, results.length, isEn)
+      trackSearchResultSelect(query, { url: nextUrl, ...selected }, isEn)
+    }
+    // Contributor bylines and page-credit records are written into each
+    // exported HTML document after Next renders. A client-router transition
+    // only receives Next's payload, so it cannot receive that postbuild markup
+    // and would leave the previous page's credit in the persistent root layout.
+    // Load the result document itself so the route gets its own static record.
+    window.location.assign(url)
   }
 
   const moveActive = (step: number) => {
@@ -245,7 +307,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
     if (results.length === 0) return isEn ? 'No results found.' : 'কোনো মিল পাওয়া যায়নি।'
     return isEn
       ? `${results.length} results. Use the up and down arrow keys to choose.`
-      : `${bengaliDigits(results.length)}টি ফলাফল। উপর-নিচ তীর দিয়ে বেছে নিন।`
+      : `${bengaliDigits(results.length)}টি ফলাফল। ওপর-নিচের তীর দিয়ে বেছে নিন।`
   }
 
   return (
@@ -261,8 +323,9 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
       }}
       onSubmit={(event) => {
         event.preventDefault()
-        const target = results[activeIndex] || results[0]
-        if (target) goTo(target.url)
+        const targetIndex = activeIndex >= 0 ? activeIndex : 0
+        const target = results[targetIndex]
+        if (target) goTo(target.url, { index: targetIndex, isStub: target.isStub })
       }}
     >
       <input
@@ -307,7 +370,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
 
           {!isLoading && !error && results.length === 0 && query.trim() && (
             <p className="search-status">
-              {isEn ? 'No results found. Try another word, or ' : 'কোনো মিল পাওয়া যায়নি। অন্য শব্দে খুঁজুন, বা '}
+              {isEn ? 'No results found. Try another word, or ' : 'কিছু খুঁজে পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন, অথবা '}
               <a
                 href={sitemapHref}
                 onMouseDown={(event) => event.preventDefault()}
@@ -316,7 +379,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
                   goTo(sitemapHref)
                 }}
               >
-                {isEn ? 'browse every page' : 'সব পাতার তালিকা দেখুন'}
+                {isEn ? 'browse every page' : 'সব পেজের তালিকা দেখুন'}
               </a>
               {isEn ? '.' : '।'}
             </p>
@@ -333,7 +396,7 @@ export default function SearchBox({ isEn = false }: SearchBoxProps) {
                 className={index === activeIndex ? 'search-result is-active' : 'search-result'}
                 onMouseDown={(event) => event.preventDefault()}
                 onMouseMove={() => setActiveIndex(index)}
-                onClick={() => goTo(result.url)}
+                onClick={() => goTo(result.url, { index, isStub: result.isStub })}
               >
                 <span className="result-title">
                   {result.title}

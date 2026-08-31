@@ -14,6 +14,7 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { classifyContributorMediaAvatars } from './lib/contributor-media.mjs'
 import {
   deleteObject,
   objectKeyMatchesLogicalPath,
@@ -21,11 +22,16 @@ import {
   readRetired,
   RETIREMENT_GRACE_DAYS,
   root,
+  validLogicalPath,
   writeRegistry,
   writeRetired
 } from './lib/media-lib.mjs'
 
 const contentRoot = path.join(root, 'app', '(contents)')
+const contributorLedgerFile = path.join(root, 'data', 'contributor-ledger.json')
+const contributorPolicyFile = path.join(root, 'data', 'contributors-policy.json')
+const startup50LogoFile = path.join(root, 'data', 'startup-50-logos.json')
+const socialImagesFile = path.join(root, 'data', 'social-images.json')
 const apply = process.argv.includes('--apply')
 const retireUnreferenced = process.argv.includes('--retire-unreferenced')
 const unknown = process.argv
@@ -75,6 +81,36 @@ function references() {
       }
     }
   }
+
+  const ledger = JSON.parse(fs.readFileSync(contributorLedgerFile, 'utf8'))
+  const policy = JSON.parse(fs.readFileSync(contributorPolicyFile, 'utf8'))
+  const avatars = classifyContributorMediaAvatars(ledger, policy)
+  for (const avatar of avatars.active) {
+    const logicalPath = avatar.path
+    if (!validLogicalPath(logicalPath || '')) {
+      throw new Error(
+        `${path.relative(root, contributorLedgerFile)} profile ${avatar.profileId} has an invalid media avatar path`
+      )
+    }
+    used.add(logicalPath)
+  }
+
+  if (fs.existsSync(socialImagesFile)) {
+    const definitions = JSON.parse(fs.readFileSync(socialImagesFile, 'utf8'))
+    for (const definition of Object.values(definitions)) {
+      for (const localized of Object.values(definition?.locales || {})) {
+        if (validLogicalPath(localized?.src || '')) used.add(localized.src)
+      }
+    }
+  }
+
+  if (fs.existsSync(startup50LogoFile)) {
+    const logoData = JSON.parse(fs.readFileSync(startup50LogoFile, 'utf8'))
+    for (const logo of logoData.entries || []) {
+      if (validLogicalPath(logo?.src || '')) used.add(logo.src)
+    }
+  }
+
   return used
 }
 

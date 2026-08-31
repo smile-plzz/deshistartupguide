@@ -1,1 +1,109 @@
-[]
+[
+  {
+    "logicalPath": "/media/og/bn/startup-50.png",
+    "key": "og/bn/startup-50.b02d27c889d3.png",
+    "bytes": 55862,
+    "retiredAt": "2026-08-24T12:15:08.522Z",
+    "reason": "superseded",
+    "replacementKey": "og/bn/startup-50.b36805afc551.png"
+  },
+  {
+    "logicalPath": "/media/startup-50/bondstein.webp",
+    "key": "startup-50/bondstein.1a5ddd9e6114.webp",
+    "bytes": 5992,
+    "retiredAt": "2026-08-24T17:08:42.261Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/dreamers-academy.webp",
+    "key": "startup-50/dreamers-academy.0fc1f44bfba0.webp",
+    "bytes": 11212,
+    "retiredAt": "2026-08-24T17:08:42.261Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/inkam.webp",
+    "key": "startup-50/inkam.224876179b8d.webp",
+    "bytes": 4398,
+    "retiredAt": "2026-08-24T17:08:42.261Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/khaas-food.webp",
+    "key": "startup-50/khaas-food.a2ea484eb353.webp",
+    "bytes": 4508,
+    "retiredAt": "2026-08-24T17:08:42.261Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/moner-bondhu.webp",
+    "key": "startup-50/moner-bondhu.3c4c25a54969.webp",
+    "bytes": 22486,
+    "retiredAt": "2026-08-24T17:08:42.261Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/apon-wellbeing.webp",
+    "key": "startup-50/apon-wellbeing.2f59ac2a7ad4.webp",
+    "bytes": 5714,
+    "retiredAt": "2026-08-24T17:36:33.459Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/intelligent-machines.webp",
+    "key": "startup-50/intelligent-machines.b95ad78779ce.webp",
+    "bytes": 1328,
+    "retiredAt": "2026-08-24T17:36:33.459Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/sheba-xyz.webp",
+    "key": "startup-50/sheba-xyz.a5f411c53d51.webp",
+    "bytes": 8952,
+    "retiredAt": "2026-08-24T17:36:33.459Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/biniyog-io.webp",
+    "key": "startup-50/biniyog-io.22de0a776a83.webp",
+    "bytes": 12604,
+    "retiredAt": "2026-08-24T18:48:59.428Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/chaldal.webp",
+    "key": "startup-50/chaldal.290ae1be0a7b.webp",
+    "bytes": 10712,
+    "retiredAt": "2026-08-24T18:48:59.428Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/pickaboo.webp",
+    "key": "startup-50/pickaboo.92f46ff1925c.webp",
+    "bytes": 4204,
+    "retiredAt": "2026-08-24T18:48:59.428Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/praava-health.webp",
+    "key": "startup-50/praava-health.2e7c3b1fa12b.webp",
+    "bytes": 5132,
+    "retiredAt": "2026-08-24T18:48:59.428Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/shajgoj.webp",
+    "key": "startup-50/shajgoj.c5829b741a68.webp",
+    "bytes": 4318,
+    "retiredAt": "2026-08-24T18:48:59.428Z",
+    "reason": "unreferenced"
+  },
+  {
+    "logicalPath": "/media/startup-50/airwork.webp",
+    "key": "startup-50/airwork.275fd931d2a1.webp",
+    "bytes": 3700,
+    "retiredAt": "2026-08-25T10:15:44.512Z",
+    "reason": "superseded",
+    "replacementKey": "startup-50/airwork.1f4d476f4565.webp"
+  }
+]

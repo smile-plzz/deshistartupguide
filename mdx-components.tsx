@@ -3,12 +3,20 @@ import StubNotice from './app/components/StubNotice'
 import SectionIndex from './app/components/SectionIndex'
 import SiteMap from './app/components/SiteMap'
 import Figure, { MarkdownImage } from './app/components/Figure'
+import DataBars from './app/components/DataBars'
+import Waterfall from './app/components/Waterfall'
+import Timeline from './app/components/Timeline'
+import CodRiskCalculator from './app/components/CodRiskCalculator'
 import YouTube from './app/components/YouTube'
 import FacebookVideo from './app/components/FacebookVideo'
 import OfficialSocialLinks from './app/components/OfficialSocialLinks'
 import Term from './app/components/Term'
+import Glossary from './app/components/Glossary'
 import ExpertReview from './app/components/ExpertReview'
 import ContributorLeaderboard from './app/components/ContributorLeaderboard'
+import ContributionInvite from './app/components/ContributionInvite'
+import ContactForm from './app/components/ContactForm'
+import Startup50 from './app/components/Startup50'
 
 interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string
@@ -38,11 +46,19 @@ export function useMDXComponents(components: Record<string, any>): Record<string
     SectionIndex,
     SiteMap,
     Figure,
+    DataBars,
+    Waterfall,
+    Timeline,
+    CodRiskCalculator,
     YouTube,
     FacebookVideo,
     OfficialSocialLinks,
     Term,
+    Glossary,
     ExpertReview,
-    ContributorLeaderboard
+    ContributorLeaderboard,
+    ContributionInvite,
+    ContactForm,
+    Startup50
   }
 }

@@ -1,4 +1,5 @@
 import { GET as getContent } from './api/content'
+import { POST as sendContactMessage } from './api/contact'
 import { POST as createContribution } from './api/contribute'
 import {
   DELETE as deleteContributionMedia,
@@ -9,6 +10,7 @@ import {
   GET as getContributionReview,
   POST as updateContributionReview
 } from './api/contribution-review'
+import { logError } from './lib/logging'
 
 const OPAQUE_ID = /^[a-f0-9]{32}$/
 
@@ -38,6 +40,12 @@ async function apiResponse(
     return request.method === 'GET'
       ? getContent(request, env)
       : methodNotAllowed('GET')
+  }
+
+  if (pathname === '/api/contact') {
+    return request.method === 'POST'
+      ? sendContactMessage(request, env)
+      : methodNotAllowed('POST')
   }
 
   if (pathname === '/api/contribute') {
@@ -84,6 +92,13 @@ export default {
         return await apiResponse(request, env, url.pathname.replace(/\/+$/, ''))
       }
 
+      const startup50Alias = url.pathname.match(/^\/(en\/)?50\/?$/)
+      if (startup50Alias) {
+        const destination = new URL(startup50Alias[1] ? '/en/startup-50' : '/startup-50', url)
+        destination.search = url.search
+        return Response.redirect(destination.toString(), 308)
+      }
+
       const legacyReview = url.pathname.match(/^\/contribute\/review\/([^/]+)\/?$/)
       if (legacyReview && OPAQUE_ID.test(legacyReview[1])) {
         const destination = new URL('/contribute/review', url)
@@ -93,10 +108,9 @@ export default {
 
       return env.ASSETS.fetch(request)
     } catch (error) {
-      console.error('[worker] Unhandled request failure', {
+      logError('worker', 'unhandled_request_failure', error, {
         method: request.method,
-        pathname: url.pathname,
-        error
+        pathname: url.pathname
       })
       return json('internal_error', 500)
     }

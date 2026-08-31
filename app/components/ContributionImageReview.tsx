@@ -167,7 +167,7 @@ export default function ContributionImageReview() {
         <h1>প্রস্তাবিত ছবি যাচাই</h1>
         <p>
           লেখার অনুমোদন আর ছবির অনুমোদন আলাদা। গোপন তথ্য, অধিকার, প্রাসঙ্গিকতা,
-          বিকল্প বর্ণনা এবং সূত্র দেখে প্রতিটি ছবিতে আলাদা সিদ্ধান্ত নিন।
+          বিকল্প বর্ণনা এবং সোর্স দেখে প্রতিটি ছবিতে আলাদা সিদ্ধান্ত নিন।
         </p>
       </header>
 
@@ -193,7 +193,7 @@ export default function ContributionImageReview() {
                 : error === 'image_expired'
                   ? 'ছবিটির ৭ দিনের মেয়াদ শেষ হয়েছে। অনুমোদন করা যাবে না, তবে প্রত্যাখ্যান করে PR থেকে সরানো যাবে।'
                   : error === 'stale_review'
-                    ? 'এর পর আরেকটি সম্পাদনা জমা হয়েছে। নতুন PR রিভিউ লিংকটি খুলুন।'
+                    ? 'এর পর আরেকটি এডিট জমা হয়েছে। নতুন PR রিভিউ লিংকটি খুলুন।'
                     : 'সিদ্ধান্তটি সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।'}
           </strong>
         </div>
@@ -203,7 +203,7 @@ export default function ContributionImageReview() {
         <>
           <section className="media-review__summary">
             <div>
-              <span>পাতা</span>
+              <span>পেজ</span>
               <strong>{data.pageTitle}</strong>
               <code>{data.pagePath}</code>
             </div>
@@ -271,7 +271,7 @@ export default function ContributionImageReview() {
                     </div>
                     {media.source && (
                       <div>
-                        <dt>সূত্র</dt>
+                        <dt>সোর্স</dt>
                         <dd>{media.source}</dd>
                       </div>
                     )}

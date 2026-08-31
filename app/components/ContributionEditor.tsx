@@ -38,6 +38,9 @@ import {
   extractPendingMediaIds,
   rejectPendingMediaInMarkdown
 } from '../lib/contribution-media'
+import { buildContributionReview } from '../lib/contribution-diff'
+import type { ContributionReview } from '../lib/contribution-diff'
+import ContributionDiffDialog from './ContributionDiffDialog'
 
 /**
  * DIRECTION CONTRACT
@@ -50,7 +53,7 @@ import {
  *   Edit mode adds exactly two objects and no new colour, both on the cool-paper
  *   panel neutral: a bar ruled at the bottom that pins under the header, and a
  *   publish panel ruled at the top that closes the canvas.
- * STORY: a founder spots a wrong fee, presses সম্পাদনা, and the paragraph they
+ * STORY: a founder spots a wrong fee, presses এডিট, and the paragraph they
  *   were reading is suddenly under their cursor in the same place on the page.
  *   They fix it, say what they changed, and submit. A reviewer takes it from there.
  * FIRST VIEWPORT: tab strip, then the edit bar (what you are editing on the left,
@@ -207,10 +210,12 @@ export default function ContributionEditor({
   const [pendingMedia, setPendingMedia] = useState<PendingMedia[]>([])
   const [uploadingImage, setUploadingImage] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
+  const [review, setReview] = useState<ContributionReview | null>(null)
   const [previewUrls, setPreviewUrls] = useState<Record<string, string>>({})
   const containerRef = useRef<HTMLDivElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   const summaryRef = useRef<HTMLTextAreaElement>(null)
+  const submitErrorRef = useRef<HTMLDivElement>(null)
   const crepeRef = useRef<Crepe | null>(null)
   const markdownRef = useRef<string>('')
   const baselineRef = useRef<string | null>(null)
@@ -363,7 +368,7 @@ export default function ContributionEditor({
           'aria-label',
           isEn
             ? 'Protected site component. It cannot be edited here.'
-            : 'সাইটের সুরক্ষিত অংশ। এখানে এটি সম্পাদনা করা যাবে না।'
+            : 'সাইটের সুরক্ষিত অংশ। এটি এখানে এডিট করা যাবে না।'
         )
       } else {
         block.removeAttribute('contenteditable')
@@ -396,7 +401,7 @@ export default function ContributionEditor({
         if (!active) return
         setError(err.message)
         // The server is the authority on whether a token is still good. If it
-        // says no, drop it, so pressing সম্পাদনা again offers a fresh sign-in
+        // says no, drop it, so pressing এডিট again offers a fresh sign-in
         // instead of failing the same way a second time.
         if (err.message === 'unauthorized') {
           onSessionExpired()
@@ -611,6 +616,21 @@ export default function ContributionEditor({
   useEffect(() => onReadyChange(ready), [ready, onReadyChange])
   useEffect(() => onDirtyChange(dirty), [dirty, onDirtyChange])
 
+  // A submission can start from the sticky review sheet while the publish
+  // panel is far below the viewport. If validation or the network rejects it,
+  // take both sighted and keyboard users to the existing actionable error.
+  useEffect(() => {
+    if (!submitError) return undefined
+    const focusFrame = window.requestAnimationFrame(() => {
+      const errorNode = submitErrorRef.current
+      // Reauthentication owns focus when its modal is open.
+      if (!errorNode || errorNode.closest('[inert]')) return
+      errorNode.scrollIntoView({ block: 'center' })
+      errorNode.focus({ preventScroll: true })
+    })
+    return () => window.cancelAnimationFrame(focusFrame)
+  }, [submitError])
+
   // The shell asks to leave (browser back). Never drop work silently.
   // Edge-triggered, not level-triggered: the counter lives in the shell and
   // keeps climbing across edit sessions, so a fresh editor must react to the
@@ -823,20 +843,35 @@ export default function ContributionEditor({
     }
   }
 
+  const closeReview = useCallback(() => setReview(null), [])
+
+  function openReview() {
+    if (baselineRef.current === null) return
+    let current = markdownRef.current
+    try {
+      current = readMarkdown(crepeRef.current)
+    } catch {
+      // markdownRef follows every successful editor serialization, so it is a
+      // safe last-known copy if Crepe is briefly between transactions.
+    }
+    markdownRef.current = current
+    setReview(buildContributionReview(baselineRef.current, current))
+  }
+
   const ghEditUrl = `${REPO_URL}/edit/main/${repoFileFor(pathname)}`
   const pageTitle = data?.frontmatter.title || data?.title || fallbackTitle
 
   let status = ''
   if (submitting) status = t(isEn, 'রিভিউতে পাঠানো হচ্ছে…', 'Sending for review…')
   else if (loading) status = t(isEn, 'লেখা আনা হচ্ছে…', 'Loading the page…')
-  else if (dirty) status = t(isEn, 'পরিবর্তন এখনো জমা হয়নি', 'Changes not submitted')
+  else if (dirty) status = t(isEn, 'এডিট এখনো পাঠানো হয়নি', 'Changes not submitted')
 
   return (
     <div className="edit-mode" aria-busy={submitting || loading}>
       <div className="edit-bar">
         <p className="edit-bar__what">
           <PencilIcon />
-          <span>{t(isEn, 'সম্পাদনা করছেন', 'Editing')}</span>
+          <span>{t(isEn, 'এডিট করছেন', 'Editing')}</span>
           {pageTitle && <strong title={pageTitle}>{pageTitle}</strong>}
         </p>
 
@@ -850,12 +885,12 @@ export default function ContributionEditor({
               <span className="edit-bar__warn">
                 {t(
                   isEn,
-                  'এই পাতায় করা পরিবর্তন মুছে যাবে।',
+                  'এই পেজে করা পরিবর্তন মুছে যাবে।',
                   'Your changes to this page will be lost.'
                 )}
               </span>
               <button type="button" className="edit-btn" onClick={() => setConfirmingExit(false)}>
-                {t(isEn, 'সম্পাদনা চালিয়ে যান', 'Keep editing')}
+                {t(isEn, 'এডিট চালিয়ে যান', 'Keep editing')}
               </button>
               <button
                 type="button"
@@ -895,26 +930,45 @@ export default function ContributionEditor({
               >
                 <ImageIcon />
                 {uploadingImage
-                  ? t(isEn, 'ছবি তোলা হচ্ছে…', 'Adding image…')
+                  ? t(isEn, 'ছবি যোগ করা হচ্ছে…', 'Adding image…')
                   : t(isEn, 'ছবি যোগ করুন', 'Add image')}
               </button>
               <button type="button" className="edit-btn" onClick={requestExit} disabled={submitting}>
                 {error ? t(isEn, 'পড়ায় ফিরুন', 'Back to reading') : t(isEn, 'বাতিল', 'Cancel')}
               </button>
               {!error && (
-                <button
-                  type="button"
-                  className="edit-btn is-primary"
-                  onClick={handleSubmit}
-                  disabled={!ready || !dirty || submitting}
-                  title={
-                    ready && !dirty
-                      ? t(isEn, 'এখনো কিছু বদলাননি।', 'Nothing has changed yet.')
-                      : undefined
-                  }
-                >
-                  {t(isEn, 'রিভিউতে পাঠান', 'Send for review')}
-                </button>
+                <>
+                  {/* Always present, disabled while clean: a control that
+                      appears on the first keystroke pushes the primary button
+                      sideways under the reader's own cursor. */}
+                  <button
+                    type="button"
+                    className="edit-btn edit-btn--review"
+                    aria-haspopup="dialog"
+                    onClick={openReview}
+                    disabled={!ready || !dirty || submitting}
+                    title={
+                      ready && !dirty
+                        ? t(isEn, 'এখনো কিছু বদলাননি।', 'Nothing has changed yet.')
+                        : undefined
+                    }
+                  >
+                    {t(isEn, 'কী বদলেছে', 'Review changes')}
+                  </button>
+                  <button
+                    type="button"
+                    className="edit-btn is-primary edit-btn--send"
+                    onClick={handleSubmit}
+                    disabled={!ready || !dirty || submitting}
+                    title={
+                      ready && !dirty
+                        ? t(isEn, 'এখনো কিছু বদলাননি।', 'Nothing has changed yet.')
+                        : undefined
+                    }
+                  >
+                    {t(isEn, 'রিভিউতে পাঠান', 'Send for review')}
+                  </button>
+                </>
               )}
             </>
           )}
@@ -929,7 +983,7 @@ export default function ContributionEditor({
               <p>
                 {t(
                   isEn,
-                  'আবার সাইন ইন করলে এখান থেকেই সম্পাদনা চালিয়ে যেতে পারবেন।',
+                  'আবার সাইন ইন করলে এখান থেকেই এডিট চালিয়ে যেতে পারবেন।',
                   'Sign in again to continue editing from here.'
                 )}
               </p>
@@ -937,23 +991,23 @@ export default function ContributionEditor({
           ) : error === 'contributor_banned' || error === 'contributor_muted' ? (
             <>
               <strong>
-                {t(isEn, 'এই অ্যাকাউন্ট থেকে সম্পাদনা থামানো আছে', 'Editing is paused for this account')}
+                {t(isEn, 'এই অ্যাকাউন্ট থেকে আপাতত এডিট করা যাচ্ছে না', 'Editing is paused for this account')}
               </strong>
               <p>
                 {t(
                   isEn,
-                  'বারবার স্প্যাম বা নিয়ম ভাঙার কারণে এই অ্যাকাউন্ট থেকে এখন অবদান পাঠানো যাচ্ছে না। ভুল হয়ে থাকলে রক্ষণাবেক্ষণকারীদের সঙ্গে যোগাযোগ করুন।',
+                  'বারবার স্প্যাম বা নিয়ম ভাঙার কারণে এই অ্যাকাউন্ট থেকে এখন অবদান পাঠানো যাচ্ছে না। ভুল হয়ে থাকলে টিমের সঙ্গে যোগাযোগ করুন।',
                   'This account cannot submit contributions right now because of spam or repeated rule violations. Contact the maintainers if this is a mistake.'
                 )}
               </p>
             </>
           ) : error === 'not_contributable' ? (
             <>
-              <strong>{t(isEn, 'এই পাতা এখানে সম্পাদনা করা যাচ্ছে না', 'This page cannot be edited here')}</strong>
+              <strong>{t(isEn, 'এই পেজ এখানে এডিট করা যাচ্ছে না', 'This page cannot be edited here')}</strong>
               <p>
                 {t(
                   isEn,
-                  'পাতাটি এখন ইনলাইন এডিটরে খোলা যাচ্ছে না। GitHub-এ সরাসরি সম্পাদনা করলে সেটিও একইভাবে রিভিউ হবে।',
+                  'পেজটি এখন ইনলাইন এডিটরে খোলা যাচ্ছে না। GitHub-এ সরাসরি এডিট করলেও একইভাবে রিভিউ হবে।',
                   'This page is not available in the inline editor. You can edit it on GitHub instead; it goes through the same review.'
                 )}
               </p>
@@ -964,7 +1018,7 @@ export default function ContributionEditor({
               <p>
                 {t(
                   isEn,
-                  'পাতার লেখা ঠিক আছে, কিন্তু এই ব্রাউজারে এডিটর চালু হয়নি। পাতা রিলোড করে আবার চেষ্টা করুন, বা GitHub-এ সম্পাদনা করুন।',
+                  'পেজের লেখা ঠিক আছে, কিন্তু এই ব্রাউজারে এডিটর চালু হয়নি। পেজ রিলোড করে আবার চেষ্টা করুন, বা GitHub-এ এডিট করুন।',
                   'The page is fine, but the editor did not start in this browser. Reload and try again, or edit on GitHub.'
                 )}
               </p>
@@ -975,7 +1029,7 @@ export default function ContributionEditor({
               <p>
                 {t(
                   isEn,
-                  'পাতার লেখা আনতে গিয়ে সমস্যা হয়েছে। ইন্টারনেট ঠিক থাকলে একটু পরে আবার চেষ্টা করুন, বা GitHub-এ সরাসরি সম্পাদনা করুন।',
+                  'পেজের লেখা আনতে গিয়ে সমস্যা হয়েছে। ইন্টারনেট ঠিক থাকলে একটু পরে আবার চেষ্টা করুন, বা GitHub-এ সরাসরি এডিট করুন।',
                   'Something went wrong while fetching the page. Try again in a moment, or edit it directly on GitHub.'
                 )}
               </p>
@@ -988,7 +1042,7 @@ export default function ContributionEditor({
               </button>
             )}
             <a className="edit-btn" href={ghEditUrl} target="_blank" rel="noopener noreferrer">
-              {t(isEn, 'GitHub-এ সম্পাদনা করুন', 'Edit on GitHub')}
+              {t(isEn, 'GitHub-এ এডিট করুন', 'Edit on GitHub')}
             </a>
             <button type="button" className="edit-btn" onClick={onExit}>
               {t(isEn, 'পড়ায় ফিরুন', 'Back to reading')}
@@ -999,11 +1053,11 @@ export default function ContributionEditor({
 
       {draft && !draftApplied && !error && ready && (
         <aside className="edit-draft-notice" role="note">
-          <strong>{t(isEn, 'জমা না দেওয়া লেখা পাওয়া গেছে', 'Unsent changes found')}</strong>
+          <strong>{t(isEn, 'আগের এডিট পাওয়া গেছে', 'Unsent changes found')}</strong>
           <p>
             {t(
               isEn,
-              `এই পাতায় আপনার কিছু পরিবর্তন এই ব্রাউজারে জমা আছে (${formatSavedAt(draft.savedAt, isEn)}), কিন্তু রিভিউতে পাঠানো হয়নি। নিচে এখন পাতাটির বর্তমান লেখা দেখছেন।`,
+              `এই পেজে আপনার কিছু পরিবর্তন এই ব্রাউজারে জমা আছে (${formatSavedAt(draft.savedAt, isEn)}), কিন্তু রিভিউতে পাঠানো হয়নি। নিচে এখন পেজটির বর্তমান লেখা দেখছেন।`,
               `Some changes you made on this page are saved in this browser (${formatSavedAt(draft.savedAt, isEn)}) but were never sent for review. What you see below is the page as it stands now.`
             )}
           </p>
@@ -1020,11 +1074,11 @@ export default function ContributionEditor({
 
       {data?.existingPR && !error && (
         <aside className="edit-draft-notice" role="note">
-          <strong>{t(isEn, 'আপনি আপনার নিজের ড্রাফট সম্পাদনা করছেন', 'You are editing your own draft')}</strong>
+          <strong>{t(isEn, 'আপনি নিজের ড্রাফট এডিট করছেন', 'You are editing your own draft')}</strong>
           <p>
             {t(
               isEn,
-              'এই পাতায় আপনার একটা পুল রিকোয়েস্ট এখনো রিভিউয়ের অপেক্ষায় আছে। নিচে সেটার সর্বশেষ লেখাই দেখছেন, আর জমা দিলে সেটাই হালনাগাদ হবে।',
+              'এই পেজে আপনার একটা পুল রিকোয়েস্ট এখনো রিভিউয়ের অপেক্ষায় আছে। নিচে সেটার সর্বশেষ লেখাই দেখছেন, আর জমা দিলে সেটাই আপডেট হবে।',
               'You already have a pull request waiting for review on this page. What you see below is that draft, and submitting updates it.'
             )}{' '}
             <a href={data.existingPR.url} target="_blank" rel="noopener noreferrer">
@@ -1046,7 +1100,7 @@ export default function ContributionEditor({
               <div className="edit-media__heading">
                 <div>
                   <h2 id="edit-media-heading">
-                    {t(isEn, 'এই সম্পাদনার ছবি', 'Images in this edit')}
+                    {t(isEn, 'এই এডিটের ছবি', 'Images in this edit')}
                   </h2>
                   <p>
                     {t(
@@ -1172,14 +1226,14 @@ export default function ContributionEditor({
                         <p className="edit-media-item__hint">
                           {t(
                             isEn,
-                            'ক্যাপশনটি উপরের ছবির ঠিক নিচে লিখতে পারবেন।',
+                            'ক্যাপশনটি ওপরের ছবির ঠিক নিচে লিখতে পারবেন।',
                             'Write the visible caption directly under the image above.'
                           )}
                         </p>
 
                         <div className="edit-media-item__optional">
                           <label htmlFor={`media-source-${media.id}`}>
-                            {t(isEn, 'সূত্র (থাকলে)', 'Source (if any)')}
+                            {t(isEn, 'সোর্স (থাকলে)', 'Source (if any)')}
                             <input
                               id={`media-source-${media.id}`}
                               value={media.source || ''}
@@ -1193,7 +1247,7 @@ export default function ContributionEditor({
                             />
                           </label>
                           <label htmlFor={`media-credit-${media.id}`}>
-                            {t(isEn, 'কৃতজ্ঞতা / ক্রেডিট (থাকলে)', 'Credit (if any)')}
+                            {t(isEn, 'ক্রেডিট (থাকলে)', 'Credit (if any)')}
                             <input
                               id={`media-credit-${media.id}`}
                               value={media.credit || ''}
@@ -1235,7 +1289,7 @@ export default function ContributionEditor({
 
           <div className="edit-publish">
             <label className="edit-publish__label" htmlFor="contrib-summary">
-              {t(isEn, 'কী বদলালেন? (ঐচ্ছিক)', 'What changed? (optional)')}
+              {t(isEn, 'কী বদলালেন? (না দিলেও হবে)', 'What changed? (optional)')}
             </label>
             <p className="edit-publish__hint">
               {t(
@@ -1257,12 +1311,17 @@ export default function ContributionEditor({
             />
 
             {submitError && (
-              <div className="edit-publish__error" role="alert">
+              <div
+                className="edit-publish__error"
+                ref={submitErrorRef}
+                role="alert"
+                tabIndex={-1}
+              >
                 <p>
                   {submitError === 'unauthorized'
                     ? t(
                         isEn,
-                        'সাইন-ইনের মেয়াদ শেষ হয়েছে। আপনার পরিবর্তন এই পাতাতেই আছে। আবার সাইন ইন করে রিভিউতে পাঠান।',
+                        'সাইন-ইনের মেয়াদ শেষ হয়েছে। আপনার পরিবর্তন এই পেজেই আছে। আবার সাইন ইন করে রিভিউতে পাঠান।',
                         'Your sign-in expired. Your changes are still here. Sign in again, then send them for review.'
                       )
                     : submitError === 'locked_content_changed'
@@ -1286,7 +1345,7 @@ export default function ContributionEditor({
                       : submitError === 'content_too_large'
                         ? t(
                             isEn,
-                            'পরিবর্তনটি একবারে পাঠানোর জন্য খুব বড়। ছোট ভাগে পাঠান, বা GitHub-এ সম্পাদনা করুন।',
+                            'পরিবর্তনটি একবারে পাঠানোর জন্য খুব বড়। ছোট ভাগে পাঠান, বা GitHub-এ এডিট করুন।',
                             'This change is too large to send at once. Submit a smaller edit, or edit on GitHub.'
                           )
                         : submitError === 'image_alt_required'
@@ -1323,7 +1382,7 @@ export default function ContributionEditor({
                                   submitError === 'contributor_muted'
                                 ? t(
                                     isEn,
-                                    'এই অ্যাকাউন্ট থেকে এখন অবদান পাঠানো যাচ্ছে না। ভুল হয়ে থাকলে রক্ষণাবেক্ষণকারীদের সঙ্গে যোগাযোগ করুন।',
+                                    'এই অ্যাকাউন্ট থেকে এখন অবদান পাঠানো যাচ্ছে না। ভুল হয়ে থাকলে টিমের সঙ্গে যোগাযোগ করুন।',
                                     'This account cannot submit contributions right now. Contact the maintainers if this is a mistake.'
                                   )
                                 : submitError === 'contribution_rate_limited'
@@ -1335,12 +1394,12 @@ export default function ContributionEditor({
                                   : submitError === 'content_empty' || submitError === 'content_too_short'
                           ? t(
                               isEn,
-                              'পাতাটি এখন ফাঁকা, তাই কিছু পাঠানো হয়নি। লেখা ভুলে মুছে গিয়ে থাকলে Ctrl+Z (Mac-এ Cmd+Z) চেপে ফিরিয়ে আনুন, তারপর আবার পাঠান।',
+                              'পেজটি এখন ফাঁকা, তাই কিছু পাঠানো হয়নি। লেখা ভুলে মুছে গিয়ে থাকলে Ctrl+Z (Mac-এ Cmd+Z) চেপে ফিরিয়ে আনুন, তারপর আবার পাঠান।',
                               'The page is empty, so nothing was sent. If the text was deleted by accident, press Ctrl+Z (Cmd+Z on a Mac) to bring it back, then send again.'
                             )
                           : t(
                               isEn,
-                              'রিভিউতে পাঠানো যায়নি। একটু পরে আবার চেষ্টা করুন। আপনার পরিবর্তন এই পাতাতেই আছে।',
+                              'রিভিউতে পাঠানো যায়নি। একটু পরে আবার চেষ্টা করুন। আপনার পরিবর্তন এই পেজেই আছে।',
                               'The changes could not be sent for review. Try again in a moment; your work is still here.'
                             )}
                 </p>
@@ -1372,6 +1431,15 @@ export default function ContributionEditor({
                 </button>
                 <button
                   type="button"
+                  className="edit-btn"
+                  aria-haspopup="dialog"
+                  onClick={openReview}
+                  disabled={!ready || !dirty || submitting}
+                >
+                  {t(isEn, 'কী বদলেছে', 'Review changes')}
+                </button>
+                <button
+                  type="button"
                   className="edit-btn is-primary"
                   onClick={handleSubmit}
                   disabled={!ready || !dirty || submitting}
@@ -1384,6 +1452,20 @@ export default function ContributionEditor({
             </div>
           </div>
         </>
+      )}
+      {review && (
+        <ContributionDiffDialog
+          review={review}
+          isEn={isEn}
+          onClose={closeReview}
+          // Close first: a submit error belongs on the publish panel, which
+          // this sheet would otherwise be covering.
+          onSubmit={() => {
+            closeReview()
+            void handleSubmit()
+          }}
+          canSubmit={ready && dirty && !submitting}
+        />
       )}
     </div>
   )

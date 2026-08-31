@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Moar",
+    "type": "Coworking space",
+    "city": "Dhaka",
+    "locations": "Banani 11, Dhanmondi 27, and Gulshan-Tejgaon Link Road.",
+    "priceRange": "Starter membership BDT 5,000; Infinity all-location membership BDT 15,000; hour pass BDT 250; day pass BDT 1,000. Meeting rooms start at BDT 250–1,000 depending on capacity.",
+    "facilities": [
+      "Hot desks",
+      "Dedicated offices",
+      "Private offices",
+      "Meeting rooms (2–16 people)",
+      "Coworking pass"
+    ],
+    "hours": "8:00–22:00, six days a week; closed Fridays and government holidays.",
+    "applicationPath": "Book a pass or meeting room online, or enquire about offices and memberships.",
+    "website": "https://moarbd.com/",
+    "sourceUrl": "https://moarbd.com/",
+    "lastVerified": "2026-08-19",
+    "notes": "A three-location coworking network offering hourly and daily access, memberships, meeting rooms, dedicated or private offices and event space. All-location membership suits people who need to move between Banani, Dhanmondi and the Gulshan–Tejgaon Link Road."
+  },
+  {
+    "name": "Impact Hub Dhaka",
+    "type": "Coworking space and innovation hub",
+    "city": "Dhaka",
+    "locations": "Mirpur (9th Floor, Grameen Telecom Bhaban, Zoo Road) and Banani (7th Floor, Momen Bari Heights, Plot 157, Road 12).",
+    "priceRange": "BDT 2,000 per month for 8 hours, BDT 8,000 for 50 hours, BDT 14,000 for 100 hours, or BDT 17,500 for unlimited office hours.",
+    "facilities": [
+      "Coworking space",
+      "Private offices",
+      "Community events",
+      "Entrepreneurship programmes",
+      "Consultancy"
+    ],
+    "hours": "9:00 AM–6:00 PM",
+    "applicationPath": "Book a membership, free tour or team call through the co-working page.",
+    "website": "https://dhaka.impacthub.net/",
+    "sourceUrl": "https://dhaka.impacthub.net/co-working",
+    "lastVerified": "2026-08-25",
+    "notes": "A coworking and innovation hub for entrepreneurs, freelancers, professionals and impact-focused teams. Alongside desks and private offices, members can access community events, entrepreneurship programmes, consultancy and connections across the wider Impact Hub network."
+  },
+  {
+    "name": "hubdhaka",
+    "type": "Coworking space",
+    "city": "Dhaka",
+    "locations": "Mirpur 11 (Building 7, Road 3, Section 7).",
+    "priceRange": "Premium coworking BDT 9,000 per month; Basic Coworking is currently waitlisted; team rooms are quoted on enquiry.",
+    "facilities": [
+      "Shared workspace",
+      "Client meeting space",
+      "Backup internet and power",
+      "Printing and lockers",
+      "Event space for up to 130 people"
+    ],
+    "hours": "Not publicly stated",
+    "applicationPath": "Submit the membership application for evaluation, then schedule a visit and one-day trial if invited.",
+    "website": "https://hubdhaka.com/",
+    "sourceUrl": "https://hubdhaka.com/take-the-test.html",
+    "lastVerified": "2026-08-19",
+    "notes": "A community-oriented Mirpur coworking space for freelancers, entrepreneurs and small teams. Membership includes workspace, backup internet and power, printing, lockers and event facilities without a long-term agreement; admission is application-based."
+  },
+  {
+    "name": "WorkStation 101",
+    "type": "Coworking space",
+    "city": "Dhaka",
+    "locations": "Uttara Tower, Level 4, 1 Jashimuddin Avenue, Sector 3, Uttara.",
+    "priceRange": "Hot desk BDT 100 per hour, BDT 700 per day or BDT 8,000 per month; private offices start from BDT 40,000 per month. Hot-desk prices exclude 15% VAT.",
+    "facilities": [
+      "Hot desks",
+      "Dedicated desks",
+      "Private offices",
+      "Meeting and conference rooms",
+      "Event space",
+      "High-speed Wi-Fi",
+      "Generator backup",
+      "Printing and lockers"
+    ],
+    "hours": "Saturday–Thursday, 9:00 AM–8:00 PM for hot desks and premium desks",
+    "applicationPath": "Book a desk or room through the co-working page, or contact WorkStation 101 for a private office.",
+    "website": "https://workstation101.com/",
+    "sourceUrl": "https://workstation101.com/co-working-space/",
+    "lastVerified": "2026-08-25",
+    "notes": "An Uttara coworking space for individual professionals and teams, with hourly, daily and monthly desks, private offices, meeting rooms, event space and virtual-office services."
+  }
+]

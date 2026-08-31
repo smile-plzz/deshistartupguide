@@ -8,9 +8,9 @@
  *   app/generated/manifest.bn.json  – full locale tree for build/reporting
  *   app/generated/manifest.en.json
  *   app/generated/content-index.json – compact tree used by rendered hub UI
- *   public/page-dates.json          – route -> last git commit date (client meta bar)
+ *   public/page-dates.json          – route -> last git update, or verified-date fallback
+ *   public/page-published.json      – route -> oldest git commit date
  */
-import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,9 +21,19 @@ import {
   SITE_URL,
   canonicalUrl,
 } from "../app/seo.config.mjs";
+import { prepareContributorSnapshot } from "../app/lib/contributor-leaderboard.mjs";
+import { sourceSupportsInlineEdit } from "../app/lib/inline-edit-policy.mjs";
+import { isWrittenGuide } from "./content-guide.mjs";
+import { collectGitDates } from "./git-content-dates.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentRoot = path.join(root, "app", "(contents)");
+const contributorSnapshotPath = path.join(
+  root,
+  "app",
+  "generated",
+  "contributors.json",
+);
 
 const LOCALES = [
   { key: "bn", dir: path.join(contentRoot, "(bn)"), routePrefix: "" },
@@ -55,54 +65,20 @@ function firstHeading(source) {
   return match ? match[1].trim() : null;
 }
 
-// One git pass: newest and oldest commit date per content file. Rename detection
-// (--name-status -M) walks history through moves such as the July 2026 URL
-// migration, so a moved guide keeps its original published/updated dates.
-function collectGitDates() {
-  const modified = new Map();
-  const published = new Map();
-  const alias = new Map(); // historical path -> current path
-  const resolve = (file) => {
-    let current = file;
-    while (alias.has(current)) current = alias.get(current);
-    return current;
-  };
+// A directory page is a shell around data/directory/*.json. With no rows it is
+// as unwritten as a StubNotice page, so it must not be counted as written,
+// indexed, or listed in the sitemap and llms.txt. Flips back on its own as soon
+// as entries land, so no page edit is needed when the data arrives.
+function rendersEmptyDirectory(source) {
+  const match = source.match(/<DirectoryList[^>]*\bcategory=["']([^"']+)["']/);
+  if (!match) return false;
+  const dataPath = path.join(root, "data", "directory", `${match[1]}.json`);
   try {
-    const log = execSync(
-      "git log --format='C%cs' --name-status -M -- 'app/(contents)'",
-      {
-        cwd: root,
-        encoding: "utf8",
-        maxBuffer: 64 * 1024 * 1024,
-      },
-    );
-    let current = null;
-    for (const line of log.split("\n")) {
-      if (line.startsWith("C")) {
-        current = line.slice(1).trim();
-        continue;
-      }
-      if (!line.trim() || !current) continue;
-      const parts = line.split("\t");
-      const status = parts[0];
-      let file = null;
-      if (status.startsWith("R") && parts.length >= 3) {
-        // Log runs newest → oldest: map the pre-rename path onto the file's
-        // current (already-resolved) path for all older commits.
-        const canonical = resolve(parts[2].trim());
-        alias.set(parts[1].trim(), canonical);
-        file = canonical;
-      } else if (parts.length >= 2) {
-        file = resolve(parts[1].trim());
-      }
-      if (!file) continue;
-      if (!modified.has(file)) modified.set(file, current);
-      published.set(file, current);
-    }
+    return JSON.parse(fs.readFileSync(dataPath, "utf8")).length === 0;
   } catch {
-    // No git available (fresh tarball) – dates stay empty, UI hides them.
+    // Missing or unparseable data renders nothing either way.
+    return true;
   }
-  return { modified, published };
 }
 
 function walkPages(dir, baseDir) {
@@ -119,7 +95,7 @@ function walkPages(dir, baseDir) {
   return pages;
 }
 
-const gitDates = collectGitDates();
+const gitDates = collectGitDates(root);
 const generatedDir = path.join(root, "app", "generated");
 fs.mkdirSync(generatedDir, { recursive: true });
 
@@ -130,6 +106,7 @@ const llmsPages = {};
 const localeCounts = {};
 const localeManifests = {};
 const seoPages = [];
+const inlineEditableRoutes = new Set();
 
 for (const locale of LOCALES) {
   if (!fs.existsSync(locale.dir)) continue;
@@ -140,15 +117,21 @@ for (const locale of LOCALES) {
     const source = fs.readFileSync(filePath, "utf8");
     const fm = parseFrontmatter(source);
     const title = fm.title || firstHeading(source) || rel;
-    const isStub = source.includes("<StubNotice");
+    const isStub =
+      source.includes("<StubNotice") || rendersEmptyDirectory(source);
     const route =
       rel === "" ? locale.routePrefix || "/" : `${locale.routePrefix}/${rel}`;
+    if (sourceSupportsInlineEdit({ slug: rel, source, stub: isStub })) {
+      inlineEditableRoutes.add(route);
+    }
     const repoPath = path.relative(root, filePath).split(path.sep).join("/");
-    const date = gitDates.modified.get(repoPath) || null;
+    const verified = fm.verified ? String(fm.verified) : null;
+    const date = gitDates.modified.get(repoPath) || verified;
     const published = gitDates.published.get(repoPath) || null;
+    const modifiedAt = gitDates.modifiedAt.get(repoPath) || null;
+    const publishedAt = gitDates.publishedAt.get(repoPath) || null;
     if (date) allDates[route] = date;
     if (published) allPublished[route] = published;
-    const verified = fm.verified || null;
     if (verified) allVerified[route] = verified;
     return {
       route,
@@ -158,8 +141,11 @@ for (const locale of LOCALES) {
       fullTitle: title,
       description: fm.description || "",
       stub: isStub,
+      guide: isWrittenGuide({ slug: rel, source, stub: isStub }),
       date,
       published,
+      modifiedAt,
+      publishedAt,
       verified,
       repoPath,
     };
@@ -219,14 +205,57 @@ for (const locale of LOCALES) {
   );
 }
 
+// Contributor profiles are generated static routes rather than authored MDX,
+// so they do not belong in the content manifests, editor allowlist, or llms
+// indexes. They do belong in the SEO route registry and sitemap. The committed
+// snapshot is the only build input; there is no runtime identity lookup.
+if (fs.existsSync(contributorSnapshotPath)) {
+  const contributorView = prepareContributorSnapshot(
+    JSON.parse(fs.readFileSync(contributorSnapshotPath, "utf8")),
+  );
+  for (const profile of contributorView.rankedProfiles) {
+    const descriptions = {
+      bn: `দেশি স্টার্টআপে ${profile.displayName} কী কী কাজ করেছেন, কোন পেজে করেছেন আর কবে করেছেন।`,
+      en: `What ${profile.displayName} has worked on at Deshi Startup, which pages, and when.`,
+    };
+    for (const locale of LOCALES) {
+      const isEn = locale.key === "en";
+      const slug = `contributors/${profile.slug}`;
+      seoPages.push({
+        kind: "contributor-profile",
+        profileId: profile.id,
+        profileSlug: profile.slug,
+        route: `${locale.routePrefix}/${slug}`,
+        slug,
+        locale: locale.key,
+        title: profile.displayName,
+        fullTitle: `${profile.displayName} – ${isEn ? "Contributor" : "কন্ট্রিবিউটর"}`,
+        description: descriptions[locale.key],
+        stub: false,
+        guide: false,
+        date: profile.lastAcceptedAt,
+        published: profile.contributorSince,
+        verified: null,
+        repoPath: null,
+      });
+    }
+  }
+  console.log(
+    `contributor profiles: ${contributorView.rankedProfiles.length * LOCALES.length} localized routes`,
+  );
+}
+
 // Route allowlist for the inline contribution editor. Source paths and locale
-// are derived only after a route passes this generated allowlist.
+// are derived only after a route passes this generated allowlist. Stubs keep
+// their purpose-built GitHub writing CTA; generated data views and thin section
+// shells do not pretend that their locked MDX contains the page readers see.
 // Landing pages ("/" and "/en") are excluded — they are hubs, not articles.
 {
   const contributable = [];
   for (const locale of LOCALES) {
     for (const page of llmsPages[locale.key] || []) {
       if (page.route === "/" || page.route === "/en") continue;
+      if (!inlineEditableRoutes.has(page.route)) continue;
       contributable.push(page.route);
     }
   }
@@ -265,53 +294,89 @@ fs.writeFileSync(
 );
 console.log(`seo-pages.json: ${seoPages.length} routes`);
 
-// llms.txt – an experimental, legible map for AI assistants. Canonical URLs always
-// use the custom domain, regardless of a deployment mirror's basePath.
+// llms.txt – an experimental, curated map for AI assistants. Keep this much
+// smaller than the sitemap: it is an orientation document that agents should be
+// able to hold in context, not a duplicate inventory of every article. The full
+// published-page list remains available separately in llms-full.txt.
 {
   const abs = canonicalUrl;
   const oneLine = (value) => value.replace(/\s+/g, " ").trim();
-
-  const lines = [];
-  lines.push("# Deshi Startup");
-  lines.push("");
-  lines.push(
-    "> Deshi Startup is a free, open-source, Bangla-first knowledge base and practical operating " +
-      "manual for founders building startups in Bangladesh. Some startup basics also help small " +
-      "businesses, but the focus is scalable new ventures. Bengali is the source of truth; English " +
-      "mirrors it at /en/...",
+  const writtenByLocale = Object.fromEntries(
+    ["bn", "en"].map((key) => [
+      key,
+      (llmsPages[key] || []).filter((page) => !page.stub),
+    ]),
   );
-  lines.push("");
-  lines.push(`Base URL: ${SITE_URL}`);
-  lines.push(`Canonical sitemap: ${canonicalUrl("/sitemap.xml")}`);
-  lines.push(`Content license: ${CONTENT_LICENSE_URL}`);
-  lines.push(`Source repository: ${REPOSITORY_URL}`);
-  lines.push("");
-  lines.push(
-    "Use the Bengali page as the source of truth when the two language versions differ. " +
-      "Legal, tax, fee and regulatory claims should be checked against each page’s cited official sources and verification date.",
-  );
-
-  const localeSections = [
-    { key: "bn", heading: "## বাংলা (Bengali)" },
-    { key: "en", heading: "## English" },
+  const curatedSlugs = [
+    "",
+    "start-here",
+    "roadmap",
+    "ecosystem",
+    "guides",
+    "ideas",
+    "validation",
+    "registration",
+    "tax",
+    "payments",
+    "customers",
+    "team",
+    "funding",
+    "founder-life",
+    "journeys",
+    "tools",
+    "case-studies",
+    "directory",
+    "about",
+    "contribute",
+    "contributors",
   ];
-
-  let totalStubs = 0;
-  for (const { key, heading } of localeSections) {
-    const pages = (llmsPages[key] || []).filter((p) => !p.stub);
-    totalStubs += localeCounts[key]?.stubs || 0;
-    lines.push("");
-    lines.push(heading);
+  const curatedOrder = new Map(curatedSlugs.map((slug, index) => [slug, index]));
+  const preamble = (title) => [
+    `# ${title}`,
+    "",
+    "> Deshi Startup is the free, open-source manual for founders building startups in Bangladesh. " +
+      "Some startup basics also help small businesses, but the focus is scalable new ventures. " +
+      "Completed guides are published in Bangla and English, with English pages under /en/.",
+    "",
+    `Base URL: ${SITE_URL}`,
+    `Canonical sitemap: ${canonicalUrl("/sitemap.xml")}`,
+    `Content license: ${CONTENT_LICENSE_URL}`,
+    "",
+    "Legal, tax, fee and regulatory claims should be checked against each page’s cited official " +
+      "sources and verification date. If the language versions differ, use those sources to verify the claim.",
+  ];
+  const addPageList = (lines, pages) => {
     for (const page of pages) {
       const desc = page.description ? oneLine(page.description) : "";
       lines.push(
         `- [${oneLine(page.title)}](${abs(page.route)})${desc ? `: ${desc}` : ""}`,
       );
     }
+  };
+
+  const localeSections = [
+    { key: "bn", heading: "## বাংলা (Bengali)" },
+    { key: "en", heading: "## English" },
+  ];
+
+  const lines = preamble("Deshi Startup");
+  let totalStubs = 0;
+  for (const { key, heading } of localeSections) {
+    const pages = writtenByLocale[key]
+      .filter((page) => curatedOrder.has(page.slug))
+      .sort((a, b) => curatedOrder.get(a.slug) - curatedOrder.get(b.slug));
+    totalStubs += localeCounts[key]?.stubs || 0;
+    lines.push("");
+    lines.push(heading);
+    addPageList(lines, pages);
   }
 
   lines.push("");
-  lines.push("---");
+  lines.push("## Optional");
+  lines.push(`- [Full published-page index](${abs("/llms-full.txt")}): Every completed Bengali and English page.`);
+  lines.push(`- [XML sitemap](${abs("/sitemap.xml")}): Canonical indexable URLs and language alternates.`);
+  lines.push(`- [Source repository](${REPOSITORY_URL}): Editorial policy, source history and website code.`);
+  lines.push("");
   lines.push(
     `${totalStubs} additional topics are planned but not yet written (stubs) across both languages. ` +
       `See ${abs("/contribute")} to help write one.`,
@@ -322,7 +387,20 @@ console.log(`seo-pages.json: ${seoPages.length} routes`);
     lines.join("\n") + "\n",
   );
   console.log(
-    `llms.txt: ${(llmsPages.bn?.filter((p) => !p.stub).length || 0) + (llmsPages.en?.filter((p) => !p.stub).length || 0)} written pages listed`,
+    `llms.txt: ${localeSections.reduce((count, { key }) => count + writtenByLocale[key].filter((page) => curatedOrder.has(page.slug)).length, 0)} curated pages listed`,
+  );
+
+  const fullLines = preamble("Deshi Startup — full published-page index");
+  for (const { key, heading } of localeSections) {
+    fullLines.push("", heading);
+    addPageList(fullLines, writtenByLocale[key]);
+  }
+  fs.writeFileSync(
+    path.join(root, "public", "llms-full.txt"),
+    fullLines.join("\n") + "\n",
+  );
+  console.log(
+    `llms-full.txt: ${localeSections.reduce((count, { key }) => count + writtenByLocale[key].length, 0)} written pages listed`,
   );
 }
 

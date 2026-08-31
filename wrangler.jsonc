@@ -22,19 +22,32 @@
     "not_found_handling": "404-page",
     "run_worker_first": [
       "/api/*",
-      "/contribute/review/*"
+      "/contribute/review/*",
+      "/50",
+      "/50/",
+      "/en/50",
+      "/en/50/"
     ]
   },
   "vars": {
     "GITHUB_REPO": "Deshi-Startup/deshistartup"
   },
+  // CONTACT_INBOX is a runtime secret containing one verified destination.
+  // The request cannot set a recipient; worker/api/contact.ts always uses that
+  // secret, while this public binding declaration contains no private address.
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL"
+    }
+  ],
   "secrets": {
     "required": [
       "NEXT_PUBLIC_GOOGLE_CLIENT_ID",
       "GITHUB_APP_ID",
       "GITHUB_APP_PRIVATE_KEY",
       "GITHUB_INSTALLATION_ID",
-      "CONTRIBUTION_REVIEWER_EMAILS"
+      "CONTRIBUTION_REVIEWER_EMAILS",
+      "CONTACT_INBOX"
     ]
   },
   "r2_buckets": [
@@ -77,9 +90,35 @@
         "limit": 3,
         "period": 60
       }
+    },
+    {
+      "name": "CONTACT_IP_RATE",
+      "namespace_id": "31004",
+      "simple": {
+        "limit": 3,
+        "period": 60
+      }
+    },
+    {
+      // Workers Rate Limiting counters are maintained per Cloudflare location,
+      // not as one site-wide global counter.
+      "name": "CONTACT_REGION_RATE",
+      "namespace_id": "31005",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
     }
   ],
   "observability": {
-    "enabled": true
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01
+    }
   }
 }

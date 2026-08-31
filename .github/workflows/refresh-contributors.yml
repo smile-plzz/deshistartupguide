@@ -1,0 +1,92 @@
+name: Refresh contributors
+
+on:
+  schedule:
+    # Every day at 04:00 UTC
+    - cron: '0 4 * * *'
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-contributors
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    # main takes changes through pull requests, so the snapshot arrives as one
+    # too: push the branch (contents), open it and let it merge itself
+    # (pull-requests).
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Validation should not inherit the job's write-capable Git credentials.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh contributor snapshot
+        id: refresh
+        run: |
+          npm run contributors:refresh
+          if git diff --quiet app/generated/contributors.json; then
+            echo "Snapshot unchanged — nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # A PR created or updated with the repository's GITHUB_TOKEN creates
+      # `pull_request` runs that wait for manual approval, so this unattended bot
+      # cannot rely on PR checks. The snapshot decides the contributor route set,
+      # manifest entries and proof cards, so validate it here before the push.
+      - name: Validate the refreshed snapshot
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          npm run test:contributors
+          npm run build:worker
+          node scripts/check-static-assets.mjs
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      - name: Open a pull request with the snapshot
+        if: steps.refresh.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: chore/contributors
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add app/generated/contributors.json
+          git commit -m "chore: refresh contributor snapshot"
+          # The branch is disposable and always one commit ahead of main.
+          gh auth setup-git --hostname github.com
+          git push --force origin "$BRANCH"
+
+          if [ -z "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "chore: refresh contributor snapshot" \
+              --body "Daily rebuild of \`app/generated/contributors.json\` from the GitHub API. Merges itself once it is mergeable."
+          fi
+
+          # Merge when GitHub says it can; fall back to merging right away if it
+          # already can (auto-merge refuses on an already-mergeable PR).
+          gh pr merge "$BRANCH" --auto --squash --delete-branch ||
+            gh pr merge "$BRANCH" --squash --delete-branch

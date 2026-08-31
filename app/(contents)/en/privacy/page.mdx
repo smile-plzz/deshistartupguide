@@ -7,11 +7,13 @@ description: "What data is processed when you read the site, sign in with Google
 
 > **In short:** You do not need an account or need to identify yourself to read the guides. If you
 > sign in with Google to edit a page, we receive your name, email, profile image and a temporary
-> identity token. Submitted text, images and your name are used to review the contribution.
-> Public credit for accepted work may appear on the contributors page.
-> Measurement tags may also run through Google Tag Manager to help us understand site use.
+> identity token; submitted text, images and your name are used to review the contribution. With
+> your permission, public credit for accepted work may appear on the contributors index, your
+> contributor profile, relevant guides and the profile link's social preview image. Contact-form
+> messages are used only to reply, and measurement tags may run through Google Tag Manager to help
+> us understand site use.
 
-**Effective: 5 August 2026**
+**Effective: 18 August 2026**
 
 ## When you only read the site
 
@@ -22,6 +24,20 @@ The site loads Google Tag Manager. Measurement tags configured inside it may sen
 views, device information, approximate location and the referring page to Google. The application
 code does not currently show advertising or build its own profiles of readers. Browser privacy and
 tracking controls may limit this measurement.
+
+## When you send us a message
+
+The [contact form](/en/contact) asks for your name, email address, a topic and your message. Those
+four fields are emailed to the Deshi Startup inbox and are used only to answer you. Your address is
+not added to a mailing list, and nothing else from the page is attached to the message.
+
+The form has no CAPTCHA. It checks that browser requests have this site's origin and use JSON,
+discards messages that fill a hidden field, limits the request size, and applies per-IP and
+per-Cloudflare-location rate limits. The IP address is used for the one-minute rate-limit window; it
+is not written into the email or stored separately by the application.
+
+Email sent to hello@, security@ or conduct@deshistartup.com is forwarded by Cloudflare Email Routing
+into a Google mailbox, so both companies process it under their own policies.
 
 ## When you edit a page
 
@@ -35,19 +51,45 @@ and a signed temporary ID token.
   email does not.
 - Account-based rate limits and mute/ban records may be used to prevent abuse.
 
-## Names on the contributors page
+## Public contributor credit
 
-When your contribution is accepted and goes live, your public name, GitHub profile, profile photo
-and accepted-work count may appear on the [contributors page](/en/contributors). For work sent
-through the inline editor, the page uses the name already published in the pull request. It does
-not include email addresses, Google identity tokens or private Google profile data. Work is not
+When accepted work goes live and you choose named credit, the same public record may appear on the
+[contributors index](/en/contributors), a dedicated contributor profile, the relevant guides and the
+profile link's social preview image. Depending on what you have confirmed, that record can contain your public
+name, role labels, accepted-work count, acceptance dates, evidence links, a short headline or job
+title, organization, selected public profile links and an approved profile photo. Work is not
 assigned to a person when attribution is ambiguous.
 
-Profile photos come from GitHub's own servers, so opening the page sends GitHub an ordinary image
-request that may carry the IP address, browser information and request time. A letter monogram
-stands in when there is no photo, or when you would rather not show one.
+Contributor profiles can be indexed by search engines. They also include `ProfilePage` and
+`Person` structured data so search tools can understand that the page describes a person and their
+contribution history. These surfaces do not include email addresses, Google identity
+tokens, private Google profile data or private consent records.
 
-To rename or remove an entry, [open a GitHub request](https://github.com/Deshi-Startup/deshistartup/issues/new?title=Contributor%20listing%20request).
+Each public contributor also has a generated 1200×630 PNG social preview at a stable public URL,
+used as the profile's `og:image`. The image contains the public name, an English contributor label,
+up to three English role labels, the profile URL and a letter monogram. It does not contain
+contribution counts, dates, rank, organization or other activity statistics, and it does
+not fetch a contributor photo during the build.
+
+If you choose your public GitHub photo, maintainers look up the approved GitHub account only while
+refreshing the contributor record. The index and profile page then load that photo from GitHub's
+servers, so opening either page sends GitHub an ordinary image request that may carry the IP
+address, browser information and request time.
+
+If you approve a photo supplied directly or selected from your website, LinkedIn or another public
+profile, a copy is placed in Deshi Startup's R2 media storage and served from our media domain. We
+do not scrape profile pages or hotlink those photos. A letter monogram stands in when there is no
+approved photo, or when you would rather not show one.
+
+A headline or job title is published only in wording you have confirmed. It is descriptive context,
+not a certification, verification of expertise or endorsement by Deshi Startup.
+
+If a public-identity opt-out is accepted, the next site build removes the contributor profile and
+its social preview image. The ranked identity and guide-level names are removed, while work that remains
+published can keep anonymous credit. Search engines, caches and git history may retain earlier
+copies for some time.
+
+To correct, rename or remove public credit, [open a GitHub request](https://github.com/Deshi-Startup/deshistartup/issues/new?title=Contributor%20listing%20request).
 The issue is public, so do not include an email address or other sensitive information.
 
 ## When you contribute an image
@@ -71,11 +113,16 @@ Expired tokens and local drafts older than 14 days are removed when the browser 
 editor. Accepted contributions may remain in the public GitHub version history. Approved media may
 remain in content history and caches.
 
+Contact messages and replies may remain in the Google mailbox while they are needed for the
+conversation or ordinary record-keeping. You can ask us to delete a conversation; provider backups
+or legal obligations may keep a copy for longer.
+
 Google, GitHub and Cloudflare process information under their own policies.
 
 ## Questions or removal requests
 
 [Open a GitHub issue](https://github.com/Deshi-Startup/deshistartup/issues/new), but do not place
-sensitive information in it because the issue will be public. Once a contribution is published,
+sensitive information in it because the issue will be public. For anything private, write to
+hello@deshistartup.com or use the [contact form](/en/contact). Once a contribution is published,
 copies may spread through git history, forks or caches, so complete removal may not always be
 possible.

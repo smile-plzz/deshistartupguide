@@ -19,6 +19,55 @@ test('accepts a defined citation reused more than once', () => {
   assert.deepEqual(result.referenceCounts, { 'official-source': 2 })
 })
 
+test('accepts the Bangla sources heading', () => {
+  const result = inspectCitations(
+    [
+      'দাবি।[^official-source]',
+      '',
+      '## প্রাসঙ্গিক সোর্স',
+      '',
+      '[^official-source]: [সোর্স](https://example.com)'
+    ].join('\n')
+  )
+
+  assert.deepEqual(result.errors, [])
+})
+
+test('rejects manual source lists on completed guides', () => {
+  const result = inspectCitations(
+    [
+      '# Guide',
+      '',
+      '## Relevant Sources',
+      '',
+      '- [Source](https://example.com)'
+    ].join('\n'),
+    'page.mdx'
+  )
+
+  assert.ok(
+    result.errors.some((error) =>
+      /page\.mdx:5 completed guides must use inline GFM footnotes/.test(error)
+    )
+  )
+})
+
+test('allows manual source seeds on stubs', () => {
+  const result = inspectCitations(
+    [
+      '# Stub',
+      '',
+      '<StubNotice path="example" locale="en" />',
+      '',
+      '## Relevant Sources',
+      '',
+      '- [Starting source](https://example.com)'
+    ].join('\n')
+  )
+
+  assert.deepEqual(result.errors, [])
+})
+
 test('rejects unresolved citation syntax', () => {
   const result = inspectCitations('Claim.[^missing-source]', 'page.mdx')
   assert.match(result.errors[0], /page\.mdx:1 unresolved citation \[\^missing-source\]/)
@@ -43,7 +92,7 @@ test('requires cited pages to retain their sources heading', () => {
   const result = inspectCitations(
     'Claim.[^official-source]\n\n[^official-source]: [Source](https://example.com)'
   )
-  assert.ok(result.errors.some((error) => /must include a ## প্রাসঙ্গিক সূত্র/))
+  assert.ok(result.errors.some((error) => /must include a ## প্রাসঙ্গিক সোর্স/))
 })
 
 test('ignores citation-shaped examples inside code', () => {

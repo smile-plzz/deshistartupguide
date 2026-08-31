@@ -61,14 +61,18 @@ export default function SiteMap({ locale = 'bn' }: SiteMapProps) {
     <div className="section-index sitemap-list" data-pagefind-ignore>
       <p className="section-stats">
         <span>
-          {isEn ? 'Published pages' : 'প্রকাশিত পাতা'}{' '}
+          {isEn ? 'Published pages' : 'প্রকাশিত পেজ'}{' '}
           <b>{isEn ? total : bengaliDigits(total)}</b>
         </span>
       </p>
 
       {standalone.length > 0 && (
         <section>
-          <h2>{isEn ? 'Core guides' : 'মূল গাইড'}</h2>
+          {/* MDX headings get their id from rehype-slug; these are rendered by a
+              component, so they need one here. Without it the shell's "on this
+              page" list has nowhere to link, and it is built after hydration
+              instead of shipping in the HTML. */}
+          <h2 id="core-guides">{isEn ? 'Core guides' : 'মূল গাইড'}</h2>
           <ul>
             {standalone.map(([route, title, , description]) => (
               <li key={route}>
@@ -82,7 +86,7 @@ export default function SiteMap({ locale = 'bn' }: SiteMapProps) {
 
       {clusters.map((section) => (
         <section key={section.slug}>
-          <h2>
+          <h2 id={section.slug}>
             {section.index ? <a href={href(section.index[0])}>{section.index[1]}</a> : section.title}
           </h2>
           <ul>
