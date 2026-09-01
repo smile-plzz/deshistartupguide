@@ -319,6 +319,11 @@ p {
 .search-results ul {
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+.search-result {
+  margin: 0;
   border-radius: 4px;
   padding: 8px 10px;
   cursor: pointer;
@@ -389,6 +394,22 @@ p {
 }
 
 .language-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 76px;
+  height: 30px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--canvas);
+  color: var(--ink);
+  cursor: pointer;
+  isolation: isolate;
+  text-decoration: none;
+}
+
 .language-switcher__thumb {
   position: absolute;
   z-index: -1;
@@ -618,6 +639,14 @@ a.tab {
 }
 
 .breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .breadcrumbs li {
   display: inline-flex;
   align-items: center;
@@ -3407,6 +3436,30 @@ html[lang='bn'] .startup50-hero__folio strong {
 }
 
 .wiki-path-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.wiki-path-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green-deep);
+}
+
+/* The description span only – :not([class]) keeps this off the destination cue
+   below, which is also a span and needs its own display and colour. */
+.wiki-path-card > span:not([class]),
+.wiki-scope-card p,
+.wiki-source-list p {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Where the card leads. Not a button and not emphasis – a destination cue, so
+   it is set as one: a quiet label with an arrow that steps forward on hover. */
+.wiki-path-card__go {
+  display: flex;
   align-items: baseline;
   gap: 6px;
   margin-top: auto;
@@ -3456,9 +3509,40 @@ html[lang='bn'] .startup50-hero__folio strong {
   font-weight: var(--w-strong);
   cursor: pointer;
   list-style: none;
+}
+
+.home-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.home-faq summary::before {
+  content: '+';
+  flex: 0 0 auto;
   width: 0.8em;
   color: var(--green-deep);
   font-weight: var(--w-strong);
+}
+
+.home-faq details[open] > summary::before {
+  content: '–';
+}
+
+.home-faq summary:hover {
+  background: var(--green-soft);
+  color: var(--green-deep);
+}
+
+.home-faq details[open] > summary {
+  color: var(--green-deep);
+}
+
+.home-faq details p {
+  margin: 0;
+  padding: 0 18px 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 /* contribution section (wiki styling) */
 .contrib-section {
   margin-top: 18px;
@@ -3518,6 +3602,10 @@ html[lang='bn'] .startup50-hero__folio strong {
 
 .recent-list time {
   color: var(--faint);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
 /* ---------------------------------------------------------------- footer */
 
 /* The footer is a sibling of .page-shell, not a child, so it cannot inherit the
@@ -4152,6 +4240,126 @@ html[lang='bn'] .startup50-hero__folio strong {
 /* part of this reference work and not as a borrowed auth popup.            */
 
 body.auth-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgb(var(--ink-channels) / 55%);
+  padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+  animation: modal-scrim-in 160ms ease-out both;
+}
+
+/* 466px less the 1px rules and 32px padding leaves Google's full 400px
+   rendering column. Keeping the iframe at the width it was painted avoids
+   clipping its personalized account state at the right-hand rule. */
+.modal-card {
+  position: relative;
+  width: min(100%, 466px);
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--green-deep);
+  background: var(--canvas);
+  padding: 26px 32px 24px;
+  animation: modal-card-in 180ms ease-out both;
+}
+
+.modal-card:focus {
+  outline: none;
+}
+
+/* One reserve that clears the 44px close target from either padding. */
+.modal-card h2 {
+  margin: 0 0 10px;
+  border: 0;
+  padding: 0 40px 0 0;
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  color: var(--faint);
+  cursor: pointer;
+}
+
+.modal-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.modal-close:hover {
+  border-color: var(--line);
+  background: var(--canvas-soft);
+  color: var(--ink);
+}
+
+.modal-lede {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* The waiting state and the button Google eventually paints share one grid
+   cell, so the card never grows or shrinks under the reader's cursor. */
+.modal-signin {
+  display: grid;
+}
+
+.modal-signin > * {
+  grid-area: 1 / 1;
+}
+
+.google-btn-wrap {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Holds the button's exact footprint while Google's script is in flight, and
+   breathes a green wash so a slow connection still looks like it is working. */
+.modal-status {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--canvas-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  animation: modal-wait 1.5s ease-in-out infinite alternate;
+}
+
+/* A sign-in that will not load is a caution, not a failure of the reader's,
+   so it wears the notice family and names itself (The Rule-and-Label Rule). */
+.modal-error {
+  margin: 14px 0 0;
+  border: 1px solid var(--warn-border);
+  background: var(--warn-bg);
   padding: 12px 14px;
   color: var(--warn-ink);
   font-size: 0.9rem;
@@ -4259,6 +4467,60 @@ body.auth-open {
   color: var(--ink);
   font-size: 0.95rem;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.edit-pencil {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--green-deep);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.edit-bar__status {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.85rem;
+}
+
+.edit-bar__status:empty {
+  display: none;
+}
+
+.edit-bar__actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-bar__warn {
+  color: var(--warn-ink);
+  font-size: 0.85rem;
+}
+
+/* Same geometry as every other action on the site: hairline, 3px, white ground,
+   green wash on hover. The primary is the homepage's start button. */
+.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 8px 16px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .edit-btn:hover:not(:disabled) {
@@ -4293,6 +4555,14 @@ body.auth-open {
   opacity: 0.42;
   transition: opacity 160ms ease-out;
   pointer-events: none;
+  user-select: none;
+}
+
+.edit-live {
+  padding-top: 22px;
+  animation: edit-canvas-in 160ms ease-out both;
+}
+
 .edit-live.is-mounting {
   display: none;
 }
@@ -4579,6 +4849,26 @@ body.auth-open {
 
 .edit-live .milkdown .milkdown-video-block[data-selected] {
   outline: 2px solid var(--green-deep);
+  outline-offset: 2px;
+}
+
+.edit-video__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #202328;
+}
+
+.edit-video__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .edit-video__empty-poster {
   position: absolute;
   top: -0.2em;
@@ -4600,6 +4890,18 @@ body.auth-open {
   color: #fff;
   font-size: 0.76rem;
   font-weight: var(--w-strong);
+}
+
+.edit-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 .edit-video__play svg {
   display: block;
 }
@@ -5318,6 +5620,31 @@ body.auth-open {
 .media-review-item dd {
   margin: 2px 0 0;
   color: var(--ink);
+  line-height: 1.55;
+}
+
+.media-review-item__actions,
+.media-review__moderation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.media-review__moderation {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(18rem, 1.2fr);
+  gap: 18px 28px;
+  margin-top: 38px;
+  border-top: 1px solid var(--line);
+  background: var(--canvas-soft);
+  padding: 22px;
+}
+
+.media-review__moderation h2,
+.media-review__moderation p {
+  margin: 0;
+}
+
 .media-review__moderation label {
   display: grid;
   gap: 5px;
@@ -5544,6 +5871,16 @@ body.auth-open {
 }
 
 .expert-review__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+}
+
 .expert-review__badge {
   display: inline-flex;
   align-items: center;
@@ -5564,6 +5901,9 @@ body.auth-open {
 .expert-review__person {
   font-size: 0.96rem;
   line-height: 1.5;
+  color: var(--ink);
+}
+
 .expert-review__name {
   font-weight: var(--w-strong);
   color: var(--ink);
@@ -5579,6 +5919,70 @@ body.auth-open {
 
 .expert-review__notes {
   margin: 8px 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+.expert-review__source {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Wikipedia-style inline citations and source notes */
+@counter-style bengali-decimal {
+  system: numeric;
+  symbols: '০' '১' '২' '৩' '৪' '৫' '৬' '৭' '৮' '৯';
+  suffix: '. ';
+}
+
+.cite-footnote {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+  margin-inline-start: 2px;
+}
+
+.article .cite-link,
+.article .cite-link:visited {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1px 3px;
+  border-radius: 2px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.cite-link::before {
+  content: '[';
+}
+
+.cite-link::after {
+  content: ']';
+}
+
+.article .cite-link:hover,
+.article .cite-link:focus-visible {
+  color: var(--blue-hover);
+  background-color: var(--blue-soft);
+  text-decoration: underline;
+}
+
+.reference-notes {
+  margin-block-start: 0.5rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.reference-list {
+  margin-block: 0;
+  padding-inline-start: 1.75rem;
+}
+
 /* Lists that carry their own markers, or none, opt out here rather than
    trying to out-specify this rule locally: `list-style: none` on the list
    itself loses to it and the marker came back in Bangla only. */
@@ -5590,6 +5994,118 @@ html[lang='bn'] ol:not(
   ),
 html[lang='bn'] .reference-list {
   list-style-type: bengali-decimal;
+}
+
+.reference-item {
+  padding-inline-start: 0.25rem;
+  scroll-margin-block-start: 7rem;
+  border-radius: 3px;
+}
+
+.reference-item:target {
+  background: var(--blue-soft);
+}
+
+.reference-item > :last-child {
+  margin-block-end: 0;
+}
+
+.reference-backlink {
+  display: inline-block;
+  margin-inline-start: 0.2rem;
+  padding-inline: 0.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.reference-backlink sup {
+  margin-inline-start: 0.08rem;
+}
+
+.glossary-copy--en {
+  display: none;
+}
+
+html[lang='en'] .glossary-copy--bn {
+  display: none;
+}
+
+html[lang='en'] .glossary-copy--en {
+  display: inline;
+}
+
+/* Inline Term Glossary */
+.glossary-term-plain {
+  font-weight: 500;
+}
+
+.glossary-term-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.glossary-term-btn {
+  display: inline-flex;
+  align-items: baseline;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1.5px dotted var(--green);
+  cursor: help;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.glossary-term-btn:hover,
+.glossary-term-btn:focus-visible {
+  border-bottom-style: solid;
+  background-color: var(--green-soft);
+  color: var(--green-deep);
+  outline: none;
+}
+
+.glossary-term-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-left: 2px;
+  border-radius: 50%;
+  background-color: var(--green);
+  vertical-align: super;
+}
+
+.glossary-popover {
+  position: fixed;
+  inset: auto 12px 16px;
+  z-index: 50;
+  width: min(280px, calc(100vw - 24px));
+  max-height: min(60vh, 320px);
+  margin: 0 auto;
+  padding: 12px 14px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--canvas);
+  box-shadow: 0 4px 20px rgb(var(--ink-channels) / 16%);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.glossary-popover::after {
+  display: none;
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--canvas) transparent transparent transparent;
+}
+
 .glossary-popover__title {
   display: flex;
   align-items: center;
@@ -6252,3 +6768,1509 @@ html:has(.glossary :target) {
     font-size: 0.85em;
     color: #444;
   }
+}
+
+/* ------------------------------------------------------ touch input floor */
+
+/* iOS Safari zooms the viewport when a focused control renders text under 16px
+   and never zooms back out, which leaves a reader scrolling sideways through
+   the rest of the page. Every control below runs a deliberately small label at
+   desktop width; on a touch pointer it gets the body size back instead. Last in
+   the file and selector-for-selector with the rules above, so each one is
+   overridden where it is set rather than at a specificity nobody can predict. */
+
+@media (pointer: coarse) {
+  /* Search inherits the body, which now holds 16px on a phone. It stays on the
+     list because it is the one control every reader touches first, and it
+     should not become a zoom trap again if the body size is ever revisited. */
+  .search input,
+  .glossary-search input,
+  .directory-controls input,
+  .directory-controls select,
+  .edit-media-item :is(input, textarea),
+  .media-review__moderation input,
+  .edit-publish__summary,
+  .edit-live .milkdown .milkdown-image-block > .caption-input {
+    font-size: 1rem;
+  }
+
+  /* Named in DESIGN.md: the important mobile actions are at least 44px. The
+     directory filters are the whole interface on that page. */
+  .directory-controls input,
+  .directory-controls select,
+  .directory-controls button {
+    min-height: 44px;
+  }
+
+  /* Same reasoning on the glossary: the filter field, the theme pills and the
+     letter strip are the whole interface of that page. The letters run 40px
+     rather than 44px because twenty-six cells at 44 push the first term most of
+     a screen down on a 360px phone. */
+  .glossary-search input,
+  .glossary-groups button {
+    min-height: 44px;
+  }
+
+  .glossary-alphabet a,
+  .glossary-alphabet span {
+    min-height: 40px;
+    font-size: 1rem;
+  }
+
+  /* The citation marker is the smallest target on a source-backed page and the
+     one a founder checking a fee actually reaches for. Its sup carries
+     line-height 0, so vertical padding grows the target to ~24px without moving
+     a single line of the paragraph around it. */
+  .article .cite-link {
+    padding-block: 6px;
+  }
+}
+
+/* ============================================================
+   Deshi Startup — Product layer
+   Visual guidance / journeys / action components.
+   Builds on the existing calm design system:
+     paper background, white canvas, deep green structure,
+     blue links, Bengali serif headings, hairline borders.
+   No second design system. No startup-gradient noise.
+   ============================================================ */
+
+:root {
+  --action-haze: rgba(180, 140, 50, 0.05);
+  --step-dot: #2f6b3a;
+  --step-dot-done: #2f6b3a;
+  --step-dot-current: #0a3d2e;
+  --step-dot-future: #8a8f5a;
+  --step-line: rgba(64, 82, 46, 0.35);
+  --accent-green: #2f6b3a;
+  --accent-blue: #1c5fb2;
+  --card-soft: rgba(255, 255, 255, 0.5);
+  --warn-bg: rgba(190, 150, 40, 0.08);
+  --warn-line: #c9a13a;
+  --gov-bg: rgba(40, 100, 140, 0.06);
+  --gov-line: #2d6f8c;
+}
+
+/* ============================================================
+   Progress indicator — vertical stepper with a progress meter
+   ============================================================ */
+.pg-progress {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.pg-progress--horizontal {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.pg-progress--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pg-progress--horizontal .pg-step { flex: 1 1 0; }
+.pg-progress--vertical .pg-step { flex: 0 0 auto; }
+
+.pg-step {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.pg-step--horizontal {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 0 4px 20px;
+}
+
+.pg-step--horizontal .pg-step__marker {
+  flex: 0 0 auto;
+  margin-top: 6px;
+}
+
+.pg-step--horizontal .pg-step__body {
+  min-width: 0;
+}
+
+/* Dots / markers */
+.pg-step__marker {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  margin-top: 4px;
+}
+
+.pg-step__dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--step-dot);
+  background: var(--paper);
+  position: absolute;
+  inset: 0;
+  transition: background-color 120ms ease, border-color 120ms ease,
+              box-shadow 120ms ease, transform 120ms ease;
+}
+
+.pg-step__dot--future {
+  border-color: var(--step-dot-future);
+  background: var(--paper);
+}
+.pg-step__dot--doing {
+  border-color: var(--step-dot-current);
+  background: var(--page);
+  animation: pulse-step 1.6s ease-in-out infinite;
+}
+.pg-step__dot--current {
+  border-color: var(--step-dot-current);
+  background: var(--accent-green);
+}
+.pg-step__dot--done {
+  border-color: var(--step-dot-done);
+  background: var(--accent-green);
+}
+
+.pg-step__dot--current::after,
+.pg-step__dot--done::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-green);
+  opacity: 0;
+}
+
+.pg-step__dot--current::after {
+  animation: ring-current 2s ease-out infinite;
+}
+
+@keyframes pulse-step {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(180, 140, 50, 0.0); }
+  50% { box-shadow: 0 0 0 6px rgba(180, 140, 50, 0.12); }
+}
+
+@keyframes ring-current {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  100% { transform: scale(1.9);  opacity: 0; }
+}
+
+.pg-step__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.38;
+}
+
+.pg-step__num {
+  display: inline-block;
+  font-feature-settings: "ss01" 1, "ss02" 1;
+  font-variant-numeric: oldstyle-nums;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  font-size: 0.82em;
+  margin-right: 6px;
+  font-family: var(--serif);
+}
+
+.pg-step__label {
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.pg-step__desc {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  display: block;
+}
+
+/* Vertical step connector line */
+.pg-step__connector {
+  position: absolute;
+  left: 8px;
+  top: 18px;
+  bottom: -10px;
+  width: 1.5px;
+  background: var(--step-line);
+  pointer-events: none;
+}
+
+.pg-progress--vertical > .pg-step:last-child .pg-step__connector { display: none; }
+
+/* Progress meter (thin bar under the list) */
+.pg-progress__meter {
+  position: relative;
+  height: 3px;
+  margin-top: 10px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.pg-progress__fill {
+  position: absolute;
+  inset: 0 0 0 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green), #3f8a5a);
+  transform-origin: left center;
+  transition: width 350ms ease;
+}
+
+/* ============================================================
+   Journey step card — individual card in a journey
+   ============================================================ */
+.js-step {
+  position: relative;
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-mute);
+  padding: 16px 18px;
+  margin: 0 0 12px 0;
+  transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  scroll-margin-top: 40px;
+}
+
+.js-step--done {
+  border-left-color: var(--accent-green);
+  background: linear-gradient(180deg, rgba(47,107,58,0.04), rgba(47,107,58,0));
+}
+.js-step--doing {
+  border-left-color: var(--accent-blue);
+  background: linear-gradient(180deg, rgba(28,95,178,0.04), rgba(28,95,178,0));
+}
+.js-step--next {
+  border-left-color: var(--ink-soft);
+}
+
+.js-step--accent {
+  border-left-width: 4px;
+  border-left-color: var(--accent-green);
+}
+
+.js-step__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px dotted var(--rule-mute);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.js-step__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 36px;
+}
+
+.js-step__num {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--accent-green);
+  font-weight: 400;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.js-step--done .js-step__num {
+  background: var(--accent-green);
+  color: #fff;
+  border-color: var(--accent-green);
+}
+
+.js-step--doing .js-step__num {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.js-step__badge {
+  font-size: 0.68rem;
+  background: var(--warn-bg);
+  color: #7a5f1a;
+  border: 1px solid var(--warn-line);
+  padding: 1px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.js-step__titles {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.js-step__title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  letter-spacing: 0.005em;
+  word-break: break-word;
+}
+
+.js-step__title:hover {
+  color: var(--link);
+  border-bottom: 1px solid var(--link-soft);
+}
+
+.js-step__desc {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.js-step__body {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.js-step__children {
+  margin-top: 12px;
+}
+
+/* ============================================================
+   Situation selector — "Where are you right now?" cards
+   ============================================================ */
+.situation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.situation-card {
+  position: relative;
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 16px 16px 14px;
+  cursor: pointer;
+  transition: border-color 120ms ease, box-shadow 120ms ease,
+              transform 120ms ease, background 120ms ease;
+  text-align: left;
+  font-family: var(--sans);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  user-select: none;
+}
+
+.situation-card:hover {
+  border-color: var(--accent-green);
+  box-shadow: 0 2px 0 var(--accent-green) inset;
+  transform: translateY(-1px);
+}
+
+.situation-card:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.situation-card__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent-green);
+  opacity: 0.75;
+}
+
+.situation-card__title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.situation-card__sub {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  flex: 1 1 auto;
+}
+
+.situation-card.selected {
+  border-color: var(--accent-green);
+  background: var(--card-soft);
+  box-shadow: 0 0 0 1px var(--accent-green) inset;
+}
+
+.situation-card.selected .situation-card__icon {
+  opacity: 1;
+  color: var(--accent-green);
+}
+
+/* ============================================================
+   Guide action layer — "What should I do now?" block
+   ============================================================ */
+.guide-action {
+  border: 1px solid var(--rule);
+  background: var(--action-haze);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+
+.guide-action__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--rule-mute);
+  padding-bottom: 12px;
+}
+
+.guide-action__glyph {
+  font-size: 1.3rem;
+  color: var(--accent-green);
+  flex: 0 0 28px;
+  line-height: 1;
+}
+
+.guide-action__titles {
+  flex: 1 1 auto;
+}
+
+.guide-action__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-green);
+  font-weight: 600;
+  font-family: var(--sans);
+  margin-bottom: 2px;
+}
+
+.guide-action__title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.guide-action__intro {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.guide-action__steps {
+  list-style: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.guide-action__step {
+  position: relative;
+  padding: 6px 0 6px 30px;
+  counter-increment: step;
+  line-height: 1.5;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.guide-action__step::before {
+  content: counter(step) ".";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-family: var(--serif);
+  color: var(--accent-green);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.guide-action__ready {
+  background: rgba(47, 107, 58, 0.05);
+  border-left: 3px solid var(--accent-green);
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+  border-radius: 0 4px 4px 0;
+}
+
+.guide-action__ready-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-green);
+  font-weight: 600;
+  font-family: var(--sans);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.guide-action__next {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule-mute);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.guide-action__next-label {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+}
+
+.guide-action__next-link {
+  color: var(--link);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.guide-action__next-link:hover {
+  border-bottom: 1px solid var(--link-soft);
+}
+
+/* ============================================================
+   Next step block — small, after guide content
+   ============================================================ */
+.next-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent-green);
+  padding: 12px 16px;
+  margin: 24px 0 16px;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.92rem;
+  break-inside: avoid;
+}
+
+.next-step__arrow {
+  color: var(--accent-green);
+  flex: 0 0 18px;
+  line-height: 1;
+}
+
+.next-step__label {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.next-step__title {
+  color: var(--link);
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 2px;
+  display: block;
+}
+
+.next-step__title:hover {
+  border-bottom: 1px solid var(--link-soft);
+}
+
+/* ============================================================
+   Guide summary card
+   ============================================================ */
+.guide-summary {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+.guide-summary__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-green);
+  font-weight: 600;
+  font-family: var(--sans);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.guide-summary__text {
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Resource / tool card
+   ============================================================ */
+.resource-card {
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  break-inside: avoid;
+}
+
+.resource-card:hover {
+  border-color: var(--accent-green);
+  box-shadow: 0 1px 0 var(--accent-green) inset;
+}
+
+.resource-card__icon {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: var(--card-soft);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-green);
+  font-size: 1.1rem;
+}
+
+.resource-card__titles {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.resource-card__title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  line-height: 1.3;
+}
+
+.resource-card__title:hover {
+  color: var(--link);
+  border-bottom: 1px solid var(--link-soft);
+}
+
+.resource-card__sub {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.resource-card__tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  background: var(--gov-bg);
+  color: #1f5570;
+  border: 1px solid var(--gov-line);
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+  margin-top: 4px;
+  font-family: var(--sans);
+}
+
+.resource-card__tag--tool {
+  background: rgba(47,107,58,0.08);
+  color: #2f6b3a;
+  border-color: #7ba06a;
+}
+
+.resource-card__tag--guide {
+  background: rgba(28,95,178,0.08);
+  color: #1c5fb2;
+  border-color: #6f93c9;
+}
+
+.resource-card__tag--questions {
+  background: rgba(110, 70, 20, 0.08);
+  color: #5c3f10;
+  border-color: #b3915a;
+}
+
+/* ============================================================
+   Contextual warning / caution
+   ============================================================ */
+.context-warning {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-left: 3px solid var(--warn-line);
+  padding: 12px 14px;
+  margin: 14px 0;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.context-warning__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7a5f1a;
+  font-weight: 600;
+  font-family: var(--sans);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.context-warning__text {
+  line-height: 1.5;
+}
+
+.context-warning--gov {
+  background: var(--gov-bg);
+  border-left-color: var(--gov-line);
+}
+
+.context-warning--gov .context-warning__label {
+  color: #1f5570;
+}
+
+.context-warning--gov .context-warning__text {
+  color: var(--ink);
+}
+
+/* ============================================================
+   Founder path selector — explicit journey picker
+   ============================================================ */
+.path-selector {
+  margin: 24px 0;
+}
+
+.path-selector__head {
+  margin-bottom: 12px;
+}
+
+.path-selector__question {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--ink);
+  line-height: 1.35;
+  font-weight: 400;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.path-selector__hint {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  margin-top: 4px;
+  line-height: 1.5;
+  font-family: var(--sans);
+}
+
+.path-selector__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.path-choice {
+  border: 1px solid var(--rule);
+  background: var(--page);
+  border-radius: 6px;
+  padding: 12px 12px 10px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease,
+              box-shadow 120ms ease;
+  text-align: left;
+  font-family: var(--sans);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.path-choice:hover {
+  border-color: var(--accent-green);
+}
+
+.path-choice:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.path-choice.selected {
+  border-color: var(--accent-green);
+  background: var(--card-soft);
+  box-shadow: 0 0 0 1px var(--accent-green) inset;
+}
+
+.path-choice__num {
+  font-family: var(--serif);
+  color: var(--accent-green);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.path-choice__title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.path-choice__sub {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  flex: 1 1 auto;
+}
+
+/* ============================================================
+   Completion state
+   ============================================================ */
+.completion-state {
+  background: linear-gradient(180deg, rgba(47,107,58,0.06), rgba(47,107,58,0));
+  border: 1px solid var(--accent-green);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 18px 0;
+}
+
+.completion-state__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-green);
+  font-weight: 600;
+  font-family: var(--sans);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.completion-state__text {
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Interactive checklist — marks persisted in localStorage
+   ============================================================ */
+.checklist {
+  list-style: none;
+  margin: 0 0 14px 0;
+  padding: 0;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 4px 0;
+  line-height: 1.5;
+  font-size: 0.92rem;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 80ms ease;
+}
+
+.checklist__item:hover {
+  background: rgba(0,0,0,0.02);
+}
+
+.checklist__item:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.checklist__box {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1.5px solid var(--rule);
+  background: var(--paper);
+  border-radius: 3px;
+  position: relative;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.checklist__item.checked .checklist__box {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+}
+
+.checklist__item.checked .checklist__box::after {
+  content: "\2713";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.checklist__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.checklist__item.checked .checklist__text {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-soft);
+}
+
+.checklist__hint {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  font-family: var(--sans);
+}
+
+/* ============================================================
+   Decision helper — "which one applies to me?"
+   ============================================================ */
+.decision {
+  border: 1px solid var(--rule);
+  background: var(--page);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.decision__question {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 10px;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  line-height: 1.4;
+}
+
+.decision__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.decision__option {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+  font-family: var(--sans);
+  text-align: left;
+  color: var(--ink);
+}
+
+.decision__option:hover { border-color: var(--accent-green); }
+.decision__option:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+
+.decision__option.selected {
+  border-color: var(--accent-green);
+  background: var(--card-soft);
+}
+
+.decision__option-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ============================================================
+   Comparison table — enhanced static table style
+   ============================================================ */
+table.compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 12px 0;
+}
+
+table.compare th,
+table.compare td {
+  border: 1px solid var(--rule);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.compare th {
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-family: var(--sans);
+}
+
+table.compare td {
+  color: var(--ink);
+}
+
+table.compare tr:nth-child(even) td {
+  background: rgba(0,0,0,0.018);
+}
+
+/* ============================================================
+   Process flow — simple inline steps with arrows
+   ============================================================ */
+.process-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 2px;
+  margin: 12px 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.process-flow__step {
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.process-flow__arrow {
+  color: var(--accent-green);
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   Timeline — government process / sequential visual
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 22px;
+  margin: 14px 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: var(--rule);
+}
+
+.timeline__item {
+  position: relative;
+  padding: 4px 0 4px 12px;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.timeline__dot {
+  position: absolute;
+  left: -20px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  border: 1px solid var(--rule);
+}
+
+.timeline__item:first-child .timeline__dot { background: var(--accent-green); }
+.timeline__item.done .timeline__dot { background: var(--ink-soft); }
+
+.timeline__head {
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.timeline__body {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   Homepage hero
+   ============================================================ */
+.hero {
+  padding: 56px 0 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--rule-mute);
+  margin-bottom: 32px;
+}
+
+.hero__eyebrow {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent-green);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.hero__title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--ink);
+  font-weight: 400;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  margin: 0 0 12px;
+  max-width: 18ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero__sub {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 36ch;
+  margin: 0 auto 22px;
+  font-family: var(--sans);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero__btn {
+  font-family: var(--sans);
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-green);
+  background: var(--accent-green);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 120ms ease, border-color 120ms ease;
+  letter-spacing: 0.01em;
+}
+
+.hero__btn:hover {
+  background: #387a46;
+  border-color: #387a46;
+}
+
+.hero__btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+.hero__btn--ghost:hover {
+  background: var(--paper);
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
+.hero__info {
+  margin-top: 18px;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+}
+
+/* ============================================================
+   Homepage section headings
+   ============================================================ */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 40px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-mute);
+}
+
+.section-head__num {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--accent-green);
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.section-head__title {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--ink);
+  font-weight: 400;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  line-height: 1.2;
+}
+
+.section-head__hint {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-family: var(--sans);
+  margin-left: auto;
+}
+
+/* ============================================================
+   Popular tasks — task card list
+   ============================================================ */
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.task-card {
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-mute);
+  border-radius: 4px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: border-left-color 120ms ease, border-color 120ms ease,
+              box-shadow 120ms ease, transform 120ms ease;
+}
+
+.task-card:hover {
+  border-left-color: var(--accent-green);
+  border-color: var(--accent-green);
+  box-shadow: 0 1px 0 var(--accent-green) inset;
+  transform: translateY(-1px);
+}
+
+.task-card__title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.task-card__sub {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* ============================================================
+   Cards grid for tools, ecosystem, case studies
+   ============================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+/* ============================================================
+   Footer / OSS section
+   ============================================================ */
+.open-source {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 24px 0;
+  margin-top: 32px;
+}
+
+.open-source__title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 400;
+}
+
+.open-source__text {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  max-width: 40ch;
+  margin-bottom: 14px;
+  font-family: var(--sans);
+}
+
+.open-source__links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   Roadmap page — big visual with branch lanes
+   ============================================================ */
+.roadmap {
+  position: relative;
+}
+
+.roadmap__lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.roadmap__lane {
+  position: relative;
+  padding-left: 14px;
+  border-left: 1px solid var(--rule);
+}
+
+.roadmap__lane::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  bottom: 6px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  opacity: 0.15;
+}
+
+.roadmap__lane.is-active::before {
+  opacity: 0.7;
+  background: var(--accent-green);
+}
+
+.roadmap__lane-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.roadmap__lane-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.roadmap__step {
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.roadmap__step:hover {
+  background: var(--accent-green);
+  color: #fff;
+  border-color: var(--accent-green);
+}
+
+.roadmap__step.is-current {
+  background: var(--accent-green);
+  color: #fff;
+  border-color: var(--accent-green);
+  font-weight: 500;
+}
+
+.roadmap__step.is-done {
+  background: rgba(47,107,58,0.1);
+  color: var(--accent-green);
+  border-color: rgba(47,107,58,0.3);
+}
+
+/* ============================================================
+   Journey detail page enhancements
+   ============================================================ */
+.journey-progress-wrap {
+  margin: 20px 0 18px;
+  padding: 16px 18px;
+  background: var(--card-soft);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+/* ============================================================
+   Responsive adjustments
+   ============================================================ */
+@media (max-width: 680px) {
+  .hero { padding: 36px 0 24px; }
+  .hero__title { font-size: 1.7rem; }
+
+  .situation-grid,
+  .path-selector__list,
+  .task-list,
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-progress--horizontal { flex-direction: column; }
+
+  .resource-card,
+  .decision__options {
+    flex-direction: column;
+  }
+
+  .section-head__hint { display: none; }
+}
+
+/* ============================================================
+   Respect non-JS — graceful degradation
+   ============================================================ */
+.no-js .checklist__item,
+.no-js .situation-card,
+.no-js .path-choice,
+.no-js .decision__option,
+.no-js .roadmap__step {
+  cursor: default;
+}
+
+.no-js .checklist__item.checked,
+.no-js .situation-card.selected,
+.no-js .path-choice.selected,
+.no-js .decision__option.selected {
+  background: var(--page);
+}
+
