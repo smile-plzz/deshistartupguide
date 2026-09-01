@@ -319,11 +319,6 @@ p {
 .search-results ul {
   margin: 0;
   padding: 0;
-  list-style: none;
-}
-
-.search-result {
-  margin: 0;
   border-radius: 4px;
   padding: 8px 10px;
   cursor: pointer;
@@ -394,22 +389,6 @@ p {
 }
 
 .language-switcher {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 76px;
-  height: 30px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--canvas);
-  color: var(--ink);
-  cursor: pointer;
-  isolation: isolate;
-  text-decoration: none;
-}
-
 .language-switcher__thumb {
   position: absolute;
   z-index: -1;
@@ -639,14 +618,6 @@ a.tab {
 }
 
 .breadcrumbs ol {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .breadcrumbs li {
   display: inline-flex;
   align-items: center;
@@ -3436,30 +3407,6 @@ html[lang='bn'] .startup50-hero__folio strong {
 }
 
 .wiki-path-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.wiki-path-card strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--green-deep);
-}
-
-/* The description span only – :not([class]) keeps this off the destination cue
-   below, which is also a span and needs its own display and colour. */
-.wiki-path-card > span:not([class]),
-.wiki-scope-card p,
-.wiki-source-list p {
-  display: block;
-  margin: 0;
-  color: var(--muted);
-}
-
-/* Where the card leads. Not a button and not emphasis – a destination cue, so
-   it is set as one: a quiet label with an arrow that steps forward on hover. */
-.wiki-path-card__go {
-  display: flex;
   align-items: baseline;
   gap: 6px;
   margin-top: auto;
@@ -3509,40 +3456,9 @@ html[lang='bn'] .startup50-hero__folio strong {
   font-weight: var(--w-strong);
   cursor: pointer;
   list-style: none;
-}
-
-.home-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.home-faq summary::before {
-  content: '+';
-  flex: 0 0 auto;
   width: 0.8em;
   color: var(--green-deep);
   font-weight: var(--w-strong);
-}
-
-.home-faq details[open] > summary::before {
-  content: '–';
-}
-
-.home-faq summary:hover {
-  background: var(--green-soft);
-  color: var(--green-deep);
-}
-
-.home-faq details[open] > summary {
-  color: var(--green-deep);
-}
-
-.home-faq details p {
-  margin: 0;
-  padding: 0 18px 16px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
 /* contribution section (wiki styling) */
 .contrib-section {
   margin-top: 18px;
@@ -3602,10 +3518,6 @@ html[lang='bn'] .startup50-hero__folio strong {
 
 .recent-list time {
   color: var(--faint);
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
 /* ---------------------------------------------------------------- footer */
 
 /* The footer is a sibling of .page-shell, not a child, so it cannot inherit the
@@ -4240,126 +4152,6 @@ html[lang='bn'] .startup50-hero__folio strong {
 /* part of this reference work and not as a borrowed auth popup.            */
 
 body.auth-open {
-  overflow: hidden;
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  background: rgb(var(--ink-channels) / 55%);
-  padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
-  animation: modal-scrim-in 160ms ease-out both;
-}
-
-/* 466px less the 1px rules and 32px padding leaves Google's full 400px
-   rendering column. Keeping the iframe at the width it was painted avoids
-   clipping its personalized account state at the right-hand rule. */
-.modal-card {
-  position: relative;
-  width: min(100%, 466px);
-  max-height: calc(100vh - 48px);
-  max-height: calc(100dvh - 48px);
-  overflow-y: auto;
-  border: 1px solid var(--line);
-  border-top: 5px solid var(--green-deep);
-  background: var(--canvas);
-  padding: 26px 32px 24px;
-  animation: modal-card-in 180ms ease-out both;
-}
-
-.modal-card:focus {
-  outline: none;
-}
-
-/* One reserve that clears the 44px close target from either padding. */
-.modal-card h2 {
-  margin: 0 0 10px;
-  border: 0;
-  padding: 0 40px 0 0;
-  font-family: var(--sans);
-  font-size: 1.25rem;
-  color: var(--ink);
-}
-
-.modal-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  background: none;
-  color: var(--faint);
-  cursor: pointer;
-}
-
-.modal-close svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.modal-close:hover {
-  border-color: var(--line);
-  background: var(--canvas-soft);
-  color: var(--ink);
-}
-
-.modal-lede {
-  margin: 0 0 18px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* The waiting state and the button Google eventually paints share one grid
-   cell, so the card never grows or shrinks under the reader's cursor. */
-.modal-signin {
-  display: grid;
-}
-
-.modal-signin > * {
-  grid-area: 1 / 1;
-}
-
-.google-btn-wrap {
-  display: flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Holds the button's exact footprint while Google's script is in flight, and
-   breathes a green wash so a slow connection still looks like it is working. */
-.modal-status {
-  display: grid;
-  place-items: center;
-  min-height: 44px;
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--canvas-soft);
-  color: var(--muted);
-  font-size: 0.9rem;
-  animation: modal-wait 1.5s ease-in-out infinite alternate;
-}
-
-/* A sign-in that will not load is a caution, not a failure of the reader's,
-   so it wears the notice family and names itself (The Rule-and-Label Rule). */
-.modal-error {
-  margin: 14px 0 0;
-  border: 1px solid var(--warn-border);
-  background: var(--warn-bg);
   padding: 12px 14px;
   color: var(--warn-ink);
   font-size: 0.9rem;
@@ -4467,60 +4259,6 @@ body.auth-open {
   color: var(--ink);
   font-size: 0.95rem;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.edit-pencil {
-  flex: 0 0 auto;
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: var(--green-deep);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.edit-bar__status {
-  flex: 0 0 auto;
-  margin: 0;
-  color: var(--faint);
-  font-size: 0.85rem;
-}
-
-.edit-bar__status:empty {
-  display: none;
-}
-
-.edit-bar__actions {
-  display: flex;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.edit-bar__warn {
-  color: var(--warn-ink);
-  font-size: 0.85rem;
-}
-
-/* Same geometry as every other action on the site: hairline, 3px, white ground,
-   green wash on hover. The primary is the homepage's start button. */
-.edit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--canvas);
-  padding: 8px 16px;
-  color: var(--ink);
-  font: inherit;
-  font-size: 0.9rem;
-  line-height: 1.25;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .edit-btn:hover:not(:disabled) {
@@ -4555,14 +4293,6 @@ body.auth-open {
   opacity: 0.42;
   transition: opacity 160ms ease-out;
   pointer-events: none;
-  user-select: none;
-}
-
-.edit-live {
-  padding-top: 22px;
-  animation: edit-canvas-in 160ms ease-out both;
-}
-
 .edit-live.is-mounting {
   display: none;
 }
@@ -4849,26 +4579,6 @@ body.auth-open {
 
 .edit-live .milkdown .milkdown-video-block[data-selected] {
   outline: 2px solid var(--green-deep);
-  outline-offset: 2px;
-}
-
-.edit-video__frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: #202328;
-}
-
-.edit-video__poster {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .edit-video__empty-poster {
   position: absolute;
   top: -0.2em;
@@ -4890,18 +4600,6 @@ body.auth-open {
   color: #fff;
   font-size: 0.76rem;
   font-weight: var(--w-strong);
-}
-
-.edit-video__play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 48px;
-  height: 48px;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
 .edit-video__play svg {
   display: block;
 }
@@ -5620,31 +5318,6 @@ body.auth-open {
 .media-review-item dd {
   margin: 2px 0 0;
   color: var(--ink);
-  line-height: 1.55;
-}
-
-.media-review-item__actions,
-.media-review__moderation-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.media-review__moderation {
-  display: grid;
-  grid-template-columns: minmax(14rem, 0.8fr) minmax(18rem, 1.2fr);
-  gap: 18px 28px;
-  margin-top: 38px;
-  border-top: 1px solid var(--line);
-  background: var(--canvas-soft);
-  padding: 22px;
-}
-
-.media-review__moderation h2,
-.media-review__moderation p {
-  margin: 0;
-}
-
 .media-review__moderation label {
   display: grid;
   gap: 5px;
@@ -5871,16 +5544,6 @@ body.auth-open {
 }
 
 .expert-review__header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 16px;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed var(--line);
-}
-
 .expert-review__badge {
   display: inline-flex;
   align-items: center;
@@ -5901,9 +5564,6 @@ body.auth-open {
 .expert-review__person {
   font-size: 0.96rem;
   line-height: 1.5;
-  color: var(--ink);
-}
-
 .expert-review__name {
   font-weight: var(--w-strong);
   color: var(--ink);
@@ -5919,70 +5579,6 @@ body.auth-open {
 
 .expert-review__notes {
   margin: 8px 0 0;
-  font-size: 0.88rem;
-  color: var(--ink-light);
-  line-height: 1.5;
-}
-
-.expert-review__source {
-  margin: 8px 0 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-/* Wikipedia-style inline citations and source notes */
-@counter-style bengali-decimal {
-  system: numeric;
-  symbols: '০' '১' '২' '৩' '৪' '৫' '৬' '৭' '৮' '৯';
-  suffix: '. ';
-}
-
-.cite-footnote {
-  font-size: 0.75em;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-  top: -0.5em;
-  margin-inline-start: 2px;
-}
-
-.article .cite-link,
-.article .cite-link:visited {
-  color: var(--blue);
-  font-weight: 600;
-  text-decoration: none;
-  padding: 1px 3px;
-  border-radius: 2px;
-  transition: background-color 150ms ease, color 150ms ease;
-}
-
-.cite-link::before {
-  content: '[';
-}
-
-.cite-link::after {
-  content: ']';
-}
-
-.article .cite-link:hover,
-.article .cite-link:focus-visible {
-  color: var(--blue-hover);
-  background-color: var(--blue-soft);
-  text-decoration: underline;
-}
-
-.reference-notes {
-  margin-block-start: 0.5rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.reference-list {
-  margin-block: 0;
-  padding-inline-start: 1.75rem;
-}
-
 /* Lists that carry their own markers, or none, opt out here rather than
    trying to out-specify this rule locally: `list-style: none` on the list
    itself loses to it and the marker came back in Bangla only. */
@@ -5994,118 +5590,6 @@ html[lang='bn'] ol:not(
   ),
 html[lang='bn'] .reference-list {
   list-style-type: bengali-decimal;
-}
-
-.reference-item {
-  padding-inline-start: 0.25rem;
-  scroll-margin-block-start: 7rem;
-  border-radius: 3px;
-}
-
-.reference-item:target {
-  background: var(--blue-soft);
-}
-
-.reference-item > :last-child {
-  margin-block-end: 0;
-}
-
-.reference-backlink {
-  display: inline-block;
-  margin-inline-start: 0.2rem;
-  padding-inline: 0.25rem;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.reference-backlink sup {
-  margin-inline-start: 0.08rem;
-}
-
-.glossary-copy--en {
-  display: none;
-}
-
-html[lang='en'] .glossary-copy--bn {
-  display: none;
-}
-
-html[lang='en'] .glossary-copy--en {
-  display: inline;
-}
-
-/* Inline Term Glossary */
-.glossary-term-plain {
-  font-weight: 500;
-}
-
-.glossary-term-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.glossary-term-btn {
-  display: inline-flex;
-  align-items: baseline;
-  background: transparent;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: var(--ink);
-  font-weight: 600;
-  border-bottom: 1.5px dotted var(--green);
-  cursor: help;
-  transition: border-color 150ms ease, background-color 150ms ease;
-}
-
-.glossary-term-btn:hover,
-.glossary-term-btn:focus-visible {
-  border-bottom-style: solid;
-  background-color: var(--green-soft);
-  color: var(--green-deep);
-  outline: none;
-}
-
-.glossary-term-dot {
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  margin-left: 2px;
-  border-radius: 50%;
-  background-color: var(--green);
-  vertical-align: super;
-}
-
-.glossary-popover {
-  position: fixed;
-  inset: auto 12px 16px;
-  z-index: 50;
-  width: min(280px, calc(100vw - 24px));
-  max-height: min(60vh, 320px);
-  margin: 0 auto;
-  padding: 12px 14px;
-  overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--canvas);
-  box-shadow: 0 4px 20px rgb(var(--ink-channels) / 16%);
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--ink);
-}
-
-.glossary-popover::after {
-  display: none;
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: var(--canvas) transparent transparent transparent;
-}
-
 .glossary-popover__title {
   display: flex;
   align-items: center;
@@ -6768,60 +6252,3 @@ html:has(.glossary :target) {
     font-size: 0.85em;
     color: #444;
   }
-}
-
-/* ------------------------------------------------------ touch input floor */
-
-/* iOS Safari zooms the viewport when a focused control renders text under 16px
-   and never zooms back out, which leaves a reader scrolling sideways through
-   the rest of the page. Every control below runs a deliberately small label at
-   desktop width; on a touch pointer it gets the body size back instead. Last in
-   the file and selector-for-selector with the rules above, so each one is
-   overridden where it is set rather than at a specificity nobody can predict. */
-
-@media (pointer: coarse) {
-  /* Search inherits the body, which now holds 16px on a phone. It stays on the
-     list because it is the one control every reader touches first, and it
-     should not become a zoom trap again if the body size is ever revisited. */
-  .search input,
-  .glossary-search input,
-  .directory-controls input,
-  .directory-controls select,
-  .edit-media-item :is(input, textarea),
-  .media-review__moderation input,
-  .edit-publish__summary,
-  .edit-live .milkdown .milkdown-image-block > .caption-input {
-    font-size: 1rem;
-  }
-
-  /* Named in DESIGN.md: the important mobile actions are at least 44px. The
-     directory filters are the whole interface on that page. */
-  .directory-controls input,
-  .directory-controls select,
-  .directory-controls button {
-    min-height: 44px;
-  }
-
-  /* Same reasoning on the glossary: the filter field, the theme pills and the
-     letter strip are the whole interface of that page. The letters run 40px
-     rather than 44px because twenty-six cells at 44 push the first term most of
-     a screen down on a 360px phone. */
-  .glossary-search input,
-  .glossary-groups button {
-    min-height: 44px;
-  }
-
-  .glossary-alphabet a,
-  .glossary-alphabet span {
-    min-height: 40px;
-    font-size: 1rem;
-  }
-
-  /* The citation marker is the smallest target on a source-backed page and the
-     one a founder checking a fee actually reaches for. Its sup carries
-     line-height 0, so vertical padding grows the target to ~24px without moving
-     a single line of the paragraph around it. */
-  .article .cite-link {
-    padding-block: 6px;
-  }
-}
