@@ -24,7 +24,7 @@ import {
 import { prepareContributorSnapshot } from "../app/lib/contributor-leaderboard.mjs";
 import { sourceSupportsInlineEdit } from "../app/lib/inline-edit-policy.mjs";
 import { isWrittenGuide } from "./content-guide.mjs";
-import { collectGitDates } from "./git-content-dates.mjs";
+import { collectGitDates, ensureFullGitHistory } from "./git-content-dates.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentRoot = path.join(root, "app", "(contents)");
@@ -94,6 +94,10 @@ function walkPages(dir, baseDir) {
   }
   return pages;
 }
+
+// Vercel (and other CI) shallow-clones by default; fetch full history so
+// collectGitDates can emit accurate publication/modification dates.
+ensureFullGitHistory(root);
 
 const gitDates = collectGitDates(root);
 const generatedDir = path.join(root, "app", "generated");
