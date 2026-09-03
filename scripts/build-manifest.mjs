@@ -95,11 +95,25 @@ function walkPages(dir, baseDir) {
   return pages;
 }
 
-// Vercel (and other CI) shallow-clones by default; fetch full history so
-// collectGitDates can emit accurate publication/modification dates.
-ensureFullGitHistory(root);
+// Vercel (and other CI) shallow-clones by default; try to fetch full history
+// so collectGitDates emits accurate publication/modification dates. If the
+// fetch fails or git isn't available at all, degrade gracefully — the build
+// keeps going with empty dates rather than failing the deploy.
+let gitDates;
+try {
+  ensureFullGitHistory(root);
+  gitDates = collectGitDates(root);
+} catch (err) {
+  console.warn("git-content-dates: could not collect dates (" + err.message + "); proceeding without.",);
+  gitDates = {
+    modified: new Map(),
+    published: new Map(),
+    modifiedAt: new Map(),
+    publishedAt: new Map(),
+  };
+}
 
-const gitDates = collectGitDates(root);
+const gitDatesOuter = gitDates;
 const generatedDir = path.join(root, "app", "generated");
 fs.mkdirSync(generatedDir, { recursive: true });
 
@@ -130,10 +144,10 @@ for (const locale of LOCALES) {
     }
     const repoPath = path.relative(root, filePath).split(path.sep).join("/");
     const verified = fm.verified ? String(fm.verified) : null;
-    const date = gitDates.modified.get(repoPath) || verified;
-    const published = gitDates.published.get(repoPath) || null;
-    const modifiedAt = gitDates.modifiedAt.get(repoPath) || null;
-    const publishedAt = gitDates.publishedAt.get(repoPath) || null;
+    const date = gitDatesOuter.modified.get(repoPath) || verified;
+    const published = gitDatesOuter.published.get(repoPath) || null;
+    const modifiedAt = gitDatesOuter.modifiedAt.get(repoPath) || null;
+    const publishedAt = gitDatesOuter.publishedAt.get(repoPath) || null;
     if (date) allDates[route] = date;
     if (published) allPublished[route] = published;
     if (verified) allVerified[route] = verified;
