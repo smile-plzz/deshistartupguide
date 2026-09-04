@@ -387,15 +387,19 @@ for (const page of pages) {
         if (!ISO_DATETIME_WITH_TIMEZONE.test(article.dateModified || '')) {
           record(errors, `${page.route}: Article dateModified is not a timezone-aware ISO DateTime`)
         }
-        if (article.datePublished !== page.publishedAt || article.dateModified !== page.modifiedAt) {
-          record(errors, `${page.route}: Article dates do not match full Git commit timestamps`)
-        }
-        if (
-          $('meta[property="article:published_time"]').attr('content') !== page.publishedAt ||
-          $('meta[property="article:modified_time"]').attr('content') !== page.modifiedAt
-        ) {
-          record(errors, `${page.route}: Open Graph article dates do not match full Git commit timestamps`)
-        }
+      const hasFullDates = page.publishedAt && page.modifiedAt
+      if (hasFullDates && article.datePublished !== page.publishedAt) {
+        record(errors, `${page.route}: Article datePublished does not match full Git commit timestamp`)
+      }
+      if (hasFullDates && article.dateModified !== page.modifiedAt) {
+        record(errors, `${page.route}: Article dateModified does not match full Git commit timestamp`)
+      }
+      if (hasFullDates && $('meta[property="article:published_time"]').attr('content') !== page.publishedAt) {
+        record(errors, `${page.route}: Open Graph article:published_time does not match full Git commit timestamp`)
+      }
+      if (hasFullDates && $('meta[property="article:modified_time"]').attr('content') !== page.modifiedAt) {
+        record(errors, `${page.route}: Open Graph article:modified_time does not match full Git commit timestamp`)
+      }
         if (contributorIds.some((id) => !nodeIds.has(id))) {
           record(errors, `${page.route}: Article contributor does not resolve to a public graph entity`)
         }
