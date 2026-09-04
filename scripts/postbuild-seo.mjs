@@ -40,6 +40,13 @@ import {
   fillPageCredits
 } from './postbuild-contributors.mjs'
 
+const ISO_DATETIME = /^\d{4}-\d{2}-\d{2}$/
+
+function toIsoDateTime(value) {
+  if (!value) return value
+  return ISO_DATETIME.test(value) ? `${value}T00:00:00+00:00` : value
+}
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const { htmlDir: outDir } = resolveBuildOutput(root)
 const pages = JSON.parse(fs.readFileSync(path.join(root, 'app', 'generated', 'seo-pages.json'), 'utf8'))
@@ -478,8 +485,8 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
     copyrightHolder: { '@id': organizationNode['@id'] }
   }
 
-  if (!isUtility && page.published) pageNode.datePublished = page.publishedAt || page.published
-  if (!isUtility && page.date) pageNode.dateModified = page.modifiedAt || page.date
+  if (!isUtility && page.published) pageNode.datePublished = toIsoDateTime(page.publishedAt || page.published)
+  if (!isUtility && page.date) pageNode.dateModified = toIsoDateTime(page.modifiedAt || page.date)
   const collectionItems = visibleCollectionItems.length > 0
     ? visibleCollectionItems
     : children.map((child, index) => ({
@@ -552,8 +559,8 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
         ? contributorReferences[0]
         : contributorReferences
     }
-    if (page.published) articleNode.datePublished = page.publishedAt || page.published
-    if (page.date) articleNode.dateModified = page.modifiedAt || page.date
+    if (page.published) articleNode.datePublished = toIsoDateTime(page.publishedAt || page.published)
+    if (page.date) articleNode.dateModified = toIsoDateTime(page.modifiedAt || page.date)
     if (wordCount > 0) articleNode.wordCount = wordCount
     pageNode.mainEntity = { '@id': articleNode['@id'] }
     graph.push(articleNode)
@@ -726,8 +733,8 @@ for (const page of pages) {
   )
 
   if (ogType === 'article') {
-    if (page.published) tags.push(`<meta property="article:published_time" content="${page.publishedAt || page.published}"/>`)
-    if (page.date) tags.push(`<meta property="article:modified_time" content="${page.modifiedAt || page.date}"/>`)
+    if (page.published) tags.push(`<meta property="article:published_time" content="${toIsoDateTime(page.publishedAt || page.published)}"/>`)
+    if (page.date) tags.push(`<meta property="article:modified_time" content="${toIsoDateTime(page.modifiedAt || page.date)}"/>`)
     if (pageNamedAuthors.length > 0) {
       for (const profile of pageNamedAuthors) {
         tags.push(
