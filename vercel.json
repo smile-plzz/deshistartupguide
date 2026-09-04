@@ -1,4 +1,3 @@
 {
-  "outputDirectory": "out",
-  "nodeVersion": "22.x"
+  "outputDirectory": "out"
 }
