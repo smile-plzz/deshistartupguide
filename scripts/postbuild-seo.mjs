@@ -485,7 +485,7 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
     copyrightHolder: { '@id': organizationNode['@id'] }
   }
 
-  if (!isUtility && page.published) pageNode.datePublished = toIsoDateTime(page.publishedAt || page.published)
+  if (!isUtility && (page.published || page.date)) pageNode.datePublished = toIsoDateTime(page.publishedAt || page.published || page.date)
   if (!isUtility && page.date) pageNode.dateModified = toIsoDateTime(page.modifiedAt || page.date)
   const collectionItems = visibleCollectionItems.length > 0
     ? visibleCollectionItems
@@ -559,7 +559,7 @@ function schemaFor(page, wordCount, visibleCollectionItems = [], contributionEve
         ? contributorReferences[0]
         : contributorReferences
     }
-    if (page.published) articleNode.datePublished = toIsoDateTime(page.publishedAt || page.published)
+    if (page.published || page.date) articleNode.datePublished = toIsoDateTime(page.publishedAt || page.published || page.date)
     if (page.date) articleNode.dateModified = toIsoDateTime(page.modifiedAt || page.date)
     if (wordCount > 0) articleNode.wordCount = wordCount
     pageNode.mainEntity = { '@id': articleNode['@id'] }
@@ -733,7 +733,7 @@ for (const page of pages) {
   )
 
   if (ogType === 'article') {
-    if (page.published) tags.push(`<meta property="article:published_time" content="${toIsoDateTime(page.publishedAt || page.published)}"/>`)
+    if (page.published || page.date) tags.push(`<meta property="article:published_time" content="${toIsoDateTime(page.publishedAt || page.published || page.date)}"/>`)
     if (page.date) tags.push(`<meta property="article:modified_time" content="${toIsoDateTime(page.modifiedAt || page.date)}"/>`)
     if (pageNamedAuthors.length > 0) {
       for (const profile of pageNamedAuthors) {
