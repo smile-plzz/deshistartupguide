@@ -41,16 +41,18 @@ export function ensureFullGitHistory(root) {
       stdio: "inherit",
     });
   } catch (error) {
+    // On Vercel and other shallow CI checkouts, unshallow often fails.
+    // Callers (build-manifest, history:ensure) treat this as soft failure.
     throw new Error(
       "SEO dates require complete Git history. This checkout is shallow and `git fetch --unshallow --tags` failed.",
-      { cause: error },
+      { cause: error }
     );
   }
 
   const refreshed = gitRepositoryState(root);
   if (refreshed.shallow) {
     throw new Error(
-      "SEO dates require complete Git history, but this checkout is still shallow after fetching.",
+      "SEO dates require complete Git history, but this checkout is still shallow after fetching."
     );
   }
   return { ...refreshed, fetched: true };
@@ -76,8 +78,17 @@ export function collectGitDates(root) {
     return { modified, published, modifiedAt, publishedAt };
   }
   if (repository.shallow) {
+    // Prefer empty dates over a hard build failure on shallow CI clones.
+    // Production Cloudflare builds use full history; Vercel previews tolerate
+    // missing commit timestamps (seo-audit already treats them as warnings).
+    if (process.env.VERCEL || process.env.CI) {
+      console.warn(
+        "git-content-dates: shallow clone on CI; SEO publication dates will be incomplete."
+      );
+      return { modified, published, modifiedAt, publishedAt };
+    }
     throw new Error(
-      "SEO dates require complete Git history. Run `npm run history:ensure` before generating manifests.",
+      "SEO dates require complete Git history. Run `npm run history:ensure` before generating manifests."
     );
   }
 
